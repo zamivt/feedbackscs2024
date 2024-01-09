@@ -17,108 +17,93 @@ const IPatientSchema = CollectionSchema(
   name: r'IPatient',
   id: -7043799312183322577,
   properties: {
-    r'activetask': PropertySchema(
-      id: 0,
-      name: r'activetask',
-      type: IsarType.string,
-    ),
     r'anamnez': PropertySchema(
-      id: 1,
+      id: 0,
       name: r'anamnez',
       type: IsarType.string,
     ),
     r'diagnoz': PropertySchema(
-      id: 2,
+      id: 1,
       name: r'diagnoz',
       type: IsarType.string,
     ),
     r'email': PropertySchema(
-      id: 3,
+      id: 2,
       name: r'email',
       type: IsarType.string,
     ),
     r'fio': PropertySchema(
-      id: 4,
+      id: 3,
       name: r'fio',
       type: IsarType.string,
     ),
-    r'histrorystage': PropertySchema(
-      id: 5,
-      name: r'histrorystage',
-      type: IsarType.string,
-    ),
     r'islicense': PropertySchema(
-      id: 6,
+      id: 4,
       name: r'islicense',
       type: IsarType.bool,
     ),
     r'isremotepatient': PropertySchema(
-      id: 7,
+      id: 5,
       name: r'isremotepatient',
       type: IsarType.bool,
     ),
     r'levelmaxpain': PropertySchema(
-      id: 8,
+      id: 6,
       name: r'levelmaxpain',
       type: IsarType.long,
     ),
     r'modelneuro': PropertySchema(
-      id: 9,
+      id: 7,
       name: r'modelneuro',
       type: IsarType.string,
     ),
     r'phone': PropertySchema(
-      id: 10,
+      id: 8,
       name: r'phone',
       type: IsarType.string,
     ),
     r'prioritylevelpain': PropertySchema(
-      id: 11,
+      id: 9,
       name: r'prioritylevelpain',
       type: IsarType.long,
     ),
     r'priorityshorttest': PropertySchema(
-      id: 12,
+      id: 10,
       name: r'priorityshorttest',
       type: IsarType.string,
     ),
     r'sex': PropertySchema(
-      id: 13,
+      id: 11,
       name: r'sex',
       type: IsarType.string,
     ),
     r'sympotoms1': PropertySchema(
-      id: 14,
+      id: 12,
       name: r'sympotoms1',
       type: IsarType.string,
     ),
     r'sympotoms2': PropertySchema(
-      id: 15,
+      id: 13,
       name: r'sympotoms2',
       type: IsarType.string,
     ),
     r'sympotoms3': PropertySchema(
-      id: 16,
+      id: 14,
       name: r'sympotoms3',
       type: IsarType.string,
     ),
-    r'teststage': PropertySchema(
-      id: 17,
-      name: r'teststage',
-      type: IsarType.string,
-    ),
     r'timelie': PropertySchema(
-      id: 18,
+      id: 15,
       name: r'timelie',
       type: IsarType.long,
     ),
     r'timemove': PropertySchema(
-      id: 19,
+      id: 16,
       name: r'timemove',
       type: IsarType.long,
     ),
     r'timeseat': PropertySchema(
-      id: 20,
+      id: 17,
       name: r'timeseat',
       type: IsarType.long,
     )
@@ -143,22 +128,10 @@ int _iPatientEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
-  {
-    final value = object.activetask;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
   bytesCount += 3 + object.anamnez.length * 3;
   bytesCount += 3 + object.diagnoz.length * 3;
   bytesCount += 3 + object.email.length * 3;
   bytesCount += 3 + object.fio.length * 3;
-  {
-    final value = object.histrorystage;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
   bytesCount += 3 + object.modelneuro.length * 3;
   bytesCount += 3 + object.phone.length * 3;
   bytesCount += 3 + object.priorityshorttest.length * 3;
@@ -171,7 +144,6 @@ int _iPatientEstimateSize(
       bytesCount += 3 + value.length * 3;
     }
   }
-  bytesCount += 3 + object.teststage.length * 3;
   return bytesCount;
 }
 
@@ -181,27 +153,24 @@ void _iPatientSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeString(offsets[0], object.activetask);
-  writer.writeString(offsets[1], object.anamnez);
-  writer.writeString(offsets[2], object.diagnoz);
-  writer.writeString(offsets[3], object.email);
-  writer.writeString(offsets[4], object.fio);
-  writer.writeString(offsets[5], object.histrorystage);
-  writer.writeBool(offsets[6], object.islicense);
-  writer.writeBool(offsets[7], object.isremotepatient);
-  writer.writeLong(offsets[8], object.levelmaxpain);
-  writer.writeString(offsets[9], object.modelneuro);
-  writer.writeString(offsets[10], object.phone);
-  writer.writeLong(offsets[11], object.prioritylevelpain);
-  writer.writeString(offsets[12], object.priorityshorttest);
-  writer.writeString(offsets[13], object.sex);
-  writer.writeString(offsets[14], object.sympotoms1);
-  writer.writeString(offsets[15], object.sympotoms2);
-  writer.writeString(offsets[16], object.sympotoms3);
-  writer.writeString(offsets[17], object.teststage);
-  writer.writeLong(offsets[18], object.timelie);
-  writer.writeLong(offsets[19], object.timemove);
-  writer.writeLong(offsets[20], object.timeseat);
+  writer.writeString(offsets[0], object.anamnez);
+  writer.writeString(offsets[1], object.diagnoz);
+  writer.writeString(offsets[2], object.email);
+  writer.writeString(offsets[3], object.fio);
+  writer.writeBool(offsets[4], object.islicense);
+  writer.writeBool(offsets[5], object.isremotepatient);
+  writer.writeLong(offsets[6], object.levelmaxpain);
+  writer.writeString(offsets[7], object.modelneuro);
+  writer.writeString(offsets[8], object.phone);
+  writer.writeLong(offsets[9], object.prioritylevelpain);
+  writer.writeString(offsets[10], object.priorityshorttest);
+  writer.writeString(offsets[11], object.sex);
+  writer.writeString(offsets[12], object.sympotoms1);
+  writer.writeString(offsets[13], object.sympotoms2);
+  writer.writeString(offsets[14], object.sympotoms3);
+  writer.writeLong(offsets[15], object.timelie);
+  writer.writeLong(offsets[16], object.timemove);
+  writer.writeLong(offsets[17], object.timeseat);
 }
 
 IPatient _iPatientDeserialize(
@@ -211,28 +180,25 @@ IPatient _iPatientDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = IPatient();
-  object.activetask = reader.readStringOrNull(offsets[0]);
-  object.anamnez = reader.readString(offsets[1]);
-  object.diagnoz = reader.readString(offsets[2]);
-  object.email = reader.readString(offsets[3]);
-  object.fio = reader.readString(offsets[4]);
-  object.histrorystage = reader.readStringOrNull(offsets[5]);
+  object.anamnez = reader.readString(offsets[0]);
+  object.diagnoz = reader.readString(offsets[1]);
+  object.email = reader.readString(offsets[2]);
+  object.fio = reader.readString(offsets[3]);
   object.id = id;
-  object.islicense = reader.readBoolOrNull(offsets[6]);
-  object.isremotepatient = reader.readBool(offsets[7]);
-  object.levelmaxpain = reader.readLong(offsets[8]);
-  object.modelneuro = reader.readString(offsets[9]);
-  object.phone = reader.readString(offsets[10]);
-  object.prioritylevelpain = reader.readLong(offsets[11]);
-  object.priorityshorttest = reader.readString(offsets[12]);
-  object.sex = reader.readString(offsets[13]);
-  object.sympotoms1 = reader.readString(offsets[14]);
-  object.sympotoms2 = reader.readString(offsets[15]);
-  object.sympotoms3 = reader.readStringOrNull(offsets[16]);
-  object.teststage = reader.readString(offsets[17]);
-  object.timelie = reader.readLong(offsets[18]);
-  object.timemove = reader.readLong(offsets[19]);
-  object.timeseat = reader.readLong(offsets[20]);
+  object.islicense = reader.readBoolOrNull(offsets[4]);
+  object.isremotepatient = reader.readBool(offsets[5]);
+  object.levelmaxpain = reader.readLong(offsets[6]);
+  object.modelneuro = reader.readString(offsets[7]);
+  object.phone = reader.readString(offsets[8]);
+  object.prioritylevelpain = reader.readLong(offsets[9]);
+  object.priorityshorttest = reader.readString(offsets[10]);
+  object.sex = reader.readString(offsets[11]);
+  object.sympotoms1 = reader.readString(offsets[12]);
+  object.sympotoms2 = reader.readString(offsets[13]);
+  object.sympotoms3 = reader.readStringOrNull(offsets[14]);
+  object.timelie = reader.readLong(offsets[15]);
+  object.timemove = reader.readLong(offsets[16]);
+  object.timeseat = reader.readLong(offsets[17]);
   return object;
 }
 
@@ -244,7 +210,7 @@ P _iPatientDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 1:
       return (reader.readString(offset)) as P;
     case 2:
@@ -252,38 +218,32 @@ P _iPatientDeserializeProp<P>(
     case 3:
       return (reader.readString(offset)) as P;
     case 4:
-      return (reader.readString(offset)) as P;
-    case 5:
-      return (reader.readStringOrNull(offset)) as P;
-    case 6:
       return (reader.readBoolOrNull(offset)) as P;
-    case 7:
+    case 5:
       return (reader.readBool(offset)) as P;
-    case 8:
+    case 6:
       return (reader.readLong(offset)) as P;
-    case 9:
+    case 7:
       return (reader.readString(offset)) as P;
+    case 8:
+      return (reader.readString(offset)) as P;
+    case 9:
+      return (reader.readLong(offset)) as P;
     case 10:
       return (reader.readString(offset)) as P;
     case 11:
-      return (reader.readLong(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 12:
       return (reader.readString(offset)) as P;
     case 13:
       return (reader.readString(offset)) as P;
     case 14:
-      return (reader.readString(offset)) as P;
-    case 15:
-      return (reader.readString(offset)) as P;
-    case 16:
       return (reader.readStringOrNull(offset)) as P;
+    case 15:
+      return (reader.readLong(offset)) as P;
+    case 16:
+      return (reader.readLong(offset)) as P;
     case 17:
-      return (reader.readString(offset)) as P;
-    case 18:
-      return (reader.readLong(offset)) as P;
-    case 19:
-      return (reader.readLong(offset)) as P;
-    case 20:
       return (reader.readLong(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -379,154 +339,6 @@ extension IPatientQueryWhere on QueryBuilder<IPatient, IPatient, QWhereClause> {
 
 extension IPatientQueryFilter
     on QueryBuilder<IPatient, IPatient, QFilterCondition> {
-  QueryBuilder<IPatient, IPatient, QAfterFilterCondition> activetaskIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'activetask',
-      ));
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterFilterCondition>
-      activetaskIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'activetask',
-      ));
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterFilterCondition> activetaskEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'activetask',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterFilterCondition> activetaskGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'activetask',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterFilterCondition> activetaskLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'activetask',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterFilterCondition> activetaskBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'activetask',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterFilterCondition> activetaskStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'activetask',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterFilterCondition> activetaskEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'activetask',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterFilterCondition> activetaskContains(
-      String value,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'activetask',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterFilterCondition> activetaskMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'activetask',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterFilterCondition> activetaskIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'activetask',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterFilterCondition>
-      activetaskIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'activetask',
-        value: '',
-      ));
-    });
-  }
-
   QueryBuilder<IPatient, IPatient, QAfterFilterCondition> anamnezEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -1042,158 +854,6 @@ extension IPatientQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'fio',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterFilterCondition>
-      histrorystageIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'histrorystage',
-      ));
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterFilterCondition>
-      histrorystageIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'histrorystage',
-      ));
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterFilterCondition> histrorystageEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'histrorystage',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterFilterCondition>
-      histrorystageGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'histrorystage',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterFilterCondition> histrorystageLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'histrorystage',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterFilterCondition> histrorystageBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'histrorystage',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterFilterCondition>
-      histrorystageStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'histrorystage',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterFilterCondition> histrorystageEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'histrorystage',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterFilterCondition> histrorystageContains(
-      String value,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'histrorystage',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterFilterCondition> histrorystageMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'histrorystage',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterFilterCondition>
-      histrorystageIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'histrorystage',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterFilterCondition>
-      histrorystageIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'histrorystage',
         value: '',
       ));
     });
@@ -2334,137 +1994,6 @@ extension IPatientQueryFilter
     });
   }
 
-  QueryBuilder<IPatient, IPatient, QAfterFilterCondition> teststageEqualTo(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'teststage',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterFilterCondition> teststageGreaterThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'teststage',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterFilterCondition> teststageLessThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'teststage',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterFilterCondition> teststageBetween(
-    String lower,
-    String upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'teststage',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterFilterCondition> teststageStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'teststage',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterFilterCondition> teststageEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'teststage',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterFilterCondition> teststageContains(
-      String value,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'teststage',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterFilterCondition> teststageMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'teststage',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterFilterCondition> teststageIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'teststage',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterFilterCondition>
-      teststageIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'teststage',
-        value: '',
-      ));
-    });
-  }
-
   QueryBuilder<IPatient, IPatient, QAfterFilterCondition> timelieEqualTo(
       int value) {
     return QueryBuilder.apply(this, (query) {
@@ -2632,18 +2161,6 @@ extension IPatientQueryLinks
     on QueryBuilder<IPatient, IPatient, QFilterCondition> {}
 
 extension IPatientQuerySortBy on QueryBuilder<IPatient, IPatient, QSortBy> {
-  QueryBuilder<IPatient, IPatient, QAfterSortBy> sortByActivetask() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'activetask', Sort.asc);
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterSortBy> sortByActivetaskDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'activetask', Sort.desc);
-    });
-  }
-
   QueryBuilder<IPatient, IPatient, QAfterSortBy> sortByAnamnez() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'anamnez', Sort.asc);
@@ -2689,18 +2206,6 @@ extension IPatientQuerySortBy on QueryBuilder<IPatient, IPatient, QSortBy> {
   QueryBuilder<IPatient, IPatient, QAfterSortBy> sortByFioDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'fio', Sort.desc);
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterSortBy> sortByHistrorystage() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'histrorystage', Sort.asc);
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterSortBy> sortByHistrorystageDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'histrorystage', Sort.desc);
     });
   }
 
@@ -2836,18 +2341,6 @@ extension IPatientQuerySortBy on QueryBuilder<IPatient, IPatient, QSortBy> {
     });
   }
 
-  QueryBuilder<IPatient, IPatient, QAfterSortBy> sortByTeststage() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'teststage', Sort.asc);
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterSortBy> sortByTeststageDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'teststage', Sort.desc);
-    });
-  }
-
   QueryBuilder<IPatient, IPatient, QAfterSortBy> sortByTimelie() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'timelie', Sort.asc);
@@ -2887,18 +2380,6 @@ extension IPatientQuerySortBy on QueryBuilder<IPatient, IPatient, QSortBy> {
 
 extension IPatientQuerySortThenBy
     on QueryBuilder<IPatient, IPatient, QSortThenBy> {
-  QueryBuilder<IPatient, IPatient, QAfterSortBy> thenByActivetask() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'activetask', Sort.asc);
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterSortBy> thenByActivetaskDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'activetask', Sort.desc);
-    });
-  }
-
   QueryBuilder<IPatient, IPatient, QAfterSortBy> thenByAnamnez() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'anamnez', Sort.asc);
@@ -2944,18 +2425,6 @@ extension IPatientQuerySortThenBy
   QueryBuilder<IPatient, IPatient, QAfterSortBy> thenByFioDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'fio', Sort.desc);
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterSortBy> thenByHistrorystage() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'histrorystage', Sort.asc);
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterSortBy> thenByHistrorystageDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'histrorystage', Sort.desc);
     });
   }
 
@@ -3103,18 +2572,6 @@ extension IPatientQuerySortThenBy
     });
   }
 
-  QueryBuilder<IPatient, IPatient, QAfterSortBy> thenByTeststage() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'teststage', Sort.asc);
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QAfterSortBy> thenByTeststageDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'teststage', Sort.desc);
-    });
-  }
-
   QueryBuilder<IPatient, IPatient, QAfterSortBy> thenByTimelie() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'timelie', Sort.asc);
@@ -3154,13 +2611,6 @@ extension IPatientQuerySortThenBy
 
 extension IPatientQueryWhereDistinct
     on QueryBuilder<IPatient, IPatient, QDistinct> {
-  QueryBuilder<IPatient, IPatient, QDistinct> distinctByActivetask(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'activetask', caseSensitive: caseSensitive);
-    });
-  }
-
   QueryBuilder<IPatient, IPatient, QDistinct> distinctByAnamnez(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -3186,14 +2636,6 @@ extension IPatientQueryWhereDistinct
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'fio', caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<IPatient, IPatient, QDistinct> distinctByHistrorystage(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'histrorystage',
-          caseSensitive: caseSensitive);
     });
   }
 
@@ -3271,13 +2713,6 @@ extension IPatientQueryWhereDistinct
     });
   }
 
-  QueryBuilder<IPatient, IPatient, QDistinct> distinctByTeststage(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'teststage', caseSensitive: caseSensitive);
-    });
-  }
-
   QueryBuilder<IPatient, IPatient, QDistinct> distinctByTimelie() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'timelie');
@@ -3305,12 +2740,6 @@ extension IPatientQueryProperty
     });
   }
 
-  QueryBuilder<IPatient, String?, QQueryOperations> activetaskProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'activetask');
-    });
-  }
-
   QueryBuilder<IPatient, String, QQueryOperations> anamnezProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'anamnez');
@@ -3332,12 +2761,6 @@ extension IPatientQueryProperty
   QueryBuilder<IPatient, String, QQueryOperations> fioProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'fio');
-    });
-  }
-
-  QueryBuilder<IPatient, String?, QQueryOperations> histrorystageProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'histrorystage');
     });
   }
 
@@ -3404,12 +2827,6 @@ extension IPatientQueryProperty
   QueryBuilder<IPatient, String?, QQueryOperations> sympotoms3Property() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'sympotoms3');
-    });
-  }
-
-  QueryBuilder<IPatient, String, QQueryOperations> teststageProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'teststage');
     });
   }
 

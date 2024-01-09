@@ -6,6 +6,7 @@ class IPatient {
   Id id = Isar.autoIncrement;
   late bool isremotepatient;
   late String fio;
+  late String sex;
   late String email;
   late String phone;
   late String diagnoz;
@@ -20,9 +21,5 @@ class IPatient {
   late int timeseat;
   late int timelie;
   late int timemove;
-  late String teststage;
-  String? activetask;
   bool? islicense;
-  late String sex;
-  String? histrorystage;
 }
