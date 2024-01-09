@@ -2,7 +2,7 @@ import 'package:isar/isar.dart';
 part 'doc.g.dart';
 
 @collection
-class DocPat {
+class IDocPat {
   Id id = Isar.autoIncrement;
   late String docid;
   late String family;

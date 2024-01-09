@@ -9,13 +9,13 @@ part of 'doc.dart';
 // coverage:ignore-file
 // ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, prefer_final_locals, avoid_js_rounded_ints, avoid_positional_boolean_parameters, always_specify_types
 
-extension GetDocPatCollection on Isar {
-  IsarCollection<DocPat> get docPats => this.collection();
+extension GetIDocPatCollection on Isar {
+  IsarCollection<IDocPat> get iDocPats => this.collection();
 }
 
-const DocPatSchema = CollectionSchema(
-  name: r'DocPat',
-  id: -7799790141561667085,
+const IDocPatSchema = CollectionSchema(
+  name: r'IDocPat',
+  id: -8689149226878951513,
   properties: {
     r'attempt': PropertySchema(
       id: 0,
@@ -68,22 +68,22 @@ const DocPatSchema = CollectionSchema(
       type: IsarType.string,
     )
   },
-  estimateSize: _docPatEstimateSize,
-  serialize: _docPatSerialize,
-  deserialize: _docPatDeserialize,
-  deserializeProp: _docPatDeserializeProp,
+  estimateSize: _iDocPatEstimateSize,
+  serialize: _iDocPatSerialize,
+  deserialize: _iDocPatDeserialize,
+  deserializeProp: _iDocPatDeserializeProp,
   idName: r'id',
   indexes: {},
   links: {},
   embeddedSchemas: {},
-  getId: _docPatGetId,
-  getLinks: _docPatGetLinks,
-  attach: _docPatAttach,
+  getId: _iDocPatGetId,
+  getLinks: _iDocPatGetLinks,
+  attach: _iDocPatAttach,
   version: '3.1.0+1',
 );
 
-int _docPatEstimateSize(
-  DocPat object,
+int _iDocPatEstimateSize(
+  IDocPat object,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
@@ -100,8 +100,8 @@ int _docPatEstimateSize(
   return bytesCount;
 }
 
-void _docPatSerialize(
-  DocPat object,
+void _iDocPatSerialize(
+  IDocPat object,
   IsarWriter writer,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
@@ -118,13 +118,13 @@ void _docPatSerialize(
   writer.writeString(offsets[9], object.photo);
 }
 
-DocPat _docPatDeserialize(
+IDocPat _iDocPatDeserialize(
   Id id,
   IsarReader reader,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  final object = DocPat();
+  final object = IDocPat();
   object.attempt = reader.readLong(offsets[0]);
   object.docid = reader.readString(offsets[1]);
   object.email = reader.readString(offsets[2]);
@@ -139,7 +139,7 @@ DocPat _docPatDeserialize(
   return object;
 }
 
-P _docPatDeserializeProp<P>(
+P _iDocPatDeserializeProp<P>(
   IsarReader reader,
   int propertyId,
   int offset,
@@ -171,28 +171,28 @@ P _docPatDeserializeProp<P>(
   }
 }
 
-Id _docPatGetId(DocPat object) {
+Id _iDocPatGetId(IDocPat object) {
   return object.id;
 }
 
-List<IsarLinkBase<dynamic>> _docPatGetLinks(DocPat object) {
+List<IsarLinkBase<dynamic>> _iDocPatGetLinks(IDocPat object) {
   return [];
 }
 
-void _docPatAttach(IsarCollection<dynamic> col, Id id, DocPat object) {
+void _iDocPatAttach(IsarCollection<dynamic> col, Id id, IDocPat object) {
   object.id = id;
 }
 
-extension DocPatQueryWhereSort on QueryBuilder<DocPat, DocPat, QWhere> {
-  QueryBuilder<DocPat, DocPat, QAfterWhere> anyId() {
+extension IDocPatQueryWhereSort on QueryBuilder<IDocPat, IDocPat, QWhere> {
+  QueryBuilder<IDocPat, IDocPat, QAfterWhere> anyId() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(const IdWhereClause.any());
     });
   }
 }
 
-extension DocPatQueryWhere on QueryBuilder<DocPat, DocPat, QWhereClause> {
-  QueryBuilder<DocPat, DocPat, QAfterWhereClause> idEqualTo(Id id) {
+extension IDocPatQueryWhere on QueryBuilder<IDocPat, IDocPat, QWhereClause> {
+  QueryBuilder<IDocPat, IDocPat, QAfterWhereClause> idEqualTo(Id id) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IdWhereClause.between(
         lower: id,
@@ -201,7 +201,7 @@ extension DocPatQueryWhere on QueryBuilder<DocPat, DocPat, QWhereClause> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterWhereClause> idNotEqualTo(Id id) {
+  QueryBuilder<IDocPat, IDocPat, QAfterWhereClause> idNotEqualTo(Id id) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
@@ -223,7 +223,7 @@ extension DocPatQueryWhere on QueryBuilder<DocPat, DocPat, QWhereClause> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterWhereClause> idGreaterThan(Id id,
+  QueryBuilder<IDocPat, IDocPat, QAfterWhereClause> idGreaterThan(Id id,
       {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
@@ -232,7 +232,7 @@ extension DocPatQueryWhere on QueryBuilder<DocPat, DocPat, QWhereClause> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterWhereClause> idLessThan(Id id,
+  QueryBuilder<IDocPat, IDocPat, QAfterWhereClause> idLessThan(Id id,
       {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
@@ -241,7 +241,7 @@ extension DocPatQueryWhere on QueryBuilder<DocPat, DocPat, QWhereClause> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterWhereClause> idBetween(
+  QueryBuilder<IDocPat, IDocPat, QAfterWhereClause> idBetween(
     Id lowerId,
     Id upperId, {
     bool includeLower = true,
@@ -258,8 +258,9 @@ extension DocPatQueryWhere on QueryBuilder<DocPat, DocPat, QWhereClause> {
   }
 }
 
-extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> attemptEqualTo(
+extension IDocPatQueryFilter
+    on QueryBuilder<IDocPat, IDocPat, QFilterCondition> {
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> attemptEqualTo(
       int value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -269,7 +270,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> attemptGreaterThan(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> attemptGreaterThan(
     int value, {
     bool include = false,
   }) {
@@ -282,7 +283,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> attemptLessThan(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> attemptLessThan(
     int value, {
     bool include = false,
   }) {
@@ -295,7 +296,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> attemptBetween(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> attemptBetween(
     int lower,
     int upper, {
     bool includeLower = true,
@@ -312,7 +313,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> docidEqualTo(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> docidEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -325,7 +326,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> docidGreaterThan(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> docidGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -340,7 +341,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> docidLessThan(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> docidLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -355,7 +356,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> docidBetween(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> docidBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -374,7 +375,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> docidStartsWith(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> docidStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -387,7 +388,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> docidEndsWith(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> docidEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -400,7 +401,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> docidContains(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> docidContains(
       String value,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -412,7 +413,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> docidMatches(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> docidMatches(
       String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -424,7 +425,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> docidIsEmpty() {
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> docidIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'docid',
@@ -433,7 +434,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> docidIsNotEmpty() {
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> docidIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'docid',
@@ -442,7 +443,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> emailEqualTo(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> emailEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -455,7 +456,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> emailGreaterThan(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> emailGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -470,7 +471,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> emailLessThan(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> emailLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -485,7 +486,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> emailBetween(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> emailBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -504,7 +505,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> emailStartsWith(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> emailStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -517,7 +518,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> emailEndsWith(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> emailEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -530,7 +531,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> emailContains(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> emailContains(
       String value,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -542,7 +543,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> emailMatches(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> emailMatches(
       String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -554,7 +555,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> emailIsEmpty() {
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> emailIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'email',
@@ -563,7 +564,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> emailIsNotEmpty() {
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> emailIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'email',
@@ -572,7 +573,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> familyEqualTo(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> familyEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -585,7 +586,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> familyGreaterThan(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> familyGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -600,7 +601,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> familyLessThan(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> familyLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -615,7 +616,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> familyBetween(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> familyBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -634,7 +635,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> familyStartsWith(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> familyStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -647,7 +648,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> familyEndsWith(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> familyEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -660,7 +661,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> familyContains(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> familyContains(
       String value,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -672,7 +673,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> familyMatches(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> familyMatches(
       String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -684,7 +685,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> familyIsEmpty() {
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> familyIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'family',
@@ -693,7 +694,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> familyIsNotEmpty() {
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> familyIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'family',
@@ -702,7 +703,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> historyEqualTo(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> historyEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -715,7 +716,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> historyGreaterThan(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> historyGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -730,7 +731,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> historyLessThan(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> historyLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -745,7 +746,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> historyBetween(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> historyBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -764,7 +765,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> historyStartsWith(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> historyStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -777,7 +778,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> historyEndsWith(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> historyEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -790,7 +791,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> historyContains(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> historyContains(
       String value,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -802,7 +803,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> historyMatches(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> historyMatches(
       String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -814,7 +815,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> historyIsEmpty() {
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> historyIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'history',
@@ -823,7 +824,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> historyIsNotEmpty() {
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> historyIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'history',
@@ -832,7 +833,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> hospitalEqualTo(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> hospitalEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -845,7 +846,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> hospitalGreaterThan(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> hospitalGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -860,7 +861,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> hospitalLessThan(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> hospitalLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -875,7 +876,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> hospitalBetween(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> hospitalBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -894,7 +895,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> hospitalStartsWith(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> hospitalStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -907,7 +908,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> hospitalEndsWith(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> hospitalEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -920,7 +921,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> hospitalContains(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> hospitalContains(
       String value,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -932,7 +933,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> hospitalMatches(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> hospitalMatches(
       String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -944,7 +945,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> hospitalIsEmpty() {
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> hospitalIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'hospital',
@@ -953,7 +954,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> hospitalIsNotEmpty() {
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> hospitalIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'hospital',
@@ -962,7 +963,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> idEqualTo(Id value) {
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> idEqualTo(Id value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'id',
@@ -971,7 +972,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> idGreaterThan(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> idGreaterThan(
     Id value, {
     bool include = false,
   }) {
@@ -984,7 +985,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> idLessThan(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> idLessThan(
     Id value, {
     bool include = false,
   }) {
@@ -997,7 +998,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> idBetween(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> idBetween(
     Id lower,
     Id upper, {
     bool includeLower = true,
@@ -1014,7 +1015,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> ioEqualTo(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> ioEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -1027,7 +1028,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> ioGreaterThan(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> ioGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1042,7 +1043,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> ioLessThan(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> ioLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1057,7 +1058,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> ioBetween(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> ioBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -1076,7 +1077,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> ioStartsWith(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> ioStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -1089,7 +1090,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> ioEndsWith(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> ioEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -1102,7 +1103,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> ioContains(String value,
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> ioContains(String value,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
@@ -1113,7 +1114,8 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> ioMatches(String pattern,
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> ioMatches(
+      String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
@@ -1124,7 +1126,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> ioIsEmpty() {
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> ioIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'io',
@@ -1133,7 +1135,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> ioIsNotEmpty() {
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> ioIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'io',
@@ -1142,7 +1144,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> passwordEqualTo(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> passwordEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -1155,7 +1157,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> passwordGreaterThan(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> passwordGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1170,7 +1172,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> passwordLessThan(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> passwordLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1185,7 +1187,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> passwordBetween(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> passwordBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -1204,7 +1206,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> passwordStartsWith(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> passwordStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -1217,7 +1219,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> passwordEndsWith(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> passwordEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -1230,7 +1232,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> passwordContains(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> passwordContains(
       String value,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -1242,7 +1244,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> passwordMatches(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> passwordMatches(
       String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -1254,7 +1256,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> passwordIsEmpty() {
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> passwordIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'password',
@@ -1263,7 +1265,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> passwordIsNotEmpty() {
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> passwordIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'password',
@@ -1272,7 +1274,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> phoneEqualTo(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> phoneEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -1285,7 +1287,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> phoneGreaterThan(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> phoneGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1300,7 +1302,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> phoneLessThan(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> phoneLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1315,7 +1317,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> phoneBetween(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> phoneBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -1334,7 +1336,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> phoneStartsWith(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> phoneStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -1347,7 +1349,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> phoneEndsWith(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> phoneEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -1360,7 +1362,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> phoneContains(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> phoneContains(
       String value,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -1372,7 +1374,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> phoneMatches(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> phoneMatches(
       String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -1384,7 +1386,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> phoneIsEmpty() {
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> phoneIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'phone',
@@ -1393,7 +1395,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> phoneIsNotEmpty() {
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> phoneIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'phone',
@@ -1402,7 +1404,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> photoEqualTo(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> photoEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -1415,7 +1417,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> photoGreaterThan(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> photoGreaterThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1430,7 +1432,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> photoLessThan(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> photoLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -1445,7 +1447,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> photoBetween(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> photoBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -1464,7 +1466,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> photoStartsWith(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> photoStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -1477,7 +1479,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> photoEndsWith(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> photoEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -1490,7 +1492,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> photoContains(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> photoContains(
       String value,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -1502,7 +1504,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> photoMatches(
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> photoMatches(
       String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -1514,7 +1516,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> photoIsEmpty() {
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> photoIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'photo',
@@ -1523,7 +1525,7 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterFilterCondition> photoIsNotEmpty() {
+  QueryBuilder<IDocPat, IDocPat, QAfterFilterCondition> photoIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'photo',
@@ -1533,330 +1535,334 @@ extension DocPatQueryFilter on QueryBuilder<DocPat, DocPat, QFilterCondition> {
   }
 }
 
-extension DocPatQueryObject on QueryBuilder<DocPat, DocPat, QFilterCondition> {}
+extension IDocPatQueryObject
+    on QueryBuilder<IDocPat, IDocPat, QFilterCondition> {}
 
-extension DocPatQueryLinks on QueryBuilder<DocPat, DocPat, QFilterCondition> {}
+extension IDocPatQueryLinks
+    on QueryBuilder<IDocPat, IDocPat, QFilterCondition> {}
 
-extension DocPatQuerySortBy on QueryBuilder<DocPat, DocPat, QSortBy> {
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> sortByAttempt() {
+extension IDocPatQuerySortBy on QueryBuilder<IDocPat, IDocPat, QSortBy> {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> sortByAttempt() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'attempt', Sort.asc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> sortByAttemptDesc() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> sortByAttemptDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'attempt', Sort.desc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> sortByDocid() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> sortByDocid() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'docid', Sort.asc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> sortByDocidDesc() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> sortByDocidDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'docid', Sort.desc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> sortByEmail() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> sortByEmail() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'email', Sort.asc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> sortByEmailDesc() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> sortByEmailDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'email', Sort.desc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> sortByFamily() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> sortByFamily() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'family', Sort.asc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> sortByFamilyDesc() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> sortByFamilyDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'family', Sort.desc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> sortByHistory() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> sortByHistory() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'history', Sort.asc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> sortByHistoryDesc() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> sortByHistoryDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'history', Sort.desc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> sortByHospital() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> sortByHospital() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'hospital', Sort.asc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> sortByHospitalDesc() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> sortByHospitalDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'hospital', Sort.desc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> sortByIo() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> sortByIo() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'io', Sort.asc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> sortByIoDesc() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> sortByIoDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'io', Sort.desc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> sortByPassword() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> sortByPassword() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'password', Sort.asc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> sortByPasswordDesc() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> sortByPasswordDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'password', Sort.desc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> sortByPhone() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> sortByPhone() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'phone', Sort.asc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> sortByPhoneDesc() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> sortByPhoneDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'phone', Sort.desc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> sortByPhoto() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> sortByPhoto() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'photo', Sort.asc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> sortByPhotoDesc() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> sortByPhotoDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'photo', Sort.desc);
     });
   }
 }
 
-extension DocPatQuerySortThenBy on QueryBuilder<DocPat, DocPat, QSortThenBy> {
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> thenByAttempt() {
+extension IDocPatQuerySortThenBy
+    on QueryBuilder<IDocPat, IDocPat, QSortThenBy> {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> thenByAttempt() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'attempt', Sort.asc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> thenByAttemptDesc() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> thenByAttemptDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'attempt', Sort.desc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> thenByDocid() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> thenByDocid() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'docid', Sort.asc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> thenByDocidDesc() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> thenByDocidDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'docid', Sort.desc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> thenByEmail() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> thenByEmail() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'email', Sort.asc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> thenByEmailDesc() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> thenByEmailDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'email', Sort.desc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> thenByFamily() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> thenByFamily() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'family', Sort.asc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> thenByFamilyDesc() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> thenByFamilyDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'family', Sort.desc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> thenByHistory() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> thenByHistory() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'history', Sort.asc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> thenByHistoryDesc() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> thenByHistoryDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'history', Sort.desc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> thenByHospital() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> thenByHospital() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'hospital', Sort.asc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> thenByHospitalDesc() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> thenByHospitalDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'hospital', Sort.desc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> thenById() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> thenById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> thenByIdDesc() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> thenByIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.desc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> thenByIo() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> thenByIo() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'io', Sort.asc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> thenByIoDesc() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> thenByIoDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'io', Sort.desc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> thenByPassword() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> thenByPassword() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'password', Sort.asc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> thenByPasswordDesc() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> thenByPasswordDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'password', Sort.desc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> thenByPhone() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> thenByPhone() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'phone', Sort.asc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> thenByPhoneDesc() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> thenByPhoneDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'phone', Sort.desc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> thenByPhoto() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> thenByPhoto() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'photo', Sort.asc);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QAfterSortBy> thenByPhotoDesc() {
+  QueryBuilder<IDocPat, IDocPat, QAfterSortBy> thenByPhotoDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'photo', Sort.desc);
     });
   }
 }
 
-extension DocPatQueryWhereDistinct on QueryBuilder<DocPat, DocPat, QDistinct> {
-  QueryBuilder<DocPat, DocPat, QDistinct> distinctByAttempt() {
+extension IDocPatQueryWhereDistinct
+    on QueryBuilder<IDocPat, IDocPat, QDistinct> {
+  QueryBuilder<IDocPat, IDocPat, QDistinct> distinctByAttempt() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'attempt');
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QDistinct> distinctByDocid(
+  QueryBuilder<IDocPat, IDocPat, QDistinct> distinctByDocid(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'docid', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QDistinct> distinctByEmail(
+  QueryBuilder<IDocPat, IDocPat, QDistinct> distinctByEmail(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'email', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QDistinct> distinctByFamily(
+  QueryBuilder<IDocPat, IDocPat, QDistinct> distinctByFamily(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'family', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QDistinct> distinctByHistory(
+  QueryBuilder<IDocPat, IDocPat, QDistinct> distinctByHistory(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'history', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QDistinct> distinctByHospital(
+  QueryBuilder<IDocPat, IDocPat, QDistinct> distinctByHospital(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'hospital', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QDistinct> distinctByIo(
+  QueryBuilder<IDocPat, IDocPat, QDistinct> distinctByIo(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'io', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QDistinct> distinctByPassword(
+  QueryBuilder<IDocPat, IDocPat, QDistinct> distinctByPassword(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'password', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QDistinct> distinctByPhone(
+  QueryBuilder<IDocPat, IDocPat, QDistinct> distinctByPhone(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'phone', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<DocPat, DocPat, QDistinct> distinctByPhoto(
+  QueryBuilder<IDocPat, IDocPat, QDistinct> distinctByPhoto(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'photo', caseSensitive: caseSensitive);
@@ -1864,68 +1870,69 @@ extension DocPatQueryWhereDistinct on QueryBuilder<DocPat, DocPat, QDistinct> {
   }
 }
 
-extension DocPatQueryProperty on QueryBuilder<DocPat, DocPat, QQueryProperty> {
-  QueryBuilder<DocPat, int, QQueryOperations> idProperty() {
+extension IDocPatQueryProperty
+    on QueryBuilder<IDocPat, IDocPat, QQueryProperty> {
+  QueryBuilder<IDocPat, int, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
     });
   }
 
-  QueryBuilder<DocPat, int, QQueryOperations> attemptProperty() {
+  QueryBuilder<IDocPat, int, QQueryOperations> attemptProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'attempt');
     });
   }
 
-  QueryBuilder<DocPat, String, QQueryOperations> docidProperty() {
+  QueryBuilder<IDocPat, String, QQueryOperations> docidProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'docid');
     });
   }
 
-  QueryBuilder<DocPat, String, QQueryOperations> emailProperty() {
+  QueryBuilder<IDocPat, String, QQueryOperations> emailProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'email');
     });
   }
 
-  QueryBuilder<DocPat, String, QQueryOperations> familyProperty() {
+  QueryBuilder<IDocPat, String, QQueryOperations> familyProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'family');
     });
   }
 
-  QueryBuilder<DocPat, String, QQueryOperations> historyProperty() {
+  QueryBuilder<IDocPat, String, QQueryOperations> historyProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'history');
     });
   }
 
-  QueryBuilder<DocPat, String, QQueryOperations> hospitalProperty() {
+  QueryBuilder<IDocPat, String, QQueryOperations> hospitalProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'hospital');
     });
   }
 
-  QueryBuilder<DocPat, String, QQueryOperations> ioProperty() {
+  QueryBuilder<IDocPat, String, QQueryOperations> ioProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'io');
     });
   }
 
-  QueryBuilder<DocPat, String, QQueryOperations> passwordProperty() {
+  QueryBuilder<IDocPat, String, QQueryOperations> passwordProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'password');
     });
   }
 
-  QueryBuilder<DocPat, String, QQueryOperations> phoneProperty() {
+  QueryBuilder<IDocPat, String, QQueryOperations> phoneProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'phone');
     });
   }
 
-  QueryBuilder<DocPat, String, QQueryOperations> photoProperty() {
+  QueryBuilder<IDocPat, String, QQueryOperations> photoProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'photo');
     });

@@ -1,5 +1,11 @@
 import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:feedbackscs2024/collections/doc.dart';
+import 'package:feedbackscs2024/collections/longtest.dart';
+import 'package:feedbackscs2024/collections/placeparestesia_short_test.dart';
+import 'package:feedbackscs2024/collections/reason_finish_long_test.dart';
+import 'package:feedbackscs2024/collections/shorttest.dart';
+import 'package:feedbackscs2024/collections/sideeffects_short_test.dart';
 import 'package:feedbackscs2024/services/hive_adapter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -22,8 +28,16 @@ void main() async {
   await HiveAdapter();
   final dirisar = await getApplicationDocumentsDirectory();
   if (Isar.instanceNames.isEmpty) {
-    final isar = await Isar.open([IPatientSchema],
-        directory: dirisar.path, name: 'feedbackSCSInstance');
+    // ignore: unused_local_variable
+    final isar = await Isar.open([
+      IPatientSchema,
+      IDocPatSchema,
+      IShortTestSchema,
+      ILongTestSchema,
+      PlaceParestesiaShortTestSchema,
+      ReasonFinishLongTestSchema,
+      SideEffectsShortTestSchema
+    ], directory: dirisar.path, name: 'feedbackSCSInstance');
   }
 
   runApp(EasyLocalization(
