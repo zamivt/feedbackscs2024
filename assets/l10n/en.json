@@ -1,0 +1,482 @@
+{
+    "profile": "Profile",
+    "tasks": "Tasks",
+    "report": "Report",
+    "charge": "Charge",
+    "settings": "Settings",
+    "profpat": "Patient profile",
+    "stimulator":"Stimulator",
+    "principies":"Principles",
+    "diagnoz": "Diagnosis",
+    "symptoms": "Symptoms of the disease",
+    "painlevel": "Pain level",
+
+    "goalneuro": "Goals of neurostimulation",
+    "reducingsymptoms": "Reducing symptoms",
+    "minpain": "Desired level of pain is no more",
+    "painmorelevelmax":"more than the maximum",
+    "doc": "Doctor",
+
+    "model": "Model",
+    "numberelectrodes": "Number of electrodes",
+    "instructionneuro": "Quick Setup instructions",
+    "neurostim": "Neurostimulator",
+
+   
+    "nobattery": "No battery charging was carried out",
+    "diarybattery": "Battery charging diary",
+    "daycharge": "Days between charges - ",
+    "datecharge": "Date charge",
+    "withoutcharge": "  excluding pre-charges",
+    "addcharge": "Add charge",
+    "reasoncharge":
+        "Specify the reason if you have charged the neurostimulator before discharging",
+   
+    "patient": "Patient",
+    "namepatient": "Patient's name",
+    "sex":"Sex",
+    "fem":"fem",
+    "mal":"male",
+    "email": "Email",
+    "phone": "Phone",
+    "anamnesis": "Brief anamnesis",
+    "currentpainlevel": "Current maximum pain level",
+    "currentsymptoms":
+        "Current manifestations of the disease, which may be affected by neurostimulation",
+    "neuro": "Neurostimulator",
+    "modelneuro": "Neurostimulator model",
+    "desioncriteria": "Decision-making criteria",
+    "shorttest": "Short-term testing",
+    "combdiarytest": "combination testing and routine testing",
+    "notest": "finish testing",
+    "priority":
+        "Select a priority to determine whether the patient needs to use the program:",
+    "priorityсhoice":
+        "Priority to determine whether the patient needs to use the program:",
+    "percentpain":
+        "Specify the percentage of pain that will be considered acceptable for the patient when evaluating the result",
+    "longtest": "Long-term testing",
+    "choicemaxtimepositiondes":
+        "Specify the maximum time in hours that the patient plans to spend continuously in this activity without changing it.",
+    "maxtimeposition":
+        "Maximum time in hours that the patient plans to spend continuously in this activity without changing it.",
+    "seatp": "sitting position",
+    "lie": "lying position",
+    "movep": "move",
+    "save": "💾  Save",
+    "firstcharge": "Date of the first charge",
+    "lastcharge": "Date of  last charge",
+    "numbercharge": "Number of charges",
+    "showdiarycharge": "View the charging diary",
+    "plancharge": "Planned charging date",
+    "averagecharge": "Average time between charges",
+    "nodate": "There is not enough data",
+    "graph5": "Graph (last 5)",
+    "chargingreport": "Charging Report",
+   
+    "taskheader": "Complete tasks and\nyou will change your life",
+    "dayactive": "Daily activities",
+    "cmove": "Move",
+    "sleep": "Sleep",
+    "cseat": "Seat",
+    "clie": "Lie",
+    "testcomb": "Testing combinations",
+    "everydaytest": "Everyday testing",
+    "aviabletasks": "Available tasks",
+    "notasks": "No tasks available",
+
+    "maketask": "Complete a task",
+    
+    "move10": "Move 10 min",
+    "begintest": "Parameters entered",
+    "enterparametres":
+        "1. Enter the parameters on the remote of your neurostimulator",
+    "program": "Program",
+    "conditionmove1":
+        "For no more than ",
+        "conditionmove2":
+        "minutes you should be on the move: take a walk, perform active movements",
+    "conditionlie1":
+        "For no more than ",
+        "conditionlie2":
+
+        " minutes you should be lying down: for example, read a book, work on a tablet, just relax. During testing, be sure to change your posture: on your back, on your left and right sides, possibly on your stomach, if you use this pose during sleep and rest. Undesirable symptoms should not occur in all these poses.",
+    "conditionseat1":
+        "You should be sitting for no more than ",
+        "conditionseat2":
+        " minutes: read a book, work on a tablet or computer, watch TV",
+    "amps": "Amp",
+    "freq": "Frequency",
+    "freqs": "Freq",
+    "dur": "Duration",
+    "durs": "Dur",
+    "ampcond": "Amplitude with the condition",
+    "setamplitudecond": "Set the amplitude according to the condition",
+    "amp": "Amplitude",
+    
+    "testreport": "Test report",
+    "dayactivity": "Daily activities",
+    "done": "completed",
+    "nodone": "not completed",
+    "fits": "fit",
+    "nofits": "doesn't fit",
+    "testgood": "Programs suitable for further testing",
+    "electrods": "Electrodes",
+    "electrodss": "Elect",
+
+    "move": "move",
+    "seat": "seat",
+    "lie1": "lie 1",
+    "lie2": "lie 2",
+    "lie3": "lie 3",
+
+    "days": "days",
+    "sdays":"days",
+    "timeactive": "Time distribution of activity",
+    "less1": "less then  1 hour",
+    "h12": "from 1 to 2 hours",
+    "h23": "from 2 to 3 hours",
+    "h34": "from 3 to 4 hours",
+    "more4": "more then 4 hours",
+    "top3": "Top-3",
+    "time": "Time",
+    "timerrun": "Timer is running",
+    "changeprogram ": "Install the program ",
+    "next10": ", the next task will be available in 10 min.",
+    "evaluateresult": "Evaluate the test result",
+    "diseasedecreased":
+        "2. Has the manifestation of the symptoms of the disease decreased",
+    "sideeffects":
+        "3. Describe the side effects (pain and discomfort outside your problem area). If there are several of them, then write, separated by commas",
+    "bigsideeffects": "4. Are the side effects bothering you much?",
+    "placeparestesia":
+        "5. If there is paresthesia, write in what place?",
+    "longtestsuitable":
+        "6. Is the program suitable for long-term testing?",
+    "no": "no",
+    "yes": "yes",
+    "savetest": "Save the test result",
+    "timetest": "Testing time",
+    "min": "min",
+    "interrupttesting":
+        "Attention: You can interrupt testing before the time expires if side effects prevent it from continuing.  For example, the pain increases, etc.",
+    "aborttesting": "Abort testing",
+    "tasksshort": "Task for short-term testing",
+    "choicetypeshorttesting": "Choose which testing you want to add",
+    "taskslong": "Task for long-term testing",
+    "choiceactivity": "Choice activity",
+    "single": "single",
+    "singletest": "Single testing",
+    "range": "range",
+    "addtask": "Add task",
+    "electrodeformula": "Program electrode formula",
+    "conditionamplchoice": "Amplitude selection conditions",
+    "ampcomment":
+        "Amplitude (not filled in if you have selected a condition for selecting the amplitude and the patient will set it himself during testing)",
+    "choicehide":
+        "Choose one of the options if you want to hide some of the data from the patient",
+    "hidefreqdur": "Hide frequency and duration",
+    "hideamplfeqdur": "Hide amplitude, frequency and duration",
+    "optfields": "Optional fields:",
+    "requiredfield": "required field",
+    "afterprogram": "Program after the tested program",
+    "charaftertest": "Characteristics of the program after the tested",
+    "initialfreq": "Initial value of the frequency",
+    "endfreq": "Final value of the frequency",
+    "stepfreq": "step of the frequency",
+    "initialdur": "Initial value of the durartion",
+    "enddur": "Final value of the duration",
+    "stepdur": "step of the duration",
+    "progdouble": "Program-double",
+    "conditionprogramdouble":
+        "for testing combinations, it is convenient to use especially when testing sleep combinations, so that the patient can only select the program button and not enter parameters when waking up",
+    "maxtime": "Estimated maximum time for short-term testing:",
+    "hours": " hours",
+    "totalcrit": "total value of several objective criteria",
+    "finaldesion": "final decision of the patient",
+    "enteremail": "Enter your email address",
+    "enter110": "Enter a value from 1 to 10",
+    "painmore10": "Pain level cannot be more than 10",
+    "fillmodel": "Fill in the model",
+    "fillcriteria": "Fill in the criteria",
+    "shortlongtest": "short-term and long-term testing",
+    "testingstage": "Testing stage",
+    "choicemaxtimeposition": "сhoice maximum time position",
+    "nodata": "Patient data is not filled in",
+    "changename": "Change name",
+    "changeemail": "Change email",
+    "changephone": "Change phone",
+    "changesex":"Change sex",
+    "changediagnoz": "Change diagnosis",
+    "changeanamnez": "Change anamnesis",
+    "changesymptoms1": "Change symptom 1",
+    "changesymptoms2": "Change symptom 2",
+    "changesymptoms3": "Change symptom 3",
+    "changelevelmaxpain": "Change the current maximum pain level",
+    "changetimelie": "Change the lying time",
+    "changetimeseat": "Change sitting time",
+    "changetimemove": "Change the movement time",
+    "changeprioritylevelpain": "Change the desired pain level",
+    "changeneuro": "Change the neurostimulator model",
+    "changepriorityshorttest":
+        "Select a priority to determine whether the patient needs to use the program",
+    "changestage": "Change the testing stage",
+    "mystimulator": "My stimulator",
+    "instrprog": "Instructions for setting up the program",
+    "instampl": "Instructions for setting the amplitude",
+    "instfreq": "Frequency setting instructions",
+    "instdur": "Instructions for setting the duration",
+    "videoinstr": "Video instructions",
+    "hz": " Hz",
+    
+    "instructions": "Guide",
+    "princFeedbackscs":
+        "Principles of operation neurostimulation and feedback",
+    "typesofactivities": "Types of activities",
+    "maintypesofactivity": "Main types of activity",
+    "descriptionlie":
+        "This is the first activity that will be available to you during the operation and after it. It is the basis for sleep, so you need to start testing with it. \n It is usually worth understanding how you usually lie: On his back, on his side, or prefers to sleep on his stomach. All these poses, and even more so their change should not worsen the condition (increase pain or side effects of stimulation, because after falling asleep you will not be able to change the program.",
+    "descriptionseat":
+        "This activity will be useful to you while working at a desk, watching TV or reading books in an armchair",
+    "descriptionmove":
+        "Perhaps the most important activity that you will strive to increase when you select the parameters. Because at the beginning after the operation you will walk a little, then start with a short-term test of no more than 10 minutes, but when the doctor allows you to start actively moving, walk along the corridor.",
+    "concldescription":
+        "The activities described above should be dominant when performing any type of testing, but from the stage of long-term testing, a short-term change of activity is quite acceptable, for example, you are testing movement and plan to sit down for a few minutes. At night, the main lying mode is tested, but we plan that without changing the program on the remote control, you can walk a little and sit a little.",
+    "principlscs": "Principles of neurostimulation",
+    "aboutscs": "About SCS technology",
+    "infoscs":
+        "Neurostimulation is an innovative and proven technique (first proposed in 1967) that allows you to get an analgesic effect, improve the quality of life and reduce the use of analgesics in patients with neuropathic pain.The effect is achieved with the help of electrical impulses, which are delivered by electrodes implanted in the epidural space.\n\u2705 Electrical impulses activate pain-inhibiting neurons in the posterior horn of the spinal cord, as a result of which the feeling of pain decreases. \n\u2705 stimulation also causes paresthesia (a feeling of soft pleasant vibration) in the area where the pain originates and its surroundings.\n \u2705 The application of SCS is considered successful if it was possible to achieve more than a 50% reduction in pain on a visual-analog scale. \n\u2705 However, a 30% reduction in pain is also clinically significant.\n\u2705 More than 15,000 patients worldwide are implanted with neurostimulators for the treatment of chronic neuropathic pain every year",
+    "techscs": "SCS Hardware Parts",
+    "descriptionscs":
+        "Any neurostimulation system consists of two parts:\n\u2705 the implantable part consists of a pulse generator, an electrode (a set of electrodes) and an extension cord (optionally several); \n\u2705 the non-implantable part consists of a patients console, a doctors programmer. During the test period, the implantable pulse generator is replaced with an external pulse generator.",
+    "controlunit": "1. Control unit",
+    "descriptioncontrolunit":
+        "The doctors programmer or the patients remote control is connected to the pulse generator and transmits control signals. Only sequential use of the programmer or remote control is used without simultaneous use. The pulse generator allows you to synchronize the data of the doctors programmer and the patients remote control. The multiuser mode of the programmer allows you to store data of different patients (in internal memory, cloud or additional removable media, depending on the model). The physical carrier for transmitting parameters is a radio frequency with a minimum interaction radius or Bluetooth.",
+    "ipg": "2. Pulse generator",
+    "descriptonipg":
+        "It is a multi-program device that generates electrical impulses conducted by one or more electrodes. The pulse generator has the ability to change the polarity of the contacts on each channel (off, positive, negative), the normal operation of one of the channels when the circuit of the second is broken. The pulse generator is implanted subcutaneously.",
+    "electrode": "3. Implantable electrode",
+    "descriptionelectrode":
+        "The implantable electrode is designed to stimulate the spinal cord. The electrode is a thin insulated four-core wire with four, eight or 16 contacts at the tip. The electrode is implanted into the epidural space to conduct an electric current there, which enhances neurostimulation. The optimal position of the electrode is always correlated with the patients pain zone. To stimulate the spinal cord, electrodes are implanted into the epidural space (between the vertebra with the dura mater), while the contacts of the electrodes are close enough to the posterior horn of the spinal cord to stimulate thick myelin nerve fibers.An extension cord and a retainer are supplied with it. At the test stage, a cable is used to connect the implantable electrodes to an external test neurostimulator. The electrodes are made in the form of one or several rows of metal plates with a common terminal, which is either a percutaneous catheter or a tapering plate in the form of a paddle. The electrodes can be either bipolar or multipolar. Increasing the number of contacts allows you to control the electromagnetic field more accurately, but also significantly increases the power consumption, which means you will have to charge the system more often for rechargeable pulse generators or change it for non-rechargeable ones.",
+    "chargingsystem": "4. Charging system",
+    "descriptioncharge":
+        "In rechargeable systems, the generator is charged using a radio frequency in a contactless way.",
+    "strategychoiceandtasks": "Selection strategy and tasks",
+    "bigtasks":
+        "The number of tasks that a doctor can offer you is very large and it can take years to complete all of them if you think about it and count. Of course, the doctor will not set unsolvable tasks, because neurostimulation helps to improve the quality of life, and does not replace it.",
+    "mintasks":
+        "In testing, we adhere to the strategy of minimizing the number of tasks performed and the time of their completion. But we do not miss the compatibility of programs and their impact on daily activity.",
+    "stagetest": "Testing stages",
+    "goal": "Goal: ",
+    "avialablelongtest": "Available transition to the next stage:",
+    "find5":
+        "found at least 5 programs for one activity that satisfy you",
+    "nomore10": "no more than 10 min\n\n",
+    "timeactivity": "Testing time for each activity:",
+    "findminpain":
+        " find a program in which you are comfortable: the pain level is significantly lower, side effects are minimized, you decide to conduct long-term testing yourself.\n \n",
+    "findtimemore":
+        " find a program whose running time is longer than you need.\n For example, you spend a couple of hours at your desk at work, and then you can change the program and take a little walk. At night, it is permissible to wake up once: out of 8 hours of sleep, 4 for each program.\n \n",
+    "discusdoctor": "you are discussing with the doctor. \n\n",
+    "find3":
+        " at least 3 different programs were found in the supine position for sleep testing and 2 sitting, movement, and lying activities for daytime activities. The running time of each program is longer than the maximum activity time in everyday life. ",
+    "programFeedbackSCS": "Program FeedbackSCS",
+    "aboutapp": "Learn more about the app",
+    "findcomb":
+        "find a combination of programs so that their sequence is convenient for you in everyday life during the day and night. \n While testing combinations, you try to spend your normal day changing the program with each long-term change in activity. \n \n",
+    "onedaynight": " one day or night \n\n",
+    "findfullcomb":
+        " found combinations for day and night activities that satisfy you.",
+    "findfulcomb":
+        " Conduct a full-fledged testing of combinations to determine the charging time that will suit you and test the actual effect of combinations of programs in everyday life. \n You start testing immediately after the battery is fully charged and finish when you reach 50%. \n \n",
+    "fulltime": " from charging to charging the neurostimulator",
+    "effectiveprogram": "Effective program",
+    "programandcharact": "The program and its characteristics",
+    "characterictic":
+        "Any neurostimulation wave can be represented by the following characteristics: \n\u2705 amplitude measured in milliamps or volts \n\u2705 frequency measured in Hz, \n\u2705 duration measured in microseconds.",
+    "buster":
+        "The most common is stimulation with constantly distributed pulses, but in 2010 booster stimulation was introduced, when a series of several constant pulses alternates with a complete absence of pulses. Booster stimulation has not yet been sufficiently implemented by the main manufacturers, only Nevro Corporation and Abbott Laboratories have such systems.",
+    "critef": "Criteria for the effectiveness of the program",
+    "qualitativeevalshort":
+        "Qualitative evaluation of the program by the patient during short-term testing",
+    "paramshort":
+        "Starting testing any program when it is first turned on and short-term testing, you should listen to your feelings to assess whether it works or you will have to abandon it. At the beginning, it will be difficult for you to evaluate and understand all the pros and cons at once, but later it will be immediately clear whether it is worth interrupting testing if the program does not satisfy you or continuing for a longer time. \n What you should pay attention to: \n\u2705 What level of pain are you experiencing? \n\u2705 are there side effects (pain and discomfort outside your problem area? Do they bother you? \n\u2705 Are there any paresthesia at the site of your problem? \n\u2705 Is the program suitable for further testing?",
+    "quantitativelongtest":
+        "Quantitative evaluation of the program by the patient during long-term testing",
+    "longtime":
+        "The main criterion is the running time of the program. We strive to get a work time program that would be significantly more than the activity time in everyday life. For example, you like to walk and go shopping for 2 hours; you get to work driving for an hour. Think and decide with your doctor what time frame is critical for you and what you would like to achieve in the future.",
+    "qualitativecomb": "Qualitative evaluation of program combinations",
+    "decriptioncombtest":
+        "At this stage, you are aiming more for real, rather than maximum testing, as in the previous stage. You evaluate whether transitions between programs work well when one program ends and you change activities, whether your already positive feelings change to negative ones. Our task is to find a set of programs in which your life differs from others only in that you need to switch the program on the neurostimulator console from time to time and do it not often. You start testing, first of all, sleep. The set of programs at night should be minimal, so that you wake up at night to change the program or do it infrequently, your remote control should be configured to do it in a couple of movements, if necessary.",
+    "effbattery":
+        "We can definitely congratulate you if you have moved on to this stage. The quality of your life has clearly improved, but I would like more independence. You have long learned that your battery life is limited: for non-rechargeable - the total time; for rechargeable - the time between charges and the number of charges. before the need to replace the neurostimulator. I would like to have more of all the indicators. If it is difficult to get an accurate quantitative estimate for non-rechargeable ones, even manufacturers give only a partial comparison table for different amplitudes and durations, then for rechargeable ones you can compare the charging time from full charge to a certain level, more often 50%.",
+    "partapp": "Parts of the application",
+    "decriptionprofile":
+        "You can familiarize yourself with your profile: \n\u2B50 goals of neurostimulation, \n\u2B50 view the instructions for your neurostimulator, \n\u2B50 call, write a letter or message to the doctor.",
+    "decriptiontasks":
+        "You will be able to select an available task and complete it.",
+    "decriptionreport":
+        "You will get acquainted with the report of the passed testing.",
+    "decriptionbattery":
+        "You will be able to keep a charging diary of the neurostimulator and receive a full charging report.",
+    "privacy": "Privacy",
+    "decription confident":
+        "All program data is stored in your phones memory and is not transmitted to the Internet. You can provide your phone number for setting up the task plan and your profile to the doctor, as well as send the generated report on your testing. The program does not transfer information to third parties.",
+    "About FeedbackSCS": "About the app FeedbackSCS",
+    "description app":
+        "As a result of the application, you and your doctor will get an idea: \n\u2B50 Which parameters of spinal cord neurostimulation are better for you? \n\u2B50 How long do the parameters work? \n\u2B50 How to combine different sets of parameters with each other to improve the quality of your life? \n\u2B50 Is it possible to reduce battery consumption and charge less often?",
+    "understand process":
+        "Only by understanding the process \n can it be managed",
+    "description understand":
+        "Make the process of selecting parameters of spinal cord neurostimulation intelligent: \n\u2B50 gain knowledge on neurostimulation technology; \n\u2B50 learn how to control a neurostimulator.",
+
+    "analiz facts": "Analysis of facts provides solutions",
+    "decription analiz":
+        "By tracking how a certain set of neurostimulation parameters affects you, you can understand how effective it is. We will make the parameter selection process much easier: \n\u2B50 choose a strategy together with your doctor and follow it; \n\u2B50 track the parameter selection process.",
+    "report onboard": "Get a full report",
+    "description report":
+        "Study how effective you are in your testing: \n\u2B50 how many programs and kits have been tested and how many are left; \n\u2B50 are you close to the goal: to get the best set of parameters at the moment and whether there are spare options.",
+    "move tasks": "Move and complete tasks",
+    "description move tasks":
+        "A small step of the task will bring you closer to pain control. Do not lose motivation, look for new best programs every day, their combination will give you the opportunity to do something that you have not done before or that you have long forgotten because of the pain.",
+    "beactive": "Be active \n and do what you want",
+    "descriptionbe active":
+        "Sleep, sitting at the table, walking, swimming... Different types of activity give different pain, the electrode of the neurostimulation system also moves in different poses. The doctor will offer different tasks for different types of activities and you will be able to assess how effective the program is for you. You can always suggest new activities to test.",
+    "bebattery":
+        "Control your charging and squeeze more out of the battery",
+    "description be battery":
+        "In everyday life, you always want to be independent: \n\u2B50 the neurostimulator charging calendar will give you an understanding during long testing which set of programs requires more time between charges; \n\u2B50 choose the most effective set of parameters and be independent in traveling and any habitual activity, save your time on charging.",
+    "descriptiondoctor":
+        "Logging in to the doctors account will allow you to fill out the patients profile, add new tasks for testing the patient, and view the report.",
+    "username": "Username",
+    "password": "Password",
+    "Genpdfreport": "Create a report for a doctor",
+
+    "createdreport":
+        "The report was created by the Feedbacks 1.0 application",
+    "reportSCS": "SCS Neurostimulation System Testing Report",
+    "current doctor": "Attending physician",
+    "hospital": "Hospital",
+    "chart": "Charts",
+    "beforeprogramcomment":
+        "You can plan which mode the patient will turn on after completing your task, for example, after completing the task, he experiences severe pain and in order to remove it guaranteed. To do this, you need a previously found effective program. Even though her efficiency time is short, the client experiences more severe paresthesia than necessary, she eats a lot of battery, but as a temporary solution, she is effective. It is better not to change this program often. These fields are optional and you dont have to specify them.",
+    "beforeprogram":
+        "Specify the programs that run after the tested ones",
+        "beforeprog":"Before program",
+          "wrongdate":"wrong date",
+          "note":"Note",
+    "downloadreports": "Download reports",
+
+    "changeprog": "Change program",
+    "changeelect": "Change electrodes",
+    "changeampl": "Change amplitude",
+    "changefreq": "Change frequency",
+    "changedur": "Change duration",
+    "curprogparam": "current program parameters",
+    "fixamp": "fixed amplitude",
+    "noparestesia": "before paresthesia",
+    "painmin": "with a pain level below ",
+    "condlong move":
+        "For a long time you will need to be on the move: take a walk, perform active movements. Therefore, choose a time convenient for you so as not to interrupt this activity as much as possible. Only allowed. short stops without changing the program, for example, you can sit for a while to rest a little. First of all, assume what time you want to spend as much as possible in this activity and try to exceed this time on this program.",
+    "markself": "2. Evaluate your well-being during testing",
+    "reasonstoptest":
+        "1. Specify the reasons why you had to finish testing, for example, increased pain, the appearance of unpleasant symptoms, etc",
+    "condlonglie":
+        "For a long time you will need to be lying down. Plan this long-term activity when you want to relax. First of all, assume what time you want to spend as much as possible in this activity and try to exceed this time on this program. Also, when testing the program, be sure to sit for a short time and walk around after a while, because, for example, at night there may be a need for a short change of activity. and at night it is quite difficult to change programs.",
+    "condlongseat":
+        "For a long time you will need to be sitting. Therefore, choose a time convenient for you so as not to interrupt this activity as much as possible. Only allowed. short walks without changing the program. First of all, assume what time you want to spend as much as possible in this activity and try to exceed this time on this program.",
+    "descrtestcombday":
+        "Start your testing as soon as you wake up during the whole day before your sleep. Try to behave absolutely normally and even perform more activities if you want to. If you plan to move for a long time, sit or lie down, switch the program on the remote of your stimulator and in the program If the transition to a new activity is short, then you do not need to switch the current program. \n You can always finish testing before the end of the day if you are not satisfied with the work of combinations of programs.",
+    "descrtestcombnight":
+        "Start your testing as soon as you plan to fall asleep. If you woke up while the program was running, for some reason interfering with sleep related to neurostimulation (increased paresthesia, increased pain, etc.), then change the program and try to fall asleep again.",
+    "descr test usual":
+        "The purpose of testing at this stage is to find out how long the battery of the neurostimulator will work on the selected set of programs in everyday life, as well as how well this set affects you for a long time. Therefore, perform maximum activity in this test as in normal life.",
+    "battery full start test": "The battery is charged. \n Start testing",
+    "finish usual test":
+        "You have finished testing at the end of the battery life of the neurostimulator",
+    "reason finish test":
+        "Specify the reasons why you had to finish testing, for example, increased pain, the appearance of unpleasant symptoms, etc.",
+    "evalute self": "Evaluate your well-being during testing",
+    "full charge": "Charging is done",
+    "day pass": "Days have passed",
+    "batterysless50":
+        "Battery charge is less than 50%. \n Finish testing",
+    "finishmorning": "Did you finish testing this morning?",
+    "finishsleep":
+        "Did you finish testing at the end of the day before going to bed?",
+    "unfulfilledtasks": "Unfulfilled tasks",
+    "taskcompleted": "Task completed",
+    "taskresult": "Task results",
+    "interrupttest": "You interrupted testing before the end of time",
+    "fulltest": "You have completed the task completely",
+    "belowthedesired": " below the desired",
+    "higherthandesired": " higher than desired",
+    "progcandidatlongtest":
+        "The program is suitable for long-term testing",
+    "prognoncandidatlongtest":
+        "The program is not suitable for long-term testing",
+    "nexttaskafter": "The next task will be available via",
+    "continuetesting": "Continue testing",
+    "notesttask": "No testing was carried out",
+    "testover": "Testing time is over",
+    "success": "successful",
+    "unsuccess": "not successful",
+    "showcombtest": "Show combinations of testing and testing time",
+    "start": "Start",
+    "next": "Next",
+    "logdoc": "Log in to your doctor account",
+    "invaliduserdata": "invalid username or password",
+    "enter": "Enter",
+    "welcome": "Welcome",
+    "begin":"Begin",
+    "aboutFeedbackSCS": "About  FeedbackSCS app",
+    "descriptionapp":
+    "As a result of the application, you and your doctor will get an idea: \n\u2B50 Which parameters of spinal cord neurostimulation are better for you? \n\u2B50 How long do the parameters work? \n\u2B50 How to combine different sets of parameters with each other to improve the quality of your life? \n\u2B50 Is it possible to reduce battery consumption and charge less often?",
+"understandprocess":
+    "Only by understanding the process \n can it be controlled?",
+"descriptionunderstand":
+    "Make the process of selecting parameters of spinal cord neurostimulation intelligent: \n\u2B50 gain knowledge on neurostimulation technology; \n\u2B50 learn how to control a neurostimulator. ",
+"analizfacts": "The analysis of facts \n gives solutions",
+"decriptionanaliz":
+    "By tracking how a certain set of neurostimulation parameters affects you, you can understand how effective it is. We will make the parameter selection process much easier: \n\u2B50 choose a strategy together with your doctor and follow it; \n\u2B50 track the parameter selection process.",
+"reportonboard": "Get a full report",
+"descriptionreport":
+    "Study how effective you are in your testing: \n\u2B50 how many programs and kits have been tested and how many are left; \n\u2B50 are you close to the goal: to get the best set of parameters at the moment and whether there are spare options. ",
+"movetasks": "Move and complete tasks",
+"descriptionmovetasks":
+    "A small step of abstinence will bring you closer to pain control. Do not lose motivation, look for new best programs every day, their combination will give you the opportunity to do something that you have not done before or that you have long forgotten because of the pain.",
+
+"descriptionbeactive":
+    "Sleep, work at the table sitting, walking, swimming... Different types of activity give different pain, the electrode of the neurostimulation system also moves in different poses. The doctor will offer different tasks for different types of activities and you will be able to assess how effective the program is for you. You can always suggest new activities to test.",
+
+"descriptionbebattery":
+    "In everyday life, you always want to be independent: \n\u2B50 the neurostimulator charging calendar will give you an understanding during long testing which set of programs requires more time between charges; \n\u2B50 choose the most effective set of parameters and be independent during travel and any habitual activity, save your time on charging", 
+    "decriptionconfident":
+        "All program data is stored in your phone's memory and is not transmitted to the Internet. You can provide your phone number for setting up the task plan and your profile to the doctor, as well as send the generated report on your testing. The information is not transmitted by the program to third parties.",
+        "princFeedbackSCS":"Principles of neurostimulation",
+        "quanificationeveryday":"Quantitative assessment of the daily use of a set of programs",
+        "notask":"no  tasks",
+        "user":"User",
+        "enterdoc":"Enter doctor",
+        "wrongploginpassword":"You entered the wrong username or password",
+        "startvalue":"start value",
+        "endvalue":"end value",
+        "stepvalue":"step",
+        "rangetest":"range testing",
+        "accept": "Accept",
+        "profilepatintfull":"The patient's profile is filled in",
+        "addsuccestask": "Task added",
+        "noaddtask":"This task has already been given",
+        "busyprogram":"Busy testing programs",
+        "counttask":"Tasks will be added - ",
+       "timetask": "The time of completion of tasks by the patient - ",
+       "withprepprog":" taking into account the preliminary program - ",
+       "tablecand": "Short-term testing candidate table",
+       "checkcor": "Check that the data is entered correctly",
+       "testperiod":"test period",
+       "settingdrawer":"Settings",
+       "changetheme":"Choosing a theme"
+          
+
+        
+    }

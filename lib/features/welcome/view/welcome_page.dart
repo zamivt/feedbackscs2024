@@ -1,0 +1,221 @@
+import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:go_router/go_router.dart';
+import 'package:pdfx/pdfx.dart';
+
+import '../../../core/router/route_names.dart';
+import '../../../core/ui/theme/appimages.dart';
+import 'package:easy_localization/easy_localization.dart';
+import '../../../l10n/locale_keys.g.dart';
+import '../../doc/patient/controllers/patient_controller.dart';
+
+class WelcomePage extends StatefulWidget {
+  const WelcomePage({super.key});
+
+  @override
+  State<WelcomePage> createState() => _WelcomePageState();
+}
+
+class _WelcomePageState extends State<WelcomePage> {
+  List images = [
+    AppImages.bigicon,
+    AppImages.intellect,
+    AppImages.scs,
+    AppImages.achivement,
+    AppImages.activity,
+    AppImages.battery,
+    AppImages.report,
+    AppImages.confident
+  ];
+  List discriptionwelcome = [
+    LocaleKeys.descriptionapp.tr(),
+    LocaleKeys.descriptionunderstand.tr(),
+    LocaleKeys.decriptionanaliz.tr(),
+    LocaleKeys.descriptionmovetasks.tr(),
+    LocaleKeys.descriptionbeactive.tr(),
+    LocaleKeys.descriptionbebattery.tr(),
+    LocaleKeys.descriptionreport.tr(),
+    LocaleKeys.decriptionconfident.tr()
+  ];
+
+  List titlewelcome = [
+    LocaleKeys.aboutFeedbackSCS.tr(),
+    LocaleKeys.understandprocess.tr(),
+    LocaleKeys.analizfacts.tr(),
+    LocaleKeys.movetasks.tr(),
+    LocaleKeys.beactive.tr(),
+    LocaleKeys.bebattery.tr(),
+    LocaleKeys.reportonboard.tr(),
+    LocaleKeys.privacy.tr(),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.tertiary,
+        body: PageView.builder(
+            scrollDirection: Axis.vertical,
+            itemCount: images.length,
+            itemBuilder: (_, index) {
+              return Container(
+                width: double.maxFinite,
+                height: double.maxFinite,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage(MediaQuery.of(context).orientation ==
+                                Orientation.landscape
+                            ? 'assets/img/empty.png'
+                            : images[index]),
+                        alignment: Alignment.bottomCenter,
+                        fit: BoxFit.scaleDown)),
+                child: Container(
+                  margin: const EdgeInsets.only(top: 80, left: 20, right: 20),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                MediaQuery.of(context).orientation ==
+                                        Orientation.landscape
+                                    ? SizedBox(
+                                        width: 100,
+                                        child: Image.asset(images[index]))
+                                    : Container(),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                Text(
+                                  titlewelcome[index].toString(),
+                                  style:
+                                      Theme.of(context).textTheme.titleMedium,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 40),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width - 60,
+                              child: Text(discriptionwelcome[index].toString(),
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .primary)),
+                            ),
+                            const SizedBox(
+                              height: 80,
+                            ),
+                            (images.length - 1 == index) || (index == 0)
+                                ? GetBuilder(builder:
+                                    (PatientController patientController) {
+                                    return ElevatedButton(
+                                      onPressed: () {
+                                        patientController.patients.isEmpty
+                                            ? context.pushNamed(
+                                                RouteNames.patientemptymainpage)
+                                            : patientController.patients[0]
+                                                        .islicense !=
+                                                    true
+                                                ? context.pushNamed(
+                                                    RouteNames.licenseapp)
+                                                : context.pushNamed(
+                                                    RouteNames.patientmainpage);
+                                        ;
+                                      },
+                                      child: Text(LocaleKeys.begin.tr(),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelLarge),
+                                    );
+                                  })
+                                : Container(),
+                          ],
+                        ),
+                        Column(
+                          children: List.generate(8, (indexDots) {
+                            return Container(
+                              margin: const EdgeInsets.only(bottom: 2),
+                              width: 8,
+                              height: index == indexDots ? 25 : 8,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: index == indexDots
+                                    ? Theme.of(context).colorScheme.primary
+                                    : Theme.of(context)
+                                        .colorScheme
+                                        .primary
+                                        .withOpacity(0.3),
+                              ),
+                            );
+                          }),
+                        ),
+                      ]),
+                ),
+              );
+            }));
+  }
+
+  Future<dynamic> LicenceDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      context.pushNamed(RouteNames.patientmainpage);
+                    },
+                    child: Text(
+                      'Принять лицензионнное соглашение и разрешения',
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                          fontStyle: FontStyle.italic),
+                    )),
+              ],
+              title: Text(
+                'FeedbackSCS',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary,
+                  fontSize: 22,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              contentPadding: EdgeInsets.all(10.0),
+              content: Column(
+                children: [
+                  ColoredBox(
+                    color: Colors.blue,
+                    child: Row(children: [
+                      PdfPageNumber(
+                        controller: PdfController(
+                          document:
+                              PdfDocument.openAsset('assets/pdf/sample.pdf'),
+                        ),
+                        builder: (_, loadingState, page, pagesCount) =>
+                            Container(
+                          alignment: Alignment.center,
+                          child: Text(
+                            '$page/${pagesCount ?? 0}',
+                            style: const TextStyle(fontSize: 22),
+                          ),
+                        ),
+                      ),
+                    ]),
+                  ),
+                  SizedBox(
+                    width: 300,
+                    height: 600,
+                    child: PdfView(
+                        controller: PdfController(
+                      document: PdfDocument.openAsset('assets/pdf/sample.pdf'),
+                    )),
+                  )
+                ],
+              ),
+            ));
+  }
+}
