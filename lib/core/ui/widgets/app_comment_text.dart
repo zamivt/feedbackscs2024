@@ -27,7 +27,7 @@ class AppCommentText extends StatelessWidget {
         text,
         textAlign: TextAlign.start,
         style: TextStyle(
-            fontSize: 16,
+            fontSize: 14,
             fontStyle: FontStyle.italic,
             color: Theme.of(context).colorScheme.onTertiary),
       ),

@@ -7,12 +7,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+import '../../../../../collections/patient.dart';
 import '../../../../../core/router/route_names.dart';
 import '../../../../../core/ui/theme/appimages.dart';
 import '../../../../../core/ui/widgets/common_widgets.dart';
 import '../../../../../l10n/locale_keys.g.dart';
-
-import '../../../../doc/patient/controllers/patient_controller.dart';
+import '../../../../../repository/feedbackscs_database.dart';
 import '../../../../doc/tasks/controllers/candidate_short_task_lie_controller.dart';
 import '../../../../doc/tasks/controllers/candidate_short_task_move_controller.dart';
 import '../../../../doc/tasks/controllers/candidate_short_task_seat_controller.dart';
@@ -27,7 +28,9 @@ class Stage1_2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _patientController = Get.find<PatientController>();
+    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
+
     final _currentShortTaskControler = Get.find<CurrentShortTaskControler>();
     final _currentLongTaskControler = Get.find<CurrentLongTaskControler>();
     final _candidateShortTaskMoveController =
@@ -65,7 +68,6 @@ class Stage1_2 extends StatelessWidget {
               ShortTaskTable(
                   _candidateShortTaskMoveController,
                   context,
-                  _patientController,
                   _currentShortTaskControler,
                   _candidateShortTaskSeatController,
                   _candidateShortTaskLieController),
@@ -76,7 +78,6 @@ class Stage1_2 extends StatelessWidget {
       LongTaskTable(
           context,
           _candidatelongTaskMoveControler,
-          _patientController,
           _candidateShortTaskMoveController,
           _currentShortTaskControler,
           _candidatelongTaskMoveControler,
@@ -89,13 +90,15 @@ class Stage1_2 extends StatelessWidget {
   Padding LongTaskTable(
       BuildContext context,
       CandidateLongTaskMoveControler _candidatelongTaskMoveControler,
-      PatientController _patientController,
       CandidateShortTaskMoveControler _candidateShortTaskMoveController,
       CurrentShortTaskControler _currentShortTaskControler,
       CandidateLongTaskMoveControler _candidatelongTaskNoveControler,
       CandidateShortTaskSeatControler _candidateShortTaskSeatController,
       CandidateLongTaskLieControler _candidatelongTaskLieControler,
       CandidateShortTaskLieControler _candidateShortTaskLieController) {
+    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
+
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: AppColorContainer(
@@ -145,8 +148,7 @@ class Stage1_2 extends StatelessWidget {
                                             .colorScheme
                                             .onBackground)),
                                 child: Image.asset(
-                                    _patientController.patients[0].sex ==
-                                            LocaleKeys.fem.tr()
+                                    currentpatient[0].sex == LocaleKeys.fem.tr()
                                         ? AppImages.happymovemen
                                         : AppImages.happymovemen))),
                         Container(
@@ -217,8 +219,9 @@ class Stage1_2 extends StatelessWidget {
                                           .deleteCandidateShortTaskMove(index);
 
                                       String newactivetask;
-                                      _patientController.editactivetaskPatient(
-                                          newactivetask = 'st1');
+                                      context
+                                          .read<FeedbackSCSDatabase>()
+                                          .updateActiveTask('st1');
                                       context.pushNamed(RouteNames.shorttest1);
                                     },
                                     icon: Icon(Icons.add_task))),
@@ -261,8 +264,7 @@ class Stage1_2 extends StatelessWidget {
                                             .colorScheme
                                             .onBackground)),
                                 child: Image.asset(
-                                    _patientController.patients[0].sex ==
-                                            LocaleKeys.fem.tr()
+                                    currentpatient[0].sex == LocaleKeys.fem.tr()
                                         ? AppImages.happyseatwomen
                                         : AppImages.happyseatmen))),
                         Container(
@@ -333,8 +335,9 @@ class Stage1_2 extends StatelessWidget {
                                           .deleteCandidateShortTaskSeat(index);
 
                                       String newactivetask;
-                                      _patientController.editactivetaskPatient(
-                                          newactivetask = 'st1');
+                                      context
+                                          .read<FeedbackSCSDatabase>()
+                                          .updateActiveTask('st1');
                                       context.pushNamed(RouteNames.shorttest1);
                                     },
                                     icon: Icon(Icons.add_task))),
@@ -377,8 +380,7 @@ class Stage1_2 extends StatelessWidget {
                                           .colorScheme
                                           .onBackground)),
                               child: Image.asset(
-                                  _patientController.patients[0].sex ==
-                                          LocaleKeys.fem.tr()
+                                  currentpatient[0].sex == LocaleKeys.fem.tr()
                                       ? AppImages.happysleepwomen
                                       : AppImages.happysleepmen)),
                         ),
@@ -449,8 +451,9 @@ class Stage1_2 extends StatelessWidget {
                                           .deleteCandidateShortTaskLie(index);
 
                                       String newactivetask;
-                                      _patientController.editactivetaskPatient(
-                                          newactivetask = 'st1');
+                                      context
+                                          .read<FeedbackSCSDatabase>()
+                                          .updateActiveTask('st1');
                                       context.pushNamed(RouteNames.shorttest1);
                                     },
                                     icon: Icon(Icons.add_task))),
@@ -469,10 +472,11 @@ class Stage1_2 extends StatelessWidget {
   Padding ShortTaskTable(
       CandidateShortTaskMoveControler _candidateShortTaskMoveController,
       BuildContext context,
-      PatientController _patientController,
       CurrentShortTaskControler _currentShortTaskControler,
       CandidateShortTaskSeatControler _candidateShortTaskSeatController,
       CandidateShortTaskLieControler _candidateShortTaskLieController) {
+    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
       child: Row(
@@ -511,10 +515,10 @@ class Stage1_2 extends StatelessWidget {
                                 color: Theme.of(context)
                                     .colorScheme
                                     .onBackground)),
-                        child: Image.asset(_patientController.patients[0].sex ==
-                                LocaleKeys.fem.tr()
-                            ? AppImages.painmovewomen
-                            : AppImages.painmovemen))),
+                        child: Image.asset(
+                            currentpatient[0].sex == LocaleKeys.fem.tr()
+                                ? AppImages.painmovewomen
+                                : AppImages.painmovemen))),
                 Container(
                   width: 100,
                   color: Theme.of(context).colorScheme.tertiary,
@@ -544,11 +548,8 @@ class Stage1_2 extends StatelessWidget {
                         child: IconButton(
                             color: Theme.of(context).colorScheme.onBackground,
                             onPressed: () {
-                              createNewCurrentTask(
-                                  _currentShortTaskControler,
-                                  _candidateShortTaskMoveController,
-                                  _patientController,
-                                  context);
+                              createNewCurrentTask(_currentShortTaskControler,
+                                  _candidateShortTaskMoveController, context);
                             },
                             icon: Icon(Icons.add_task))),
               ],
@@ -587,10 +588,10 @@ class Stage1_2 extends StatelessWidget {
                                 color: Theme.of(context)
                                     .colorScheme
                                     .onBackground)),
-                        child: Image.asset(_patientController.patients[0].sex ==
-                                LocaleKeys.fem.tr()
-                            ? AppImages.painseatwomen
-                            : AppImages.painseatmen))),
+                        child: Image.asset(
+                            currentpatient[0].sex == LocaleKeys.fem.tr()
+                                ? AppImages.painseatwomen
+                                : AppImages.painseatmen))),
                 Container(
                   width: 100,
                   color: Theme.of(context).colorScheme.tertiary,
@@ -649,8 +650,9 @@ class Stage1_2 extends StatelessWidget {
                                   .deleteCandidateShortTaskSeat(index);
 
                               String newactivetask;
-                              _patientController
-                                  .editactivetaskPatient(newactivetask = 'st1');
+                              context
+                                  .read<FeedbackSCSDatabase>()
+                                  .updateActiveTask('st1');
                               context.pushNamed(RouteNames.shorttest1);
                             },
                             icon: Icon(Icons.add_task))),
@@ -688,10 +690,10 @@ class Stage1_2 extends StatelessWidget {
                           border: Border.all(
                               color:
                                   Theme.of(context).colorScheme.onBackground)),
-                      child: Image.asset(_patientController.patients[0].sex ==
-                              LocaleKeys.fem.tr()
-                          ? AppImages.painsleepwomen
-                          : AppImages.painsleepmen)),
+                      child: Image.asset(
+                          currentpatient[0].sex == LocaleKeys.fem.tr()
+                              ? AppImages.painsleepwomen
+                              : AppImages.painsleepmen)),
                 ),
                 Container(
                   width: 100,
@@ -751,8 +753,9 @@ class Stage1_2 extends StatelessWidget {
                                   .deleteCandidateShortTaskLie(index);
 
                               String newactivetask;
-                              _patientController
-                                  .editactivetaskPatient(newactivetask = 'st1');
+                              context
+                                  .read<FeedbackSCSDatabase>()
+                                  .updateActiveTask('st1');
                               context.pushNamed(RouteNames.shorttest1);
                             },
                             icon: Icon(Icons.add_task))),
@@ -767,7 +770,6 @@ class Stage1_2 extends StatelessWidget {
   void createNewCurrentTask(
       CurrentShortTaskControler _currentShortTaskControler,
       CandidateShortTaskMoveControler _candidateShortTaskMoveController,
-      PatientController _patientController,
       BuildContext context) {
     _currentShortTaskControler.clearcurrentTaskShort();
     late int index;
@@ -790,7 +792,7 @@ class Stage1_2 extends StatelessWidget {
     _candidateShortTaskMoveController.deleteCandidateShortTaskMove(index);
 
     String newactivetask;
-    _patientController.editactivetaskPatient(newactivetask = 'st1');
+    context.read<FeedbackSCSDatabase>().updateActiveTask('st1');
     context.pushNamed(RouteNames.shorttest1);
   }
 }

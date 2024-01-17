@@ -10,16 +10,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+import '../../../../../collections/patient.dart';
 import '../../../../../l10n/locale_keys.g.dart';
 import '../../../../../../services/entities/13_unsuccesshorttaskmove.dart';
 import '../../../../../../services/entities/10_successhorttaskmove.dart';
 
 import '../../../../../core/router/route_names.dart';
+import '../../../../../repository/feedbackscs_database.dart';
 import '../../../../../services/entities/11_successhorttasklie.dart';
 import '../../../../../services/entities/14_unsuccesshorttasklie.dart';
 import '../../../../../services/entities/15_unsuccesshorttaskseat.dart';
 import '../../../../../services/entities/data/test_const.dart';
-import '../../../../doc/patient/controllers/patient_controller.dart';
 import '../../../../doc/tasks/controllers/short_task_lie_controller.dart';
 import '../../../../doc/tasks/controllers/short_task_seat_controller.dart';
 import '../../longtest/controllers/candidate_long_lie.dart';
@@ -37,7 +39,9 @@ class ShortTest4 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _patientController = Get.find<PatientController>();
+    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+
+    List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
 
     final _shorttaskmoveController = Get.find<ShortTaskMoveControler>();
     final _successShortMoveController =
@@ -70,13 +74,11 @@ class ShortTest4 extends StatelessWidget {
                   TimeTestConst.timeshorttest) &&
               (currentShortTaskControler.currentshorttasks[0].longestsuitable ==
                   true) &&
-              ((_patientController.patients[0].priorityshorttest ==
-                      'final desion'.tr) ||
-                  (_patientController.patients[0].priorityshorttest !=
-                          'final desion'.tr) &&
+              ((currentpatient[0].priorityshorttest == 'final desion'.tr) ||
+                  (currentpatient[0].priorityshorttest != 'final desion'.tr) &&
                       (currentShortTaskControler
                               .currentshorttasks[0].currentlevelpain! <=
-                          _patientController.patients[0].prioritylevelpain));
+                          currentpatient[0].prioritylevelpain));
       return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.secondary,
         appBar: AppBar(
@@ -158,9 +160,7 @@ class ShortTest4 extends StatelessWidget {
                       Text(
                         currentShortTaskControler
                                     .currentshorttasks[0].currentlevelpain! >
-                                Get.find<PatientController>()
-                                    .patients[0]
-                                    .prioritylevelpain
+                                currentpatient[0].prioritylevelpain
                             ? LocaleKeys.higherthandesired.tr()
                             : LocaleKeys.belowthedesired.tr(),
                         style: Theme.of(context).textTheme.displayMedium,
@@ -194,8 +194,9 @@ class ShortTest4 extends StatelessWidget {
                             _shorttasklieController,
                             _successShortLieController,
                             _unsuccessShortLieController);
-                        Get.find<PatientController>()
-                            .editactivetaskPatient('no tasks');
+                        context
+                            .read<FeedbackSCSDatabase>()
+                            .updateActiveTask('no tasks');
 
                         context.pushNamed(RouteNames.patienttasks);
                       },

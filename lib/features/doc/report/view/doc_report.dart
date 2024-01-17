@@ -2,29 +2,32 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:feedbackscs2024/core/ui/widgets/app_color_container.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
+
+import 'package:provider/provider.dart';
+import '../../../../collections/patient.dart';
 import '../../../../l10n/locale_keys.g.dart';
-import '../../patient/controllers/patient_controller.dart';
+import '../../../../repository/feedbackscs_database.dart';
 
 class DocReport extends StatelessWidget {
   const DocReport({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.primary,
-      appBar: AppBar(
-        automaticallyImplyLeading: F,
-        centerTitle: true,
-        elevation: 0,
         backgroundColor: Theme.of(context).colorScheme.primary,
-        title: Text(
-          LocaleKeys.report.tr(),
-          style: Theme.of(context).textTheme.titleLarge,
+        appBar: AppBar(
+          automaticallyImplyLeading: F,
+          centerTitle: true,
+          elevation: 0,
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          title: Text(
+            LocaleKeys.report.tr(),
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
         ),
-      ),
-      body: GetBuilder(builder: (PatientController patientController) {
-        return patientController.patients.isNotEmpty
+        body: currentpatient.isNotEmpty
             ? Column(children: [
                 AppColorContainer(
                     color: Theme.of(context).colorScheme.secondary,
@@ -48,8 +51,6 @@ class DocReport extends StatelessWidget {
                     style: Theme.of(context).textTheme.displayLarge,
                   ),
                 ),
-              );
-      }),
-    );
+              ));
   }
 }

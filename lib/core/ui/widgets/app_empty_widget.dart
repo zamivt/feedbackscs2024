@@ -27,7 +27,7 @@ class AppEmptyWidget extends StatelessWidget {
             child: Icon(
               Icons.data_thresholding,
               size: 60,
-              color: Theme.of(context).colorScheme.primary,
+              color: Colors.blue,
             ),
           ),
           Padding(

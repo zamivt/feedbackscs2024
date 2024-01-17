@@ -8,11 +8,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+import '../../../../../collections/patient.dart';
 import '../../../../../core/router/route_names.dart';
 import '../../../../../core/ui/theme/appimages.dart';
 import '../../../../../l10n/locale_keys.g.dart';
+import '../../../../../repository/feedbackscs_database.dart';
 import '../../../../../services/entities/data/test_const.dart';
-import '../../../../doc/patient/controllers/patient_controller.dart';
+
 import '../../../../doc/tasks/controllers/short_task_lie_controller.dart';
 import '../../../../doc/tasks/controllers/short_task_seat_controller.dart';
 import '../controllers/current_short_controller.dart';
@@ -29,8 +32,10 @@ class ShortTest1 extends StatelessWidget {
         Get.find<CurrentShortTaskControler>().currentshorttasks[0].position;
     final _formKey = GlobalKey<FormState>();
     final amplcondCtrl = TextEditingController();
-    final _patientcontroller = Get.find<PatientController>();
-    final String _sex = _patientcontroller.patients[0].sex;
+    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
+
+    final String _sex = currentpatient[0].sex;
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.secondary,
@@ -241,7 +246,7 @@ class ShortTest1 extends StatelessWidget {
     int _countdouble = 0;
     if (currentShortTaskControler.currentshorttasks[0].condition ==
         LocaleKeys.fixamp.tr()) {
-      Get.find<PatientController>().editactivetaskPatient('st2');
+      context.read<FeedbackSCSDatabase>().updateActiveTask('st2');
       context.pushNamed(RouteNames.shorttest2);
     } else {
       currentShortTaskControler
@@ -277,8 +282,9 @@ class ShortTest1 extends StatelessWidget {
                           currentShortTaskControler.currentshorttasks[0].id,
                           currentShortTaskControler
                               .currentshorttasks[0].amplit!),
-                      Get.find<PatientController>()
-                          .editactivetaskPatient('st2'),
+                      context
+                          .read<FeedbackSCSDatabase>()
+                          .updateActiveTask('st2'),
                       context.pushNamed(RouteNames.shorttest2)
                     }
                   else
@@ -299,8 +305,9 @@ class ShortTest1 extends StatelessWidget {
                               currentShortTaskControler
                                   .currentshorttasks[0].id),
                           currentShortTaskControler.clearcurrentTaskShort(),
-                          Get.find<PatientController>()
-                              .editactivetaskPatient('no tasks'),
+                          context
+                              .read<FeedbackSCSDatabase>()
+                              .updateActiveTask('no tasks'),
                           context.pushNamed(RouteNames.patienttasks)
                         },
                         description: Text(LocaleKeys.noaddtask.tr()),
@@ -314,8 +321,9 @@ class ShortTest1 extends StatelessWidget {
                               currentShortTaskControler
                                   .currentshorttasks[0].id),
                           currentShortTaskControler.clearcurrentTaskShort(),
-                          Get.find<PatientController>()
-                              .editactivetaskPatient('no tasks'),
+                          context
+                              .read<FeedbackSCSDatabase>()
+                              .updateActiveTask('no tasks'),
                           context.pushNamed(RouteNames.patienttasks)
                         },
                       ).show(context)
@@ -354,8 +362,9 @@ class ShortTest1 extends StatelessWidget {
                               currentShortTaskControler.currentshorttasks[0].id,
                               currentShortTaskControler
                                   .currentshorttasks[0].amplit!),
-                          Get.find<PatientController>()
-                              .editactivetaskPatient('st2'),
+                          context
+                              .read<FeedbackSCSDatabase>()
+                              .updateActiveTask('st2'),
                           context.pushNamed(RouteNames.shorttest2)
                         }
                       else
@@ -377,8 +386,9 @@ class ShortTest1 extends StatelessWidget {
                                   currentShortTaskControler
                                       .currentshorttasks[0].id),
                               currentShortTaskControler.clearcurrentTaskShort(),
-                              Get.find<PatientController>()
-                                  .editactivetaskPatient('no tasks'),
+                              context
+                                  .read<FeedbackSCSDatabase>()
+                                  .updateActiveTask('no tasks'),
                               context.pushNamed(RouteNames.patienttasks)
                             },
                             description: Text(LocaleKeys.noaddtask.tr()),
@@ -393,8 +403,9 @@ class ShortTest1 extends StatelessWidget {
                                   currentShortTaskControler
                                       .currentshorttasks[0].id),
                               currentShortTaskControler.clearcurrentTaskShort(),
-                              Get.find<PatientController>()
-                                  .editactivetaskPatient('no tasks'),
+                              context
+                                  .read<FeedbackSCSDatabase>()
+                                  .updateActiveTask('no tasks'),
                               context.pushNamed(RouteNames.patienttasks)
                             },
                           ).show(context)
@@ -432,8 +443,9 @@ class ShortTest1 extends StatelessWidget {
                               currentShortTaskControler.currentshorttasks[0].id,
                               currentShortTaskControler
                                   .currentshorttasks[0].amplit!),
-                          Get.find<PatientController>()
-                              .editactivetaskPatient('st2'),
+                          context
+                              .read<FeedbackSCSDatabase>()
+                              .updateActiveTask('st2'),
                           context.pushNamed(RouteNames.shorttest2)
                         }
                       else
@@ -454,8 +466,9 @@ class ShortTest1 extends StatelessWidget {
                                   'double',
                                   currentShortTaskControler
                                       .currentshorttasks[0].id),
-                              Get.find<PatientController>()
-                                  .editactivetaskPatient('no tasks'),
+                              context
+                                  .read<FeedbackSCSDatabase>()
+                                  .updateActiveTask('no tasks'),
                               currentShortTaskControler.clearcurrentTaskShort(),
                               context.pushNamed(RouteNames.patienttasks)
                             },
@@ -471,8 +484,9 @@ class ShortTest1 extends StatelessWidget {
                                   currentShortTaskControler
                                       .currentshorttasks[0].id),
                               currentShortTaskControler.clearcurrentTaskShort(),
-                              Get.find<PatientController>()
-                                  .editactivetaskPatient('no tasks'),
+                              context
+                                  .read<FeedbackSCSDatabase>()
+                                  .updateActiveTask('no tasks'),
                               context.pushNamed(RouteNames.patienttasks)
                             },
                           ).show(context)

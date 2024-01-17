@@ -17,33 +17,38 @@ const CurrentTestSchema = CollectionSchema(
   name: r'CurrentTest',
   id: 3663883832982452335,
   properties: {
-    r'idcombinationtest': PropertySchema(
+    r'activetask': PropertySchema(
       id: 0,
+      name: r'activetask',
+      type: IsarType.string,
+    ),
+    r'idcombinationtest': PropertySchema(
+      id: 1,
       name: r'idcombinationtest',
       type: IsarType.long,
     ),
     r'iddiarytest': PropertySchema(
-      id: 1,
+      id: 2,
       name: r'iddiarytest',
       type: IsarType.long,
     ),
     r'idlongtest': PropertySchema(
-      id: 2,
+      id: 3,
       name: r'idlongtest',
       type: IsarType.long,
     ),
     r'idprobetest': PropertySchema(
-      id: 3,
+      id: 4,
       name: r'idprobetest',
       type: IsarType.long,
     ),
     r'idshorttest': PropertySchema(
-      id: 4,
+      id: 5,
       name: r'idshorttest',
       type: IsarType.long,
     ),
     r'stage': PropertySchema(
-      id: 5,
+      id: 6,
       name: r'stage',
       type: IsarType.string,
     )
@@ -69,6 +74,12 @@ int _currentTestEstimateSize(
 ) {
   var bytesCount = offsets.last;
   {
+    final value = object.activetask;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
     final value = object.stage;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
@@ -83,12 +94,13 @@ void _currentTestSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeLong(offsets[0], object.idcombinationtest);
-  writer.writeLong(offsets[1], object.iddiarytest);
-  writer.writeLong(offsets[2], object.idlongtest);
-  writer.writeLong(offsets[3], object.idprobetest);
-  writer.writeLong(offsets[4], object.idshorttest);
-  writer.writeString(offsets[5], object.stage);
+  writer.writeString(offsets[0], object.activetask);
+  writer.writeLong(offsets[1], object.idcombinationtest);
+  writer.writeLong(offsets[2], object.iddiarytest);
+  writer.writeLong(offsets[3], object.idlongtest);
+  writer.writeLong(offsets[4], object.idprobetest);
+  writer.writeLong(offsets[5], object.idshorttest);
+  writer.writeString(offsets[6], object.stage);
 }
 
 CurrentTest _currentTestDeserialize(
@@ -98,13 +110,14 @@ CurrentTest _currentTestDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = CurrentTest();
+  object.activetask = reader.readStringOrNull(offsets[0]);
   object.id = id;
-  object.idcombinationtest = reader.readLongOrNull(offsets[0]);
-  object.iddiarytest = reader.readLongOrNull(offsets[1]);
-  object.idlongtest = reader.readLongOrNull(offsets[2]);
-  object.idprobetest = reader.readLongOrNull(offsets[3]);
-  object.idshorttest = reader.readLongOrNull(offsets[4]);
-  object.stage = reader.readStringOrNull(offsets[5]);
+  object.idcombinationtest = reader.readLongOrNull(offsets[1]);
+  object.iddiarytest = reader.readLongOrNull(offsets[2]);
+  object.idlongtest = reader.readLongOrNull(offsets[3]);
+  object.idprobetest = reader.readLongOrNull(offsets[4]);
+  object.idshorttest = reader.readLongOrNull(offsets[5]);
+  object.stage = reader.readStringOrNull(offsets[6]);
   return object;
 }
 
@@ -116,7 +129,7 @@ P _currentTestDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 1:
       return (reader.readLongOrNull(offset)) as P;
     case 2:
@@ -126,6 +139,8 @@ P _currentTestDeserializeProp<P>(
     case 4:
       return (reader.readLongOrNull(offset)) as P;
     case 5:
+      return (reader.readLongOrNull(offset)) as P;
+    case 6:
       return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -225,6 +240,160 @@ extension CurrentTestQueryWhere
 
 extension CurrentTestQueryFilter
     on QueryBuilder<CurrentTest, CurrentTest, QFilterCondition> {
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      activetaskIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'activetask',
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      activetaskIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'activetask',
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      activetaskEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'activetask',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      activetaskGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'activetask',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      activetaskLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'activetask',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      activetaskBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'activetask',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      activetaskStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'activetask',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      activetaskEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'activetask',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      activetaskContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'activetask',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      activetaskMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'activetask',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      activetaskIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'activetask',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      activetaskIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'activetask',
+        value: '',
+      ));
+    });
+  }
+
   QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> idEqualTo(
       Id value) {
     return QueryBuilder.apply(this, (query) {
@@ -806,6 +975,18 @@ extension CurrentTestQueryLinks
 
 extension CurrentTestQuerySortBy
     on QueryBuilder<CurrentTest, CurrentTest, QSortBy> {
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> sortByActivetask() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'activetask', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> sortByActivetaskDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'activetask', Sort.desc);
+    });
+  }
+
   QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy>
       sortByIdcombinationtest() {
     return QueryBuilder.apply(this, (query) {
@@ -883,6 +1064,18 @@ extension CurrentTestQuerySortBy
 
 extension CurrentTestQuerySortThenBy
     on QueryBuilder<CurrentTest, CurrentTest, QSortThenBy> {
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> thenByActivetask() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'activetask', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> thenByActivetaskDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'activetask', Sort.desc);
+    });
+  }
+
   QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> thenById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
@@ -972,6 +1165,13 @@ extension CurrentTestQuerySortThenBy
 
 extension CurrentTestQueryWhereDistinct
     on QueryBuilder<CurrentTest, CurrentTest, QDistinct> {
+  QueryBuilder<CurrentTest, CurrentTest, QDistinct> distinctByActivetask(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'activetask', caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<CurrentTest, CurrentTest, QDistinct>
       distinctByIdcombinationtest() {
     return QueryBuilder.apply(this, (query) {
@@ -1016,6 +1216,12 @@ extension CurrentTestQueryProperty
   QueryBuilder<CurrentTest, int, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
+    });
+  }
+
+  QueryBuilder<CurrentTest, String?, QQueryOperations> activetaskProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'activetask');
     });
   }
 

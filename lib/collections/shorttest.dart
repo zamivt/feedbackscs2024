@@ -30,18 +30,10 @@ class IShortTest {
   bool? dessymptoms1;
   bool? dessymptoms2;
   bool? dessymptoms3;
-  SideEffects? sideeffects;
   bool? bigsideeffects;
-  PlaceParestesia? placeparestesia;
   String? status;
 }
 
-@embedded
-class SideEffects {
-  String? name;
-}
+List<String>? sideEffects;
 
-@embedded
-class PlaceParestesia {
-  String? name;
-}
+List<String>? placeParestesia;

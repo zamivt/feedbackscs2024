@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pdfx/pdfx.dart';
-
+import 'package:provider/provider.dart';
+import '../../../collections/patient.dart';
 import '../../../core/router/route_names.dart';
 import '../../../core/ui/theme/appimages.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../../../l10n/locale_keys.g.dart';
-import '../../doc/patient/controllers/patient_controller.dart';
+import '../../../repository/feedbackscs_database.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
@@ -48,9 +48,16 @@ class _WelcomePageState extends State<WelcomePage> {
     LocaleKeys.reportonboard.tr(),
     LocaleKeys.privacy.tr(),
   ];
+  @override
+  void initState() {
+    Provider.of<FeedbackSCSDatabase>(context, listen: false).readPatient();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.tertiary,
         body: PageView.builder(
@@ -89,6 +96,10 @@ class _WelcomePageState extends State<WelcomePage> {
                                   width: 20,
                                 ),
                                 Text(
+                                  currentpatient.length.toString(),
+                                  style: TextStyle(color: Colors.blue),
+                                ),
+                                Text(
                                   titlewelcome[index].toString(),
                                   style:
                                       Theme.of(context).textTheme.titleMedium,
@@ -109,28 +120,23 @@ class _WelcomePageState extends State<WelcomePage> {
                               height: 80,
                             ),
                             (images.length - 1 == index) || (index == 0)
-                                ? GetBuilder(builder:
-                                    (PatientController patientController) {
-                                    return ElevatedButton(
-                                      onPressed: () {
-                                        patientController.patients.isEmpty
-                                            ? context.pushNamed(
-                                                RouteNames.patientemptymainpage)
-                                            : patientController.patients[0]
-                                                        .islicense !=
-                                                    true
-                                                ? context.pushNamed(
-                                                    RouteNames.licenseapp)
-                                                : context.pushNamed(
-                                                    RouteNames.patientmainpage);
-                                        ;
-                                      },
-                                      child: Text(LocaleKeys.begin.tr(),
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .labelLarge),
-                                    );
-                                  })
+                                ? ElevatedButton(
+                                    onPressed: () {
+                                      currentpatient.isEmpty
+                                          ? context.pushNamed(
+                                              RouteNames.patientemptymainpage)
+                                          : currentpatient[0].islicense == false
+                                              ? context.pushNamed(
+                                                  RouteNames.licenseapp)
+                                              : context.pushNamed(
+                                                  RouteNames.patientmainpage);
+                                      ;
+                                    },
+                                    child: Text(LocaleKeys.begin.tr(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelLarge),
+                                  )
                                 : Container(),
                           ],
                         ),
@@ -165,6 +171,7 @@ class _WelcomePageState extends State<WelcomePage> {
               actions: [
                 TextButton(
                     onPressed: () {
+                      context.read<FeedbackSCSDatabase>().updateIsLisense(true);
                       context.pushNamed(RouteNames.patientmainpage);
                     },
                     child: Text(

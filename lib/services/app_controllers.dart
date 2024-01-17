@@ -5,7 +5,7 @@ import 'package:feedbackscs2024/features/patient/battery/controllers/battery_con
 import 'package:feedbackscs2024/features/patient/tasks/longtest/controllers/candidate_long_move.dart';
 import 'package:get/instance_manager.dart';
 import '../features/doc/auth/controllers/docpat_controllers.dart';
-import '../features/doc/patient/controllers/patient_controller.dart';
+
 import '../features/doc/tasks/controllers/candidate_short_task_lie_controller.dart';
 import '../features/doc/tasks/controllers/candidate_short_task_move_controller.dart';
 import '../features/doc/tasks/controllers/candidate_short_task_seat_controller.dart';
@@ -30,7 +30,7 @@ import '../features/patient/tasks/shorttest/controllers/unsuccess_short_seat_con
 
 void AppController() {
   // ignore: unused_local_variable
-  final patientControler = Get.put<PatientController>(PatientController());
+
   //docpat
   final docpatController = Get.put<DocPatController>(DocPatController());
 // SHORT

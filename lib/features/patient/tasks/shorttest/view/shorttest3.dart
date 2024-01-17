@@ -5,10 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/instance_manager.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+import '../../../../../collections/current_test.dart';
+import '../../../../../collections/patient.dart';
 import '../../../../../core/ui/widgets/app_divider.dart';
 import '../../../../../core/ui/widgets/app_text_field.dart';
 import '../../../../../l10n/locale_keys.g.dart';
-import '../../../../doc/patient/controllers/patient_controller.dart';
+import '../../../../../repository/feedbackscs_database.dart';
 import '../../../../doc/tasks/controllers/before_task_controller.dart';
 import '../../../../../core/router/route_names.dart';
 import '../controllers/current_short_controller.dart';
@@ -35,7 +38,6 @@ class _ShortTest3State extends State<ShortTest3> {
   bool _islongestsuitable = true;
   final _sideeffectsCtrl = TextEditingController();
   final _placeparestesiaCtrl = TextEditingController();
-  int _painlevel = Get.find<PatientController>().patients[0].levelmaxpain;
 
   final _formKey = GlobalKey<FormState>();
   @override
@@ -56,6 +58,11 @@ class _ShortTest3State extends State<ShortTest3> {
     String placeparestesia;
     bool islongestsuitable;
     bool isbigsideeffects;
+    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
+    int _painlevel = currentpatient[0].levelmaxpain;
+
+    List<CurrentTest> currenttest = feedbackSCSDatabase.currentTest;
     return Scaffold(
       appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.primary,
@@ -205,9 +212,7 @@ class _ShortTest3State extends State<ShortTest3> {
                               style: Theme.of(context).textTheme.displaySmall,
                             ),
                             Text(
-                              Get.find<PatientController>()
-                                  .patients[0]
-                                  .sympotoms1,
+                              currentpatient[0].sympotoms1,
                               style: Theme.of(context).textTheme.displaySmall,
                               textAlign: TextAlign.start,
                             ),
@@ -256,9 +261,7 @@ class _ShortTest3State extends State<ShortTest3> {
                               ),
                             ),
                             Text(
-                              Get.find<PatientController>()
-                                  .patients[0]
-                                  .sympotoms2,
+                              currentpatient[0].sympotoms2,
                               style: Theme.of(context).textTheme.displaySmall,
                               textAlign: TextAlign.start,
                             ),
@@ -302,16 +305,11 @@ class _ShortTest3State extends State<ShortTest3> {
                                 ],
                               ),
                             ),
-                            Get.find<PatientController>()
-                                    .patients[0]
-                                    .sympotoms3!
-                                    .isEmpty
+                            currentpatient[0].sympotoms3!.isEmpty
                                 ? Container()
                                 : Column(children: [
                                     Text(
-                                      Get.find<PatientController>()
-                                          .patients[0]
-                                          .sympotoms3!,
+                                      currentpatient[0].sympotoms3!,
                                       style: Theme.of(context)
                                           .textTheme
                                           .displaySmall,
@@ -488,8 +486,9 @@ class _ShortTest3State extends State<ShortTest3> {
                           );
                           //
                           String newactivetask;
-                          Get.find<PatientController>()
-                              .editactivetaskPatient(newactivetask = 'st4');
+                          context
+                              .read<FeedbackSCSDatabase>()
+                              .updateActiveTask('st4');
                           context.pushNamed(RouteNames.shorttest4);
                         },
                         child: Text(

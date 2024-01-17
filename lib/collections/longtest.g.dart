@@ -87,14 +87,8 @@ const ILongTestSchema = CollectionSchema(
       name: r'program',
       type: IsarType.string,
     ),
-    r'reasonstoptest': PropertySchema(
-      id: 14,
-      name: r'reasonstoptest',
-      type: IsarType.object,
-      target: r'ReasonStopTest',
-    ),
     r'stoptesttime': PropertySchema(
-      id: 15,
+      id: 14,
       name: r'stoptesttime',
       type: IsarType.dateTime,
     )
@@ -159,7 +153,7 @@ const ILongTestSchema = CollectionSchema(
     )
   },
   links: {},
-  embeddedSchemas: {r'ReasonStopTest': ReasonStopTestSchema},
+  embeddedSchemas: {},
   getId: _iLongTestGetId,
   getLinks: _iLongTestGetLinks,
   attach: _iLongTestAttach,
@@ -176,14 +170,6 @@ int _iLongTestEstimateSize(
   bytesCount += 3 + object.formula.length * 3;
   bytesCount += 3 + object.position.length * 3;
   bytesCount += 3 + object.program.length * 3;
-  {
-    final value = object.reasonstoptest;
-    if (value != null) {
-      bytesCount += 3 +
-          ReasonStopTestSchema.estimateSize(
-              value, allOffsets[ReasonStopTest]!, allOffsets);
-    }
-  }
   return bytesCount;
 }
 
@@ -207,13 +193,7 @@ void _iLongTestSerialize(
   writer.writeLong(offsets[11], object.markself);
   writer.writeString(offsets[12], object.position);
   writer.writeString(offsets[13], object.program);
-  writer.writeObject<ReasonStopTest>(
-    offsets[14],
-    allOffsets,
-    ReasonStopTestSchema.serialize,
-    object.reasonstoptest,
-  );
-  writer.writeDateTime(offsets[15], object.stoptesttime);
+  writer.writeDateTime(offsets[14], object.stoptesttime);
 }
 
 ILongTest _iLongTestDeserialize(
@@ -238,12 +218,7 @@ ILongTest _iLongTestDeserialize(
   object.markself = reader.readLongOrNull(offsets[11]);
   object.position = reader.readString(offsets[12]);
   object.program = reader.readString(offsets[13]);
-  object.reasonstoptest = reader.readObjectOrNull<ReasonStopTest>(
-    offsets[14],
-    ReasonStopTestSchema.deserialize,
-    allOffsets,
-  );
-  object.stoptesttime = reader.readDateTimeOrNull(offsets[15]);
+  object.stoptesttime = reader.readDateTimeOrNull(offsets[14]);
   return object;
 }
 
@@ -283,12 +258,6 @@ P _iLongTestDeserializeProp<P>(
     case 13:
       return (reader.readString(offset)) as P;
     case 14:
-      return (reader.readObjectOrNull<ReasonStopTest>(
-        offset,
-        ReasonStopTestSchema.deserialize,
-        allOffsets,
-      )) as P;
-    case 15:
       return (reader.readDateTimeOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -1739,24 +1708,6 @@ extension ILongTestQueryFilter
   }
 
   QueryBuilder<ILongTest, ILongTest, QAfterFilterCondition>
-      reasonstoptestIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'reasonstoptest',
-      ));
-    });
-  }
-
-  QueryBuilder<ILongTest, ILongTest, QAfterFilterCondition>
-      reasonstoptestIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'reasonstoptest',
-      ));
-    });
-  }
-
-  QueryBuilder<ILongTest, ILongTest, QAfterFilterCondition>
       stoptesttimeIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -1831,14 +1782,7 @@ extension ILongTestQueryFilter
 }
 
 extension ILongTestQueryObject
-    on QueryBuilder<ILongTest, ILongTest, QFilterCondition> {
-  QueryBuilder<ILongTest, ILongTest, QAfterFilterCondition> reasonstoptest(
-      FilterQuery<ReasonStopTest> q) {
-    return QueryBuilder.apply(this, (query) {
-      return query.object(q, r'reasonstoptest');
-    });
-  }
-}
+    on QueryBuilder<ILongTest, ILongTest, QFilterCondition> {}
 
 extension ILongTestQueryLinks
     on QueryBuilder<ILongTest, ILongTest, QFilterCondition> {}
@@ -2409,248 +2353,9 @@ extension ILongTestQueryProperty
     });
   }
 
-  QueryBuilder<ILongTest, ReasonStopTest?, QQueryOperations>
-      reasonstoptestProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'reasonstoptest');
-    });
-  }
-
   QueryBuilder<ILongTest, DateTime?, QQueryOperations> stoptesttimeProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'stoptesttime');
     });
   }
 }
-
-// **************************************************************************
-// IsarEmbeddedGenerator
-// **************************************************************************
-
-// coverage:ignore-file
-// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, prefer_final_locals, avoid_js_rounded_ints, avoid_positional_boolean_parameters, always_specify_types
-
-const ReasonStopTestSchema = Schema(
-  name: r'ReasonStopTest',
-  id: -1890757616954119166,
-  properties: {
-    r'name': PropertySchema(
-      id: 0,
-      name: r'name',
-      type: IsarType.string,
-    )
-  },
-  estimateSize: _reasonStopTestEstimateSize,
-  serialize: _reasonStopTestSerialize,
-  deserialize: _reasonStopTestDeserialize,
-  deserializeProp: _reasonStopTestDeserializeProp,
-);
-
-int _reasonStopTestEstimateSize(
-  ReasonStopTest object,
-  List<int> offsets,
-  Map<Type, List<int>> allOffsets,
-) {
-  var bytesCount = offsets.last;
-  {
-    final value = object.name;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  return bytesCount;
-}
-
-void _reasonStopTestSerialize(
-  ReasonStopTest object,
-  IsarWriter writer,
-  List<int> offsets,
-  Map<Type, List<int>> allOffsets,
-) {
-  writer.writeString(offsets[0], object.name);
-}
-
-ReasonStopTest _reasonStopTestDeserialize(
-  Id id,
-  IsarReader reader,
-  List<int> offsets,
-  Map<Type, List<int>> allOffsets,
-) {
-  final object = ReasonStopTest();
-  object.name = reader.readStringOrNull(offsets[0]);
-  return object;
-}
-
-P _reasonStopTestDeserializeProp<P>(
-  IsarReader reader,
-  int propertyId,
-  int offset,
-  Map<Type, List<int>> allOffsets,
-) {
-  switch (propertyId) {
-    case 0:
-      return (reader.readStringOrNull(offset)) as P;
-    default:
-      throw IsarError('Unknown property with id $propertyId');
-  }
-}
-
-extension ReasonStopTestQueryFilter
-    on QueryBuilder<ReasonStopTest, ReasonStopTest, QFilterCondition> {
-  QueryBuilder<ReasonStopTest, ReasonStopTest, QAfterFilterCondition>
-      nameIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'name',
-      ));
-    });
-  }
-
-  QueryBuilder<ReasonStopTest, ReasonStopTest, QAfterFilterCondition>
-      nameIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'name',
-      ));
-    });
-  }
-
-  QueryBuilder<ReasonStopTest, ReasonStopTest, QAfterFilterCondition>
-      nameEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'name',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ReasonStopTest, ReasonStopTest, QAfterFilterCondition>
-      nameGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'name',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ReasonStopTest, ReasonStopTest, QAfterFilterCondition>
-      nameLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'name',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ReasonStopTest, ReasonStopTest, QAfterFilterCondition>
-      nameBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'name',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ReasonStopTest, ReasonStopTest, QAfterFilterCondition>
-      nameStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'name',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ReasonStopTest, ReasonStopTest, QAfterFilterCondition>
-      nameEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'name',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ReasonStopTest, ReasonStopTest, QAfterFilterCondition>
-      nameContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'name',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ReasonStopTest, ReasonStopTest, QAfterFilterCondition>
-      nameMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'name',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<ReasonStopTest, ReasonStopTest, QAfterFilterCondition>
-      nameIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'name',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<ReasonStopTest, ReasonStopTest, QAfterFilterCondition>
-      nameIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'name',
-        value: '',
-      ));
-    });
-  }
-}
-
-extension ReasonStopTestQueryObject
-    on QueryBuilder<ReasonStopTest, ReasonStopTest, QFilterCondition> {}

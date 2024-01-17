@@ -1,30 +1,33 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:feedbackscs2024/providers/themeprovider.dart';
+import 'package:feedbackscs2024/providers/ui/themeprovider.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:provider/provider.dart';
 
 import 'core/router/go_router.dart';
-import 'core/ui/theme/theme.dart';
+
 import 'services/app_controllers.dart';
 
-class FeedbackSCSApp extends ConsumerWidget {
+class FeedbackSCSApp extends StatelessWidget {
   const FeedbackSCSApp({
     super.key,
   });
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(
+    BuildContext context,
+  ) {
     AppController();
-    final isLightTheme = ref.watch(themeProvider);
+
     return MaterialApp.router(
       title: 'FeedbackSCS',
       debugShowCheckedModeBanner: false,
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      theme: isLightTheme ? TAppTheme.ligtTheme : TAppTheme.darkTheme,
+      theme: Provider.of<ThemeProvider>(context).themeData,
       routerConfig: router,
     );
   }

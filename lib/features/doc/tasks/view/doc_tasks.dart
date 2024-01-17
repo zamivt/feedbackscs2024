@@ -1,9 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
-
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:provider/provider.dart';
+import '../../../../collections/patient.dart';
 import '../../../../l10n/locale_keys.g.dart';
-import '../../patient/controllers/patient_controller.dart';
+
+import '../../../../repository/feedbackscs_database.dart';
 import '../widgets/combination_tasks.dart';
 import '../widgets/shorttasks/short_task.dart';
 
@@ -12,6 +13,9 @@ class DocTasks extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
+
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.primary,
         appBar: AppBar(
@@ -25,8 +29,7 @@ class DocTasks extends StatelessWidget {
           ),
         ),
         body: SingleChildScrollView(
-          child: GetBuilder(builder: (PatientController patientController) {
-            return patientController.patients.isNotEmpty
+            child: currentpatient.isNotEmpty
                 ? Column(
                     children: [ShortTasks(), LongTasks(), CombinationTasks()],
                   )
@@ -38,8 +41,6 @@ class DocTasks extends StatelessWidget {
                         child: Text(
                       LocaleKeys.nodata.tr(),
                       style: Theme.of(context).textTheme.displayLarge,
-                    )));
-          }),
-        ));
+                    )))));
   }
 }

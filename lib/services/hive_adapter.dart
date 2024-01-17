@@ -3,7 +3,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'entities/16_candidate_long_taskmove.dart';
 import 'entities/17_candidate_longtasklie.dart';
 import 'entities/18_candidate_longtaskseat.dart';
-import 'entities/1_patient.dart';
+
 import 'entities/20_longtaskmove.dart';
 import 'entities/21_longtasklie.dart';
 import 'entities/22_longtaskseat.dart';
@@ -31,8 +31,6 @@ Future<void> HiveAdapter() async {
   await Hive.openBox<Battery>('batteries');
   //patients 1
 
-  Hive.registerAdapter<Patient>(PatientAdapter());
-  await Hive.openBox<Patient>('patients');
   //befor task2
 
   Hive.registerAdapter<BeforeTask>(BeforeTaskAdapter());

@@ -9,12 +9,13 @@ import 'package:flutter_timer_countdown/flutter_timer_countdown.dart';
 import 'package:get/instance_manager.dart';
 import 'package:get/state_manager.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import '../../../../../core/router/route_names.dart';
 import '../../../../../core/ui/widgets/app_comment_text.dart';
 import '../../../../../core/ui/widgets/appcountuptimer.dart';
 import '../../../../../l10n/locale_keys.g.dart';
+import '../../../../../repository/feedbackscs_database.dart';
 import '../../../../../services/entities/data/test_const.dart';
-import '../../../../doc/patient/controllers/patient_controller.dart';
 import '../controllers/current_short_controller.dart';
 
 class ShortTest2 extends StatefulWidget {
@@ -27,7 +28,6 @@ class ShortTest2 extends StatefulWidget {
 class _ShortTest2State extends State<ShortTest2> {
   @override
   Widget build(BuildContext context) {
-    //final patientController = Get.find<PatientController>();
     final _currentShortTaskControler = Get.find<CurrentShortTaskControler>();
     return Scaffold(
       appBar: AppBar(
@@ -91,16 +91,6 @@ class _ShortTest2State extends State<ShortTest2> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                 child: AppCommentText(text: LocaleKeys.interrupttesting.tr())),
-            // (DateTime.now()
-            //             .difference(_currentShortTaskControler
-            //                 .currentshorttasks[0].begintesttime!)
-            //             .inMinutes <
-            //         TimeTestConst.timeshorttest)
-            //     ? Expanded(
-            //         child:
-            //             ShortTest2Timer(patientController: patientController),
-            //       )
-            //     : Text('Задание выполнено'),
             Expanded(child: LongTest2Timer()),
             ElevatedButton(
               child: Text(
@@ -117,7 +107,7 @@ class _ShortTest2State extends State<ShortTest2> {
                             .currentshorttasks[0].begintesttime!)
                         .inMinutes);
 
-                Get.find<PatientController>().editactivetaskPatient('st3');
+                context.read<FeedbackSCSDatabase>().updateActiveTask('st3');
                 context.pushNamed(RouteNames.shorttest3);
               },
             ),
@@ -167,10 +157,7 @@ class LongTest2Timer extends StatelessWidget {
 class ShortTest2Timer extends StatelessWidget {
   const ShortTest2Timer({
     super.key,
-    required this.patientController,
   });
-
-  final PatientController patientController;
 
   @override
   Widget build(BuildContext context) {
@@ -212,7 +199,7 @@ class ShortTest2Timer extends StatelessWidget {
                       .difference(currentShortTaskControler
                           .currentshorttasks[0].begintesttime!)
                       .inMinutes);
-              patientController.patients[0].activetask = 'st3';
+              context.read<FeedbackSCSDatabase>().updateActiveTask('st3');
               context.pushNamed(RouteNames.shorttest3);
             },
           ),

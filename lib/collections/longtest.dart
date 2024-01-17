@@ -24,12 +24,9 @@ class ILongTest {
   @Index()
   int? durationtest;
   //longtest2
-  ReasonStopTest? reasonstoptest;
+
   int? markself;
   bool? ismoresuccess;
 }
 
-@embedded
-class ReasonStopTest {
-  String? name;
-}
+List<String>? reasonStopTest;

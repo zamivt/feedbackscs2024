@@ -2,12 +2,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:feedbackscs2024/core/ui/widgets/common_widgets.dart';
 import 'package:feedbackscs2024/l10n/locale_keys.g.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pdfx/pdfx.dart';
-
+import 'package:provider/provider.dart';
 import '../../../core/router/route_names.dart';
-import '../../doc/patient/controllers/patient_controller.dart';
+import '../../../repository/feedbackscs_database.dart';
 
 class LicenseAppPage extends StatefulWidget {
   const LicenseAppPage({super.key});
@@ -112,17 +111,16 @@ class _LicenseAppPageState extends State<LicenseAppPage> {
             ),
             AppDivider(),
             AppCommentText(text: LocaleKeys.decriptionconfident.tr()),
-            GetBuilder(builder: (PatientController patientController) {
-              return ElevatedButton(
-                onPressed: () {
-                  patientController.addLicensePatient(true);
-                  context.pushNamed(RouteNames.patientmainpage);
-                },
-                child: Text(LocaleKeys.accept.tr(),
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.labelLarge),
-              );
-            }),
+            ElevatedButton(
+              onPressed: () {
+                context.read<FeedbackSCSDatabase>().updateIsLisense(true);
+
+                context.pushNamed(RouteNames.patientmainpage);
+              },
+              child: Text(LocaleKeys.accept.tr(),
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.labelLarge),
+            )
           ],
         ),
       ),

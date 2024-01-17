@@ -1,12 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:feedbackscs2024/collections/current_test.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_instance/get_instance.dart';
 import 'package:get/state_manager.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:provider/provider.dart';
 import '../../../../core/ui/widgets/common_widgets.dart';
 import '../../../../l10n/locale_keys.g.dart';
+import '../../../../repository/feedbackscs_database.dart';
 import '../../../../services/entities/0_battery.dart';
-import '../../../doc/patient/controllers/patient_controller.dart';
 import '../controllers/battery_controllers.dart';
 
 class BatteryForm extends StatefulWidget {
@@ -40,7 +42,8 @@ class _BatteryFormState extends State<BatteryForm> {
   @override
   Widget build(BuildContext context) {
     final _batteryController = Get.find<BatteryControler>();
-    final _patientController = Get.find<PatientController>();
+    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    List<CurrentTest> currenttest = feedbackSCSDatabase.currentTest;
 
     final DateTime _lastchargedate = _batteryController.batteries.isEmpty
         ? _date
@@ -131,7 +134,7 @@ class _BatteryFormState extends State<BatteryForm> {
                                                 1]
                                             .countwithoutcoment! +
                                         (_reasonCtrl.text.isNotEmpty ? 0 : 1),
-                            teststage: _patientController.patients[0].teststage,
+                            teststage: currenttest[0].stage.toString(),
                           ),
                         );
                         Navigator.of(context).pop();

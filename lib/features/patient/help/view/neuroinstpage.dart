@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:get/instance_manager.dart';
+
 import 'package:pdfx/pdfx.dart';
+import 'package:provider/provider.dart';
+import '../../../../collections/patient.dart';
+import '../../../../repository/feedbackscs_database.dart';
 import '../../../../services/entities/data/model/neuromodel.dart';
 import '../../../../services/entities/data/neuromodels.dart';
-
-import '../../../doc/patient/controllers/patient_controller.dart';
 
 class NeuroinstPage extends StatefulWidget {
   const NeuroinstPage({super.key});
@@ -16,12 +17,14 @@ class NeuroinstPage extends StatefulWidget {
 class _NeuroinstPageState extends State<NeuroinstPage> {
   static const int _initialPage = 1;
   late PdfController _pdfController;
-  final _patientController = Get.find<PatientController>();
 
   @override
   void initState() {
     super.initState();
-    final String _namemodel = _patientController.patients[0].modelneuro;
+    Provider.of<FeedbackSCSDatabase>(context, listen: false).readPatient();
+    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
+    final String _namemodel = currentpatient[0].modelneuro;
     Iterable<Neuro> liststimul = neuromodels
         .where((neuromodel) => neuromodel.model.contains(_namemodel));
 
@@ -44,11 +47,13 @@ class _NeuroinstPageState extends State<NeuroinstPage> {
 
   @override
   Widget build(BuildContext context) {
+    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         foregroundColor: Colors.white,
-        title: Text(_patientController.patients[0].modelneuro.toString()),
+        title: Text(currentpatient[0].modelneuro.toString()),
         actions: <Widget>[],
       ),
       body: SafeArea(

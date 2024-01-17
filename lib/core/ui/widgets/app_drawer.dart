@@ -1,18 +1,21 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:feedbackscs2024/core/ui/widgets/app_divider.dart';
 import 'package:feedbackscs2024/l10n/locale_keys.g.dart';
-import 'package:feedbackscs2024/providers/themeprovider.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:feedbackscs2024/providers/ui/themeprovider.dart';
+import 'package:flutter/cupertino.dart';
 
-class AppDrawer extends ConsumerWidget {
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+class AppDrawer extends StatelessWidget {
   AppDrawer({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final isLightTheme = ref.watch(themeProvider);
+  Widget build(
+    BuildContext context,
+  ) {
     return Drawer(
         backgroundColor: Theme.of(context).colorScheme.primary,
         child: Padding(
@@ -52,21 +55,24 @@ class AppDrawer extends ConsumerWidget {
                       child: Icon(
                         Icons.dark_mode,
                         size: 50,
-                        color: !isLightTheme ? Colors.yellow : Colors.grey,
+                        color: Provider.of<ThemeProvider>(context).isDarkmode
+                            ? Colors.yellow
+                            : Colors.grey,
                       ),
                     ),
-                    Switch(
-                        inactiveThumbColor:
-                            Theme.of(context).colorScheme.primary,
-                        value: isLightTheme,
+                    CupertinoSwitch(
+                        value: Provider.of<ThemeProvider>(context).isDarkmode,
                         onChanged: (value) =>
-                            ref.read(themeProvider.notifier).state = value),
+                            Provider.of<ThemeProvider>(context, listen: false)
+                                .toogleTheme()),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Icon(
                         Icons.light_mode,
                         size: 50,
-                        color: isLightTheme ? Colors.yellow : Colors.grey,
+                        color: Provider.of<ThemeProvider>(context).isDarkmode
+                            ? Colors.yellow
+                            : Colors.grey,
                       ),
                     ),
                   ],

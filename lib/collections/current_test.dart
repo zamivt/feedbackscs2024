@@ -5,6 +5,7 @@ part 'current_test.g.dart';
 class CurrentTest {
   Id id = Isar.autoIncrement;
   String? stage;
+  String? activetask;
   int? idprobetest;
   int? idshorttest;
   int? idlongtest;

@@ -447,7 +447,8 @@
    "checkcor": "Проверьте правильность ввода данных",
     "testperiod":"тестовый период",
     "settingdrawer":"Настройки",
-    "changetheme":"Выбор темы"
+    "changetheme":"Выбор темы",
+    "cancel": "Отменить"
     
 
 

@@ -7,8 +7,10 @@ class AppNameField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 5),
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.grey.shade200,
+      ),
       child: Text(
         namefield,
         textAlign: TextAlign.center,

@@ -1,36 +1,35 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:feedbackscs2024/providers/ui/patient_mainscreen_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import '../../../../../l10n/locale_keys.g.dart';
-import '../../../../doc/patient/controllers/patientfull_mainscreen_controller.dart';
 
-class PatientBottomNavigationWidget extends ConsumerStatefulWidget {
+class PatientBottomNavigationWidget extends StatefulWidget {
   const PatientBottomNavigationWidget({super.key});
 
   @override
-  ConsumerState<PatientBottomNavigationWidget> createState() =>
+  State<PatientBottomNavigationWidget> createState() =>
       _PatientBottomNavifationWidgetState();
 }
 
 class _PatientBottomNavifationWidgetState
-    extends ConsumerState<PatientBottomNavigationWidget> {
+    extends State<PatientBottomNavigationWidget> {
   @override
   Widget build(BuildContext context) {
-    final position = ref.watch(patientfullMainscreenControllerProvider);
+    final position = Provider.of<PatientMainScreenProvider>(context).position;
     return BottomNavigationBar(
         unselectedFontSize: 0,
         type: BottomNavigationBarType.fixed,
         backgroundColor: Theme.of(context).colorScheme.primary,
-        onTap: (value) => _onTap(value),
+        onTap: (value) => _setPosition(value),
         currentIndex: position,
         selectedItemColor: Theme.of(context).colorScheme.onSurface,
         unselectedItemColor: Theme.of(context).colorScheme.onBackground,
         showSelectedLabels: true,
         showUnselectedLabels: false,
-
-        // ignore: prefer_const_literals_to_create_immutables
         items: [
           BottomNavigationBarItem(
               label: LocaleKeys.profile.tr(),
@@ -58,10 +57,9 @@ class _PatientBottomNavifationWidgetState
         ]);
   }
 
-  void _onTap(int index) {
-    ref
-        .read(patientfullMainscreenControllerProvider.notifier)
-        .setPosition(index);
+  void _setPosition(int index) {
+    Provider.of<PatientMainScreenProvider>(context, listen: false)
+        .setposition(index);
     switch (index) {
       case 0:
         context.go('/patient/profile');

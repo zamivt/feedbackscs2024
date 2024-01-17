@@ -6,8 +6,10 @@ import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/instance_manager.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+import '../../../../../collections/current_test.dart';
 import '../../../../../l10n/locale_keys.g.dart';
-import '../../../../doc/patient/controllers/patient_controller.dart';
+import '../../../../../repository/feedbackscs_database.dart';
 import '../../../../doc/tasks/controllers/before_task_controller.dart';
 import '../../../../../core/router/route_names.dart';
 import '../../../../../core/ui/widgets/common_widgets.dart';
@@ -42,6 +44,8 @@ class _LongTest3State extends State<LongTest3> {
     final _formKey = GlobalKey<FormState>();
     String reasonstoptest;
     double markself;
+    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    List<CurrentTest> currenttest = feedbackSCSDatabase.currentTest;
 
     return Scaffold(
       appBar: AppBar(
@@ -164,8 +168,9 @@ class _LongTest3State extends State<LongTest3> {
                           markself = longrating);
 
                       String newactivetask;
-                      Get.find<PatientController>()
-                          .editactivetaskPatient(newactivetask = 'no tasks');
+                      context
+                          .read<FeedbackSCSDatabase>()
+                          .updateActiveTask('no tasks');
                       context.pushNamed(RouteNames.patienttasks);
                     },
                     child: Text(LocaleKeys.save.tr(),

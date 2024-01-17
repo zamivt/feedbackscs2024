@@ -2,11 +2,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+import '../../../../../collections/patient.dart';
 import '../../../../../core/router/route_names.dart';
 import '../../../../../core/ui/theme/appimages.dart';
 import '../../../../../core/ui/widgets/common_widgets.dart';
 import '../../../../../l10n/locale_keys.g.dart';
-import '../../../../doc/patient/controllers/patient_controller.dart';
+import '../../../../../repository/feedbackscs_database.dart';
 import '../controllers/current_long__controller.dart';
 
 class LongTest1 extends StatelessWidget {
@@ -17,8 +19,10 @@ class LongTest1 extends StatelessWidget {
     final currentLongTaskControler = Get.find<CurrentLongTaskControler>();
     final String _position =
         currentLongTaskControler.currentlongtasks[0].position;
-    final patientcontroller = Get.find<PatientController>();
-    final String _sex = patientcontroller.patients[0].sex;
+    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
+    final String _sex = currentpatient[0].sex;
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.secondary,
       appBar: AppBar(
@@ -72,7 +76,7 @@ class LongTest1 extends StatelessWidget {
               onPressed: () {
                 currentLongTaskControler
                     .addStartTestTimeLongTask(DateTime.now());
-                Get.find<PatientController>().editactivetaskPatient('lt2');
+                context.read<FeedbackSCSDatabase>().updateActiveTask('lt2');
                 context.pushNamed(RouteNames.longtest2);
               },
               child: Text(

@@ -102,35 +102,23 @@ const IShortTestSchema = CollectionSchema(
       name: r'hidefreq',
       type: IsarType.bool,
     ),
-    r'placeparestesia': PropertySchema(
-      id: 17,
-      name: r'placeparestesia',
-      type: IsarType.object,
-      target: r'PlaceParestesia',
-    ),
     r'position': PropertySchema(
-      id: 18,
+      id: 17,
       name: r'position',
       type: IsarType.string,
     ),
     r'program': PropertySchema(
-      id: 19,
+      id: 18,
       name: r'program',
       type: IsarType.string,
     ),
-    r'sideeffects': PropertySchema(
-      id: 20,
-      name: r'sideeffects',
-      type: IsarType.object,
-      target: r'SideEffects',
-    ),
     r'status': PropertySchema(
-      id: 21,
+      id: 19,
       name: r'status',
       type: IsarType.string,
     ),
     r'stoptesttime': PropertySchema(
-      id: 22,
+      id: 20,
       name: r'stoptesttime',
       type: IsarType.dateTime,
     )
@@ -195,10 +183,7 @@ const IShortTestSchema = CollectionSchema(
     )
   },
   links: {},
-  embeddedSchemas: {
-    r'SideEffects': SideEffectsSchema,
-    r'PlaceParestesia': PlaceParestesiaSchema
-  },
+  embeddedSchemas: {},
   getId: _iShortTestGetId,
   getLinks: _iShortTestGetLinks,
   attach: _iShortTestAttach,
@@ -225,24 +210,8 @@ int _iShortTestEstimateSize(
       bytesCount += 3 + value.length * 3;
     }
   }
-  {
-    final value = object.placeparestesia;
-    if (value != null) {
-      bytesCount += 3 +
-          PlaceParestesiaSchema.estimateSize(
-              value, allOffsets[PlaceParestesia]!, allOffsets);
-    }
-  }
   bytesCount += 3 + object.position.length * 3;
   bytesCount += 3 + object.program.length * 3;
-  {
-    final value = object.sideeffects;
-    if (value != null) {
-      bytesCount += 3 +
-          SideEffectsSchema.estimateSize(
-              value, allOffsets[SideEffects]!, allOffsets);
-    }
-  }
   {
     final value = object.status;
     if (value != null) {
@@ -275,22 +244,10 @@ void _iShortTestSerialize(
   writer.writeBool(offsets[14], object.hideamplt);
   writer.writeBool(offsets[15], object.hidedur);
   writer.writeBool(offsets[16], object.hidefreq);
-  writer.writeObject<PlaceParestesia>(
-    offsets[17],
-    allOffsets,
-    PlaceParestesiaSchema.serialize,
-    object.placeparestesia,
-  );
-  writer.writeString(offsets[18], object.position);
-  writer.writeString(offsets[19], object.program);
-  writer.writeObject<SideEffects>(
-    offsets[20],
-    allOffsets,
-    SideEffectsSchema.serialize,
-    object.sideeffects,
-  );
-  writer.writeString(offsets[21], object.status);
-  writer.writeDateTime(offsets[22], object.stoptesttime);
+  writer.writeString(offsets[17], object.position);
+  writer.writeString(offsets[18], object.program);
+  writer.writeString(offsets[19], object.status);
+  writer.writeDateTime(offsets[20], object.stoptesttime);
 }
 
 IShortTest _iShortTestDeserialize(
@@ -318,20 +275,10 @@ IShortTest _iShortTestDeserialize(
   object.hidedur = reader.readBool(offsets[15]);
   object.hidefreq = reader.readBool(offsets[16]);
   object.id = id;
-  object.placeparestesia = reader.readObjectOrNull<PlaceParestesia>(
-    offsets[17],
-    PlaceParestesiaSchema.deserialize,
-    allOffsets,
-  );
-  object.position = reader.readString(offsets[18]);
-  object.program = reader.readString(offsets[19]);
-  object.sideeffects = reader.readObjectOrNull<SideEffects>(
-    offsets[20],
-    SideEffectsSchema.deserialize,
-    allOffsets,
-  );
-  object.status = reader.readStringOrNull(offsets[21]);
-  object.stoptesttime = reader.readDateTimeOrNull(offsets[22]);
+  object.position = reader.readString(offsets[17]);
+  object.program = reader.readString(offsets[18]);
+  object.status = reader.readStringOrNull(offsets[19]);
+  object.stoptesttime = reader.readDateTimeOrNull(offsets[20]);
   return object;
 }
 
@@ -377,24 +324,12 @@ P _iShortTestDeserializeProp<P>(
     case 16:
       return (reader.readBool(offset)) as P;
     case 17:
-      return (reader.readObjectOrNull<PlaceParestesia>(
-        offset,
-        PlaceParestesiaSchema.deserialize,
-        allOffsets,
-      )) as P;
+      return (reader.readString(offset)) as P;
     case 18:
       return (reader.readString(offset)) as P;
     case 19:
-      return (reader.readString(offset)) as P;
-    case 20:
-      return (reader.readObjectOrNull<SideEffects>(
-        offset,
-        SideEffectsSchema.deserialize,
-        allOffsets,
-      )) as P;
-    case 21:
       return (reader.readStringOrNull(offset)) as P;
-    case 22:
+    case 20:
       return (reader.readDateTimeOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -1996,24 +1931,6 @@ extension IShortTestQueryFilter
     });
   }
 
-  QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition>
-      placeparestesiaIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'placeparestesia',
-      ));
-    });
-  }
-
-  QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition>
-      placeparestesiaIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'placeparestesia',
-      ));
-    });
-  }
-
   QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition> positionEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -2280,24 +2197,6 @@ extension IShortTestQueryFilter
     });
   }
 
-  QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition>
-      sideeffectsIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'sideeffects',
-      ));
-    });
-  }
-
-  QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition>
-      sideeffectsIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'sideeffects',
-      ));
-    });
-  }
-
   QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition> statusIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -2522,21 +2421,7 @@ extension IShortTestQueryFilter
 }
 
 extension IShortTestQueryObject
-    on QueryBuilder<IShortTest, IShortTest, QFilterCondition> {
-  QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition> placeparestesia(
-      FilterQuery<PlaceParestesia> q) {
-    return QueryBuilder.apply(this, (query) {
-      return query.object(q, r'placeparestesia');
-    });
-  }
-
-  QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition> sideeffects(
-      FilterQuery<SideEffects> q) {
-    return QueryBuilder.apply(this, (query) {
-      return query.object(q, r'sideeffects');
-    });
-  }
-}
+    on QueryBuilder<IShortTest, IShortTest, QFilterCondition> {}
 
 extension IShortTestQueryLinks
     on QueryBuilder<IShortTest, IShortTest, QFilterCondition> {}
@@ -3314,13 +3199,6 @@ extension IShortTestQueryProperty
     });
   }
 
-  QueryBuilder<IShortTest, PlaceParestesia?, QQueryOperations>
-      placeparestesiaProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'placeparestesia');
-    });
-  }
-
   QueryBuilder<IShortTest, String, QQueryOperations> positionProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'position');
@@ -3330,13 +3208,6 @@ extension IShortTestQueryProperty
   QueryBuilder<IShortTest, String, QQueryOperations> programProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'program');
-    });
-  }
-
-  QueryBuilder<IShortTest, SideEffects?, QQueryOperations>
-      sideeffectsProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'sideeffects');
     });
   }
 
@@ -3352,457 +3223,3 @@ extension IShortTestQueryProperty
     });
   }
 }
-
-// **************************************************************************
-// IsarEmbeddedGenerator
-// **************************************************************************
-
-// coverage:ignore-file
-// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, prefer_final_locals, avoid_js_rounded_ints, avoid_positional_boolean_parameters, always_specify_types
-
-const SideEffectsSchema = Schema(
-  name: r'SideEffects',
-  id: -7497915128180670248,
-  properties: {
-    r'name': PropertySchema(
-      id: 0,
-      name: r'name',
-      type: IsarType.string,
-    )
-  },
-  estimateSize: _sideEffectsEstimateSize,
-  serialize: _sideEffectsSerialize,
-  deserialize: _sideEffectsDeserialize,
-  deserializeProp: _sideEffectsDeserializeProp,
-);
-
-int _sideEffectsEstimateSize(
-  SideEffects object,
-  List<int> offsets,
-  Map<Type, List<int>> allOffsets,
-) {
-  var bytesCount = offsets.last;
-  {
-    final value = object.name;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  return bytesCount;
-}
-
-void _sideEffectsSerialize(
-  SideEffects object,
-  IsarWriter writer,
-  List<int> offsets,
-  Map<Type, List<int>> allOffsets,
-) {
-  writer.writeString(offsets[0], object.name);
-}
-
-SideEffects _sideEffectsDeserialize(
-  Id id,
-  IsarReader reader,
-  List<int> offsets,
-  Map<Type, List<int>> allOffsets,
-) {
-  final object = SideEffects();
-  object.name = reader.readStringOrNull(offsets[0]);
-  return object;
-}
-
-P _sideEffectsDeserializeProp<P>(
-  IsarReader reader,
-  int propertyId,
-  int offset,
-  Map<Type, List<int>> allOffsets,
-) {
-  switch (propertyId) {
-    case 0:
-      return (reader.readStringOrNull(offset)) as P;
-    default:
-      throw IsarError('Unknown property with id $propertyId');
-  }
-}
-
-extension SideEffectsQueryFilter
-    on QueryBuilder<SideEffects, SideEffects, QFilterCondition> {
-  QueryBuilder<SideEffects, SideEffects, QAfterFilterCondition> nameIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'name',
-      ));
-    });
-  }
-
-  QueryBuilder<SideEffects, SideEffects, QAfterFilterCondition>
-      nameIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'name',
-      ));
-    });
-  }
-
-  QueryBuilder<SideEffects, SideEffects, QAfterFilterCondition> nameEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'name',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<SideEffects, SideEffects, QAfterFilterCondition> nameGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'name',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<SideEffects, SideEffects, QAfterFilterCondition> nameLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'name',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<SideEffects, SideEffects, QAfterFilterCondition> nameBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'name',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<SideEffects, SideEffects, QAfterFilterCondition> nameStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'name',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<SideEffects, SideEffects, QAfterFilterCondition> nameEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'name',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<SideEffects, SideEffects, QAfterFilterCondition> nameContains(
-      String value,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'name',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<SideEffects, SideEffects, QAfterFilterCondition> nameMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'name',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<SideEffects, SideEffects, QAfterFilterCondition> nameIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'name',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<SideEffects, SideEffects, QAfterFilterCondition>
-      nameIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'name',
-        value: '',
-      ));
-    });
-  }
-}
-
-extension SideEffectsQueryObject
-    on QueryBuilder<SideEffects, SideEffects, QFilterCondition> {}
-
-// coverage:ignore-file
-// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, prefer_final_locals, avoid_js_rounded_ints, avoid_positional_boolean_parameters, always_specify_types
-
-const PlaceParestesiaSchema = Schema(
-  name: r'PlaceParestesia',
-  id: 2714395700080545571,
-  properties: {
-    r'name': PropertySchema(
-      id: 0,
-      name: r'name',
-      type: IsarType.string,
-    )
-  },
-  estimateSize: _placeParestesiaEstimateSize,
-  serialize: _placeParestesiaSerialize,
-  deserialize: _placeParestesiaDeserialize,
-  deserializeProp: _placeParestesiaDeserializeProp,
-);
-
-int _placeParestesiaEstimateSize(
-  PlaceParestesia object,
-  List<int> offsets,
-  Map<Type, List<int>> allOffsets,
-) {
-  var bytesCount = offsets.last;
-  {
-    final value = object.name;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  return bytesCount;
-}
-
-void _placeParestesiaSerialize(
-  PlaceParestesia object,
-  IsarWriter writer,
-  List<int> offsets,
-  Map<Type, List<int>> allOffsets,
-) {
-  writer.writeString(offsets[0], object.name);
-}
-
-PlaceParestesia _placeParestesiaDeserialize(
-  Id id,
-  IsarReader reader,
-  List<int> offsets,
-  Map<Type, List<int>> allOffsets,
-) {
-  final object = PlaceParestesia();
-  object.name = reader.readStringOrNull(offsets[0]);
-  return object;
-}
-
-P _placeParestesiaDeserializeProp<P>(
-  IsarReader reader,
-  int propertyId,
-  int offset,
-  Map<Type, List<int>> allOffsets,
-) {
-  switch (propertyId) {
-    case 0:
-      return (reader.readStringOrNull(offset)) as P;
-    default:
-      throw IsarError('Unknown property with id $propertyId');
-  }
-}
-
-extension PlaceParestesiaQueryFilter
-    on QueryBuilder<PlaceParestesia, PlaceParestesia, QFilterCondition> {
-  QueryBuilder<PlaceParestesia, PlaceParestesia, QAfterFilterCondition>
-      nameIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'name',
-      ));
-    });
-  }
-
-  QueryBuilder<PlaceParestesia, PlaceParestesia, QAfterFilterCondition>
-      nameIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'name',
-      ));
-    });
-  }
-
-  QueryBuilder<PlaceParestesia, PlaceParestesia, QAfterFilterCondition>
-      nameEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'name',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<PlaceParestesia, PlaceParestesia, QAfterFilterCondition>
-      nameGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'name',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<PlaceParestesia, PlaceParestesia, QAfterFilterCondition>
-      nameLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'name',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<PlaceParestesia, PlaceParestesia, QAfterFilterCondition>
-      nameBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'name',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<PlaceParestesia, PlaceParestesia, QAfterFilterCondition>
-      nameStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'name',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<PlaceParestesia, PlaceParestesia, QAfterFilterCondition>
-      nameEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'name',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<PlaceParestesia, PlaceParestesia, QAfterFilterCondition>
-      nameContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'name',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<PlaceParestesia, PlaceParestesia, QAfterFilterCondition>
-      nameMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'name',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<PlaceParestesia, PlaceParestesia, QAfterFilterCondition>
-      nameIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'name',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<PlaceParestesia, PlaceParestesia, QAfterFilterCondition>
-      nameIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'name',
-        value: '',
-      ));
-    });
-  }
-}
-
-extension PlaceParestesiaQueryObject
-    on QueryBuilder<PlaceParestesia, PlaceParestesia, QFilterCondition> {}

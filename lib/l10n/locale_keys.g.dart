@@ -356,5 +356,6 @@ abstract class  LocaleKeys {
   static const testperiod = 'testperiod';
   static const settingdrawer = 'settingdrawer';
   static const changetheme = 'changetheme';
+  static const cancel = 'cancel';
 
 }

@@ -1,30 +1,33 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import '../../../../../l10n/locale_keys.g.dart';
-import '../../../../doc/patient/controllers/patientempty_mainscreen_controller .dart';
+import '../../../../../providers/ui/patient_emptymainscreen_provider.dart';
 
-class EmptyPatientBottomNavigationWidget extends ConsumerStatefulWidget {
+class EmptyPatientBottomNavigationWidget extends StatefulWidget {
   const EmptyPatientBottomNavigationWidget({super.key});
 
   @override
-  ConsumerState<EmptyPatientBottomNavigationWidget> createState() =>
+  State<EmptyPatientBottomNavigationWidget> createState() =>
       _EmptyPatientBottomNavifationWidgetState();
 }
 
 class _EmptyPatientBottomNavifationWidgetState
-    extends ConsumerState<EmptyPatientBottomNavigationWidget> {
+    extends State<EmptyPatientBottomNavigationWidget> {
   @override
   Widget build(BuildContext context) {
-    final position = ref.watch(patientemptyMainscreenControllerProvider);
+    int position =
+        Provider.of<PatienEmptytMainScreenProvider>(context).position;
+
     return BottomNavigationBar(
         iconSize: 30,
         unselectedFontSize: 0,
         type: BottomNavigationBarType.fixed,
         backgroundColor: Theme.of(context).colorScheme.primary,
-        onTap: (value) => _onTap(value),
+        onTap: (value) => _setPosition(value),
         currentIndex: position,
         selectedItemColor: Theme.of(context).colorScheme.onSurface,
         unselectedItemColor: Theme.of(context).colorScheme.onPrimary,
@@ -45,10 +48,10 @@ class _EmptyPatientBottomNavifationWidgetState
         ]);
   }
 
-  void _onTap(int index) {
-    ref
-        .read(patientemptyMainscreenControllerProvider.notifier)
-        .setPosition(index);
+  void _setPosition(int index) {
+    Provider.of<PatienEmptytMainScreenProvider>(context, listen: false)
+        .setposition(index);
+
     switch (index) {
       case 0:
         context.go('/patientempty/profile');
