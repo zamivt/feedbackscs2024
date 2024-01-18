@@ -30,6 +30,7 @@ class ShortTaskController extends GetxController {
       Get.find<CandidateShortTaskLieControler>();
   final _doubleshortTaskController = Get.find<DoubleShortTaskControler>();
   add_Range_Short_task(
+    String position,
     String selectedactivity,
     String program,
     String electrodes,
@@ -44,13 +45,14 @@ class ShortTaskController extends GetxController {
   ) {
     for (int freq = startfreq; freq <= endfreq; freq = freq + stepfreq) {
       for (int dur = startdur; dur <= enddur; dur = dur + stepdur) {
-        add_Single_Short_task(selectedactivity, program, electrodes,
+        add_Single_Short_task(position, selectedactivity, program, electrodes,
             selectedcondchoiceampl, amplitude, freq, dur, false, false);
       }
     }
   }
 
   add_Single_Short_task(
+      String position,
       String selectedactivity,
       String program,
       String electrodes,
@@ -61,11 +63,12 @@ class ShortTaskController extends GetxController {
       bool hiddenfreqdur,
       bool hiddenamplfreqdur) {
     int _countolddouble = _doubleshortTaskController.doubleshorttask.length;
-    if ((selectedactivity == LocaleKeys.cmove.tr()) &&
-        (selectedcondchoiceampl == LocaleKeys.fixamp.tr())) {
+    if (selectedcondchoiceampl == LocaleKeys.fixamp.tr()) {
       for (int i = 0; i < _shortTaskMoveController.shorttaskmoves.length; i++) {
         if (_shortTaskMoveController.shorttaskmoves[i].fixformula ==
-            ('el:' +
+            ('pos' +
+                position +
+                'el:' +
                 electrodes +
                 ' ampl:' +
                 amplitude.toString() +
@@ -73,25 +76,7 @@ class ShortTaskController extends GetxController {
                 freq.toString() +
                 ' dur: ' +
                 dur.toString())) {
-          _doubleshortTaskController.addDoubleShortTask(DoubleShortTask(
-              program: program,
-              electrodes: electrodes,
-              condition: selectedcondchoiceampl,
-              amplit: amplitude,
-              freq: freq,
-              dur: dur,
-              hidedur: hiddenamplfreqdur || hiddenfreqdur,
-              hidefreq: hiddenamplfreqdur || hiddenfreqdur,
-              hideamplt: hiddenamplfreqdur,
-              formula: '',
-              fixformula: 'el:' +
-                  electrodes +
-                  ' ampl:' +
-                  amplitude.toString() +
-                  ' freq: ' +
-                  freq.toString() +
-                  ' dur: ' +
-                  dur.toString()));
+          //пишем double в строку
         }
       }
       if (_countolddouble ==

@@ -16,10 +16,10 @@ class AppTextButton extends StatelessWidget {
           context.pushNamed(linkbutton);
         },
         child: Text(
-          text + ' >',
+          text,
           style: TextStyle(
             inherit: true,
-            fontSize: 16.0,
+            fontSize: 14.0,
             fontWeight: FontWeight.w600,
             fontFamily: 'Lato',
             letterSpacing: 3,

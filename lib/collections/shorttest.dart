@@ -6,6 +6,8 @@ class IShortTest {
   Id id = Isar.autoIncrement;
   @Index()
   late String position;
+  @Index()
+  late String status;
   late String program;
   @Index()
   late String electrodes;
@@ -31,7 +33,6 @@ class IShortTest {
   bool? dessymptoms2;
   bool? dessymptoms3;
   bool? bigsideeffects;
-  String? status;
 }
 
 List<String>? sideEffects;

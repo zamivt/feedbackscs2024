@@ -323,7 +323,7 @@ class FeedbackSCSDatabase extends ChangeNotifier {
       });
     }
 
-    readPatient();
+    readCurrentTest();
   }
 
   Future<void> updateActiveTask(String newactivetask) async {
@@ -336,6 +336,310 @@ class FeedbackSCSDatabase extends ChangeNotifier {
       });
     }
 
-    readPatient();
+    readCurrentTest();
+  }
+
+  // ShortTest
+  //работа со всеми заданиями кратковременного тестирования
+  final List<IShortTest> commonshortTest = [];
+//create ShortTest
+  Future<void> addShortTest(
+    String position,
+    String program,
+    String electrodes,
+    String condition,
+    double amplit,
+    bool hideamplt,
+    int freq,
+    bool hidefreq,
+    int dur,
+    bool hidedur,
+  ) async {
+    final newShortTest = IShortTest()
+      ..position = position
+      ..program = program
+      ..electrodes = electrodes
+      ..condition = condition
+      ..amplit = amplit
+      ..hideamplt = hideamplt
+      ..freq = freq
+      ..hidefreq = hidefreq
+      ..dur = dur
+      ..hidedur = hidedur
+      ..status = 'undef';
+
+    await isar.writeTxn(() => isar.iShortTests.put(newShortTest));
+    readCommonShortTest();
+  }
+
+  Future<void> updateStatusShortTest(Id id, String newstatus) async {
+    final commonshortTest = await isar.iShortTests.get(id);
+
+    if (commonshortTest != 0) {
+      await isar.writeTxn(() async {
+        commonshortTest!.status = newstatus;
+
+        await isar.iShortTests.put(commonshortTest);
+      });
+    }
+
+    readCommonShortTest();
+  }
+
+//чтение кратковременного  тестирования
+  Future<void> readCommonShortTest() async {
+    List<IShortTest> fetchShortTest = await isar.iShortTests.where().findAll();
+    commonshortTest.clear();
+    commonshortTest.addAll(fetchShortTest);
+    notifyListeners();
+  }
+
+//чтение кратковременного  тестирования движения
+  final List<IShortTest> moveshortTest = [];
+  Future<void> readCommonShortTestMove() async {
+    List<IShortTest> fetchShortTestMove =
+        await isar.iShortTests.where().positionEqualTo('move').findAll();
+    moveshortTest.clear();
+    moveshortTest.addAll(fetchShortTestMove);
+    notifyListeners();
+  }
+
+//чтение кратковременного  тестирования сидя
+  final List<IShortTest> seatshortTest = [];
+  Future<void> readCommonShortTestSeat() async {
+    List<IShortTest> fetchShortTestSeat =
+        await isar.iShortTests.where().positionEqualTo('seat').findAll();
+    seatshortTest.clear();
+    seatshortTest.addAll(fetchShortTestSeat);
+    notifyListeners();
+  }
+
+//чтение кратковременного  тестирования лежа
+  final List<IShortTest> lieshortTest = [];
+  Future<void> readCommonShortTestLie() async {
+    List<IShortTest> fetchShortTestLie =
+        await isar.iShortTests.where().positionEqualTo('lie').findAll();
+    lieshortTest.clear();
+    lieshortTest.addAll(fetchShortTestLie);
+    notifyListeners();
+  }
+
+  //чтение кратковременного  тестирования дублирующие
+  final List<IShortTest> doubleshortTest = [];
+  Future<void> readdoubleShortTestDouble() async {
+    List<IShortTest> fetchShortTestDouble =
+        await isar.iShortTests.where().statusEqualTo('double').findAll();
+    doubleshortTest.clear();
+    doubleshortTest.addAll(fetchShortTestDouble);
+    notifyListeners();
+  }
+
+  //чтение кратковременного  тестирования движения невыполненные
+  final List<IShortTest> undefmoveshortTest = [];
+  Future<void> readundefShortTestMove() async {
+    List<IShortTest> fetchundefShortTestMove = await isar.iShortTests
+        .filter()
+        .positionEqualTo('move')
+        .and()
+        .statusEqualTo('undef')
+        .findAll();
+    undefmoveshortTest.clear();
+    undefmoveshortTest.addAll(fetchundefShortTestMove);
+    notifyListeners();
+  }
+
+//чтение кратковременного  тестирования сидя невыполненные
+  final List<IShortTest> undefseatshortTest = [];
+  Future<void> readundefShortTestSeat() async {
+    List<IShortTest> fetchShortTestSeat = await isar.iShortTests
+        .filter()
+        .positionEqualTo('seat')
+        .and()
+        .statusEqualTo('undef')
+        .findAll();
+    seatshortTest.clear();
+    seatshortTest.addAll(fetchShortTestSeat);
+    notifyListeners();
+  }
+
+//чтение кратковременного  тестирования лежа невыполненные
+  final List<IShortTest> undeflieshortTest = [];
+  Future<void> readundefShortTestLie() async {
+    List<IShortTest> fetchundefShortTestLie = await isar.iShortTests
+        .filter()
+        .positionEqualTo('lie')
+        .and()
+        .statusEqualTo('undef')
+        .findAll();
+    lieshortTest.clear();
+    lieshortTest.addAll(fetchundefShortTestLie);
+    notifyListeners();
+  }
+
+  //чтение кратковременного  тестирования непройденные
+  final List<IShortTest> undefshortTest = [];
+  Future<void> readCommonShortTestUndef() async {
+    List<IShortTest> fetchShortTestDouble =
+        await isar.iShortTests.where().statusEqualTo('undef').findAll();
+    undefshortTest.clear();
+    undefshortTest.addAll(fetchShortTestDouble);
+    notifyListeners();
+  }
+
+  //Добавление одиночного тестирования с проверкой дублей
+  Future<void> addSingleShortTest(
+      String position,
+      String program,
+      String electrodes,
+      String condition,
+      double amplit,
+      int freq,
+      int dur,
+      bool hiddenfreqdur,
+      bool hiddenamplfreqdur) async {}
+
+  // LongTest
+  //работа со всеми заданиями длительного тестирования
+  final List<ILongTest> commonlongTest = [];
+//create ShortTest
+  Future<void> addLongTest(
+    String position,
+    String program,
+    String electrodes,
+    String condition,
+    double amplit,
+    bool hideamplt,
+    int freq,
+    bool hidefreq,
+    int dur,
+    bool hidedur,
+  ) async {
+    final newLongTest = ILongTest()
+      ..position = position
+      ..program = program
+      ..electrodes = electrodes
+      ..amplit = amplit
+      ..freq = freq
+      ..hidefreq = hidefreq
+      ..dur = dur
+      ..hidedur = hidedur
+      ..status = 'undef';
+
+    await isar.writeTxn(() => isar.iLongTests.put(newLongTest));
+    readCommonLongTest();
+  }
+
+  Future<void> updateStatusLongTest(Id id, String newstatus) async {
+    final commonlongTest = await isar.iLongTests.get(id);
+
+    if (commonlongTest != 0) {
+      await isar.writeTxn(() async {
+        commonlongTest!.status = newstatus;
+
+        await isar.iLongTests.put(commonlongTest);
+      });
+    }
+
+    readCommonLongTest();
+  }
+
+//чтение длительного  тестирования
+  Future<void> readCommonLongTest() async {
+    List<ILongTest> fetchLongTest = await isar.iLongTests.where().findAll();
+    commonlongTest.clear();
+    commonlongTest.addAll(fetchLongTest);
+    notifyListeners();
+  }
+
+//чтение длительного  тестирования движения
+  final List<ILongTest> movelongTest = [];
+  Future<void> readCommonLongTestMove() async {
+    List<ILongTest> fetchLongTestMove =
+        await isar.iLongTests.where().positionEqualTo('move').findAll();
+    movelongTest.clear();
+    movelongTest.addAll(fetchLongTestMove);
+    notifyListeners();
+  }
+
+//чтение длительного  тестирования сидя
+  final List<ILongTest> seatlongTest = [];
+  Future<void> readCommonLongTestSeat() async {
+    List<ILongTest> fetchLongTestSeat =
+        await isar.iLongTests.where().positionEqualTo('seat').findAll();
+    seatlongTest.clear();
+    seatlongTest.addAll(fetchLongTestSeat);
+    notifyListeners();
+  }
+
+//чтение длительного  тестирования лежа
+  final List<ILongTest> lielongTest = [];
+  Future<void> readCommonLongTestLie() async {
+    List<ILongTest> fetchLongTestLie =
+        await isar.iLongTests.where().positionEqualTo('lie').findAll();
+    lielongTest.clear();
+    lielongTest.addAll(fetchLongTestLie);
+    notifyListeners();
+  }
+
+  //чтение длительного  тестирования дублирующие
+  final List<ILongTest> doublelongTest = [];
+  Future<void> readdoubleLongTestDouble() async {
+    List<ILongTest> fetchLongTestDouble =
+        await isar.iLongTests.where().statusEqualTo('double').findAll();
+    doublelongTest.clear();
+    doublelongTest.addAll(fetchLongTestDouble);
+    notifyListeners();
+  }
+
+  //чтение длительного  тестирования движения невыполненные
+  final List<ILongTest> undefmovelongTest = [];
+  Future<void> readundefLongTestMove() async {
+    List<ILongTest> fetchundefLongTestMove = await isar.iLongTests
+        .filter()
+        .positionEqualTo('move')
+        .and()
+        .statusEqualTo('undef')
+        .findAll();
+    undefmovelongTest.clear();
+    undefmovelongTest.addAll(fetchundefLongTestMove);
+    notifyListeners();
+  }
+
+//чтение длительного  тестирования сидя невыполненные
+  final List<ILongTest> undefseatlongTest = [];
+  Future<void> readundefLongTestSeat() async {
+    List<ILongTest> fetchLongTestSeat = await isar.iLongTests
+        .filter()
+        .positionEqualTo('seat')
+        .and()
+        .statusEqualTo('undef')
+        .findAll();
+    seatlongTest.clear();
+    seatlongTest.addAll(fetchLongTestSeat);
+    notifyListeners();
+  }
+
+//чтение длительного  тестирования лежа невыполненные
+  final List<ILongTest> undeflielongTest = [];
+  Future<void> readundefLongTestLie() async {
+    List<ILongTest> fetchundefLongTestLie = await isar.iLongTests
+        .filter()
+        .positionEqualTo('lie')
+        .and()
+        .statusEqualTo('undef')
+        .findAll();
+    lielongTest.clear();
+    lielongTest.addAll(fetchundefLongTestLie);
+    notifyListeners();
+  }
+
+  //чтение длительного  тестирования непройденные
+  final List<ILongTest> undeflongTest = [];
+  Future<void> readCommonLongTestUndef() async {
+    List<ILongTest> fetchLongTestDouble =
+        await isar.iLongTests.where().statusEqualTo('undef').findAll();
+    undeflongTest.clear();
+    undeflongTest.addAll(fetchLongTestDouble);
+    notifyListeners();
   }
 }

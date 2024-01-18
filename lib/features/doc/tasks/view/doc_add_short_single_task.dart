@@ -1,12 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:elegant_notification/elegant_notification.dart';
 import 'package:elegant_notification/resources/arrays.dart';
-import 'package:feedbackscs2024/features/doc/tasks/controllers/double_short_task_controller.dart';
-
+import 'package:feedbackscs2024/collections/shorttest.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-
-import 'package:get/instance_manager.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../../../../../../services/entities/data/neuromodels.dart';
@@ -18,13 +15,6 @@ import '../../../../l10n/locale_keys.g.dart';
 
 import '../../../../repository/feedbackscs_database.dart';
 import '../../../../services/entities/data/model/neuromodel.dart';
-import '../controllers/candidate_short_task_lie_controller.dart';
-import '../controllers/candidate_short_task_move_controller.dart';
-import '../controllers/candidate_short_task_seat_controller.dart';
-import '../controllers/short_task_controller.dart';
-import '../controllers/short_task_lie_controller.dart';
-import '../controllers/short_task_move_controller.dart';
-import '../controllers/short_task_seat_controller.dart';
 
 class DocAddSingleTask extends StatefulWidget {
   const DocAddSingleTask({super.key});
@@ -35,19 +25,6 @@ class DocAddSingleTask extends StatefulWidget {
 
 class _DocAddSingleTaskState extends State<DocAddSingleTask> {
   final _formkey = GlobalKey<FormState>();
-
-  final _candidateshortTaskMoveController =
-      Get.find<CandidateShortTaskMoveControler>();
-  final _candidateshortTaskLieController =
-      Get.find<CandidateShortTaskLieControler>();
-  final _candidateshortTaskSeatController =
-      Get.find<CandidateShortTaskSeatControler>();
-
-  final _shortTaskMoveController = Get.find<ShortTaskMoveControler>();
-  final _shortTaskLieController = Get.find<ShortTaskLieControler>();
-  final _shortTaskSeatController = Get.find<ShortTaskSeatControler>();
-  final _doubleshorttaskController = Get.find<DoubleShortTaskControler>();
-  late List<String> undoublelist;
 
   final _programCtrl = TextEditingController();
   final _electrodesCtrl = TextEditingController();
@@ -78,53 +55,6 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
 
   @override
   Widget build(BuildContext context) {
-    final _listshorttaskmove = _shortTaskMoveController.shorttaskmoves.toList();
-    final _listshorttaskseat = _shortTaskSeatController.shorttaskseats.toList();
-    final _listshorttasklie = _shortTaskLieController.shorttasklies.toList();
-
-    var undoublelistmove;
-    var undoublelistseat;
-    var undoublelistlie;
-    final _candidateshorttasklistmove =
-        _candidateshortTaskMoveController.candidateshorttaskmoves.toList();
-    final _candidateshorttasklistseat =
-        _candidateshortTaskSeatController.candidateshorttaskseats.toList();
-    final _candidateshorttasklistlie =
-        _candidateshortTaskLieController.candidateshorttasklies.toList();
-    undoublelistmove = [];
-    if (_candidateshorttasklistmove.isNotEmpty)
-      for (var index = 0; index < _candidateshorttasklistmove.length; index++)
-        undoublelistmove.add(_listshorttaskmove
-            .where((_listshorttaskmove) => _listshorttaskmove.id
-                .contains(_candidateshorttasklistmove[index].id))
-            .map((listshorttaskmove) => listshorttaskmove.program)
-            .toList()
-            .last);
-    undoublelistseat = [];
-    if (_candidateshorttasklistseat.isNotEmpty) {
-      for (var index = 0; index < _candidateshorttasklistseat.length; index++)
-        undoublelistseat.add(_listshorttaskseat
-            .where((_listshorttaskseat) => _listshorttaskseat.id
-                .contains(_candidateshorttasklistseat[index].id))
-            .map((listshorttaskseat) => listshorttaskseat.program)
-            .toList()
-            .last);
-    }
-    ;
-    undoublelistlie = [];
-    if (_candidateshorttasklistlie.isNotEmpty) {
-      for (var index = 0; index < _candidateshorttasklistlie.length; index++)
-        undoublelistlie.add(_listshorttasklie
-            .where((_listshorttasklie) => _listshorttasklie.id
-                .contains(_candidateshorttasklistlie[index].id))
-            .map((listshorttasklie) => listshorttasklie.program)
-            .toList()
-            .last);
-    }
-    ;
-    Set undoublesetmove = undoublelistmove.toSet();
-    Set undoublesetseat = undoublelistseat.toSet();
-    Set undoublesetlie = undoublelistlie.toSet();
     final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
     List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
     Iterable<Neuro> liststimul = neuromodels.where((neuromodel) =>
@@ -134,6 +64,10 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
       LocaleKeys.noparestesia.tr(),
       LocaleKeys.painmin.tr() + currentpatient[0].prioritylevelpain.toString()
     ];
+
+    List<IShortTest> undefshorttest = feedbackSCSDatabase.undefshortTest;
+    List<IShortTest> doubleshorttest = feedbackSCSDatabase.doubleshortTest;
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.secondary,
       appBar: AppBar(
@@ -162,78 +96,17 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
                         headerbloc: LocaleKeys.busyprogram.tr(),
                         widget: Column(
                           children: [
-                            Row(
-                              children: [
-                                Text(
-                                  LocaleKeys.movep.tr() + ": ",
-                                  style:
-                                      Theme.of(context).textTheme.displayLarge,
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Expanded(
-                                  child: undoublesetmove.isEmpty
-                                      ? Text('')
-                                      : Wrap(children: [
-                                          for (var index = 0;
-                                              index < undoublesetmove.length;
-                                              index++)
-                                            Text(undoublesetmove
-                                                    .toList()[index] +
-                                                ", "),
-                                        ]),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  LocaleKeys.seat.tr(),
-                                  style:
-                                      Theme.of(context).textTheme.displayLarge,
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Expanded(
-                                  child: undoublesetseat.isEmpty
-                                      ? Text(' - ')
-                                      : Wrap(children: [
-                                          for (var index = 0;
-                                              index < undoublesetseat.length;
-                                              index++)
-                                            Text(undoublesetseat
-                                                    .toList()[index] +
-                                                ", "),
-                                        ]),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  LocaleKeys.lie.tr() + ": ",
-                                  style:
-                                      Theme.of(context).textTheme.displayLarge,
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Expanded(
-                                  child: undoublesetlie.isEmpty
-                                      ? Text(' - ')
-                                      : Wrap(children: [
-                                          for (var index = 0;
-                                              index < undoublesetlie.length;
-                                              index++)
-                                            Text(
-                                                undoublesetlie.toList()[index] +
-                                                    ", "),
-                                        ]),
-                                ),
-                              ],
-                            ),
+                            undefshorttest.isEmpty
+                                ? Text('')
+                                : Wrap(children: [
+                                    for (var index = 0;
+                                        index < undefshorttest.length;
+                                        index++)
+                                      Text(undefshorttest
+                                              .toList()[index]
+                                              .program +
+                                          ", "),
+                                  ]),
                           ],
                         ),
                       ),
@@ -573,9 +446,20 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
                             style: Theme.of(context).textTheme.labelLarge,
                           ),
                           onPressed: () {
-                            add_short_task_candidate();
-                            _doubleshorttaskController
-                                    .doubleshorttask.isNotEmpty
+                            context
+                                .read<FeedbackSCSDatabase>()
+                                .addSingleShortTest(
+                                  _selectedactivity!,
+                                  _programCtrl.text,
+                                  _electrodesCtrl.text,
+                                  _selectedcondchoiceampl!,
+                                  double.parse(_ampCtrl.text),
+                                  int.parse(_freqCtrl.text),
+                                  int.parse(_durCtrl.text),
+                                  _hidefreqdur,
+                                  _hideampfreqdur,
+                                );
+                            doubleshorttest.isNotEmpty
                                 ? ElegantNotification.error(
                                     width: 360,
                                     notificationPosition:
@@ -583,8 +467,7 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
                                     animation: AnimationType.fromBottom,
                                     title: Text(_selectedactivity.toString()),
                                     onProgressFinished: () => {
-                                      _doubleshorttaskController
-                                          .clearDoubleShortTask(),
+                                      //убрать дубль
                                       context.pushNamed(
                                           RouteNames.docaddsingletask)
                                     },
@@ -613,36 +496,6 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
         ),
       ),
     );
-  }
-
-  void add_short_task_candidate() {
-    _formkey.currentState?.save();
-    if (add_Short_task_candidate.currentState != null &&
-        _formkey.currentState!.validate()) {
-      ShortTaskController().add_Single_Short_task(
-          _selectedactivity.toString(),
-          _programCtrl.text,
-          _electrodesCtrl.text,
-          _selectedcondchoiceampl.toString(),
-          (_selectedcondchoiceampl.toString() == LocaleKeys.fixamp.tr()
-              ? double.parse(_ampCtrl.text)
-              : 0),
-          int.parse(_freqCtrl.text),
-          int.parse(_durCtrl.text),
-          _hidefreqdur,
-          _hideampfreqdur);
-    } else {
-      ElegantNotification.error(
-        width: 360,
-        notificationPosition: NotificationPosition.center,
-        animation: AnimationType.fromBottom,
-        onProgressFinished: () => {},
-        description: Text(LocaleKeys.noaddtask.tr()),
-        onDismiss: () {},
-      ).show(context);
-    }
-
-    //
   }
 
   GlobalKey<FormState> get add_Short_task_candidate => add_candidate_shorttask;

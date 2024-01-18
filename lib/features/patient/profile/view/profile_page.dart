@@ -59,7 +59,7 @@ class _ProfilePageState extends State<ProfilePage> {
             children: [
               AppPictureContainer(
                   isResponsible: true,
-                  height: 300,
+                  height: 250,
                   isinfo: true,
                   title: currentpatient.isEmpty
                       ? LocaleKeys.nodata.tr()

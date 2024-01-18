@@ -87,8 +87,13 @@ const ILongTestSchema = CollectionSchema(
       name: r'program',
       type: IsarType.string,
     ),
-    r'stoptesttime': PropertySchema(
+    r'status': PropertySchema(
       id: 14,
+      name: r'status',
+      type: IsarType.string,
+    ),
+    r'stoptesttime': PropertySchema(
+      id: 15,
       name: r'stoptesttime',
       type: IsarType.dateTime,
     )
@@ -99,6 +104,19 @@ const ILongTestSchema = CollectionSchema(
   deserializeProp: _iLongTestDeserializeProp,
   idName: r'id',
   indexes: {
+    r'status': IndexSchema(
+      id: -107785170620420283,
+      name: r'status',
+      unique: false,
+      replace: false,
+      properties: [
+        IndexPropertySchema(
+          name: r'status',
+          type: IndexType.hash,
+          caseSensitive: true,
+        )
+      ],
+    ),
     r'position': IndexSchema(
       id: 5117117876086213592,
       name: r'position',
@@ -170,6 +188,7 @@ int _iLongTestEstimateSize(
   bytesCount += 3 + object.formula.length * 3;
   bytesCount += 3 + object.position.length * 3;
   bytesCount += 3 + object.program.length * 3;
+  bytesCount += 3 + object.status.length * 3;
   return bytesCount;
 }
 
@@ -193,7 +212,8 @@ void _iLongTestSerialize(
   writer.writeLong(offsets[11], object.markself);
   writer.writeString(offsets[12], object.position);
   writer.writeString(offsets[13], object.program);
-  writer.writeDateTime(offsets[14], object.stoptesttime);
+  writer.writeString(offsets[14], object.status);
+  writer.writeDateTime(offsets[15], object.stoptesttime);
 }
 
 ILongTest _iLongTestDeserialize(
@@ -218,7 +238,8 @@ ILongTest _iLongTestDeserialize(
   object.markself = reader.readLongOrNull(offsets[11]);
   object.position = reader.readString(offsets[12]);
   object.program = reader.readString(offsets[13]);
-  object.stoptesttime = reader.readDateTimeOrNull(offsets[14]);
+  object.status = reader.readString(offsets[14]);
+  object.stoptesttime = reader.readDateTimeOrNull(offsets[15]);
   return object;
 }
 
@@ -258,6 +279,8 @@ P _iLongTestDeserializeProp<P>(
     case 13:
       return (reader.readString(offset)) as P;
     case 14:
+      return (reader.readString(offset)) as P;
+    case 15:
       return (reader.readDateTimeOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -365,6 +388,51 @@ extension ILongTestQueryWhere
         upper: upperId,
         includeUpper: includeUpper,
       ));
+    });
+  }
+
+  QueryBuilder<ILongTest, ILongTest, QAfterWhereClause> statusEqualTo(
+      String status) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'status',
+        value: [status],
+      ));
+    });
+  }
+
+  QueryBuilder<ILongTest, ILongTest, QAfterWhereClause> statusNotEqualTo(
+      String status) {
+    return QueryBuilder.apply(this, (query) {
+      if (query.whereSort == Sort.asc) {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'status',
+              lower: [],
+              upper: [status],
+              includeUpper: false,
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'status',
+              lower: [status],
+              includeLower: false,
+              upper: [],
+            ));
+      } else {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'status',
+              lower: [status],
+              includeLower: false,
+              upper: [],
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'status',
+              lower: [],
+              upper: [status],
+              includeUpper: false,
+            ));
+      }
     });
   }
 
@@ -1707,6 +1775,136 @@ extension ILongTestQueryFilter
     });
   }
 
+  QueryBuilder<ILongTest, ILongTest, QAfterFilterCondition> statusEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'status',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ILongTest, ILongTest, QAfterFilterCondition> statusGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'status',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ILongTest, ILongTest, QAfterFilterCondition> statusLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'status',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ILongTest, ILongTest, QAfterFilterCondition> statusBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'status',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ILongTest, ILongTest, QAfterFilterCondition> statusStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'status',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ILongTest, ILongTest, QAfterFilterCondition> statusEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'status',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ILongTest, ILongTest, QAfterFilterCondition> statusContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'status',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ILongTest, ILongTest, QAfterFilterCondition> statusMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'status',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ILongTest, ILongTest, QAfterFilterCondition> statusIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'status',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<ILongTest, ILongTest, QAfterFilterCondition> statusIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'status',
+        value: '',
+      ));
+    });
+  }
+
   QueryBuilder<ILongTest, ILongTest, QAfterFilterCondition>
       stoptesttimeIsNull() {
     return QueryBuilder.apply(this, (query) {
@@ -1956,6 +2154,18 @@ extension ILongTestQuerySortBy on QueryBuilder<ILongTest, ILongTest, QSortBy> {
     });
   }
 
+  QueryBuilder<ILongTest, ILongTest, QAfterSortBy> sortByStatus() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'status', Sort.asc);
+    });
+  }
+
+  QueryBuilder<ILongTest, ILongTest, QAfterSortBy> sortByStatusDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'status', Sort.desc);
+    });
+  }
+
   QueryBuilder<ILongTest, ILongTest, QAfterSortBy> sortByStoptesttime() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'stoptesttime', Sort.asc);
@@ -2151,6 +2361,18 @@ extension ILongTestQuerySortThenBy
     });
   }
 
+  QueryBuilder<ILongTest, ILongTest, QAfterSortBy> thenByStatus() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'status', Sort.asc);
+    });
+  }
+
+  QueryBuilder<ILongTest, ILongTest, QAfterSortBy> thenByStatusDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'status', Sort.desc);
+    });
+  }
+
   QueryBuilder<ILongTest, ILongTest, QAfterSortBy> thenByStoptesttime() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'stoptesttime', Sort.asc);
@@ -2254,6 +2476,13 @@ extension ILongTestQueryWhereDistinct
     });
   }
 
+  QueryBuilder<ILongTest, ILongTest, QDistinct> distinctByStatus(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'status', caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<ILongTest, ILongTest, QDistinct> distinctByStoptesttime() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'stoptesttime');
@@ -2350,6 +2579,12 @@ extension ILongTestQueryProperty
   QueryBuilder<ILongTest, String, QQueryOperations> programProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'program');
+    });
+  }
+
+  QueryBuilder<ILongTest, String, QQueryOperations> statusProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'status');
     });
   }
 

@@ -142,6 +142,19 @@ const IShortTestSchema = CollectionSchema(
         )
       ],
     ),
+    r'status': IndexSchema(
+      id: -107785170620420283,
+      name: r'status',
+      unique: false,
+      replace: false,
+      properties: [
+        IndexPropertySchema(
+          name: r'status',
+          type: IndexType.hash,
+          caseSensitive: true,
+        )
+      ],
+    ),
     r'electrodes': IndexSchema(
       id: -8163605658744177914,
       name: r'electrodes',
@@ -212,12 +225,7 @@ int _iShortTestEstimateSize(
   }
   bytesCount += 3 + object.position.length * 3;
   bytesCount += 3 + object.program.length * 3;
-  {
-    final value = object.status;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
+  bytesCount += 3 + object.status.length * 3;
   return bytesCount;
 }
 
@@ -277,7 +285,7 @@ IShortTest _iShortTestDeserialize(
   object.id = id;
   object.position = reader.readString(offsets[17]);
   object.program = reader.readString(offsets[18]);
-  object.status = reader.readStringOrNull(offsets[19]);
+  object.status = reader.readString(offsets[19]);
   object.stoptesttime = reader.readDateTimeOrNull(offsets[20]);
   return object;
 }
@@ -328,7 +336,7 @@ P _iShortTestDeserializeProp<P>(
     case 18:
       return (reader.readString(offset)) as P;
     case 19:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 20:
       return (reader.readDateTimeOrNull(offset)) as P;
     default:
@@ -479,6 +487,51 @@ extension IShortTestQueryWhere
               indexName: r'position',
               lower: [],
               upper: [position],
+              includeUpper: false,
+            ));
+      }
+    });
+  }
+
+  QueryBuilder<IShortTest, IShortTest, QAfterWhereClause> statusEqualTo(
+      String status) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'status',
+        value: [status],
+      ));
+    });
+  }
+
+  QueryBuilder<IShortTest, IShortTest, QAfterWhereClause> statusNotEqualTo(
+      String status) {
+    return QueryBuilder.apply(this, (query) {
+      if (query.whereSort == Sort.asc) {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'status',
+              lower: [],
+              upper: [status],
+              includeUpper: false,
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'status',
+              lower: [status],
+              includeLower: false,
+              upper: [],
+            ));
+      } else {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'status',
+              lower: [status],
+              includeLower: false,
+              upper: [],
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'status',
+              lower: [],
+              upper: [status],
               includeUpper: false,
             ));
       }
@@ -2197,25 +2250,8 @@ extension IShortTestQueryFilter
     });
   }
 
-  QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition> statusIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'status',
-      ));
-    });
-  }
-
-  QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition>
-      statusIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'status',
-      ));
-    });
-  }
-
   QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition> statusEqualTo(
-    String? value, {
+    String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -2228,7 +2264,7 @@ extension IShortTestQueryFilter
   }
 
   QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition> statusGreaterThan(
-    String? value, {
+    String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -2243,7 +2279,7 @@ extension IShortTestQueryFilter
   }
 
   QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition> statusLessThan(
-    String? value, {
+    String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -2258,8 +2294,8 @@ extension IShortTestQueryFilter
   }
 
   QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition> statusBetween(
-    String? lower,
-    String? upper, {
+    String lower,
+    String upper, {
     bool includeLower = true,
     bool includeUpper = true,
     bool caseSensitive = true,
@@ -3211,7 +3247,7 @@ extension IShortTestQueryProperty
     });
   }
 
-  QueryBuilder<IShortTest, String?, QQueryOperations> statusProperty() {
+  QueryBuilder<IShortTest, String, QQueryOperations> statusProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'status');
     });

@@ -5,6 +5,8 @@ part 'longtest.g.dart';
 class ILongTest {
   late Id id;
   @Index()
+  late String status;
+  @Index()
   late String position;
   late String program;
   @Index()

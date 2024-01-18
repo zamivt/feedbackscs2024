@@ -18,7 +18,6 @@ import '../controllers/candidate_short_task_lie_controller.dart';
 import '../controllers/candidate_short_task_move_controller.dart';
 import '../controllers/candidate_short_task_seat_controller.dart';
 import '../controllers/double_short_task_controller.dart';
-import '../controllers/short_task_controller.dart';
 import '../controllers/short_task_lie_controller.dart';
 import '../controllers/short_task_move_controller.dart';
 import '../controllers/short_task_seat_controller.dart';
@@ -911,23 +910,7 @@ class _DocAddRangeTaskState extends State<DocAddRangeTask> {
   void add_short_range_task_candidate() {
     _formkey.currentState?.save();
     if (add_Short_task_candidate.currentState != null &&
-        _formkey.currentState!.validate()) {
-      ShortTaskController().add_Range_Short_task(
-        _selectedactivity.toString(),
-        _programCtrl.text,
-        _electrodesCtrl.text,
-        _selectedcondchoiceampl.toString(),
-        (_selectedcondchoiceampl.toString() == LocaleKeys.fixamp.tr()
-            ? double.parse(_ampCtrl.text)
-            : 0),
-        int.parse(_startfreqCtrl.text),
-        int.parse(_stopfreqCtrl.text),
-        int.parse(_stepfreqCtrl.text),
-        int.parse(_startdurCtrl.text),
-        int.parse(_stopdurCtrl.text),
-        int.parse(_stepdurCtrl.text),
-      );
-    }
+        _formkey.currentState!.validate()) {}
     context.pushNamed(RouteNames.doctasks);
   }
 

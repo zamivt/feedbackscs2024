@@ -30,8 +30,7 @@ class _TaskPageState extends State<TaskPage> {
     final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
     List<CurrentTest> currenttest = feedbackSCSDatabase.currentTest;
 
-    return (currenttest[0].activetask == 'no tasks' ||
-            currenttest[0].activetask == null)
+    return (currenttest.isEmpty || currenttest[0].activetask == 'no tasks')
         ? TasksListPage()
         : currenttest[0].activetask == 'st1'
             ? ShortTest1()

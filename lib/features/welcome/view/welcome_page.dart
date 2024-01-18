@@ -76,7 +76,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         alignment: Alignment.bottomCenter,
                         fit: BoxFit.scaleDown)),
                 child: Container(
-                  margin: const EdgeInsets.only(top: 80, left: 20, right: 20),
+                  margin: const EdgeInsets.only(top: 40, left: 20, right: 20),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -93,11 +93,7 @@ class _WelcomePageState extends State<WelcomePage> {
                                         child: Image.asset(images[index]))
                                     : Container(),
                                 SizedBox(
-                                  width: 20,
-                                ),
-                                Text(
-                                  currentpatient.length.toString(),
-                                  style: TextStyle(color: Colors.blue),
+                                  width: 10,
                                 ),
                                 Text(
                                   titlewelcome[index].toString(),
@@ -106,7 +102,7 @@ class _WelcomePageState extends State<WelcomePage> {
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 40),
+                            const SizedBox(height: 30),
                             SizedBox(
                               width: MediaQuery.of(context).size.width - 60,
                               child: Text(discriptionwelcome[index].toString(),
@@ -117,7 +113,7 @@ class _WelcomePageState extends State<WelcomePage> {
                                           .primary)),
                             ),
                             const SizedBox(
-                              height: 80,
+                              height: 40,
                             ),
                             (images.length - 1 == index) || (index == 0)
                                 ? ElevatedButton(
