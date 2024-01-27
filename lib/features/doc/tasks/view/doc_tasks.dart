@@ -17,7 +17,7 @@ class DocTasks extends StatelessWidget {
     List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
 
     return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        backgroundColor: Colors.grey.shade200,
         appBar: AppBar(
           automaticallyImplyLeading: false,
           centerTitle: true,

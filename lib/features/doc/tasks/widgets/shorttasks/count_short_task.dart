@@ -1,13 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:feedbackscs2024/core/ui/widgets/common_widgets.dart';
-import 'package:feedbackscs2024/features/doc/tasks/controllers/short_task_lie_controller.dart';
-import 'package:feedbackscs2024/features/doc/tasks/controllers/short_task_move_controller.dart';
-import 'package:flutter/material.dart';
-import 'package:get/instance_manager.dart';
 
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../../collections/shorttest.dart';
 import '../../../../../core/router/route_names.dart';
 import '../../../../../l10n/locale_keys.g.dart';
-import '../../controllers/short_task_seat_controller.dart';
+import '../../../../../repository/feedbackscs_database.dart';
 
 class CountShortTasks extends StatelessWidget {
   const CountShortTasks({
@@ -16,9 +16,17 @@ class CountShortTasks extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _shortTaskMove = Get.find<ShortTaskMoveControler>();
-    final _shortTaskLie = Get.find<ShortTaskLieControler>();
-    final _shortTaskSeat = Get.find<ShortTaskSeatControler>();
+    Provider.of<FeedbackSCSDatabase>(context, listen: false)
+        .readCommonShortTestMove();
+    Provider.of<FeedbackSCSDatabase>(context, listen: false)
+        .readCommonShortTestLie();
+
+    Provider.of<FeedbackSCSDatabase>(context, listen: false)
+        .readCommonShortTestSeat();
+    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    List<IShortTest> moveshortTest = feedbackSCSDatabase.moveShortTest;
+    List<IShortTest> seatshortTest = feedbackSCSDatabase.seatshortTest;
+    List<IShortTest> lieshortTest = feedbackSCSDatabase.lieshortTest;
     return Column(
       children: [
         Container(
@@ -50,21 +58,21 @@ class CountShortTasks extends StatelessWidget {
                 child: AppTextButton(
                     text: LocaleKeys.cmove.tr() +
                         '\n' +
-                        _shortTaskMove.shorttaskmoves.length.toString(),
+                        moveshortTest.length.toString(),
                     linkbutton: RouteNames.docshorttaskmove),
               ),
               Expanded(
                 child: AppTextButton(
                     text: LocaleKeys.cseat.tr() +
                         '\n' +
-                        _shortTaskSeat.shorttaskseats.length.toString(),
+                        seatshortTest.length.toString(),
                     linkbutton: RouteNames.docshorttaskseat),
               ),
               Expanded(
                 child: AppTextButton(
                     text: LocaleKeys.clie.tr() +
                         '\n' +
-                        _shortTaskLie.shorttasklies.length.toString(),
+                        lieshortTest.length.toString(),
                     linkbutton: RouteNames.docshorttasklie),
               )
             ],

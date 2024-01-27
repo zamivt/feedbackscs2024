@@ -20,12 +20,12 @@ class AppCommentText extends StatelessWidget {
             color: Theme.of(context).colorScheme.primaryContainer,
           )),
       width: double.infinity,
-      padding: EdgeInsets.all(15),
-      margin: EdgeInsets.all(15),
+      padding: EdgeInsets.all(5),
+      margin: EdgeInsets.only(left: 5),
 
       child: Text(
         text,
-        textAlign: TextAlign.start,
+        textAlign: TextAlign.center,
         style: TextStyle(
             fontSize: 14,
             fontStyle: FontStyle.italic,

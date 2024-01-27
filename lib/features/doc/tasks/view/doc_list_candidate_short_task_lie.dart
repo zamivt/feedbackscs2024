@@ -1,12 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_instance/get_instance.dart';
-import 'package:get/state_manager.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+import '../../../../collections/shorttest.dart';
 import '../../../../core/router/route_names.dart';
 import '../../../../l10n/locale_keys.g.dart';
-import '../controllers/candidate_short_task_lie_controller.dart';
-import '../controllers/short_task_lie_controller.dart';
+import '../../../../repository/feedbackscs_database.dart';
 
 class DocListCandidateShortTaskLie extends StatelessWidget {
   const DocListCandidateShortTaskLie({
@@ -15,10 +14,13 @@ class DocListCandidateShortTaskLie extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _candidateShortTaskLieController =
-        Get.find<CandidateShortTaskLieControler>();
-    final _shortTaskLieController = Get.find<ShortTaskLieControler>();
-    final _listshorttasklie = _shortTaskLieController.shorttasklies.toList();
+    Provider.of<FeedbackSCSDatabase>(context, listen: false)
+        .readundefShortTestLie();
+
+    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+
+    List<IShortTest> undeflieshortTest = feedbackSCSDatabase.undeflieshortTest;
+
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -36,234 +38,137 @@ class DocListCandidateShortTaskLie extends StatelessWidget {
           ),
         ),
         body: SafeArea(
-          child: _candidateShortTaskLieController
-                  .candidateshorttasklies.isNotEmpty
-              ? GetBuilder(builder: (CandidateShortTaskLieControler
-                  candidateShortTaskLieControler) {
-                  return ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: false,
-                      itemCount: candidateShortTaskLieControler
-                          .candidateshorttasklies.length,
-                      primary: false,
-                      itemBuilder: ((context, index) {
-                        return Card(
-                          color: Theme.of(context).colorScheme.secondary,
-                          shadowColor: Colors.grey[400],
-                          elevation: 10,
-                          margin: const EdgeInsets.symmetric(
-                              horizontal: 5, vertical: 10),
-                          child: ListTile(
-                            trailing: IconButton(
-                              icon: Icon(
-                                Icons.delete,
-                                color: Theme.of(context).colorScheme.primary,
+          child: undeflieshortTest.isNotEmpty
+              ? ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: false,
+                  itemCount: undeflieshortTest.length,
+                  primary: false,
+                  itemBuilder: ((context, index) {
+                    return Card(
+                      color: Theme.of(context).colorScheme.secondary,
+                      shadowColor: Colors.grey[400],
+                      elevation: 10,
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 5, vertical: 10),
+                      child: ListTile(
+                        trailing: IconButton(
+                          icon: Icon(
+                            Icons.delete,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                          onPressed: () {
+                            // _shortTaskMoveController.deleteShortTaskMove(
+                            //     candidateShortTaskMoveControler
+                            //         .candidateshorttasklies[index].id);
+                            // candidateShortTaskMoveControler
+                            //     .deleteCandidateShortTaskMove(index);
+                          },
+                        ),
+                        title: Column(
+                          children: [
+                            Row(children: [
+                              Container(
+                                  width: 30,
+                                  height: 30,
+                                  color: Theme.of(context).colorScheme.primary,
+                                  child: Text(
+                                    (index + 1).toString(),
+                                    style:
+                                        Theme.of(context).textTheme.labelLarge,
+                                    textAlign: TextAlign.center,
+                                  )),
+                              SizedBox(
+                                width: 10,
                               ),
-                              onPressed: () {
-                                _shortTaskLieController.deleteShortTaskLie(
-                                    candidateShortTaskLieControler
-                                        .candidateshorttasklies[index].id);
-                                candidateShortTaskLieControler
-                                    .deleteCandidateShortTaskLie(index);
-                              },
-                            ),
-                            title: Column(
-                              children: [
-                                Row(children: [
-                                  Container(
-                                      width: 30,
-                                      height: 30,
-                                      color:
-                                          Theme.of(context).colorScheme.primary,
-                                      child: Text(
-                                        (index + 1).toString(),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelLarge,
-                                        textAlign: TextAlign.center,
-                                      )),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Container(
-                                      width: 30,
-                                      height: 30,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .tertiary,
-                                      child: Center(
-                                        child: Text(
-                                          _listshorttasklie
-                                              .where((_listshorttasklie) =>
-                                                  _listshorttasklie.id.contains(
-                                                      _candidateShortTaskLieController
-                                                          .candidateshorttasklies[
-                                                              index]
-                                                          .id))
-                                              .map((listshorttasklie) =>
-                                                  listshorttasklie.program)
-                                              .toList()
-                                              .first,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .displayLarge,
-                                        ),
-                                      )),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Text(
-                                    LocaleKeys.electrodess.tr() + ': ',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .displaySmall,
-                                  ),
-                                  Expanded(
+                              Container(
+                                  width: 30,
+                                  height: 30,
+                                  color: Theme.of(context).colorScheme.tertiary,
+                                  child: Center(
                                     child: Text(
-                                      _listshorttasklie
-                                          .where((_listshorttasklie) =>
-                                              _listshorttasklie.id.contains(
-                                                  _candidateShortTaskLieController
-                                                      .candidateshorttasklies[
-                                                          index]
-                                                      .id))
-                                          .map((listshorttasklie) =>
-                                              listshorttasklie.electrodes)
-                                          .toList()
-                                          .first,
+                                      undeflieshortTest[index].program,
                                       style: Theme.of(context)
                                           .textTheme
-                                          .displaySmall,
-                                      textAlign: TextAlign.center,
+                                          .displayLarge,
                                     ),
-                                  )
-                                ]),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      LocaleKeys.amps.tr() + ': ',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .displaySmall,
-                                    ),
-                                    _shortTaskLieController.shorttasklies[index]
-                                                .condition ==
-                                            LocaleKeys.fixamp.tr()
-                                        ? Text(
-                                            _listshorttasklie
-                                                .where((_listshorttasklie) =>
-                                                    _listshorttasklie.id.contains(
-                                                        _candidateShortTaskLieController
-                                                            .candidateshorttasklies[
-                                                                index]
-                                                            .id))
-                                                .map((listshorttasklie) =>
-                                                    listshorttasklie.amplit)
-                                                .toList()
-                                                .first
-                                                .toString(),
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .displaySmall,
-                                          )
-                                        : Expanded(
-                                            child: Text(
-                                              _listshorttasklie
-                                                  .where((_listshorttasklie) =>
-                                                      _listshorttasklie.id.contains(
-                                                          _candidateShortTaskLieController
-                                                              .candidateshorttasklies[
-                                                                  index]
-                                                              .id))
-                                                  .map((listshorttasklie) =>
-                                                      listshorttasklie
-                                                          .condition)
-                                                  .toList()
-                                                  .first
-                                                  .toString(),
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .displaySmall,
-                                            ),
-                                          ),
-                                    _listshorttasklie
-                                            .where((_listshorttasklie) =>
-                                                _listshorttasklie.id.contains(
-                                                    _candidateShortTaskLieController
-                                                        .candidateshorttasklies[
-                                                            index]
-                                                        .id))
-                                            .map((listshorttasklie) =>
-                                                listshorttasklie.hideamplt)
-                                            .toList()
-                                            .first
-                                        ? Icon(Icons.visibility_off)
-                                        : Container()
-                                  ],
-                                )
-                              ],
-                            ),
-                            subtitle: Row(
+                                  )),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                LocaleKeys.electrodess.tr() + ': ',
+                                style: Theme.of(context).textTheme.displaySmall,
+                              ),
+                              Expanded(
+                                child: Text(
+                                  undeflieshortTest[index].electrodes,
+                                  style:
+                                      Theme.of(context).textTheme.displaySmall,
+                                  textAlign: TextAlign.center,
+                                ),
+                              )
+                            ]),
+                            Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 SizedBox(
                                   width: 10,
                                 ),
                                 Text(
-                                  LocaleKeys.durs.tr() +
-                                      ': ' +
-                                      _listshorttasklie
-                                          .where((_listshorttasklie) =>
-                                              _listshorttasklie.id.contains(
-                                                  _candidateShortTaskLieController
-                                                      .candidateshorttasklies[
-                                                          index]
-                                                      .id))
-                                          .map((listshorttasklie) =>
-                                              listshorttasklie.dur)
-                                          .toList()
-                                          .first
-                                          .toString() +
-                                      ', ' +
-                                      LocaleKeys.freqs.tr() +
-                                      ': ' +
-                                      _listshorttasklie
-                                          .where((_listshorttasklie) =>
-                                              _listshorttasklie.id.contains(
-                                                  _candidateShortTaskLieController
-                                                      .candidateshorttasklies[index]
-                                                      .id))
-                                          .map((listshorttasklie) => listshorttasklie.freq)
-                                          .toList()
-                                          .first
-                                          .toString(),
+                                  LocaleKeys.amps.tr() + ': ',
                                   style:
                                       Theme.of(context).textTheme.displaySmall,
                                 ),
-                                _listshorttasklie
-                                        .where((_listshorttasklie) =>
-                                            _listshorttasklie.id.contains(
-                                                _candidateShortTaskLieController
-                                                    .candidateshorttasklies[
-                                                        index]
-                                                    .id))
-                                        .map((listshorttasklie) =>
-                                            listshorttasklie.hidefreq)
-                                        .toList()
-                                        .first
+                                undeflieshortTest[index].condition ==
+                                        LocaleKeys.fixamp.tr()
+                                    ? Text(
+                                        undeflieshortTest[index]
+                                            .amplit
+                                            .toString(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .displaySmall,
+                                      )
+                                    : Expanded(
+                                        child: Text(
+                                          undeflieshortTest[index].condition,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .displaySmall,
+                                        ),
+                                      ),
+                                undeflieshortTest[index].hideamplt
                                     ? Icon(Icons.visibility_off)
                                     : Container()
                               ],
+                            )
+                          ],
+                        ),
+                        subtitle: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                              width: 10,
                             ),
-                          ),
-                        );
-                      }));
-                })
+                            Text(
+                              LocaleKeys.durs.tr() +
+                                  ': ' +
+                                  undeflieshortTest[index].dur.toString() +
+                                  ', ' +
+                                  LocaleKeys.freqs.tr() +
+                                  ': ' +
+                                  undeflieshortTest[index].freq.toString(),
+                              style: Theme.of(context).textTheme.displaySmall,
+                            ),
+                            undeflieshortTest[index].hidefreq
+                                ? Icon(Icons.visibility_off)
+                                : Container()
+                          ],
+                        ),
+                      ),
+                    );
+                  }))
               : Center(
                   child: Text(
                   LocaleKeys.notask.tr(),

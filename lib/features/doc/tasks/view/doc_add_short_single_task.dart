@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:elegant_notification/elegant_notification.dart';
 import 'package:elegant_notification/resources/arrays.dart';
+import 'package:feedbackscs2024/collections/current_test.dart';
 import 'package:feedbackscs2024/collections/shorttest.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
@@ -12,7 +13,6 @@ import '../../../../collections/patient.dart';
 import '../../../../core/router/route_names.dart';
 import '../../../../core/ui/widgets/common_widgets.dart';
 import '../../../../l10n/locale_keys.g.dart';
-
 import '../../../../repository/feedbackscs_database.dart';
 import '../../../../services/entities/data/model/neuromodel.dart';
 
@@ -41,6 +41,11 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
   String? _selectedactivity;
   final requiredvalidator =
       RequiredValidator(errorText: LocaleKeys.requiredfield.tr() + '*');
+  @override
+  void initState() {
+    Provider.of<FeedbackSCSDatabase>(context, listen: false).doubleShortTest;
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -55,7 +60,10 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<FeedbackSCSDatabase>(context, listen: false)
+        .readCommonShortTestUndef();
     final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    Provider.of<FeedbackSCSDatabase>(context, listen: false).readCurrentTest();
     List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
     Iterable<Neuro> liststimul = neuromodels.where((neuromodel) =>
         neuromodel.model.contains(currentpatient[0].modelneuro));
@@ -66,7 +74,7 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
     ];
 
     List<IShortTest> undefshorttest = feedbackSCSDatabase.undefshortTest;
-    List<IShortTest> doubleshorttest = feedbackSCSDatabase.doubleshortTest;
+    List<CurrentTest> currenttest = feedbackSCSDatabase.currentTest;
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.secondary,
@@ -95,6 +103,7 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
                         color: Theme.of(context).colorScheme.tertiary,
                         headerbloc: LocaleKeys.busyprogram.tr(),
                         widget: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             undefshorttest.isEmpty
                                 ? Text('')
@@ -102,13 +111,19 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
                                     for (var index = 0;
                                         index < undefshorttest.length;
                                         index++)
-                                      Text(undefshorttest
-                                              .toList()[index]
-                                              .program +
-                                          ", "),
+                                      Text(
+                                        undefshorttest.toList()[index].program +
+                                            ", ",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .displayLarge,
+                                      ),
                                   ]),
                           ],
                         ),
+                      ),
+                      SizedBox(
+                        height: 30,
                       ),
                       TextFormField(
                         controller: _programCtrl,
@@ -453,13 +468,16 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
                                   _programCtrl.text,
                                   _electrodesCtrl.text,
                                   _selectedcondchoiceampl!,
-                                  double.parse(_ampCtrl.text),
+                                  (_selectedcondchoiceampl ==
+                                          LocaleKeys.fixamp.tr())
+                                      ? double.parse(_ampCtrl.text)
+                                      : -1,
                                   int.parse(_freqCtrl.text),
                                   int.parse(_durCtrl.text),
                                   _hidefreqdur,
                                   _hideampfreqdur,
                                 );
-                            doubleshorttest.isNotEmpty
+                            currenttest[0].countdoubleshorttest! > 0
                                 ? ElegantNotification.error(
                                     width: 360,
                                     notificationPosition:
@@ -467,7 +485,9 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
                                     animation: AnimationType.fromBottom,
                                     title: Text(_selectedactivity.toString()),
                                     onProgressFinished: () => {
-                                      //убрать дубль
+                                      context
+                                          .read<FeedbackSCSDatabase>()
+                                          .updateCountDoubleTest(0),
                                       context.pushNamed(
                                           RouteNames.docaddsingletask)
                                     },
@@ -482,6 +502,9 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
                                     animation: AnimationType.fromBottom,
                                     title: Text(_selectedactivity.toString()),
                                     onProgressFinished: () => {
+                                      context
+                                          .read<FeedbackSCSDatabase>()
+                                          .updateCountDoubleTest(0),
                                       context.pushNamed(RouteNames.doctasks)
                                     },
                                     description:

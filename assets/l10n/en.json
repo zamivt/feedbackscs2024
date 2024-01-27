@@ -359,7 +359,7 @@
     "hospital": "Hospital",
     "chart": "Charts",
     "beforeprogramcomment":
-        "You can plan which mode the patient will turn on after completing your task, for example, after completing the task, he experiences severe pain and in order to remove it guaranteed. To do this, you need a previously found effective program. Even though her efficiency time is short, the client experiences more severe paresthesia than necessary, she eats a lot of battery, but as a temporary solution, she is effective. It is better not to change this program often. These fields are optional and you dont have to specify them.",
+        "Many tests will end with the arrival or increase of unpleasant symptoms of the disease (pain, lumbago, etc.). Obviously, the patient wants to at least temporarily alleviate the symptoms. You can plan which mode the patient will turn on after completing the short-term or long-term testing program and then after the symptoms subside, he can continue testing. These fields are optional and you don't have to specify them.",
     "beforeprogram":
         "Specify the programs that run after the tested ones",
         "beforeprog":"Before program",

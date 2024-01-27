@@ -1,6 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:feedbackscs2024/collections/before_test_short_test.dart';
 import 'package:feedbackscs2024/collections/current_test.dart';
+import 'package:feedbackscs2024/l10n/locale_keys.g.dart';
+
 import 'package:flutter/material.dart';
 import 'package:isar/isar.dart';
+import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
 import '../collections/doc.dart';
 import '../collections/longtest.dart';
@@ -19,6 +24,7 @@ class FeedbackSCSDatabase extends ChangeNotifier {
     isar = await Isar.open([
       IPatientSchema,
       IDocPatSchema,
+      IBeforeTestSchema,
       CurrentTestSchema,
       IShortTestSchema,
       ILongTestSchema,
@@ -297,7 +303,8 @@ class FeedbackSCSDatabase extends ChangeNotifier {
   Future<void> addCurrentTest(String stage) async {
     final newCurrentTest = CurrentTest()
       ..stage = stage
-      ..activetask = 'no tasks';
+      ..activetask = 'no tasks'
+      ..countdoubleshorttest = 0;
 
     await isar.writeTxn(() => isar.currentTests.put(newCurrentTest));
     readCurrentTest();
@@ -326,6 +333,19 @@ class FeedbackSCSDatabase extends ChangeNotifier {
     readCurrentTest();
   }
 
+  Future<void> updateCountDoubleTest(int newdouble) async {
+    final currentTest = await isar.currentTests.get(1);
+
+    if (currentTest != 0) {
+      await isar.writeTxn(() async {
+        currentTest!.countdoubleshorttest = newdouble;
+        await isar.currentTests.put(currentTest);
+      });
+    }
+
+    readCurrentTest();
+  }
+
   Future<void> updateActiveTask(String newactivetask) async {
     final currentTest = await isar.currentTests.get(1);
 
@@ -339,9 +359,38 @@ class FeedbackSCSDatabase extends ChangeNotifier {
     readCurrentTest();
   }
 
+  //BeforeTest
+  final List<IBeforeTest> beforeTest = [];
+//create ShortTest
+  Future<void> addBeforeTest(
+    String program,
+    String electrodes,
+    double amplit,
+    int freq,
+    int dur,
+  ) async {
+    final newBeforetTest = IBeforeTest()
+      ..program = program
+      ..electrodes = electrodes
+      ..amplit = amplit
+      ..freq = freq
+      ..dur = dur;
+
+    await isar.writeTxn(() => isar.iBeforeTests.put(newBeforetTest));
+    readBeforeTest();
+  }
+
+  Future<void> readBeforeTest() async {
+    List<IBeforeTest> fetchBeforeTest =
+        await isar.iBeforeTests.where().findAll();
+    beforeTest.clear();
+    beforeTest.addAll(fetchBeforeTest);
+    notifyListeners();
+  }
+
   // ShortTest
   //работа со всеми заданиями кратковременного тестирования
-  final List<IShortTest> commonshortTest = [];
+  final List<IShortTest> commonShortTest = [];
 //create ShortTest
   Future<void> addShortTest(
     String position,
@@ -355,21 +404,65 @@ class FeedbackSCSDatabase extends ChangeNotifier {
     int dur,
     bool hidedur,
   ) async {
-    final newShortTest = IShortTest()
-      ..position = position
-      ..program = program
-      ..electrodes = electrodes
-      ..condition = condition
-      ..amplit = amplit
-      ..hideamplt = hideamplt
-      ..freq = freq
-      ..hidefreq = hidefreq
-      ..dur = dur
-      ..hidedur = hidedur
-      ..status = 'undef';
+    late List<IShortTest> newdoubleShortTest;
 
-    await isar.writeTxn(() => isar.iShortTests.put(newShortTest));
-    readCommonShortTest();
+    if (condition == LocaleKeys.fixamp.tr()) {
+      List<IShortTest> fetchdoubleconstShortTest = await isar.iShortTests
+          .filter()
+          .positionEqualTo(position)
+          .and()
+          .electrodesEqualTo(electrodes)
+          .and()
+          .durEqualTo(freq)
+          .and()
+          .durEqualTo(dur)
+          .and()
+          .amplitEqualTo(amplit)
+          .findAll();
+      newdoubleShortTest = fetchdoubleconstShortTest;
+    } else {
+      List<IShortTest> fetchdoublenotconstShortTest = await isar.iShortTests
+          .filter()
+          .positionEqualTo(position)
+          .and()
+          .electrodesEqualTo(electrodes)
+          .and()
+          .durEqualTo(freq)
+          .and()
+          .durEqualTo(dur)
+          .and()
+          .conditionEqualTo(condition)
+          .and()
+          .amplitEqualTo(amplit)
+          .findAll();
+      newdoubleShortTest = fetchdoublenotconstShortTest;
+      Logger().d('nofixamp' + newdoubleShortTest.length.toString());
+    }
+    ;
+    Logger().d('real' + newdoubleShortTest.length.toString());
+    doubleShortTest.clear();
+    doubleShortTest.addAll(newdoubleShortTest);
+    readShortTestDouble();
+    if (doubleShortTest.length == 0) {
+      final newShortTest = IShortTest()
+        ..position = position
+        ..program = program
+        ..electrodes = electrodes
+        ..condition = condition
+        ..amplit = amplit
+        ..hideamplt = hideamplt
+        ..freq = freq
+        ..hidefreq = hidefreq
+        ..dur = dur
+        ..hidedur = hidedur
+        ..status = 'undef';
+
+      await isar.writeTxn(() => isar.iShortTests.put(newShortTest));
+      readCommonShortTest();
+      updateCountDoubleTest(0);
+    } else {
+      updateCountDoubleTest(1);
+    }
   }
 
   Future<void> updateStatusShortTest(Id id, String newstatus) async {
@@ -389,26 +482,31 @@ class FeedbackSCSDatabase extends ChangeNotifier {
 //чтение кратковременного  тестирования
   Future<void> readCommonShortTest() async {
     List<IShortTest> fetchShortTest = await isar.iShortTests.where().findAll();
-    commonshortTest.clear();
-    commonshortTest.addAll(fetchShortTest);
+    commonShortTest.clear();
+    commonShortTest.addAll(fetchShortTest);
     notifyListeners();
   }
 
 //чтение кратковременного  тестирования движения
-  final List<IShortTest> moveshortTest = [];
+  final List<IShortTest> moveShortTest = [];
+
   Future<void> readCommonShortTestMove() async {
-    List<IShortTest> fetchShortTestMove =
-        await isar.iShortTests.where().positionEqualTo('move').findAll();
-    moveshortTest.clear();
-    moveshortTest.addAll(fetchShortTestMove);
+    List<IShortTest> fetchShortTest = await isar.iShortTests
+        .where()
+        .positionEqualTo(LocaleKeys.cmove.tr())
+        .findAll();
+    moveShortTest.clear();
+    moveShortTest.addAll(fetchShortTest);
     notifyListeners();
   }
 
 //чтение кратковременного  тестирования сидя
   final List<IShortTest> seatshortTest = [];
   Future<void> readCommonShortTestSeat() async {
-    List<IShortTest> fetchShortTestSeat =
-        await isar.iShortTests.where().positionEqualTo('seat').findAll();
+    List<IShortTest> fetchShortTestSeat = await isar.iShortTests
+        .where()
+        .positionEqualTo(LocaleKeys.cseat.tr())
+        .findAll();
     seatshortTest.clear();
     seatshortTest.addAll(fetchShortTestSeat);
     notifyListeners();
@@ -417,20 +515,24 @@ class FeedbackSCSDatabase extends ChangeNotifier {
 //чтение кратковременного  тестирования лежа
   final List<IShortTest> lieshortTest = [];
   Future<void> readCommonShortTestLie() async {
-    List<IShortTest> fetchShortTestLie =
-        await isar.iShortTests.where().positionEqualTo('lie').findAll();
+    List<IShortTest> fetchShortTestLie = await isar.iShortTests
+        .where()
+        .positionEqualTo(LocaleKeys.clie.tr())
+        .findAll();
     lieshortTest.clear();
     lieshortTest.addAll(fetchShortTestLie);
     notifyListeners();
   }
 
+  final List<IShortTest> doubleShortTest = [];
+
   //чтение кратковременного  тестирования дублирующие
-  final List<IShortTest> doubleshortTest = [];
-  Future<void> readdoubleShortTestDouble() async {
+
+  Future<void> readShortTestDouble() async {
     List<IShortTest> fetchShortTestDouble =
         await isar.iShortTests.where().statusEqualTo('double').findAll();
-    doubleshortTest.clear();
-    doubleshortTest.addAll(fetchShortTestDouble);
+    doubleShortTest.clear();
+    doubleShortTest.addAll(fetchShortTestDouble);
     notifyListeners();
   }
 
@@ -439,7 +541,7 @@ class FeedbackSCSDatabase extends ChangeNotifier {
   Future<void> readundefShortTestMove() async {
     List<IShortTest> fetchundefShortTestMove = await isar.iShortTests
         .filter()
-        .positionEqualTo('move')
+        .positionEqualTo(LocaleKeys.cmove.tr())
         .and()
         .statusEqualTo('undef')
         .findAll();
@@ -453,12 +555,12 @@ class FeedbackSCSDatabase extends ChangeNotifier {
   Future<void> readundefShortTestSeat() async {
     List<IShortTest> fetchShortTestSeat = await isar.iShortTests
         .filter()
-        .positionEqualTo('seat')
+        .positionEqualTo(LocaleKeys.cseat.tr())
         .and()
         .statusEqualTo('undef')
         .findAll();
-    seatshortTest.clear();
-    seatshortTest.addAll(fetchShortTestSeat);
+    undefseatshortTest.clear();
+    undefseatshortTest.addAll(fetchShortTestSeat);
     notifyListeners();
   }
 
@@ -467,12 +569,12 @@ class FeedbackSCSDatabase extends ChangeNotifier {
   Future<void> readundefShortTestLie() async {
     List<IShortTest> fetchundefShortTestLie = await isar.iShortTests
         .filter()
-        .positionEqualTo('lie')
+        .positionEqualTo(LocaleKeys.clie.tr())
         .and()
         .statusEqualTo('undef')
         .findAll();
-    lieshortTest.clear();
-    lieshortTest.addAll(fetchundefShortTestLie);
+    undeflieshortTest.clear();
+    undeflieshortTest.addAll(fetchundefShortTestLie);
     notifyListeners();
   }
 
@@ -496,7 +598,19 @@ class FeedbackSCSDatabase extends ChangeNotifier {
       int freq,
       int dur,
       bool hiddenfreqdur,
-      bool hiddenamplfreqdur) async {}
+      bool hiddenamplfreqdur) async {
+    addShortTest(
+        position,
+        program,
+        electrodes,
+        condition,
+        amplit,
+        hiddenamplfreqdur,
+        freq,
+        hiddenamplfreqdur || hiddenfreqdur,
+        dur,
+        hiddenamplfreqdur || hiddenfreqdur);
+  }
 
   // LongTest
   //работа со всеми заданиями длительного тестирования
@@ -554,8 +668,10 @@ class FeedbackSCSDatabase extends ChangeNotifier {
 //чтение длительного  тестирования движения
   final List<ILongTest> movelongTest = [];
   Future<void> readCommonLongTestMove() async {
-    List<ILongTest> fetchLongTestMove =
-        await isar.iLongTests.where().positionEqualTo('move').findAll();
+    List<ILongTest> fetchLongTestMove = await isar.iLongTests
+        .where()
+        .positionEqualTo(LocaleKeys.move.tr())
+        .findAll();
     movelongTest.clear();
     movelongTest.addAll(fetchLongTestMove);
     notifyListeners();
@@ -596,7 +712,7 @@ class FeedbackSCSDatabase extends ChangeNotifier {
   Future<void> readundefLongTestMove() async {
     List<ILongTest> fetchundefLongTestMove = await isar.iLongTests
         .filter()
-        .positionEqualTo('move')
+        .positionEqualTo(LocaleKeys.cmove.tr())
         .and()
         .statusEqualTo('undef')
         .findAll();
@@ -610,12 +726,12 @@ class FeedbackSCSDatabase extends ChangeNotifier {
   Future<void> readundefLongTestSeat() async {
     List<ILongTest> fetchLongTestSeat = await isar.iLongTests
         .filter()
-        .positionEqualTo('seat')
+        .positionEqualTo(LocaleKeys.cseat.tr())
         .and()
         .statusEqualTo('undef')
         .findAll();
-    seatlongTest.clear();
-    seatlongTest.addAll(fetchLongTestSeat);
+    undefseatlongTest.clear();
+    undefseatlongTest.addAll(fetchLongTestSeat);
     notifyListeners();
   }
 
@@ -624,12 +740,12 @@ class FeedbackSCSDatabase extends ChangeNotifier {
   Future<void> readundefLongTestLie() async {
     List<ILongTest> fetchundefLongTestLie = await isar.iLongTests
         .filter()
-        .positionEqualTo('lie')
+        .positionEqualTo(LocaleKeys.clie.tr())
         .and()
         .statusEqualTo('undef')
         .findAll();
-    lielongTest.clear();
-    lielongTest.addAll(fetchundefLongTestLie);
+    undeflielongTest.clear();
+    undeflielongTest.addAll(fetchundefLongTestLie);
     notifyListeners();
   }
 

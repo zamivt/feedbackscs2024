@@ -34,7 +34,7 @@ class _DocPatientState extends State<DocPatient> {
     List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
 
     return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.secondary,
+        backgroundColor: Colors.grey.shade200,
         appBar: AppBar(
             centerTitle: true,
             foregroundColor: Colors.white,

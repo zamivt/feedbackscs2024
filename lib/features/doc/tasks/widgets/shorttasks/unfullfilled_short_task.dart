@@ -1,24 +1,39 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:feedbackscs2024/features/doc/tasks/controllers/candidate_short_task_lie_controller.dart';
-import 'package:feedbackscs2024/features/doc/tasks/controllers/candidate_short_task_move_controller.dart';
-import 'package:feedbackscs2024/features/doc/tasks/controllers/candidate_short_task_seat_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:get/instance_manager.dart';
-
+import 'package:provider/provider.dart';
+import '../../../../../collections/shorttest.dart';
 import '../../../../../core/router/route_names.dart';
 import '../../../../../core/ui/widgets/common_widgets.dart';
 import '../../../../../l10n/locale_keys.g.dart';
+import '../../../../../repository/feedbackscs_database.dart';
 
-class Unfulfilledshorttasks extends StatelessWidget {
+class Unfulfilledshorttasks extends StatefulWidget {
   const Unfulfilledshorttasks({
     super.key,
   });
 
   @override
+  State<Unfulfilledshorttasks> createState() => _UnfulfilledshorttasksState();
+}
+
+class _UnfulfilledshorttasksState extends State<Unfulfilledshorttasks> {
+  @override
   Widget build(BuildContext context) {
-    final _candidateshortTaskMove = Get.find<CandidateShortTaskMoveControler>();
-    final _candidateshortTaskLie = Get.find<CandidateShortTaskLieControler>();
-    final _candidateshortTaskSeat = Get.find<CandidateShortTaskSeatControler>();
+    Provider.of<FeedbackSCSDatabase>(context, listen: false)
+        .readundefShortTestSeat();
+    Provider.of<FeedbackSCSDatabase>(context, listen: false)
+        .readundefShortTestMove();
+
+    Provider.of<FeedbackSCSDatabase>(context, listen: false)
+        .readundefShortTestLie();
+    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+
+    List<IShortTest> undefmoveshortTest =
+        feedbackSCSDatabase.undefmoveshortTest;
+
+    List<IShortTest> undefseatshortTest =
+        feedbackSCSDatabase.undefseatshortTest;
+    List<IShortTest> undeflieshortTest = feedbackSCSDatabase.undeflieshortTest;
     return Column(
       children: [
         Container(
@@ -50,24 +65,21 @@ class Unfulfilledshorttasks extends StatelessWidget {
                 child: AppTextButton(
                     text: LocaleKeys.cmove.tr() +
                         '\n' +
-                        _candidateshortTaskMove.candidateshorttaskmoves.length
-                            .toString(),
+                        undefmoveshortTest.length.toString(),
                     linkbutton: RouteNames.doccandidateshorttaskmove),
               ),
               Expanded(
                 child: AppTextButton(
                     text: LocaleKeys.cseat.tr() +
                         '\n' +
-                        _candidateshortTaskSeat.candidateshorttaskseats.length
-                            .toString(),
+                        undefseatshortTest.length.toString(),
                     linkbutton: RouteNames.doccandidateshorttaskseat),
               ),
               Expanded(
                 child: AppTextButton(
                     text: LocaleKeys.clie.tr() +
                         '\n' +
-                        _candidateshortTaskLie.candidateshorttasklies.length
-                            .toString(),
+                        undeflieshortTest.length.toString(),
                     linkbutton: RouteNames.doccandidateshorttasklie),
               )
             ],

@@ -18,7 +18,7 @@ class ShortTasks extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: AppColorContainer(
-        color: Theme.of(context).colorScheme.secondary,
+        color: Theme.of(context).colorScheme.background,
         headerbloc: LocaleKeys.tasksshort.tr(),
         widget: Column(
           children: [

@@ -3,6 +3,7 @@
         android:label="feedbackscs2024"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
+      
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -29,5 +30,7 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+            
     </application>
 </manifest>
+

@@ -22,33 +22,38 @@ const CurrentTestSchema = CollectionSchema(
       name: r'activetask',
       type: IsarType.string,
     ),
-    r'idcombinationtest': PropertySchema(
+    r'countdoubleshorttest': PropertySchema(
       id: 1,
+      name: r'countdoubleshorttest',
+      type: IsarType.long,
+    ),
+    r'idcombinationtest': PropertySchema(
+      id: 2,
       name: r'idcombinationtest',
       type: IsarType.long,
     ),
     r'iddiarytest': PropertySchema(
-      id: 2,
+      id: 3,
       name: r'iddiarytest',
       type: IsarType.long,
     ),
     r'idlongtest': PropertySchema(
-      id: 3,
+      id: 4,
       name: r'idlongtest',
       type: IsarType.long,
     ),
     r'idprobetest': PropertySchema(
-      id: 4,
+      id: 5,
       name: r'idprobetest',
       type: IsarType.long,
     ),
     r'idshorttest': PropertySchema(
-      id: 5,
+      id: 6,
       name: r'idshorttest',
       type: IsarType.long,
     ),
     r'stage': PropertySchema(
-      id: 6,
+      id: 7,
       name: r'stage',
       type: IsarType.string,
     )
@@ -95,12 +100,13 @@ void _currentTestSerialize(
   Map<Type, List<int>> allOffsets,
 ) {
   writer.writeString(offsets[0], object.activetask);
-  writer.writeLong(offsets[1], object.idcombinationtest);
-  writer.writeLong(offsets[2], object.iddiarytest);
-  writer.writeLong(offsets[3], object.idlongtest);
-  writer.writeLong(offsets[4], object.idprobetest);
-  writer.writeLong(offsets[5], object.idshorttest);
-  writer.writeString(offsets[6], object.stage);
+  writer.writeLong(offsets[1], object.countdoubleshorttest);
+  writer.writeLong(offsets[2], object.idcombinationtest);
+  writer.writeLong(offsets[3], object.iddiarytest);
+  writer.writeLong(offsets[4], object.idlongtest);
+  writer.writeLong(offsets[5], object.idprobetest);
+  writer.writeLong(offsets[6], object.idshorttest);
+  writer.writeString(offsets[7], object.stage);
 }
 
 CurrentTest _currentTestDeserialize(
@@ -111,13 +117,14 @@ CurrentTest _currentTestDeserialize(
 ) {
   final object = CurrentTest();
   object.activetask = reader.readStringOrNull(offsets[0]);
+  object.countdoubleshorttest = reader.readLongOrNull(offsets[1]);
   object.id = id;
-  object.idcombinationtest = reader.readLongOrNull(offsets[1]);
-  object.iddiarytest = reader.readLongOrNull(offsets[2]);
-  object.idlongtest = reader.readLongOrNull(offsets[3]);
-  object.idprobetest = reader.readLongOrNull(offsets[4]);
-  object.idshorttest = reader.readLongOrNull(offsets[5]);
-  object.stage = reader.readStringOrNull(offsets[6]);
+  object.idcombinationtest = reader.readLongOrNull(offsets[2]);
+  object.iddiarytest = reader.readLongOrNull(offsets[3]);
+  object.idlongtest = reader.readLongOrNull(offsets[4]);
+  object.idprobetest = reader.readLongOrNull(offsets[5]);
+  object.idshorttest = reader.readLongOrNull(offsets[6]);
+  object.stage = reader.readStringOrNull(offsets[7]);
   return object;
 }
 
@@ -141,6 +148,8 @@ P _currentTestDeserializeProp<P>(
     case 5:
       return (reader.readLongOrNull(offset)) as P;
     case 6:
+      return (reader.readLongOrNull(offset)) as P;
+    case 7:
       return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -390,6 +399,80 @@ extension CurrentTestQueryFilter
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'activetask',
         value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      countdoubleshorttestIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'countdoubleshorttest',
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      countdoubleshorttestIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'countdoubleshorttest',
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      countdoubleshorttestEqualTo(int? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'countdoubleshorttest',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      countdoubleshorttestGreaterThan(
+    int? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'countdoubleshorttest',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      countdoubleshorttestLessThan(
+    int? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'countdoubleshorttest',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      countdoubleshorttestBetween(
+    int? lower,
+    int? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'countdoubleshorttest',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
       ));
     });
   }
@@ -988,6 +1071,20 @@ extension CurrentTestQuerySortBy
   }
 
   QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy>
+      sortByCountdoubleshorttest() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'countdoubleshorttest', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy>
+      sortByCountdoubleshorttestDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'countdoubleshorttest', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy>
       sortByIdcombinationtest() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'idcombinationtest', Sort.asc);
@@ -1073,6 +1170,20 @@ extension CurrentTestQuerySortThenBy
   QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> thenByActivetaskDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'activetask', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy>
+      thenByCountdoubleshorttest() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'countdoubleshorttest', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy>
+      thenByCountdoubleshorttestDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'countdoubleshorttest', Sort.desc);
     });
   }
 
@@ -1173,6 +1284,13 @@ extension CurrentTestQueryWhereDistinct
   }
 
   QueryBuilder<CurrentTest, CurrentTest, QDistinct>
+      distinctByCountdoubleshorttest() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'countdoubleshorttest');
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QDistinct>
       distinctByIdcombinationtest() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'idcombinationtest');
@@ -1222,6 +1340,13 @@ extension CurrentTestQueryProperty
   QueryBuilder<CurrentTest, String?, QQueryOperations> activetaskProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'activetask');
+    });
+  }
+
+  QueryBuilder<CurrentTest, int?, QQueryOperations>
+      countdoubleshorttestProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'countdoubleshorttest');
     });
   }
 

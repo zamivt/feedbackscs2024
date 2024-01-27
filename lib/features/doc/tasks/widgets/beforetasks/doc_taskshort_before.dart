@@ -9,7 +9,6 @@ import '../../../../../../../services/entities/data/neuromodels.dart';
 import '../../../../../collections/patient.dart';
 import '../../../../../l10n/locale_keys.g.dart';
 import '../../../../../repository/feedbackscs_database.dart';
-import '../../../../../services/entities/2_beforetask.dart';
 import '../../../../../services/entities/data/model/neuromodel.dart';
 import '../../controllers/before_task_controller.dart';
 import '../../../../../core/router/route_names.dart';
@@ -31,7 +30,7 @@ class _DocTaskShortBeforeState extends State<DocTaskShortBefore> {
   final _beforeampCtrl = TextEditingController();
   final _beforefreqCtrl = TextEditingController();
   final _beforedurCtrl = TextEditingController();
-  final _beforeprimCtrl = TextEditingController();
+
   final requiredvalidator =
       RequiredValidator(errorText: LocaleKeys.requiredfield.tr() + '*');
   // electrodes
@@ -199,23 +198,6 @@ class _DocTaskShortBeforeState extends State<DocTaskShortBefore> {
                     '${liststimul.map((neumodel) => neumodel.mindur).toList().first} - ${liststimul.map((neumodel) => neumodel.maxdur).toList().first}',
                     style: Theme.of(context).textTheme.displayLarge),
                 SizedBox(
-                  height: 10,
-                ),
-                TextFormField(
-                  controller: _beforeprimCtrl,
-                  minLines: 1,
-                  maxLines: 1,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                      labelStyle: Theme.of(context).textTheme.displaySmall,
-                      labelText: LocaleKeys.note.tr(),
-                      focusColor: Colors.white,
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8.0)),
-                      fillColor: Colors.white,
-                      filled: true),
-                ),
-                SizedBox(
                   height: 20,
                 ),
                 ElevatedButton(
@@ -227,13 +209,13 @@ class _DocTaskShortBeforeState extends State<DocTaskShortBefore> {
                       _formkey.currentState?.save();
                       if (_formkey.currentState != null &&
                           _formkey.currentState!.validate()) {
-                        beforeTaskController.addBeforeTasks(BeforeTask(
-                            beforeprogram: _beforeprogramCtrl.text,
-                            beforelectrode: _electrodesCtrl.text,
-                            beforeamp: double.parse(_beforeampCtrl.text),
-                            beforefreq: int.parse(_beforefreqCtrl.text),
-                            beforedur: int.parse(_beforedurCtrl.text),
-                            beforeprim: _beforeprimCtrl.text));
+                        context.read<FeedbackSCSDatabase>().addBeforeTest(
+                            _beforeprogramCtrl.text,
+                            _electrodesCtrl.text,
+                            double.parse(_beforeampCtrl.text),
+                            int.parse(_beforefreqCtrl.text),
+                            int.parse(_beforedurCtrl.text));
+
                         context.pushNamed(RouteNames.doctasks);
                       }
                     })

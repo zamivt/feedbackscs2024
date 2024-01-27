@@ -1,15 +1,15 @@
 import 'package:easy_localization/easy_localization.dart';
 
 import 'package:flutter/material.dart';
-import 'package:get/get_instance/get_instance.dart';
-import 'package:get/state_manager.dart';
+
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+import '../../../../collections/shorttest.dart';
 import '../../../../core/router/route_names.dart';
 import '../../../../l10n/locale_keys.g.dart';
 import 'package:grouped_list/grouped_list.dart';
 
-import '../../../../services/entities/4_short_task_lie.dart';
-import '../controllers/short_task_lie_controller.dart';
+import '../../../../repository/feedbackscs_database.dart';
 
 class DocListShortTaskLie extends StatelessWidget {
   const DocListShortTaskLie({
@@ -18,10 +18,12 @@ class DocListShortTaskLie extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _shortTaskLieController = Get.find<ShortTaskLieControler>();
-    List<ShortTaskLie> _shorttasklielist =
-        _shortTaskLieController.shorttasklies;
-    _shorttasklielist.sort((a, b) => a.condition!.compareTo(b.condition!));
+    Provider.of<FeedbackSCSDatabase>(context, listen: false)
+        .readCommonShortTestLie();
+
+    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+
+    List<IShortTest> lieshortTest = feedbackSCSDatabase.lieshortTest;
 
     return Scaffold(
         backgroundColor: Colors.blueGrey[200],
@@ -42,13 +44,13 @@ class DocListShortTaskLie extends StatelessWidget {
           ),
         ),
         body: SafeArea(
-          child: _shorttasklielist.isNotEmpty
+          child: lieshortTest.isNotEmpty
               ? GroupedListView(
                   floatingHeader: false,
-                  elements: _shorttasklielist,
+                  elements: lieshortTest,
                   groupBy: (element) => element.electrodes,
                   itemComparator: (item1, item2) =>
-                      item2.condition!.compareTo(item1.condition!),
+                      item2.condition.compareTo(item1.condition),
                   order: GroupedListOrder.ASC,
                   useStickyGroupSeparators: true,
                   groupSeparatorBuilder: (String value) => Container(
@@ -63,15 +65,18 @@ class DocListShortTaskLie extends StatelessWidget {
                   itemBuilder: (c, element) {
                     return Card(
                       elevation: 8.0,
-                      shadowColor: Theme.of(context).colorScheme.tertiary,
                       margin: const EdgeInsets.symmetric(
                           horizontal: 10.0, vertical: 6.0),
                       child: SizedBox(
                         child: ListTile(
-                            tileColor: Theme.of(context).colorScheme.secondary,
+                            tileColor: (element.status == 'undef')
+                                ? Colors.grey.shade200
+                                : (element.status == 'suc')
+                                    ? Theme.of(context).colorScheme.secondary
+                                    : Colors.red.shade100,
                             contentPadding: const EdgeInsets.symmetric(
                                 horizontal: 10.0, vertical: 10.0),
-                            leading: element.success == 'indef'
+                            leading: element.status == 'undef'
                                 ? Container(
                                     decoration: BoxDecoration(
                                       color:
@@ -168,7 +173,7 @@ class DocListShortTaskLie extends StatelessWidget {
                                                             .displaySmall,
                                                       ),
                                                     ),
-                                                    element.amplit != null
+                                                    element.amplit != -1
                                                         ? Text(
                                                             element.amplit
                                                                 .toString(),
