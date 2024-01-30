@@ -11,6 +11,12 @@ class DocListCandidateShortTaskSeat extends StatelessWidget {
   const DocListCandidateShortTaskSeat({
     super.key,
   });
+  void delete_undef_short_test(
+      BuildContext context, List<IShortTest> undefmoveshortTest, int index) {
+    context
+        .read<FeedbackSCSDatabase>()
+        .deleteundefShortTest(undefmoveshortTest[index].id);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,11 +65,8 @@ class DocListCandidateShortTaskSeat extends StatelessWidget {
                             color: Theme.of(context).colorScheme.primary,
                           ),
                           onPressed: () {
-                            // _shortTaskMoveController.deleteShortTaskMove(
-                            //     candidateShortTaskMoveControler
-                            //         .candidateshorttaskseats[index].id);
-                            // candidateShortTaskMoveControler
-                            //     .deleteCandidateShortTaskMove(index);
+                            delete_undef_short_test(
+                                context, undefseatshortTest, index);
                           },
                         ),
                         title: Column(

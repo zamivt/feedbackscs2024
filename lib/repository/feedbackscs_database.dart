@@ -1,11 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:feedbackscs2024/collections/before_test_short_test.dart';
 import 'package:feedbackscs2024/collections/current_test.dart';
+import 'package:feedbackscs2024/collections/double_test.dart';
 import 'package:feedbackscs2024/l10n/locale_keys.g.dart';
 
 import 'package:flutter/material.dart';
 import 'package:isar/isar.dart';
-import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
 import '../collections/doc.dart';
 import '../collections/longtest.dart';
@@ -25,6 +25,7 @@ class FeedbackSCSDatabase extends ChangeNotifier {
       IPatientSchema,
       IDocPatSchema,
       IBeforeTestSchema,
+      DoubleTestSchema,
       CurrentTestSchema,
       IShortTestSchema,
       ILongTestSchema,
@@ -361,7 +362,7 @@ class FeedbackSCSDatabase extends ChangeNotifier {
 
   //BeforeTest
   final List<IBeforeTest> beforeTest = [];
-//create ShortTest
+//create BeforetTest
   Future<void> addBeforeTest(
     String program,
     String electrodes,
@@ -386,6 +387,45 @@ class FeedbackSCSDatabase extends ChangeNotifier {
     beforeTest.clear();
     beforeTest.addAll(fetchBeforeTest);
     notifyListeners();
+  }
+
+//doubleTest
+  final List<DoubleTest> doubleTest = [];
+//create doubleTest
+  Future<void> addDoubleTest(
+    String position,
+    String program,
+    String electrodes,
+    String condition,
+    double amplit,
+    int freq,
+    int dur,
+  ) async {
+    final newDoubleTest = DoubleTest()
+      ..position = position
+      ..program = program
+      ..electrodes = electrodes
+      ..condition = condition
+      ..amplit = amplit
+      ..freq = freq
+      ..dur = dur;
+
+    await isar.writeTxn(() => isar.doubleTests.put(newDoubleTest));
+    readDoubleTest();
+  }
+
+  Future<void> readDoubleTest() async {
+    List<DoubleTest> fetchDoubleTest = await isar.doubleTests.where().findAll();
+    doubleTest.clear();
+    doubleTest.addAll(fetchDoubleTest);
+    notifyListeners();
+  }
+
+  Future<void> clearDoubleTest() async {
+    await isar.writeTxn(() async {
+      await isar.doubleTests.clear();
+    });
+    readDoubleTest();
   }
 
   // ShortTest
@@ -436,14 +476,10 @@ class FeedbackSCSDatabase extends ChangeNotifier {
           .amplitEqualTo(amplit)
           .findAll();
       newdoubleShortTest = fetchdoublenotconstShortTest;
-      Logger().d('nofixamp' + newdoubleShortTest.length.toString());
     }
     ;
-    Logger().d('real' + newdoubleShortTest.length.toString());
-    doubleShortTest.clear();
-    doubleShortTest.addAll(newdoubleShortTest);
-    readShortTestDouble();
-    if (doubleShortTest.length == 0) {
+
+    if (newdoubleShortTest.length == 0) {
       final newShortTest = IShortTest()
         ..position = position
         ..program = program
@@ -461,6 +497,8 @@ class FeedbackSCSDatabase extends ChangeNotifier {
       readCommonShortTest();
       updateCountDoubleTest(0);
     } else {
+      addDoubleTest(
+          position, program, electrodes, condition, amplit, freq, dur);
       updateCountDoubleTest(1);
     }
   }
@@ -550,6 +588,13 @@ class FeedbackSCSDatabase extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> deleteundefShortTest(int id) async {
+    await isar.writeTxn(() async {
+      await isar.iShortTests.delete(id);
+    });
+    readCommonShortTest();
+  }
+
 //чтение кратковременного  тестирования сидя невыполненные
   final List<IShortTest> undefseatshortTest = [];
   Future<void> readundefShortTestSeat() async {
@@ -612,6 +657,19 @@ class FeedbackSCSDatabase extends ChangeNotifier {
         hiddenamplfreqdur || hiddenfreqdur);
   }
 
+  Future<void> addRangeShortTest(
+    String position,
+    String program,
+    String electrodes,
+    String condition,
+    double amplit,
+    int startfreq,
+    int stopfreq,
+    int stepfreq,
+    int startdur,
+    int stopdur,
+    int stepdur,
+  ) async {}
   // LongTest
   //работа со всеми заданиями длительного тестирования
   final List<ILongTest> commonlongTest = [];

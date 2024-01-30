@@ -13,6 +13,12 @@ class DocListCandidateShortTaskMove extends StatelessWidget {
   const DocListCandidateShortTaskMove({
     super.key,
   });
+  void delete_undef_short_test(
+      BuildContext context, List<IShortTest> undefmoveshortTest, int index) {
+    context
+        .read<FeedbackSCSDatabase>()
+        .deleteundefShortTest(undefmoveshortTest[index].id);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,11 +67,8 @@ class DocListCandidateShortTaskMove extends StatelessWidget {
                             color: Theme.of(context).colorScheme.primary,
                           ),
                           onPressed: () {
-                            // _shortTaskMoveController.deleteShortTaskMove(
-                            //     candidateShortTaskMoveControler
-                            //         .candidateshorttaskmoves[index].id);
-                            // candidateShortTaskMoveControler
-                            //     .deleteCandidateShortTaskMove(index);
+                            delete_undef_short_test(
+                                context, undefmoveshortTest, index);
                           },
                         ),
                         title: Column(
@@ -110,42 +113,33 @@ class DocListCandidateShortTaskMove extends StatelessWidget {
                                       Theme.of(context).textTheme.displaySmall,
                                   textAlign: TextAlign.center,
                                 ),
-                              )
-                            ]),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  LocaleKeys.amps.tr() + ': ',
-                                  style:
-                                      Theme.of(context).textTheme.displaySmall,
-                                ),
-                                undefmoveshortTest[index].condition ==
-                                        LocaleKeys.fixamp.tr()
-                                    ? Text(
-                                        undefmoveshortTest[index]
-                                            .amplit
-                                            .toString(),
+                              ),
+                              Text(
+                                LocaleKeys.amps.tr() + ': ',
+                                style: Theme.of(context).textTheme.displaySmall,
+                              ),
+                              undefmoveshortTest[index].condition ==
+                                      LocaleKeys.fixamp.tr()
+                                  ? Text(
+                                      undefmoveshortTest[index]
+                                          .amplit
+                                          .toString(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .displaySmall,
+                                    )
+                                  : Expanded(
+                                      child: Text(
+                                        undefmoveshortTest[index].condition,
                                         style: Theme.of(context)
                                             .textTheme
                                             .displaySmall,
-                                      )
-                                    : Expanded(
-                                        child: Text(
-                                          undefmoveshortTest[index].condition,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .displaySmall,
-                                        ),
                                       ),
-                                undefmoveshortTest[index].hideamplt
-                                    ? Icon(Icons.visibility_off)
-                                    : Container()
-                              ],
-                            )
+                                    ),
+                              undefmoveshortTest[index].hideamplt
+                                  ? Icon(Icons.visibility_off)
+                                  : Container()
+                            ]),
                           ],
                         ),
                         subtitle: Row(

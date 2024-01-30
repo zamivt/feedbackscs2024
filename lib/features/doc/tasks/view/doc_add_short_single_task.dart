@@ -1,10 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:elegant_notification/elegant_notification.dart';
 import 'package:elegant_notification/resources/arrays.dart';
-import 'package:feedbackscs2024/collections/current_test.dart';
+import 'package:feedbackscs2024/collections/before_test_short_test.dart';
 import 'package:feedbackscs2024/collections/shorttest.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../../../../../../services/entities/data/neuromodels.dart';
@@ -41,11 +42,6 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
   String? _selectedactivity;
   final requiredvalidator =
       RequiredValidator(errorText: LocaleKeys.requiredfield.tr() + '*');
-  @override
-  void initState() {
-    Provider.of<FeedbackSCSDatabase>(context, listen: false).doubleShortTest;
-    super.initState();
-  }
 
   @override
   void dispose() {
@@ -58,13 +54,79 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
     super.dispose();
   }
 
+  void addSingleTask(
+      BuildContext context, FeedbackSCSDatabase feedbackSCSDatabase) {
+    _formkey.currentState?.save();
+    if (add_Short_task_candidate.currentState != null &&
+        _formkey.currentState!.validate()) {
+      context.read<FeedbackSCSDatabase>().addSingleShortTest(
+            _selectedactivity!,
+            _programCtrl.text,
+            _electrodesCtrl.text,
+            _selectedcondchoiceampl!,
+            (_selectedcondchoiceampl == LocaleKeys.fixamp.tr())
+                ? double.parse(_ampCtrl.text)
+                : -1,
+            int.parse(_freqCtrl.text),
+            int.parse(_durCtrl.text),
+            _hidefreqdur,
+            _hideampfreqdur,
+          );
+      Provider.of<FeedbackSCSDatabase>(context, listen: false).currentTest;
+
+      Future.delayed(Duration(milliseconds: 500), () {
+        Provider.of<FeedbackSCSDatabase>(context, listen: false).doubleTest;
+        feedbackSCSDatabase.doubleTest.length > 0
+            ? ElegantNotification.error(
+                width: 360,
+                notificationPosition: NotificationPosition.center,
+                animation: AnimationType.fromBottom,
+                title: Text(_selectedactivity.toString()),
+                onProgressFinished: () => {
+                  context.read<FeedbackSCSDatabase>().updateCountDoubleTest(0),
+                  context.read<FeedbackSCSDatabase>().clearDoubleTest(),
+                  Provider.of<FeedbackSCSDatabase>(context, listen: false)
+                      .doubleTest,
+                  context.pushNamed(RouteNames.docaddsingletask)
+                },
+                description: Text(LocaleKeys.noaddtask.tr()),
+                onDismiss: () {
+                  context.read<FeedbackSCSDatabase>().updateCountDoubleTest(0);
+                  context.read<FeedbackSCSDatabase>().clearDoubleTest();
+                  Provider.of<FeedbackSCSDatabase>(context, listen: false)
+                      .doubleTest;
+                  context.pushNamed(RouteNames.docaddsingletask);
+                },
+              ).show(context)
+            : ElegantNotification.success(
+                width: 360,
+                notificationPosition: NotificationPosition.center,
+                animation: AnimationType.fromBottom,
+                title: Text(_selectedactivity.toString()),
+                onProgressFinished: () => {
+                  context.read<FeedbackSCSDatabase>().updateCountDoubleTest(0),
+                  context.pushNamed(RouteNames.doctasks)
+                },
+                description: Text(LocaleKeys.addsuccestask.tr()),
+                onDismiss: () {
+                  context.read<FeedbackSCSDatabase>().updateCountDoubleTest(0);
+                  context.pushNamed(RouteNames.doctasks);
+                },
+              ).show(context);
+      });
+    }
+    ;
+  }
+
   @override
   Widget build(BuildContext context) {
     Provider.of<FeedbackSCSDatabase>(context, listen: false)
         .readCommonShortTestUndef();
     final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
     Provider.of<FeedbackSCSDatabase>(context, listen: false).readCurrentTest();
+    Provider.of<FeedbackSCSDatabase>(context, listen: false).readBeforeTest();
     List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
+    List<IBeforeTest> beforetest = feedbackSCSDatabase.beforeTest;
     Iterable<Neuro> liststimul = neuromodels.where((neuromodel) =>
         neuromodel.model.contains(currentpatient[0].modelneuro));
     final condchoiceampl = [
@@ -74,7 +136,18 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
     ];
 
     List<IShortTest> undefshorttest = feedbackSCSDatabase.undefshortTest;
-    List<CurrentTest> currenttest = feedbackSCSDatabase.currentTest;
+    // List<CurrentTest> currenttest = feedbackSCSDatabase.currentTest;
+    void _toggle1() {
+      setState(() {
+        _hideampfreqdur = !_hideampfreqdur;
+      });
+    }
+
+    void _toggle2() {
+      setState(() {
+        _hidefreqdur = !_hidefreqdur;
+      });
+    }
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.secondary,
@@ -99,142 +172,226 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
                     key: _formkey,
                     autovalidateMode: AutovalidateMode.always,
                     child: Column(children: [
-                      AppColorContainer(
-                        color: Theme.of(context).colorScheme.tertiary,
-                        headerbloc: LocaleKeys.busyprogram.tr(),
-                        widget: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            undefshorttest.isEmpty
-                                ? Text('')
-                                : Wrap(children: [
-                                    for (var index = 0;
-                                        index < undefshorttest.length;
-                                        index++)
-                                      Text(
-                                        undefshorttest.toList()[index].program +
-                                            ", ",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .displayLarge,
-                                      ),
-                                  ]),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      TextFormField(
-                        controller: _programCtrl,
-                        textCapitalization: TextCapitalization.sentences,
-                        maxLength: 1,
-                        validator: MultiValidator([
-                          requiredvalidator,
-                        ]),
-                        minLines: 1,
-                        maxLines: 1,
-                        decoration: InputDecoration(
-                            labelText: LocaleKeys.program.tr(),
-                            labelStyle: Theme.of(context).textTheme.labelMedium,
-                            focusColor: Colors.white,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8.0)),
-                            fillColor: Colors.white,
-                            filled: true),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      TextFormField(
-                        controller: _electrodesCtrl,
-                        validator: MultiValidator([
-                          requiredvalidator,
-                        ]),
-                        minLines: 1,
-                        maxLines: 1,
-                        decoration: InputDecoration(
-                            labelText: LocaleKeys.electrodeformula.tr(),
-                            labelStyle: Theme.of(context).textTheme.labelMedium,
-                            focusColor: Colors.white,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8.0)),
-                            fillColor: Colors.white,
-                            filled: true),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(LocaleKeys.choiceactivity.tr(),
-                          style: Theme.of(context).textTheme.displayLarge),
-                      DecoratedBox(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(color: Colors.black, width: 1),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 10),
-                          child: DropdownButtonHideUnderline(
-                            child: DropdownButtonFormField<String>(
-                              dropdownColor: Colors.white,
-                              isExpanded: true,
-                              iconSize: 24,
-                              items: activity.map(bildMenuactivity).toList(),
-                              onChanged: (String? value) =>
-                                  setState(() => _selectedactivity = value!),
+                      undefshorttest.isEmpty
+                          ? Text('')
+                          : Wrap(children: [
+                              Text(LocaleKeys.busyprogram.tr() + ": ",
+                                  style:
+                                      Theme.of(context).textTheme.displayLarge),
+                              for (var index = 0;
+                                  index < undefshorttest.length;
+                                  index++)
+                                Text(
+                                  undefshorttest.toList()[index].program + ", ",
+                                  style:
+                                      Theme.of(context).textTheme.displayLarge,
+                                ),
+                              beforetest.isEmpty
+                                  ? Text('')
+                                  : Text(
+                                      beforetest.toList()[1].program + ", ",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .displayLarge,
+                                    ),
+                            ]),
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: (MediaQuery.sizeOf(context).width - 40) / 2,
+                            child: TextFormField(
+                              controller: _programCtrl,
+                              textCapitalization: TextCapitalization.sentences,
+                              maxLength: 1,
+                              validator: MultiValidator([
+                                requiredvalidator,
+                              ]),
+                              minLines: 1,
+                              maxLines: 1,
+                              decoration: InputDecoration(
+                                  labelText: LocaleKeys.program.tr(),
+                                  labelStyle:
+                                      Theme.of(context).textTheme.labelMedium,
+                                  focusColor: Colors.white,
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8.0)),
+                                  fillColor: Colors.white,
+                                  filled: true),
                             ),
                           ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Text(LocaleKeys.conditionamplchoice.tr(),
-                          textAlign: TextAlign.right,
-                          style: Theme.of(context).textTheme.displayLarge),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      DecoratedBox(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(color: Colors.black, width: 1),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 10),
-                          child: DropdownButtonHideUnderline(
-                            child: DropdownButtonFormField<String>(
-                              dropdownColor: Colors.white,
-                              isExpanded: true,
-                              iconSize: 24,
-                              items: condchoiceampl
-                                  .map(_bildMenucondchoiceampl)
-                                  .toList(),
-                              onChanged: (String? value) => setState(
-                                  () => _selectedcondchoiceampl = value!),
+                          SizedBox(
+                            width: (MediaQuery.sizeOf(context).width - 40) / 2,
+                            child: TextFormField(
+                              controller: _electrodesCtrl,
+                              validator: MultiValidator([
+                                requiredvalidator,
+                              ]),
+                              minLines: 1,
+                              maxLines: 1,
+                              decoration: InputDecoration(
+                                  labelText: LocaleKeys.electrodeformula.tr(),
+                                  labelStyle:
+                                      Theme.of(context).textTheme.labelMedium,
+                                  focusColor: Colors.white,
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8.0)),
+                                  fillColor: Colors.white,
+                                  filled: true),
                             ),
                           ),
-                        ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Column(
+                            children: [
+                              Text(LocaleKeys.choiceactivity.tr(),
+                                  style:
+                                      Theme.of(context).textTheme.displayLarge),
+                              Container(
+                                width:
+                                    (MediaQuery.sizeOf(context).width - 40) / 2,
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 15),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border:
+                                      Border.all(color: Colors.black, width: 1),
+                                ),
+                                child: DropdownButtonHideUnderline(
+                                  child: DropdownButtonFormField<String>(
+                                    dropdownColor: Colors.white,
+                                    isExpanded: true,
+                                    iconSize: 24,
+                                    items:
+                                        activity.map(bildMenuactivity).toList(),
+                                    onChanged: (String? value) => setState(
+                                        () => _selectedactivity = value!),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Text(LocaleKeys.conditionamplchoice.tr(),
+                                  textAlign: TextAlign.right,
+                                  style:
+                                      Theme.of(context).textTheme.displayLarge),
+                              Container(
+                                width:
+                                    (MediaQuery.sizeOf(context).width - 40) / 2,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 15,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border:
+                                      Border.all(color: Colors.black, width: 1),
+                                ),
+                                child: DropdownButtonHideUnderline(
+                                  child: DropdownButtonFormField<String>(
+                                    dropdownColor: Colors.white,
+                                    isExpanded: true,
+                                    iconSize: 24,
+                                    items: condchoiceampl
+                                        .map(_bildMenucondchoiceampl)
+                                        .toList(),
+                                    onChanged: (String? value) => setState(
+                                        () => _selectedcondchoiceampl = value!),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                       SizedBox(
-                        height: 20,
+                        height: 5,
                       ),
                       _selectedcondchoiceampl == LocaleKeys.fixamp.tr()
                           ? Column(
                               children: [
-                                TextFormField(
-                                  controller: _ampCtrl,
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                      width: (MediaQuery.sizeOf(context).width -
+                                          100),
+                                      child: TextFormField(
+                                        controller: _ampCtrl,
+                                        validator: MultiValidator([
+                                          requiredvalidator,
+                                          RangeValidator(
+                                              min: liststimul
+                                                  .map((neumodel) =>
+                                                      neumodel.minampl)
+                                                  .toList()
+                                                  .first,
+                                              max: liststimul
+                                                  .map((neumodel) =>
+                                                      neumodel.maxampl)
+                                                  .toList()
+                                                  .first,
+                                              errorText:
+                                                  LocaleKeys.wrongdate.tr())
+                                        ]),
+                                        minLines: 1,
+                                        maxLines: 1,
+                                        keyboardType: TextInputType.number,
+                                        decoration: InputDecoration(
+                                            labelText: LocaleKeys.amp.tr(),
+                                            labelStyle: Theme.of(context)
+                                                .textTheme
+                                                .labelMedium,
+                                            focusColor: Colors.white,
+                                            border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0)),
+                                            fillColor: Colors.white,
+                                            filled: true),
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.only(bottom: 30),
+                                      child: IconButton(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary,
+                                          onPressed: () {
+                                            _toggle1();
+                                          },
+                                          icon: _hideampfreqdur
+                                              ? Icon(Icons.visibility_off)
+                                              : Icon(Icons.visibility)),
+                                    )
+                                  ],
+                                ),
+                                Text(
+                                    '${liststimul.map((neumodel) => neumodel.minampl).toList().first} - ${liststimul.map((neumodel) => neumodel.maxampl).toList().first}',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displayLarge),
+                              ],
+                            )
+                          : Container(),
+                      Row(
+                        children: [
+                          Column(
+                            children: [
+                              SizedBox(
+                                width:
+                                    (MediaQuery.sizeOf(context).width - 80) / 2,
+                                child: TextFormField(
+                                  controller: _freqCtrl,
                                   validator: MultiValidator([
                                     requiredvalidator,
                                     RangeValidator(
                                         min: liststimul
-                                            .map((neumodel) => neumodel.minampl)
+                                            .map((neumodel) => neumodel.minfreq)
                                             .toList()
                                             .first,
                                         max: liststimul
-                                            .map((neumodel) => neumodel.maxampl)
+                                            .map((neumodel) => neumodel.maxfreq)
                                             .toList()
                                             .first,
                                         errorText: LocaleKeys.wrongdate.tr())
@@ -243,7 +400,7 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
                                   maxLines: 1,
                                   keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
-                                      labelText: LocaleKeys.amp.tr(),
+                                      labelText: LocaleKeys.freq.tr(),
                                       labelStyle: Theme.of(context)
                                           .textTheme
                                           .labelMedium,
@@ -254,206 +411,69 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
                                       fillColor: Colors.white,
                                       filled: true),
                                 ),
-                                Text(
-                                    '${liststimul.map((neumodel) => neumodel.minampl).toList().first} - ${liststimul.map((neumodel) => neumodel.maxampl).toList().first}',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .displayLarge),
-                              ],
-                            )
-                          : Container(),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      TextFormField(
-                        controller: _freqCtrl,
-                        validator: MultiValidator([
-                          requiredvalidator,
-                          RangeValidator(
-                              min: liststimul
-                                  .map((neumodel) => neumodel.minfreq)
-                                  .toList()
-                                  .first,
-                              max: liststimul
-                                  .map((neumodel) => neumodel.maxfreq)
-                                  .toList()
-                                  .first,
-                              errorText: LocaleKeys.wrongdate.tr())
-                        ]),
-                        minLines: 1,
-                        maxLines: 1,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                            labelText: LocaleKeys.freq.tr(),
-                            labelStyle: Theme.of(context).textTheme.labelMedium,
-                            focusColor: Colors.white,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8.0)),
-                            fillColor: Colors.white,
-                            filled: true),
-                      ),
-                      Text(
-                          '${liststimul.map((neumodel) => neumodel.minfreq).toList().first} - ${liststimul.map((neumodel) => neumodel.maxfreq).toList().first}',
-                          textAlign: TextAlign.end,
-                          style: Theme.of(context).textTheme.displayLarge),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      TextFormField(
-                        controller: _durCtrl,
-                        validator: MultiValidator([
-                          requiredvalidator,
-                          RangeValidator(
-                              min: liststimul
-                                  .map((neumodel) => neumodel.mindur)
-                                  .toList()
-                                  .first,
-                              max: liststimul
-                                  .map((neumodel) => neumodel.maxdur)
-                                  .toList()
-                                  .first,
-                              errorText: LocaleKeys.wrongdate.tr())
-                        ]),
-                        minLines: 1,
-                        maxLines: 1,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                            labelText: LocaleKeys.dur.tr(),
-                            labelStyle: Theme.of(context).textTheme.labelMedium,
-                            focusColor: Colors.white,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8.0)),
-                            fillColor: Colors.white,
-                            filled: true),
-                      ),
-                      Text(
-                          '${liststimul.map((neumodel) => neumodel.mindur).toList().first} - ${liststimul.map((neumodel) => neumodel.maxdur).toList().first}',
-                          style: Theme.of(context).textTheme.displayLarge),
-                      AppDivider(),
-                      Text(LocaleKeys.choicehide.tr(),
-                          style: Theme.of(context).textTheme.displaySmall),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      _hideampfreqdur
-                          ? Container()
-                          : Row(
-                              children: [
-                                Expanded(
-                                  child: Text(LocaleKeys.hidefreqdur.tr(),
-                                      style: Theme.of(context)
+                              ),
+                              Text(
+                                  '${liststimul.map((neumodel) => neumodel.minfreq).toList().first} - ${liststimul.map((neumodel) => neumodel.maxfreq).toList().first}',
+                                  textAlign: TextAlign.end,
+                                  style:
+                                      Theme.of(context).textTheme.displayLarge),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              SizedBox(
+                                width:
+                                    (MediaQuery.sizeOf(context).width - 80) / 2,
+                                child: TextFormField(
+                                  controller: _durCtrl,
+                                  validator: MultiValidator([
+                                    requiredvalidator,
+                                    RangeValidator(
+                                        min: liststimul
+                                            .map((neumodel) => neumodel.mindur)
+                                            .toList()
+                                            .first,
+                                        max: liststimul
+                                            .map((neumodel) => neumodel.maxdur)
+                                            .toList()
+                                            .first,
+                                        errorText: LocaleKeys.wrongdate.tr())
+                                  ]),
+                                  minLines: 1,
+                                  maxLines: 1,
+                                  keyboardType: TextInputType.number,
+                                  decoration: InputDecoration(
+                                      labelText: LocaleKeys.dur.tr(),
+                                      labelStyle: Theme.of(context)
                                           .textTheme
-                                          .displayLarge),
+                                          .labelMedium,
+                                      focusColor: Colors.white,
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0)),
+                                      fillColor: Colors.white,
+                                      filled: true),
                                 ),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 5, horizontal: 8),
-                                  decoration: BoxDecoration(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .tertiary,
-                                      borderRadius: BorderRadius.circular(8),
-                                      border: Border.all()),
-                                  child: Row(
-                                    children: [
-                                      Text(LocaleKeys.no.tr(),
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .displaySmall),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Icon(Icons.visibility),
-                                      Transform.scale(
-                                        scale: 1,
-                                        child: Switch(
-                                          value: _hidefreqdur,
-                                          onChanged: (value1) {
-                                            setState(() {
-                                              _hidefreqdur = value1;
-                                            });
-                                          },
-                                        ),
-                                      ),
-                                      Icon(
-                                        Icons.visibility_off,
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Text(LocaleKeys.yes.tr(),
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .displaySmall),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                      AppDivider(),
-                      !_hidefreqdur &&
-                              _selectedcondchoiceampl == LocaleKeys.fixamp.tr()
-                          ? Row(
-                              children: [
-                                Expanded(
-                                    child: Text(LocaleKeys.hideamplfeqdur.tr(),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .displayLarge)),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 5, horizontal: 8),
-                                  decoration: BoxDecoration(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .tertiary,
-                                      borderRadius: BorderRadius.circular(8),
-                                      border: Border.all()),
-                                  child: Row(
-                                    children: [
-                                      Text(LocaleKeys.no.tr(),
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .displaySmall),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Icon(Icons.visibility),
-                                      Transform.scale(
-                                        scale: 1,
-                                        child: Switch(
-                                          value: _hideampfreqdur,
-                                          onChanged: (value2) {
-                                            setState(() {
-                                              _hideampfreqdur = value2;
-                                            });
-                                          },
-                                        ),
-                                      ),
-                                      Icon(Icons.visibility_off),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Text(LocaleKeys.yes.tr(),
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .displaySmall),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                AppDivider(),
-                              ],
-                            )
-                          : Container(),
+                              ),
+                              Text(
+                                  '${liststimul.map((neumodel) => neumodel.mindur).toList().first} - ${liststimul.map((neumodel) => neumodel.maxdur).toList().first}',
+                                  style:
+                                      Theme.of(context).textTheme.displayLarge),
+                            ],
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(bottom: 30),
+                            child: IconButton(
+                                color: Theme.of(context).colorScheme.primary,
+                                onPressed: () {
+                                  _toggle2();
+                                },
+                                icon: _hidefreqdur
+                                    ? Icon(Icons.visibility_off)
+                                    : Icon(Icons.visibility)),
+                          )
+                        ],
+                      ),
                       AppDivider(),
                       ElevatedButton(
                           child: Text(
@@ -461,56 +481,7 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
                             style: Theme.of(context).textTheme.labelLarge,
                           ),
                           onPressed: () {
-                            context
-                                .read<FeedbackSCSDatabase>()
-                                .addSingleShortTest(
-                                  _selectedactivity!,
-                                  _programCtrl.text,
-                                  _electrodesCtrl.text,
-                                  _selectedcondchoiceampl!,
-                                  (_selectedcondchoiceampl ==
-                                          LocaleKeys.fixamp.tr())
-                                      ? double.parse(_ampCtrl.text)
-                                      : -1,
-                                  int.parse(_freqCtrl.text),
-                                  int.parse(_durCtrl.text),
-                                  _hidefreqdur,
-                                  _hideampfreqdur,
-                                );
-                            currenttest[0].countdoubleshorttest! > 0
-                                ? ElegantNotification.error(
-                                    width: 360,
-                                    notificationPosition:
-                                        NotificationPosition.center,
-                                    animation: AnimationType.fromBottom,
-                                    title: Text(_selectedactivity.toString()),
-                                    onProgressFinished: () => {
-                                      context
-                                          .read<FeedbackSCSDatabase>()
-                                          .updateCountDoubleTest(0),
-                                      context.pushNamed(
-                                          RouteNames.docaddsingletask)
-                                    },
-                                    description:
-                                        Text(LocaleKeys.noaddtask.tr()),
-                                    onDismiss: () {},
-                                  ).show(context)
-                                : ElegantNotification.success(
-                                    width: 360,
-                                    notificationPosition:
-                                        NotificationPosition.center,
-                                    animation: AnimationType.fromBottom,
-                                    title: Text(_selectedactivity.toString()),
-                                    onProgressFinished: () => {
-                                      context
-                                          .read<FeedbackSCSDatabase>()
-                                          .updateCountDoubleTest(0),
-                                      context.pushNamed(RouteNames.doctasks)
-                                    },
-                                    description:
-                                        Text(LocaleKeys.addsuccestask.tr()),
-                                    onDismiss: () {},
-                                  ).show(context);
+                            addSingleTask(context, feedbackSCSDatabase);
                           })
                     ]))
               ]),

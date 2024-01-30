@@ -83,6 +83,9 @@ class _WelcomePageState extends State<WelcomePage> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            SizedBox(
+                              height: 20,
+                            ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -92,17 +95,21 @@ class _WelcomePageState extends State<WelcomePage> {
                                         width: 100,
                                         child: Image.asset(images[index]))
                                     : Container(),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  titlewelcome[index].toString(),
-                                  style:
-                                      Theme.of(context).textTheme.titleMedium,
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 20),
+                                  color: Theme.of(context).colorScheme.primary,
+                                  width: MediaQuery.of(context).size.width - 60,
+                                  child: Text(
+                                    titlewelcome[index].toString(),
+                                    textAlign: TextAlign.center,
+                                    style:
+                                        Theme.of(context).textTheme.titleLarge,
+                                  ),
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 30),
+                            const SizedBox(height: 20),
                             SizedBox(
                               width: MediaQuery.of(context).size.width - 60,
                               child: Text(discriptionwelcome[index].toString(),

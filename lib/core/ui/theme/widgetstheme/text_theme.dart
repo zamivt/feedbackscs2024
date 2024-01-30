@@ -4,7 +4,7 @@ class TtextTheme {
   static TextTheme lightTextTheme = TextTheme(
     titleLarge: TextStyle(
         color: Colors.white,
-        fontSize: 14,
+        fontSize: 16,
         fontWeight: FontWeight.bold,
         fontFamily: 'Comfortaa'),
     titleMedium: TextStyle(
