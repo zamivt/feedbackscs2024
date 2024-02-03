@@ -120,6 +120,8 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
 
   @override
   Widget build(BuildContext context) {
+    List<String> busyprogram;
+    busyprogram = [];
     Provider.of<FeedbackSCSDatabase>(context, listen: false)
         .readCommonShortTestUndef();
     final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
@@ -182,14 +184,14 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
                                   index < undefshorttest.length;
                                   index++)
                                 Text(
-                                  undefshorttest.toList()[index].program + ", ",
+                                  undefshorttest[index].program + ", ",
                                   style:
                                       Theme.of(context).textTheme.displayLarge,
                                 ),
                               beforetest.isEmpty
                                   ? Text('')
                                   : Text(
-                                      beforetest.toList()[1].program + ", ",
+                                      beforetest[0].program + ", ",
                                       style: Theme.of(context)
                                           .textTheme
                                           .displayLarge,

@@ -59,7 +59,7 @@ class _WelcomePageState extends State<WelcomePage> {
     final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
     List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
     return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.tertiary,
+        backgroundColor: Theme.of(context).colorScheme.onBackground,
         body: PageView.builder(
             scrollDirection: Axis.vertical,
             itemCount: images.length,
@@ -76,7 +76,9 @@ class _WelcomePageState extends State<WelcomePage> {
                         alignment: Alignment.bottomCenter,
                         fit: BoxFit.scaleDown)),
                 child: Container(
-                  margin: const EdgeInsets.only(top: 40, left: 20, right: 20),
+                  margin: const EdgeInsets.only(
+                    top: 40,
+                  ),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -84,82 +86,97 @@ class _WelcomePageState extends State<WelcomePage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(
-                              height: 20,
+                              height: 10,
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                MediaQuery.of(context).orientation ==
-                                        Orientation.landscape
-                                    ? SizedBox(
-                                        width: 100,
-                                        child: Image.asset(images[index]))
-                                    : Container(),
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 20),
-                                  color: Theme.of(context).colorScheme.primary,
-                                  width: MediaQuery.of(context).size.width - 60,
-                                  child: Text(
-                                    titlewelcome[index].toString(),
-                                    textAlign: TextAlign.center,
-                                    style:
-                                        Theme.of(context).textTheme.titleLarge,
-                                  ),
-                                ),
-                              ],
+                            MediaQuery.of(context).orientation ==
+                                    Orientation.landscape
+                                ? SizedBox(
+                                    width: 100,
+                                    child: Image.asset(images[index]))
+                                : Container(),
+                            Container(
+                              padding: EdgeInsets.symmetric(vertical: 20),
+                              color: Theme.of(context).colorScheme.primary,
+                              width: MediaQuery.of(context).size.width,
+                              child: Text(
+                                titlewelcome[index].toString(),
+                                textAlign: TextAlign.center,
+                                style: Theme.of(context).textTheme.titleLarge,
+                              ),
                             ),
                             const SizedBox(height: 20),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width - 60,
-                              child: Text(discriptionwelcome[index].toString(),
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .primary)),
-                            ),
-                            const SizedBox(
-                              height: 40,
+                            ColoredBox(
+                              color: Theme.of(context).colorScheme.onBackground,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+                                  SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width - 60,
+                                    child: Text(
+                                        discriptionwelcome[index].toString(),
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .primary)),
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Column(
+                                    children: List.generate(8, (indexDots) {
+                                      return Container(
+                                        margin:
+                                            const EdgeInsets.only(bottom: 2),
+                                        width: 8,
+                                        height: index == indexDots ? 25 : 8,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          color: index == indexDots
+                                              ? Theme.of(context)
+                                                  .colorScheme
+                                                  .primary
+                                              : Theme.of(context)
+                                                  .colorScheme
+                                                  .primary
+                                                  .withOpacity(0.3),
+                                        ),
+                                      );
+                                    }),
+                                  ),
+                                ],
+                              ),
                             ),
                             (images.length - 1 == index) || (index == 0)
-                                ? ElevatedButton(
-                                    onPressed: () {
-                                      currentpatient.isEmpty
-                                          ? context.pushNamed(
-                                              RouteNames.patientemptymainpage)
-                                          : currentpatient[0].islicense == false
-                                              ? context.pushNamed(
-                                                  RouteNames.licenseapp)
-                                              : context.pushNamed(
-                                                  RouteNames.patientmainpage);
-                                      ;
-                                    },
-                                    child: Text(LocaleKeys.begin.tr(),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelLarge),
+                                ? Container(
+                                    padding: EdgeInsets.only(top: 40, left: 40),
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        currentpatient.isEmpty
+                                            ? context.pushNamed(
+                                                RouteNames.patientemptymainpage)
+                                            : currentpatient[0].islicense ==
+                                                    false
+                                                ? context.pushNamed(
+                                                    RouteNames.licenseapp)
+                                                : context.pushNamed(
+                                                    RouteNames.patientmainpage);
+                                        ;
+                                      },
+                                      child: Text(LocaleKeys.begin.tr(),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelLarge),
+                                    ),
                                   )
                                 : Container(),
                           ],
-                        ),
-                        Column(
-                          children: List.generate(8, (indexDots) {
-                            return Container(
-                              margin: const EdgeInsets.only(bottom: 2),
-                              width: 8,
-                              height: index == indexDots ? 25 : 8,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: index == indexDots
-                                    ? Theme.of(context).colorScheme.primary
-                                    : Theme.of(context)
-                                        .colorScheme
-                                        .primary
-                                        .withOpacity(0.3),
-                              ),
-                            );
-                          }),
                         ),
                       ]),
                 ),

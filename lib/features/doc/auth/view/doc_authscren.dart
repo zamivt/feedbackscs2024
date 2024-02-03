@@ -46,83 +46,106 @@ class _DocAuthMainScreenState extends State<DocAuthMainScreen> {
         ),
       ),
       body: SafeArea(
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                padding: EdgeInsets.all(20),
-                margin: EdgeInsets.symmetric(vertical: 100, horizontal: 10),
-                decoration: BoxDecoration(
-                    border: Border.all(
-                        color: Theme.of(context).colorScheme.primary),
-                    color: Theme.of(context).colorScheme.secondary,
-                    borderRadius: BorderRadius.circular(8)),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 10,
-                    ),
-                    TextFormField(
-                      controller: _loginCtrl,
-                      validator: requiredvalidator,
-                      minLines: 1,
-                      maxLines: 1,
-                      decoration: InputDecoration(
-                          focusColor: Colors.white,
-                          hintText: LocaleKeys.username.tr(),
-                          border: UnderlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.0)),
-                          fillColor: Colors.white,
-                          filled: true),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    TextFormField(
-                      controller: _passwordCtrl,
-                      validator: requiredvalidator,
-                      minLines: 1,
-                      maxLines: 1,
-                      obscureText: _obscureText,
-                      decoration: InputDecoration(
-                          suffixIcon: InkWell(
-                            onTap: _toggle,
-                            child: Icon(
-                              _obscureText
-                                  ? FontAwesomeIcons.eye
-                                  : FontAwesomeIcons.eyeSlash,
-                              size: 15.0,
-                              color: Colors.black,
+        child: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  padding: EdgeInsets.all(20),
+                  margin: EdgeInsets.symmetric(vertical: 100, horizontal: 10),
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          color: Theme.of(context).colorScheme.primary),
+                      color: Theme.of(context).colorScheme.secondary,
+                      borderRadius: BorderRadius.circular(8)),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 10,
+                      ),
+                      TextFormField(
+                        controller: _loginCtrl,
+                        validator: requiredvalidator,
+                        minLines: 1,
+                        maxLines: 1,
+                        decoration: InputDecoration(
+                            focusColor: Colors.white,
+                            hintText: LocaleKeys.username.tr(),
+                            border: UnderlineInputBorder(
+                                borderRadius: BorderRadius.circular(8.0)),
+                            fillColor: Colors.white,
+                            filled: true),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        controller: _passwordCtrl,
+                        validator: requiredvalidator,
+                        minLines: 1,
+                        maxLines: 1,
+                        obscureText: _obscureText,
+                        decoration: InputDecoration(
+                            suffixIcon: InkWell(
+                              onTap: _toggle,
+                              child: Icon(
+                                _obscureText
+                                    ? FontAwesomeIcons.eye
+                                    : FontAwesomeIcons.eyeSlash,
+                                size: 15.0,
+                                color: Colors.black,
+                              ),
                             ),
-                          ),
-                          hintText: LocaleKeys.password.tr(),
-                          focusColor: Colors.white,
-                          border: UnderlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.0)),
-                          fillColor: Colors.white,
-                          filled: true),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    ElevatedButton(
-                        onPressed: () {
-                          if (docs
-                              .where((docs) =>
-                                  docs.docid.contains(_loginCtrl.text))
-                              .isNotEmpty) {
+                            hintText: LocaleKeys.password.tr(),
+                            focusColor: Colors.white,
+                            border: UnderlineInputBorder(
+                                borderRadius: BorderRadius.circular(8.0)),
+                            fillColor: Colors.white,
+                            filled: true),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      ElevatedButton(
+                          onPressed: () {
                             if (docs
-                                    .where((docs) =>
-                                        docs.docid.contains(_loginCtrl.text))
-                                    .map((docs) => docs.password)
-                                    .toList()
-                                    .first ==
-                                _passwordCtrl.text) {
-                              _docpatController.profDocPat(
-                                  _loginCtrl.text, DateTime.now());
-                              context.pushNamed(RouteNames.docmainpage);
+                                .where((docs) =>
+                                    docs.docid.contains(_loginCtrl.text))
+                                .isNotEmpty) {
+                              if (docs
+                                      .where((docs) =>
+                                          docs.docid.contains(_loginCtrl.text))
+                                      .map((docs) => docs.password)
+                                      .toList()
+                                      .first ==
+                                  _passwordCtrl.text) {
+                                _docpatController.profDocPat(
+                                    _loginCtrl.text, DateTime.now());
+                                context.pushNamed(RouteNames.docmainpage);
+                              } else {
+                                showModalBottomSheet(
+                                    isDismissible: true,
+                                    context: context,
+                                    builder: (context) {
+                                      return Container(
+                                          height: 150,
+                                          width: double.infinity,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .surfaceTint,
+                                          child: Center(
+                                              child: Container(
+                                                  child: Text(
+                                            LocaleKeys.wrongploginpassword.tr(),
+                                            textAlign: TextAlign.center,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .displayLarge,
+                                          ))));
+                                    });
+                              }
                             } else {
                               showModalBottomSheet(
                                   isDismissible: true,
@@ -131,45 +154,24 @@ class _DocAuthMainScreenState extends State<DocAuthMainScreen> {
                                     return Container(
                                         height: 150,
                                         width: double.infinity,
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .surfaceTint,
                                         child: Center(
                                             child: Container(
                                                 child: Text(
-                                          LocaleKeys.wrongploginpassword.tr(),
+                                          LocaleKeys.invaliduserdata.tr(),
                                           textAlign: TextAlign.center,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .displayLarge,
                                         ))));
                                   });
                             }
-                          } else {
-                            showModalBottomSheet(
-                                isDismissible: true,
-                                context: context,
-                                builder: (context) {
-                                  return Container(
-                                      height: 150,
-                                      width: double.infinity,
-                                      child: Center(
-                                          child: Container(
-                                              child: Text(
-                                        LocaleKeys.invaliduserdata.tr(),
-                                        textAlign: TextAlign.center,
-                                      ))));
-                                });
-                          }
-                        },
-                        child: Text(
-                          LocaleKeys.enter.tr(),
-                          style: Theme.of(context).textTheme.labelLarge,
-                        ))
-                  ],
+                          },
+                          child: Text(
+                            LocaleKeys.enter.tr(),
+                            style: Theme.of(context).textTheme.labelLarge,
+                          ))
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
