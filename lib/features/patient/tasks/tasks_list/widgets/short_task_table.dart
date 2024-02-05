@@ -1,9 +1,14 @@
+import 'dart:math';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
 import 'package:provider/provider.dart';
 import 'package:badges/badges.dart' as badges;
 import '../../../../../collections/patient.dart';
 import '../../../../../collections/shorttest.dart';
+import '../../../../../core/router/route_names.dart';
 import '../../../../../core/ui/theme/appimages.dart';
 import '../../../../../l10n/locale_keys.g.dart';
 import '../../../../../repository/feedbackscs_database.dart';
@@ -96,7 +101,7 @@ class ShortTaskTable extends StatelessWidget {
                         child: IconButton(
                             color: Theme.of(context).colorScheme.onBackground,
                             onPressed: () {
-                              createNewShortCurrentTask(context);
+                              newCurrentShortTestMove(context);
                             },
                             icon: Icon(Icons.add_task))),
               ],
@@ -164,7 +169,7 @@ class ShortTaskTable extends StatelessWidget {
                         child: IconButton(
                             color: Theme.of(context).colorScheme.onBackground,
                             onPressed: () {
-                              createNewShortCurrentTask(context);
+                              createNewShortSeatCurrentTask(context);
                             },
                             icon: Icon(Icons.add_task))),
               ],
@@ -231,7 +236,7 @@ class ShortTaskTable extends StatelessWidget {
                         child: IconButton(
                             color: Theme.of(context).colorScheme.onBackground,
                             onPressed: () {
-                              createNewShortCurrentTask(context);
+                              createNewShortLieCurrentTask(context);
                             },
                             icon: Icon(Icons.add_task))),
               ],
@@ -241,30 +246,50 @@ class ShortTaskTable extends StatelessWidget {
       ),
     );
   }
+
+  void newCurrentShortTestMove(BuildContext context) {
+    final feedbackSCSDatabase = context.read<FeedbackSCSDatabase>();
+    List<IShortTest> undefmoveshortTest =
+        feedbackSCSDatabase.undefmoveshortTest;
+
+    late int index;
+    undefmoveshortTest.length > 1
+        ? {index = Random().nextInt(undefmoveshortTest.length)}
+        : undefmoveshortTest.length == 1
+            ? {index = 0}
+            : {
+                index = 0,
+              };
+    int currentid = undefmoveshortTest[index].id;
+    String position = LocaleKeys.cmove.tr();
+
+    String program = undefmoveshortTest[index].program;
+    String electrodes = undefmoveshortTest[index].electrodes;
+    String condition = undefmoveshortTest[index].condition;
+    double amplit = undefmoveshortTest[index].amplit!;
+    bool hideamplt = undefmoveshortTest[index].hideamplt;
+    int freq = undefmoveshortTest[index].freq;
+    bool hidefreq = undefmoveshortTest[index].hidefreq;
+    int dur = undefmoveshortTest[index].dur;
+    bool hidedur = undefmoveshortTest[index].hidedur;
+    context.read<FeedbackSCSDatabase>().updatest0ShortTest(
+        currentid,
+        position,
+        program,
+        electrodes,
+        condition,
+        amplit,
+        hideamplt,
+        freq,
+        hidefreq,
+        dur,
+        hidedur);
+    context.read<FeedbackSCSDatabase>().updateSt0ShortTest(currentid);
+
+    context.read<FeedbackSCSDatabase>().updateActiveTask('st1');
+    context.pushNamed(RouteNames.shorttest1);
+  }
 }
 
-void createNewShortCurrentTask(context) {
-  // _currentShortTaskControler.clearcurrentTaskShort();
-  // late int index;
-  // _candidateShortTaskMoveController.candidateshorttaskmoves.length > 1
-  //     ? {
-  //         index = Random().nextInt(_candidateShortTaskMoveController
-  //             .candidateshorttaskmoves.length)
-  //       }
-  //     : _candidateShortTaskMoveController.candidateshorttaskmoves.length == 1
-  //         ? {index = 0}
-  //         : {
-  //             index = 0,
-  //           };
-
-  // _currentShortTaskControler.addCurrentShortTask(
-  //     LocaleKeys.cmove.tr().toString(),
-  //     _candidateShortTaskMoveController.candidateshorttaskmoves[index].id
-  //         .toString());
-
-  // _candidateShortTaskMoveController.deleteCandidateShortTaskMove(index);
-
-  // String newactivetask;
-  // context.read<FeedbackSCSDatabase>().updateActiveTask('st1');
-  // context.pushNamed(RouteNames.shorttest1);
-}
+void createNewShortSeatCurrentTask(context) {}
+void createNewShortLieCurrentTask(context) {}

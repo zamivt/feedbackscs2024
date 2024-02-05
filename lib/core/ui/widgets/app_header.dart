@@ -10,10 +10,16 @@ class AppHeader extends StatelessWidget {
       alignment: Alignment.center,
       padding: EdgeInsets.all(10),
       width: double.infinity,
-      color: Theme.of(context).colorScheme.primaryContainer,
+      decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.tertiary,
+          border: Border.all(
+            width: 1,
+            color: Theme.of(context).colorScheme.primaryContainer,
+          )),
       child: Text(
         header,
-        style: Theme.of(context).textTheme.titleLarge,
+        style: Theme.of(context).textTheme.titleMedium,
+        textAlign: TextAlign.center,
       ),
     );
   }

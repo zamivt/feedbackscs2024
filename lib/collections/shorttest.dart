@@ -18,8 +18,7 @@ class IShortTest {
   late bool hidefreq;
   late int dur;
   late bool hidedur;
-  String? formula;
-  String? fixformula;
+
   //shorttest1
   @Index()
   DateTime? begintesttime;

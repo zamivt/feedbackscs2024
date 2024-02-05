@@ -120,8 +120,6 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> busyprogram;
-    busyprogram = [];
     Provider.of<FeedbackSCSDatabase>(context, listen: false)
         .readCommonShortTestUndef();
     final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
@@ -138,6 +136,10 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
     ];
 
     List<IShortTest> undefshorttest = feedbackSCSDatabase.undefshortTest;
+    List<String> busyprogram;
+    busyprogram =
+        undefshorttest.map((e) => e.program).toList().toSet().toList();
+
     // List<CurrentTest> currenttest = feedbackSCSDatabase.currentTest;
     void _toggle1() {
       setState(() {
@@ -174,17 +176,17 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
                     key: _formkey,
                     autovalidateMode: AutovalidateMode.always,
                     child: Column(children: [
-                      undefshorttest.isEmpty
+                      busyprogram.isEmpty
                           ? Text('')
                           : Wrap(children: [
                               Text(LocaleKeys.busyprogram.tr() + ": ",
                                   style:
                                       Theme.of(context).textTheme.displayLarge),
                               for (var index = 0;
-                                  index < undefshorttest.length;
+                                  index < busyprogram.length;
                                   index++)
                                 Text(
-                                  undefshorttest[index].program + ", ",
+                                  busyprogram[index] + ", ",
                                   style:
                                       Theme.of(context).textTheme.displayLarge,
                                 ),

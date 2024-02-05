@@ -72,53 +72,43 @@ const IShortTestSchema = CollectionSchema(
       name: r'electrodes',
       type: IsarType.string,
     ),
-    r'fixformula': PropertySchema(
-      id: 11,
-      name: r'fixformula',
-      type: IsarType.string,
-    ),
-    r'formula': PropertySchema(
-      id: 12,
-      name: r'formula',
-      type: IsarType.string,
-    ),
     r'freq': PropertySchema(
-      id: 13,
+      id: 11,
       name: r'freq',
       type: IsarType.long,
     ),
     r'hideamplt': PropertySchema(
-      id: 14,
+      id: 12,
       name: r'hideamplt',
       type: IsarType.bool,
     ),
     r'hidedur': PropertySchema(
-      id: 15,
+      id: 13,
       name: r'hidedur',
       type: IsarType.bool,
     ),
     r'hidefreq': PropertySchema(
-      id: 16,
+      id: 14,
       name: r'hidefreq',
       type: IsarType.bool,
     ),
     r'position': PropertySchema(
-      id: 17,
+      id: 15,
       name: r'position',
       type: IsarType.string,
     ),
     r'program': PropertySchema(
-      id: 18,
+      id: 16,
       name: r'program',
       type: IsarType.string,
     ),
     r'status': PropertySchema(
-      id: 19,
+      id: 17,
       name: r'status',
       type: IsarType.string,
     ),
     r'stoptesttime': PropertySchema(
-      id: 20,
+      id: 18,
       name: r'stoptesttime',
       type: IsarType.dateTime,
     )
@@ -211,18 +201,6 @@ int _iShortTestEstimateSize(
   var bytesCount = offsets.last;
   bytesCount += 3 + object.condition.length * 3;
   bytesCount += 3 + object.electrodes.length * 3;
-  {
-    final value = object.fixformula;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
-  {
-    final value = object.formula;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
   bytesCount += 3 + object.position.length * 3;
   bytesCount += 3 + object.program.length * 3;
   bytesCount += 3 + object.status.length * 3;
@@ -246,16 +224,14 @@ void _iShortTestSerialize(
   writer.writeLong(offsets[8], object.dur);
   writer.writeLong(offsets[9], object.durationtest);
   writer.writeString(offsets[10], object.electrodes);
-  writer.writeString(offsets[11], object.fixformula);
-  writer.writeString(offsets[12], object.formula);
-  writer.writeLong(offsets[13], object.freq);
-  writer.writeBool(offsets[14], object.hideamplt);
-  writer.writeBool(offsets[15], object.hidedur);
-  writer.writeBool(offsets[16], object.hidefreq);
-  writer.writeString(offsets[17], object.position);
-  writer.writeString(offsets[18], object.program);
-  writer.writeString(offsets[19], object.status);
-  writer.writeDateTime(offsets[20], object.stoptesttime);
+  writer.writeLong(offsets[11], object.freq);
+  writer.writeBool(offsets[12], object.hideamplt);
+  writer.writeBool(offsets[13], object.hidedur);
+  writer.writeBool(offsets[14], object.hidefreq);
+  writer.writeString(offsets[15], object.position);
+  writer.writeString(offsets[16], object.program);
+  writer.writeString(offsets[17], object.status);
+  writer.writeDateTime(offsets[18], object.stoptesttime);
 }
 
 IShortTest _iShortTestDeserialize(
@@ -276,17 +252,15 @@ IShortTest _iShortTestDeserialize(
   object.dur = reader.readLong(offsets[8]);
   object.durationtest = reader.readLongOrNull(offsets[9]);
   object.electrodes = reader.readString(offsets[10]);
-  object.fixformula = reader.readStringOrNull(offsets[11]);
-  object.formula = reader.readStringOrNull(offsets[12]);
-  object.freq = reader.readLong(offsets[13]);
-  object.hideamplt = reader.readBool(offsets[14]);
-  object.hidedur = reader.readBool(offsets[15]);
-  object.hidefreq = reader.readBool(offsets[16]);
+  object.freq = reader.readLong(offsets[11]);
+  object.hideamplt = reader.readBool(offsets[12]);
+  object.hidedur = reader.readBool(offsets[13]);
+  object.hidefreq = reader.readBool(offsets[14]);
   object.id = id;
-  object.position = reader.readString(offsets[17]);
-  object.program = reader.readString(offsets[18]);
-  object.status = reader.readString(offsets[19]);
-  object.stoptesttime = reader.readDateTimeOrNull(offsets[20]);
+  object.position = reader.readString(offsets[15]);
+  object.program = reader.readString(offsets[16]);
+  object.status = reader.readString(offsets[17]);
+  object.stoptesttime = reader.readDateTimeOrNull(offsets[18]);
   return object;
 }
 
@@ -320,24 +294,20 @@ P _iShortTestDeserializeProp<P>(
     case 10:
       return (reader.readString(offset)) as P;
     case 11:
-      return (reader.readStringOrNull(offset)) as P;
-    case 12:
-      return (reader.readStringOrNull(offset)) as P;
-    case 13:
       return (reader.readLong(offset)) as P;
+    case 12:
+      return (reader.readBool(offset)) as P;
+    case 13:
+      return (reader.readBool(offset)) as P;
     case 14:
       return (reader.readBool(offset)) as P;
     case 15:
-      return (reader.readBool(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 16:
-      return (reader.readBool(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 17:
       return (reader.readString(offset)) as P;
     case 18:
-      return (reader.readString(offset)) as P;
-    case 19:
-      return (reader.readString(offset)) as P;
-    case 20:
       return (reader.readDateTimeOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -1546,308 +1516,6 @@ extension IShortTestQueryFilter
     });
   }
 
-  QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition>
-      fixformulaIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'fixformula',
-      ));
-    });
-  }
-
-  QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition>
-      fixformulaIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'fixformula',
-      ));
-    });
-  }
-
-  QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition> fixformulaEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'fixformula',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition>
-      fixformulaGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'fixformula',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition>
-      fixformulaLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'fixformula',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition> fixformulaBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'fixformula',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition>
-      fixformulaStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'fixformula',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition>
-      fixformulaEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'fixformula',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition>
-      fixformulaContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'fixformula',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition> fixformulaMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'fixformula',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition>
-      fixformulaIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'fixformula',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition>
-      fixformulaIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'fixformula',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition> formulaIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'formula',
-      ));
-    });
-  }
-
-  QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition>
-      formulaIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'formula',
-      ));
-    });
-  }
-
-  QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition> formulaEqualTo(
-    String? value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'formula',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition>
-      formulaGreaterThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'formula',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition> formulaLessThan(
-    String? value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'formula',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition> formulaBetween(
-    String? lower,
-    String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'formula',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition> formulaStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'formula',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition> formulaEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'formula',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition> formulaContains(
-      String value,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'formula',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition> formulaMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'formula',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition> formulaIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'formula',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition>
-      formulaIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'formula',
-        value: '',
-      ));
-    });
-  }
-
   QueryBuilder<IShortTest, IShortTest, QAfterFilterCondition> freqEqualTo(
       int value) {
     return QueryBuilder.apply(this, (query) {
@@ -2598,30 +2266,6 @@ extension IShortTestQuerySortBy
     });
   }
 
-  QueryBuilder<IShortTest, IShortTest, QAfterSortBy> sortByFixformula() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fixformula', Sort.asc);
-    });
-  }
-
-  QueryBuilder<IShortTest, IShortTest, QAfterSortBy> sortByFixformulaDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fixformula', Sort.desc);
-    });
-  }
-
-  QueryBuilder<IShortTest, IShortTest, QAfterSortBy> sortByFormula() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'formula', Sort.asc);
-    });
-  }
-
-  QueryBuilder<IShortTest, IShortTest, QAfterSortBy> sortByFormulaDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'formula', Sort.desc);
-    });
-  }
-
   QueryBuilder<IShortTest, IShortTest, QAfterSortBy> sortByFreq() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'freq', Sort.asc);
@@ -2855,30 +2499,6 @@ extension IShortTestQuerySortThenBy
     });
   }
 
-  QueryBuilder<IShortTest, IShortTest, QAfterSortBy> thenByFixformula() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fixformula', Sort.asc);
-    });
-  }
-
-  QueryBuilder<IShortTest, IShortTest, QAfterSortBy> thenByFixformulaDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'fixformula', Sort.desc);
-    });
-  }
-
-  QueryBuilder<IShortTest, IShortTest, QAfterSortBy> thenByFormula() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'formula', Sort.asc);
-    });
-  }
-
-  QueryBuilder<IShortTest, IShortTest, QAfterSortBy> thenByFormulaDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'formula', Sort.desc);
-    });
-  }
-
   QueryBuilder<IShortTest, IShortTest, QAfterSortBy> thenByFreq() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'freq', Sort.asc);
@@ -3058,20 +2678,6 @@ extension IShortTestQueryWhereDistinct
     });
   }
 
-  QueryBuilder<IShortTest, IShortTest, QDistinct> distinctByFixformula(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'fixformula', caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<IShortTest, IShortTest, QDistinct> distinctByFormula(
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'formula', caseSensitive: caseSensitive);
-    });
-  }
-
   QueryBuilder<IShortTest, IShortTest, QDistinct> distinctByFreq() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'freq');
@@ -3196,18 +2802,6 @@ extension IShortTestQueryProperty
   QueryBuilder<IShortTest, String, QQueryOperations> electrodesProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'electrodes');
-    });
-  }
-
-  QueryBuilder<IShortTest, String?, QQueryOperations> fixformulaProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'fixformula');
-    });
-  }
-
-  QueryBuilder<IShortTest, String?, QQueryOperations> formulaProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'formula');
     });
   }
 

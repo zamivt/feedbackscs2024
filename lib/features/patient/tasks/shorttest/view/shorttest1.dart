@@ -1,13 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:elegant_notification/elegant_notification.dart';
 import 'package:elegant_notification/resources/arrays.dart';
+import 'package:feedbackscs2024/collections/current_test.dart';
+
 import 'package:feedbackscs2024/core/ui/widgets/common_widgets.dart';
 import 'package:feedbackscs2024/features/doc/tasks/controllers/short_task_move_controller.dart';
-
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:get/instance_manager.dart';
 import 'package:go_router/go_router.dart';
+
 import 'package:provider/provider.dart';
 import '../../../../../collections/patient.dart';
 import '../../../../../core/router/route_names.dart';
@@ -20,40 +20,59 @@ import '../../../../doc/tasks/controllers/short_task_lie_controller.dart';
 import '../../../../doc/tasks/controllers/short_task_seat_controller.dart';
 import '../controllers/current_short_controller.dart';
 
-class ShortTest1 extends StatelessWidget {
+class ShortTest1 extends StatefulWidget {
   const ShortTest1({super.key});
 
   @override
+  State<ShortTest1> createState() => _ShortTest1State();
+}
+
+class _ShortTest1State extends State<ShortTest1> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final _shorttaskmovecontroller = Get.find<ShortTaskMoveControler>();
-    final _shorttaskseatcontroller = Get.find<ShortTaskSeatControler>();
-    final _shorttaskliecontroller = Get.find<ShortTaskLieControler>();
-    final _position =
-        Get.find<CurrentShortTaskControler>().currentshorttasks[0].position;
     final _formKey = GlobalKey<FormState>();
     final amplcondCtrl = TextEditingController();
+    Provider.of<FeedbackSCSDatabase>(context, listen: false).readCurrentTest();
     final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
-    List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
+    List<CurrentTest> currenttask = feedbackSCSDatabase.currentTest;
+    final int currentId = currenttask[0].idshorttest!;
+    Provider.of<FeedbackSCSDatabase>(context, listen: false)
+        .readActiveShortTest(currentId);
+    Provider.of<FeedbackSCSDatabase>(context, listen: false)
+        .readundefShortTestMove();
 
+    List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
     final String _sex = currentpatient[0].sex;
+    final String position = currenttask[0].position;
+    final String condition = currenttask[0].condition;
+    final String program = currenttask[0].program;
+    final double amplit = currenttask[0].amplit;
+    final bool hideamplt = currenttask[0].hideamplt;
+    final int freq = currenttask[0].freq;
+    final bool hidefreq = currenttask[0].hidefreq;
+    final int dur = currenttask[0].dur;
+    final bool hidedur = currenttask[0].hidedur;
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.secondary,
-      appBar: AppBar(
-        centerTitle: true,
         backgroundColor: Theme.of(context).colorScheme.primary,
-        automaticallyImplyLeading: false,
-        title: Text(
-          _position +
-              ' ' +
-              TimeTestConst.timeshorttest.toString() +
-              ' ' +
-              LocaleKeys.min.tr(),
-        ),
-      ),
-      body: GetBuilder(
-          builder: (CurrentShortTaskControler currentShortTaskControler) {
-        return SingleChildScrollView(
+        // appBar: AppBar(
+        //   centerTitle: true,
+        //   backgroundColor: Theme.of(context).colorScheme.primary,
+        //   automaticallyImplyLeading: false,
+        //   title: Text(
+        //     position +
+        //         ' ' +
+        //         TimeTestConst.timeshorttest.toString() +
+        //         ' ' +
+        //         LocaleKeys.min.tr(),
+        //   ),
+        // ),
+        body: SafeArea(
           child: Form(
             key: _formKey,
             child: Column(
@@ -61,178 +80,166 @@ class ShortTest1 extends StatelessWidget {
                 AppPictureContainer(
                     widget1: Container(),
                     widget2: Container(),
-                    picture: ((_position == LocaleKeys.cmove.tr()) &
+                    picture: ((position == LocaleKeys.cmove.tr()) &
                             (_sex == LocaleKeys.fem.tr()))
                         ? AppImages.painmovewomen
-                        : ((_position == LocaleKeys.cmove.tr()) &
+                        : ((position == LocaleKeys.cmove.tr()) &
                                 (_sex == LocaleKeys.mal.tr()))
                             ? AppImages.painmovemen
-                            : ((_position == LocaleKeys.cseat.tr()) &
+                            : ((position == LocaleKeys.cseat.tr()) &
                                     (_sex == LocaleKeys.fem.tr()))
                                 ? AppImages.painseatwomen
-                                : ((_position == LocaleKeys.cseat.tr()) &
+                                : ((position == LocaleKeys.cseat.tr()) &
                                         (_sex == LocaleKeys.mal.tr()))
                                     ? AppImages.painseatmen
-                                    : ((_position == LocaleKeys.clie.tr()) &
+                                    : ((position == LocaleKeys.clie.tr()) &
                                             (_sex == LocaleKeys.fem.tr()))
                                         ? AppImages.painsleepwomen
                                         : AppImages.painsleepmen,
                     title: LocaleKeys.shorttest.tr()),
                 AppHeader(header: LocaleKeys.enterparametres.tr()),
-                AppCommentText(
-                    text: _position == LocaleKeys.cmove.tr()
-                        ? LocaleKeys.conditionmove1.tr() +
-                            ' ' +
-                            TimeTestConst.timeshorttest.toString() +
-                            ' ' +
-                            LocaleKeys.conditionmove2.tr()
-                        : currentShortTaskControler
-                                    .currentshorttasks[0].position ==
-                                LocaleKeys.cseat.tr()
-                            ? LocaleKeys.conditionseat1.tr() +
-                                TimeTestConst.timeshorttest.toString() +
-                                " " +
-                                LocaleKeys.conditionseat2.tr()
-                            : LocaleKeys.conditionlie1.tr() +
-                                ' ' +
-                                TimeTestConst.timeshorttest.toString() +
-                                ' ' +
-                                LocaleKeys.conditionlie2.tr()),
-                SizedBox(
-                  height: 10,
-                ),
-                if (currentShortTaskControler.currentshorttasks[0].condition ==
-                    LocaleKeys.fixamp.tr())
-                  AppTableFullParamStim(
-                    program:
-                        currentShortTaskControler.currentshorttasks[0].program,
-                    hideamplitude: currentShortTaskControler
-                        .currentshorttasks[0].hideamplt,
-                    amplitude:
-                        currentShortTaskControler.currentshorttasks[0].amplit ??
-                            0,
-                    hidefreq:
-                        currentShortTaskControler.currentshorttasks[0].hidefreq,
-                    freq: currentShortTaskControler.currentshorttasks[0].freq,
-                    hidedur:
-                        currentShortTaskControler.currentshorttasks[0].hidedur,
-                    dur: currentShortTaskControler.currentshorttasks[0].dur,
-                  )
-                else
-                  Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(LocaleKeys.program.tr(),
-                                style:
-                                    Theme.of(context).textTheme.displayLarge),
-                            Text(
-                                currentShortTaskControler
-                                    .currentshorttasks[0].program,
-                                style: Theme.of(context).textTheme.displayLarge)
-                          ],
-                        ),
-                      ),
-                      AppDivider(),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
-                        child: AppTextField(
-                          isText: false,
-                          title: LocaleKeys.setamplitudecond.tr() +
-                              ' ' +
-                              currentShortTaskControler
-                                  .currentshorttasks[0].condition
-                                  .toString(),
-                          controller: amplcondCtrl,
-                        ),
-                      ),
-                      AppDivider(),
-                      !currentShortTaskControler.currentshorttasks[0].hidefreq
-                          ? Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(LocaleKeys.freq.tr(),
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .displayLarge),
-                                  Text(
-                                      currentShortTaskControler
-                                          .currentshorttasks[0].freq
-                                          .toString(),
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .displayLarge)
-                                ],
+                Expanded(
+                  child: ColoredBox(
+                    color: Theme.of(context).colorScheme.secondary,
+                    child: Column(
+                      children: [
+                        AppCommentText(
+                            text: position == LocaleKeys.cmove.tr()
+                                ? LocaleKeys.conditionmove1.tr() +
+                                    ' ' +
+                                    TimeTestConst.timeshorttest.toString() +
+                                    ' ' +
+                                    LocaleKeys.conditionmove2.tr()
+                                : position == LocaleKeys.cseat.tr()
+                                    ? LocaleKeys.conditionseat1.tr() +
+                                        TimeTestConst.timeshorttest.toString() +
+                                        " " +
+                                        LocaleKeys.conditionseat2.tr()
+                                    : LocaleKeys.conditionlie1.tr() +
+                                        ' ' +
+                                        TimeTestConst.timeshorttest.toString() +
+                                        ' ' +
+                                        LocaleKeys.conditionlie2.tr()),
+                        if (condition == LocaleKeys.fixamp.tr())
+                          AppTableFullParamStim(
+                            program: program,
+                            hideamplitude: hideamplt,
+                            amplitude: amplit,
+                            hidefreq: hidefreq,
+                            freq: freq,
+                            hidedur: hidedur,
+                            dur: dur,
+                          )
+                        else
+                          Column(
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(LocaleKeys.program.tr(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .displayLarge),
+                                    Text(program,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .displayLarge)
+                                  ],
+                                ),
                               ),
-                            )
-                          : Container(),
-                      !currentShortTaskControler.currentshorttasks[0].hidefreq
-                          ? AppDivider()
-                          : Container(),
-                      !currentShortTaskControler.currentshorttasks[0].hidedur
-                          ? Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(LocaleKeys.dur.tr(),
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .displayLarge),
-                                  Text(
-                                      currentShortTaskControler
-                                          .currentshorttasks[0].freq
-                                          .toString(),
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .displayLarge)
-                                ],
+                              AppDivider(),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8),
+                                child: AppTextField(
+                                  isText: false,
+                                  title: LocaleKeys.setamplitudecond.tr() +
+                                      ' ' +
+                                      condition.toString(),
+                                  controller: amplcondCtrl,
+                                ),
                               ),
-                            )
-                          : Container(),
-                      !currentShortTaskControler.currentshorttasks[0].hidedur
-                          ? AppDivider()
-                          : Container(),
-                    ],
+                              AppDivider(),
+                              !hidefreq
+                                  ? Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(LocaleKeys.freq.tr(),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .displayLarge),
+                                          Text(freq.toString(),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .displayLarge)
+                                        ],
+                                      ),
+                                    )
+                                  : Container(),
+                              !hidefreq ? AppDivider() : Container(),
+                              !hidedur
+                                  ? Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(LocaleKeys.dur.tr(),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .displayLarge),
+                                          Text(freq.toString(),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .displayLarge)
+                                        ],
+                                      ),
+                                    )
+                                  : Container(),
+                              !hidedur ? AppDivider() : Container(),
+                            ],
+                          ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                      ],
+                    ),
                   ),
-                SizedBox(
-                  height: 20,
                 ),
-                ElevatedButton(
-                    onPressed: () {
-                      currentShortTaskControler
-                          .addStartTestTimeShortTask(DateTime.now());
-                      addconditionamp(
-                          currentShortTaskControler,
-                          amplcondCtrl,
-                          _position,
-                          _shorttaskmovecontroller,
-                          context,
-                          _shorttaskseatcontroller,
-                          _shorttaskliecontroller);
-                    },
-                    child: Text(
-                      LocaleKeys.begintest.tr(),
-                      style: Theme.of(context).textTheme.labelLarge,
-                    )),
+                Container(
+                  color: Theme.of(context).colorScheme.secondary,
+                  width: double.infinity,
+                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                  child: ElevatedButton(
+                      onPressed: () {
+                        // currentShortTaskControler
+                        //     .addStartTestTimeShortTask(DateTime.now());
+                        // addconditionamp(
+                        //     currentShortTaskControler,
+                        //     amplcondCtrl,
+                        //     _position,
+                      },
+                      child: Text(
+                        LocaleKeys.begintest.tr(),
+                        style: Theme.of(context).textTheme.labelLarge,
+                      )),
+                ),
                 SizedBox(
                   height: 20,
                 )
               ],
             ),
           ),
-        );
-      }),
-    );
+        ));
   }
 
   void addconditionamp(

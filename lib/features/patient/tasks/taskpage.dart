@@ -27,6 +27,7 @@ class _TaskPageState extends State<TaskPage> {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<FeedbackSCSDatabase>(context, listen: false).readCurrentTest();
     final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
     List<CurrentTest> currenttest = feedbackSCSDatabase.currentTest;
 

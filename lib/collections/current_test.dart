@@ -11,9 +11,23 @@ class CurrentTest {
   int? countdoubleshorttest;
   //номера текущего  тестировани
   int? idprobetest;
+
   int? idshorttest;
   int? idlongtest;
+  late String position;
+
+  late String program;
+  late String electrodes;
+  late String condition;
+  late double amplit;
+  late bool hideamplt;
+  late int freq;
+  late bool hidefreq;
+  late int dur;
+  late bool hidedur;
+
   int? idcombinationtest;
+  String? description;
   int? iddiarytest;
   //индикатор шага тестирования для всех тестов
   String? activetask;

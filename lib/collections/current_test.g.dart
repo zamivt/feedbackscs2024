@@ -22,38 +22,93 @@ const CurrentTestSchema = CollectionSchema(
       name: r'activetask',
       type: IsarType.string,
     ),
-    r'countdoubleshorttest': PropertySchema(
+    r'amplit': PropertySchema(
       id: 1,
+      name: r'amplit',
+      type: IsarType.double,
+    ),
+    r'condition': PropertySchema(
+      id: 2,
+      name: r'condition',
+      type: IsarType.string,
+    ),
+    r'countdoubleshorttest': PropertySchema(
+      id: 3,
       name: r'countdoubleshorttest',
       type: IsarType.long,
     ),
+    r'description': PropertySchema(
+      id: 4,
+      name: r'description',
+      type: IsarType.string,
+    ),
+    r'dur': PropertySchema(
+      id: 5,
+      name: r'dur',
+      type: IsarType.long,
+    ),
+    r'electrodes': PropertySchema(
+      id: 6,
+      name: r'electrodes',
+      type: IsarType.string,
+    ),
+    r'freq': PropertySchema(
+      id: 7,
+      name: r'freq',
+      type: IsarType.long,
+    ),
+    r'hideamplt': PropertySchema(
+      id: 8,
+      name: r'hideamplt',
+      type: IsarType.bool,
+    ),
+    r'hidedur': PropertySchema(
+      id: 9,
+      name: r'hidedur',
+      type: IsarType.bool,
+    ),
+    r'hidefreq': PropertySchema(
+      id: 10,
+      name: r'hidefreq',
+      type: IsarType.bool,
+    ),
     r'idcombinationtest': PropertySchema(
-      id: 2,
+      id: 11,
       name: r'idcombinationtest',
       type: IsarType.long,
     ),
     r'iddiarytest': PropertySchema(
-      id: 3,
+      id: 12,
       name: r'iddiarytest',
       type: IsarType.long,
     ),
     r'idlongtest': PropertySchema(
-      id: 4,
+      id: 13,
       name: r'idlongtest',
       type: IsarType.long,
     ),
     r'idprobetest': PropertySchema(
-      id: 5,
+      id: 14,
       name: r'idprobetest',
       type: IsarType.long,
     ),
     r'idshorttest': PropertySchema(
-      id: 6,
+      id: 15,
       name: r'idshorttest',
       type: IsarType.long,
     ),
+    r'position': PropertySchema(
+      id: 16,
+      name: r'position',
+      type: IsarType.string,
+    ),
+    r'program': PropertySchema(
+      id: 17,
+      name: r'program',
+      type: IsarType.string,
+    ),
     r'stage': PropertySchema(
-      id: 7,
+      id: 18,
       name: r'stage',
       type: IsarType.string,
     )
@@ -84,6 +139,16 @@ int _currentTestEstimateSize(
       bytesCount += 3 + value.length * 3;
     }
   }
+  bytesCount += 3 + object.condition.length * 3;
+  {
+    final value = object.description;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  bytesCount += 3 + object.electrodes.length * 3;
+  bytesCount += 3 + object.position.length * 3;
+  bytesCount += 3 + object.program.length * 3;
   {
     final value = object.stage;
     if (value != null) {
@@ -100,13 +165,24 @@ void _currentTestSerialize(
   Map<Type, List<int>> allOffsets,
 ) {
   writer.writeString(offsets[0], object.activetask);
-  writer.writeLong(offsets[1], object.countdoubleshorttest);
-  writer.writeLong(offsets[2], object.idcombinationtest);
-  writer.writeLong(offsets[3], object.iddiarytest);
-  writer.writeLong(offsets[4], object.idlongtest);
-  writer.writeLong(offsets[5], object.idprobetest);
-  writer.writeLong(offsets[6], object.idshorttest);
-  writer.writeString(offsets[7], object.stage);
+  writer.writeDouble(offsets[1], object.amplit);
+  writer.writeString(offsets[2], object.condition);
+  writer.writeLong(offsets[3], object.countdoubleshorttest);
+  writer.writeString(offsets[4], object.description);
+  writer.writeLong(offsets[5], object.dur);
+  writer.writeString(offsets[6], object.electrodes);
+  writer.writeLong(offsets[7], object.freq);
+  writer.writeBool(offsets[8], object.hideamplt);
+  writer.writeBool(offsets[9], object.hidedur);
+  writer.writeBool(offsets[10], object.hidefreq);
+  writer.writeLong(offsets[11], object.idcombinationtest);
+  writer.writeLong(offsets[12], object.iddiarytest);
+  writer.writeLong(offsets[13], object.idlongtest);
+  writer.writeLong(offsets[14], object.idprobetest);
+  writer.writeLong(offsets[15], object.idshorttest);
+  writer.writeString(offsets[16], object.position);
+  writer.writeString(offsets[17], object.program);
+  writer.writeString(offsets[18], object.stage);
 }
 
 CurrentTest _currentTestDeserialize(
@@ -117,14 +193,25 @@ CurrentTest _currentTestDeserialize(
 ) {
   final object = CurrentTest();
   object.activetask = reader.readStringOrNull(offsets[0]);
-  object.countdoubleshorttest = reader.readLongOrNull(offsets[1]);
+  object.amplit = reader.readDouble(offsets[1]);
+  object.condition = reader.readString(offsets[2]);
+  object.countdoubleshorttest = reader.readLongOrNull(offsets[3]);
+  object.description = reader.readStringOrNull(offsets[4]);
+  object.dur = reader.readLong(offsets[5]);
+  object.electrodes = reader.readString(offsets[6]);
+  object.freq = reader.readLong(offsets[7]);
+  object.hideamplt = reader.readBool(offsets[8]);
+  object.hidedur = reader.readBool(offsets[9]);
+  object.hidefreq = reader.readBool(offsets[10]);
   object.id = id;
-  object.idcombinationtest = reader.readLongOrNull(offsets[2]);
-  object.iddiarytest = reader.readLongOrNull(offsets[3]);
-  object.idlongtest = reader.readLongOrNull(offsets[4]);
-  object.idprobetest = reader.readLongOrNull(offsets[5]);
-  object.idshorttest = reader.readLongOrNull(offsets[6]);
-  object.stage = reader.readStringOrNull(offsets[7]);
+  object.idcombinationtest = reader.readLongOrNull(offsets[11]);
+  object.iddiarytest = reader.readLongOrNull(offsets[12]);
+  object.idlongtest = reader.readLongOrNull(offsets[13]);
+  object.idprobetest = reader.readLongOrNull(offsets[14]);
+  object.idshorttest = reader.readLongOrNull(offsets[15]);
+  object.position = reader.readString(offsets[16]);
+  object.program = reader.readString(offsets[17]);
+  object.stage = reader.readStringOrNull(offsets[18]);
   return object;
 }
 
@@ -138,18 +225,40 @@ P _currentTestDeserializeProp<P>(
     case 0:
       return (reader.readStringOrNull(offset)) as P;
     case 1:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readDouble(offset)) as P;
     case 2:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 3:
       return (reader.readLongOrNull(offset)) as P;
     case 4:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 5:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readLong(offset)) as P;
     case 6:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 7:
+      return (reader.readLong(offset)) as P;
+    case 8:
+      return (reader.readBool(offset)) as P;
+    case 9:
+      return (reader.readBool(offset)) as P;
+    case 10:
+      return (reader.readBool(offset)) as P;
+    case 11:
+      return (reader.readLongOrNull(offset)) as P;
+    case 12:
+      return (reader.readLongOrNull(offset)) as P;
+    case 13:
+      return (reader.readLongOrNull(offset)) as P;
+    case 14:
+      return (reader.readLongOrNull(offset)) as P;
+    case 15:
+      return (reader.readLongOrNull(offset)) as P;
+    case 16:
+      return (reader.readString(offset)) as P;
+    case 17:
+      return (reader.readString(offset)) as P;
+    case 18:
       return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -403,6 +512,205 @@ extension CurrentTestQueryFilter
     });
   }
 
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> amplitEqualTo(
+    double value, {
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'amplit',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      amplitGreaterThan(
+    double value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'amplit',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> amplitLessThan(
+    double value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'amplit',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> amplitBetween(
+    double lower,
+    double upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'amplit',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      conditionEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'condition',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      conditionGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'condition',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      conditionLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'condition',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      conditionBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'condition',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      conditionStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'condition',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      conditionEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'condition',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      conditionContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'condition',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      conditionMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'condition',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      conditionIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'condition',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      conditionIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'condition',
+        value: '',
+      ));
+    });
+  }
+
   QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
       countdoubleshorttestIsNull() {
     return QueryBuilder.apply(this, (query) {
@@ -473,6 +781,432 @@ extension CurrentTestQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      descriptionIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'description',
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      descriptionIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'description',
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      descriptionEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'description',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      descriptionGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'description',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      descriptionLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'description',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      descriptionBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'description',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      descriptionStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'description',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      descriptionEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'description',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      descriptionContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'description',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      descriptionMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'description',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      descriptionIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'description',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      descriptionIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'description',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> durEqualTo(
+      int value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'dur',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> durGreaterThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'dur',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> durLessThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'dur',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> durBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'dur',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      electrodesEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'electrodes',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      electrodesGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'electrodes',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      electrodesLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'electrodes',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      electrodesBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'electrodes',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      electrodesStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'electrodes',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      electrodesEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'electrodes',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      electrodesContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'electrodes',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      electrodesMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'electrodes',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      electrodesIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'electrodes',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      electrodesIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'electrodes',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> freqEqualTo(
+      int value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'freq',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> freqGreaterThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'freq',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> freqLessThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'freq',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> freqBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'freq',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      hideampltEqualTo(bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'hideamplt',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> hidedurEqualTo(
+      bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'hidedur',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> hidefreqEqualTo(
+      bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'hidefreq',
+        value: value,
       ));
     });
   }
@@ -900,6 +1634,275 @@ extension CurrentTestQueryFilter
     });
   }
 
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> positionEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'position',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      positionGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'position',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      positionLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'position',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> positionBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'position',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      positionStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'position',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      positionEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'position',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      positionContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'position',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> positionMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'position',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      positionIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'position',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      positionIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'position',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> programEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'program',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      programGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'program',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> programLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'program',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> programBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'program',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      programStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'program',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> programEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'program',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> programContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'program',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> programMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'program',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      programIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'program',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      programIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'program',
+        value: '',
+      ));
+    });
+  }
+
   QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> stageIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -1070,6 +2073,30 @@ extension CurrentTestQuerySortBy
     });
   }
 
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> sortByAmplit() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'amplit', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> sortByAmplitDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'amplit', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> sortByCondition() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'condition', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> sortByConditionDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'condition', Sort.desc);
+    });
+  }
+
   QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy>
       sortByCountdoubleshorttest() {
     return QueryBuilder.apply(this, (query) {
@@ -1081,6 +2108,90 @@ extension CurrentTestQuerySortBy
       sortByCountdoubleshorttestDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'countdoubleshorttest', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> sortByDescription() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'description', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> sortByDescriptionDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'description', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> sortByDur() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'dur', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> sortByDurDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'dur', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> sortByElectrodes() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'electrodes', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> sortByElectrodesDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'electrodes', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> sortByFreq() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'freq', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> sortByFreqDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'freq', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> sortByHideamplt() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'hideamplt', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> sortByHideampltDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'hideamplt', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> sortByHidedur() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'hidedur', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> sortByHidedurDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'hidedur', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> sortByHidefreq() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'hidefreq', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> sortByHidefreqDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'hidefreq', Sort.desc);
     });
   }
 
@@ -1146,6 +2257,30 @@ extension CurrentTestQuerySortBy
     });
   }
 
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> sortByPosition() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'position', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> sortByPositionDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'position', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> sortByProgram() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'program', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> sortByProgramDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'program', Sort.desc);
+    });
+  }
+
   QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> sortByStage() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'stage', Sort.asc);
@@ -1173,6 +2308,30 @@ extension CurrentTestQuerySortThenBy
     });
   }
 
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> thenByAmplit() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'amplit', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> thenByAmplitDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'amplit', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> thenByCondition() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'condition', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> thenByConditionDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'condition', Sort.desc);
+    });
+  }
+
   QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy>
       thenByCountdoubleshorttest() {
     return QueryBuilder.apply(this, (query) {
@@ -1184,6 +2343,90 @@ extension CurrentTestQuerySortThenBy
       thenByCountdoubleshorttestDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'countdoubleshorttest', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> thenByDescription() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'description', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> thenByDescriptionDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'description', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> thenByDur() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'dur', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> thenByDurDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'dur', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> thenByElectrodes() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'electrodes', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> thenByElectrodesDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'electrodes', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> thenByFreq() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'freq', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> thenByFreqDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'freq', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> thenByHideamplt() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'hideamplt', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> thenByHideampltDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'hideamplt', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> thenByHidedur() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'hidedur', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> thenByHidedurDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'hidedur', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> thenByHidefreq() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'hidefreq', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> thenByHidefreqDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'hidefreq', Sort.desc);
     });
   }
 
@@ -1261,6 +2504,30 @@ extension CurrentTestQuerySortThenBy
     });
   }
 
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> thenByPosition() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'position', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> thenByPositionDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'position', Sort.desc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> thenByProgram() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'program', Sort.asc);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> thenByProgramDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'program', Sort.desc);
+    });
+  }
+
   QueryBuilder<CurrentTest, CurrentTest, QAfterSortBy> thenByStage() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'stage', Sort.asc);
@@ -1283,10 +2550,67 @@ extension CurrentTestQueryWhereDistinct
     });
   }
 
+  QueryBuilder<CurrentTest, CurrentTest, QDistinct> distinctByAmplit() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'amplit');
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QDistinct> distinctByCondition(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'condition', caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<CurrentTest, CurrentTest, QDistinct>
       distinctByCountdoubleshorttest() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'countdoubleshorttest');
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QDistinct> distinctByDescription(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'description', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QDistinct> distinctByDur() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'dur');
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QDistinct> distinctByElectrodes(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'electrodes', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QDistinct> distinctByFreq() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'freq');
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QDistinct> distinctByHideamplt() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'hideamplt');
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QDistinct> distinctByHidedur() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'hidedur');
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QDistinct> distinctByHidefreq() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'hidefreq');
     });
   }
 
@@ -1321,6 +2645,20 @@ extension CurrentTestQueryWhereDistinct
     });
   }
 
+  QueryBuilder<CurrentTest, CurrentTest, QDistinct> distinctByPosition(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'position', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QDistinct> distinctByProgram(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'program', caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<CurrentTest, CurrentTest, QDistinct> distinctByStage(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -1343,10 +2681,64 @@ extension CurrentTestQueryProperty
     });
   }
 
+  QueryBuilder<CurrentTest, double, QQueryOperations> amplitProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'amplit');
+    });
+  }
+
+  QueryBuilder<CurrentTest, String, QQueryOperations> conditionProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'condition');
+    });
+  }
+
   QueryBuilder<CurrentTest, int?, QQueryOperations>
       countdoubleshorttestProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'countdoubleshorttest');
+    });
+  }
+
+  QueryBuilder<CurrentTest, String?, QQueryOperations> descriptionProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'description');
+    });
+  }
+
+  QueryBuilder<CurrentTest, int, QQueryOperations> durProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'dur');
+    });
+  }
+
+  QueryBuilder<CurrentTest, String, QQueryOperations> electrodesProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'electrodes');
+    });
+  }
+
+  QueryBuilder<CurrentTest, int, QQueryOperations> freqProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'freq');
+    });
+  }
+
+  QueryBuilder<CurrentTest, bool, QQueryOperations> hideampltProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'hideamplt');
+    });
+  }
+
+  QueryBuilder<CurrentTest, bool, QQueryOperations> hidedurProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'hidedur');
+    });
+  }
+
+  QueryBuilder<CurrentTest, bool, QQueryOperations> hidefreqProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'hidefreq');
     });
   }
 
@@ -1378,6 +2770,18 @@ extension CurrentTestQueryProperty
   QueryBuilder<CurrentTest, int?, QQueryOperations> idshorttestProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'idshorttest');
+    });
+  }
+
+  QueryBuilder<CurrentTest, String, QQueryOperations> positionProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'position');
+    });
+  }
+
+  QueryBuilder<CurrentTest, String, QQueryOperations> programProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'program');
     });
   }
 

@@ -360,6 +360,39 @@ class FeedbackSCSDatabase extends ChangeNotifier {
     readCurrentTest();
   }
 
+  Future<void> updatest0ShortTest(
+      int id,
+      String position,
+      String program,
+      String electrodes,
+      String condition,
+      double amplit,
+      bool hideamplt,
+      int freq,
+      bool hidefreq,
+      int dur,
+      bool hidedur) async {
+    final currentTest = await isar.currentTests.get(1);
+
+    if (currentTest != 0) {
+      await isar.writeTxn(() async {
+        currentTest!.idshorttest = id;
+        currentTest.program = program;
+        currentTest.electrodes = electrodes;
+        currentTest.condition = condition;
+        currentTest.amplit = amplit;
+        currentTest.hideamplt = hideamplt;
+        currentTest.freq = freq;
+        currentTest.hidefreq = hidefreq;
+        currentTest.dur = dur;
+        currentTest.hidedur = hidedur;
+        await isar.currentTests.put(currentTest);
+      });
+    }
+
+    readCurrentTest();
+  }
+
   //BeforeTest
   final List<IBeforeTest> beforeTest = [];
 //create BeforetTest
@@ -503,12 +536,14 @@ class FeedbackSCSDatabase extends ChangeNotifier {
     }
   }
 
-  Future<void> updateStatusShortTest(Id id, String newstatus) async {
+  Future<void> updateSt0ShortTest(
+    Id id,
+  ) async {
     final commonshortTest = await isar.iShortTests.get(id);
 
     if (commonshortTest != 0) {
       await isar.writeTxn(() async {
-        commonshortTest!.status = newstatus;
+        commonshortTest!.status = 'active';
 
         await isar.iShortTests.put(commonshortTest);
       });
@@ -626,10 +661,20 @@ class FeedbackSCSDatabase extends ChangeNotifier {
   //чтение кратковременного  тестирования непройденные
   final List<IShortTest> undefshortTest = [];
   Future<void> readCommonShortTestUndef() async {
-    List<IShortTest> fetchShortTestDouble =
+    List<IShortTest> fetchShortTestundef =
         await isar.iShortTests.where().statusEqualTo('undef').findAll();
     undefshortTest.clear();
-    undefshortTest.addAll(fetchShortTestDouble);
+    undefshortTest.addAll(fetchShortTestundef);
+    notifyListeners();
+  }
+
+  //чтение активного задания
+  final List<IShortTest> shortTestactive = [];
+  Future<void> readActiveShortTest(int currentid) async {
+    List<IShortTest> fetchShortTestActive =
+        await isar.iShortTests.where().idEqualTo(currentid).findAll();
+    shortTestactive.clear();
+    shortTestactive.addAll(fetchShortTestActive);
     notifyListeners();
   }
 
