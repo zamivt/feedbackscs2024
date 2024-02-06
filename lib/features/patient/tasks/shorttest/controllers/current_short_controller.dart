@@ -25,57 +25,57 @@ class CurrentShortTaskControler extends GetxController {
   }
 
   addCurrentShortTask(String position, String id) {
-    final _shortTaskMoveController = Get.find<ShortTaskMoveControler>();
-    final _listshorttaskmove = _shortTaskMoveController.shorttaskmoves.toList();
-    final _shortTaskSeatController = Get.find<ShortTaskSeatControler>();
-    final _listshorttaskseat = _shortTaskSeatController.shorttaskseats.toList();
-    final _shortTaskLieController = Get.find<ShortTaskLieControler>();
-    final _listshorttasklie = _shortTaskLieController.shorttasklies.toList();
+    final shortTaskMoveController = Get.find<ShortTaskMoveControler>();
+    final listshorttaskmove = shortTaskMoveController.shorttaskmoves.toList();
+    final shortTaskSeatController = Get.find<ShortTaskSeatControler>();
+    final listshorttaskseat = shortTaskSeatController.shorttaskseats.toList();
+    final shortTaskLieController = Get.find<ShortTaskLieControler>();
+    final listshorttasklie = shortTaskLieController.shorttasklies.toList();
     if (position == LocaleKeys.cmove.tr()) {
       final currentshorttask = CurrentShortTask(
           position: position,
-          program: _listshorttaskmove
-              .where((_listshorttaskmove) => _listshorttaskmove.id.contains(id))
+          program: listshorttaskmove
+              .where((listshorttaskmove) => listshorttaskmove.id.contains(id))
               .map((listshorttaskmove) => listshorttaskmove.program)
               .toList()
               .first,
-          electrodes: _listshorttaskmove
-              .where((_listshorttaskmove) => _listshorttaskmove.id.contains(id))
+          electrodes: listshorttaskmove
+              .where((listshorttaskmove) => listshorttaskmove.id.contains(id))
               .map((listshorttaskmove) => listshorttaskmove.electrodes)
               .toList()
               .first,
-          condition: _listshorttaskmove
-              .where((_listshorttaskmove) => _listshorttaskmove.id.contains(id))
+          condition: listshorttaskmove
+              .where((listshorttaskmove) => listshorttaskmove.id.contains(id))
               .map((listshorttaskmove) => listshorttaskmove.condition)
               .toList()
               .first,
-          amplit: _listshorttaskmove
-              .where((_listshorttaskmove) => _listshorttaskmove.id.contains(id))
+          amplit: listshorttaskmove
+              .where((listshorttaskmove) => listshorttaskmove.id.contains(id))
               .map((listshorttaskmove) => listshorttaskmove.amplit)
               .toList()
               .first,
-          hideamplt: _listshorttaskmove
-              .where((_listshorttaskmove) => _listshorttaskmove.id.contains(id))
+          hideamplt: listshorttaskmove
+              .where((listshorttaskmove) => listshorttaskmove.id.contains(id))
               .map((listshorttaskmove) => listshorttaskmove.hideamplt)
               .toList()
               .first,
-          freq: _listshorttaskmove
-              .where((_listshorttaskmove) => _listshorttaskmove.id.contains(id))
+          freq: listshorttaskmove
+              .where((listshorttaskmove) => listshorttaskmove.id.contains(id))
               .map((listshorttaskmove) => listshorttaskmove.freq)
               .toList()
               .first,
-          hidefreq: _listshorttaskmove
-              .where((_listshorttaskmove) => _listshorttaskmove.id.contains(id))
+          hidefreq: listshorttaskmove
+              .where((listshorttaskmove) => listshorttaskmove.id.contains(id))
               .map((listshorttaskmove) => listshorttaskmove.hidefreq)
               .toList()
               .first,
-          dur: _listshorttaskmove
-              .where((_listshorttaskmove) => _listshorttaskmove.id.contains(id))
+          dur: listshorttaskmove
+              .where((listshorttaskmove) => listshorttaskmove.id.contains(id))
               .map((listshorttaskmove) => listshorttaskmove.dur)
               .toList()
               .first,
-          hidedur: _listshorttaskmove
-              .where((_listshorttaskmove) => _listshorttaskmove.id.contains(id))
+          hidedur: listshorttaskmove
+              .where((listshorttaskmove) => listshorttaskmove.id.contains(id))
               .map((listshorttaskmove) => listshorttaskmove.hidedur)
               .toList()
               .first,
@@ -86,48 +86,48 @@ class CurrentShortTaskControler extends GetxController {
     } else if (position == LocaleKeys.cseat.tr()) {
       final currentshorttask = CurrentShortTask(
           position: position,
-          program: _listshorttaskseat
-              .where((_listshorttaskseat) => _listshorttaskseat.id.contains(id))
+          program: listshorttaskseat
+              .where((listshorttaskseat) => listshorttaskseat.id.contains(id))
               .map((listshorttaskseat) => listshorttaskseat.program)
               .toList()
               .first,
-          electrodes: _listshorttaskseat
-              .where((_listshorttaskseat) => _listshorttaskseat.id.contains(id))
+          electrodes: listshorttaskseat
+              .where((listshorttaskseat) => listshorttaskseat.id.contains(id))
               .map((listshorttaskseat) => listshorttaskseat.electrodes)
               .toList()
               .first,
-          condition: _listshorttaskseat
-              .where((_listshorttaskseat) => _listshorttaskseat.id.contains(id))
+          condition: listshorttaskseat
+              .where((listshorttaskseat) => listshorttaskseat.id.contains(id))
               .map((listshorttaskseat) => listshorttaskseat.condition)
               .toList()
               .first,
-          amplit: _listshorttaskseat
-              .where((_listshorttaskseat) => _listshorttaskseat.id.contains(id))
+          amplit: listshorttaskseat
+              .where((listshorttaskseat) => listshorttaskseat.id.contains(id))
               .map((listshorttaskseat) => listshorttaskseat.amplit)
               .toList()
               .first,
-          hideamplt: _listshorttaskseat
-              .where((_listshorttaskseat) => _listshorttaskseat.id.contains(id))
+          hideamplt: listshorttaskseat
+              .where((listshorttaskseat) => listshorttaskseat.id.contains(id))
               .map((listshorttaskseat) => listshorttaskseat.hideamplt)
               .toList()
               .first,
-          freq: _listshorttaskseat
-              .where((_listshorttaskseat) => _listshorttaskseat.id.contains(id))
+          freq: listshorttaskseat
+              .where((listshorttaskseat) => listshorttaskseat.id.contains(id))
               .map((listshorttaskseat) => listshorttaskseat.freq)
               .toList()
               .first,
-          hidefreq: _listshorttaskseat
-              .where((_listshorttaskseat) => _listshorttaskseat.id.contains(id))
+          hidefreq: listshorttaskseat
+              .where((listshorttaskseat) => listshorttaskseat.id.contains(id))
               .map((listshorttaskseat) => listshorttaskseat.hidefreq)
               .toList()
               .first,
-          dur: _listshorttaskseat
-              .where((_listshorttaskseat) => _listshorttaskseat.id.contains(id))
+          dur: listshorttaskseat
+              .where((listshorttaskseat) => listshorttaskseat.id.contains(id))
               .map((listshorttaskseat) => listshorttaskseat.dur)
               .toList()
               .first,
-          hidedur: _listshorttaskseat
-              .where((_listshorttaskseat) => _listshorttaskseat.id.contains(id))
+          hidedur: listshorttaskseat
+              .where((listshorttaskseat) => listshorttaskseat.id.contains(id))
               .map((listshorttaskseat) => listshorttaskseat.hidedur)
               .toList()
               .first,
@@ -138,48 +138,48 @@ class CurrentShortTaskControler extends GetxController {
     } else {
       final currentshorttask = CurrentShortTask(
           position: position,
-          program: _listshorttasklie
-              .where((_listshorttasklie) => _listshorttasklie.id.contains(id))
+          program: listshorttasklie
+              .where((listshorttasklie) => listshorttasklie.id.contains(id))
               .map((listshorttasklie) => listshorttasklie.program)
               .toList()
               .first,
-          electrodes: _listshorttasklie
-              .where((_listshorttasklie) => _listshorttasklie.id.contains(id))
+          electrodes: listshorttasklie
+              .where((listshorttasklie) => listshorttasklie.id.contains(id))
               .map((listshorttasklie) => listshorttasklie.electrodes)
               .toList()
               .first,
-          condition: _listshorttasklie
-              .where((_listshorttasklie) => _listshorttasklie.id.contains(id))
+          condition: listshorttasklie
+              .where((listshorttasklie) => listshorttasklie.id.contains(id))
               .map((listshorttasklie) => listshorttasklie.condition)
               .toList()
               .first,
-          amplit: _listshorttasklie
-              .where((_listshorttasklie) => _listshorttasklie.id.contains(id))
+          amplit: listshorttasklie
+              .where((listshorttasklie) => listshorttasklie.id.contains(id))
               .map((listshorttasklie) => listshorttasklie.amplit)
               .toList()
               .first,
-          hideamplt: _listshorttasklie
-              .where((_listshorttasklie) => _listshorttasklie.id.contains(id))
+          hideamplt: listshorttasklie
+              .where((listshorttasklie) => listshorttasklie.id.contains(id))
               .map((listshorttasklie) => listshorttasklie.hideamplt)
               .toList()
               .first,
-          freq: _listshorttasklie
-              .where((_listshorttasklie) => _listshorttasklie.id.contains(id))
+          freq: listshorttasklie
+              .where((listshorttasklie) => listshorttasklie.id.contains(id))
               .map((listshorttasklie) => listshorttasklie.freq)
               .toList()
               .first,
-          hidefreq: _listshorttasklie
-              .where((_listshorttasklie) => _listshorttasklie.id.contains(id))
+          hidefreq: listshorttasklie
+              .where((listshorttasklie) => listshorttasklie.id.contains(id))
               .map((listshorttasklie) => listshorttasklie.hidefreq)
               .toList()
               .first,
-          dur: _listshorttasklie
-              .where((_listshorttasklie) => _listshorttasklie.id.contains(id))
+          dur: listshorttasklie
+              .where((listshorttasklie) => listshorttasklie.id.contains(id))
               .map((listshorttasklie) => listshorttasklie.dur)
               .toList()
               .first,
-          hidedur: _listshorttaskseat
-              .where((_listshorttasklie) => _listshorttasklie.id.contains(id))
+          hidedur: listshorttaskseat
+              .where((listshorttasklie) => listshorttasklie.id.contains(id))
               .map((listshorttasklie) => listshorttasklie.hidedur)
               .toList()
               .first,
@@ -237,7 +237,7 @@ class CurrentShortTaskControler extends GetxController {
   }
 
   clearcurrentTaskShort() {
-    if (_currentshorttasks.length != 0) {
+    if (_currentshorttasks.isNotEmpty) {
       _currentshorttasks = [];
       currentshorttaskbox.deleteAt(0);
       update();

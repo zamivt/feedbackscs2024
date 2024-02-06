@@ -15,13 +15,13 @@ class AppDuoDiagram extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(color: Colors.white, boxShadow: [
         BoxShadow(
           color: Theme.of(context).colorScheme.primary,
           spreadRadius: 4,
           blurRadius: 8,
-          offset: Offset(0, 1),
+          offset: const Offset(0, 1),
         ),
       ]),
       child: Column(
@@ -46,7 +46,7 @@ class AppDuoDiagram extends StatelessWidget {
                 Text('/', style: Theme.of(context).textTheme.displayLarge),
                 Text(countcontent.toString(),
                     style: Theme.of(context).textTheme.displayLarge),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
                 Expanded(

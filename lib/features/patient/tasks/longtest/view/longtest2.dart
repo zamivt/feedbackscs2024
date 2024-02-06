@@ -16,23 +16,21 @@ class LongTest2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final currentLongTaskControler = Get.find<CurrentLongTaskControler>();
-    final String _position =
+    final String position =
         currentLongTaskControler.currentlongtasks[0].position;
 
-    final String _program =
-        currentLongTaskControler.currentlongtasks[0].program;
+    final String program = currentLongTaskControler.currentlongtasks[0].program;
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.secondary,
       appBar: AppBar(
         centerTitle: true,
         automaticallyImplyLeading: false,
-        title:
-            Text(_position + ': ' + LocaleKeys.program.tr() + ' - ' + _program),
+        title: Text('$position: ${LocaleKeys.program.tr()} - $program'),
       ),
       body: Column(children: [
         AppHeader(
-          header: '1. ' + LocaleKeys.timerrun.tr(),
+          header: '1. ${LocaleKeys.timerrun.tr()}',
         ),
         Container(
           color: Theme.of(context).colorScheme.tertiary,
@@ -61,12 +59,12 @@ class LongTest2 extends StatelessWidget {
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.displayLarge),
         ),
-        Container(
+        const SizedBox(
             height: 300,
             child: Center(child: Text(' ТАЙМЕР')
                 // TimerLongTest()
                 )),
-        SizedBox(
+        const SizedBox(
           height: 100,
         ),
         ElevatedButton(

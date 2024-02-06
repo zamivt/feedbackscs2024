@@ -19,7 +19,7 @@ class ReportLongPosition extends StatelessWidget {
     // final _longtaskmoveController = Get.find<CandidateLongTaskMoveControler>();
 
     return Column(
-      children: [LongReportHeader(position: position), Row()],
+      children: [LongReportHeader(position: position), const Row()],
     );
   }
 }

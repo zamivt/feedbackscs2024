@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:feedbackscs2024/features/doc/tasks/controllers/candidate_short_task_move_controller.dart';
 import 'package:feedbackscs2024/features/doc/tasks/controllers/short_task_move_controller.dart';
@@ -62,25 +64,15 @@ class ShortTaskController extends GetxController {
       int dur,
       bool hiddenfreqdur,
       bool hiddenamplfreqdur) {
-    int _countolddouble = _doubleshortTaskController.doubleshorttask.length;
+    int countolddouble = _doubleshortTaskController.doubleshorttask.length;
     if (selectedcondchoiceampl == LocaleKeys.fixamp.tr()) {
       for (int i = 0; i < _shortTaskMoveController.shorttaskmoves.length; i++) {
         if (_shortTaskMoveController.shorttaskmoves[i].fixformula ==
-            ('pos' +
-                position +
-                'el:' +
-                electrodes +
-                ' ampl:' +
-                amplitude.toString() +
-                ' freq: ' +
-                freq.toString() +
-                ' dur: ' +
-                dur.toString())) {
+            ('pos${position}el:$electrodes ampl:$amplitude freq: $freq dur: $dur')) {
           //пишем double в строку
         }
       }
-      if (_countolddouble ==
-          _doubleshortTaskController.doubleshorttask.length) {
+      if (countolddouble == _doubleshortTaskController.doubleshorttask.length) {
         _shortTaskMoveController.addShortTaskMove(
           ShortTaskMove(
               success: 'undef',
@@ -94,14 +86,8 @@ class ShortTaskController extends GetxController {
               hidefreq: hiddenamplfreqdur || hiddenfreqdur,
               hideamplt: hiddenamplfreqdur,
               formula: '',
-              fixformula: 'el:' +
-                  electrodes +
-                  ' ampl:' +
-                  amplitude.toString() +
-                  ' freq: ' +
-                  freq.toString() +
-                  ' dur: ' +
-                  dur.toString()),
+              fixformula:
+                  'el:$electrodes ampl:$amplitude freq: $freq dur: $dur'),
         );
         _candidateshortTaskMoveController.addCandidateShortTaskMove(
             CandidateShortTaskMove(
@@ -113,14 +99,7 @@ class ShortTaskController extends GetxController {
         (selectedcondchoiceampl != LocaleKeys.fixamp.tr())) {
       for (int i = 0; i < _shortTaskMoveController.shorttaskmoves.length; i++) {
         if (_shortTaskMoveController.shorttaskmoves[i].formula ==
-            ('el:' +
-                electrodes +
-                ' selectamp:' +
-                selectedcondchoiceampl.toString() +
-                ' freq: ' +
-                freq.toString() +
-                ' dur: ' +
-                dur.toString())) {
+            ('el:$electrodes selectamp:$selectedcondchoiceampl freq: $freq dur: $dur')) {
           _doubleshortTaskController.addDoubleShortTask(DoubleShortTask(
               program: program,
               electrodes: electrodes,
@@ -131,19 +110,12 @@ class ShortTaskController extends GetxController {
               hidedur: hiddenamplfreqdur || hiddenfreqdur,
               hidefreq: hiddenamplfreqdur || hiddenfreqdur,
               hideamplt: hiddenamplfreqdur,
-              formula: 'el:' +
-                  electrodes +
-                  ' selectamp:' +
-                  selectedcondchoiceampl.toString() +
-                  ' freq: ' +
-                  freq.toString() +
-                  ' dur: ' +
-                  dur.toString(),
+              formula:
+                  'el:$electrodes selectamp:$selectedcondchoiceampl freq: $freq dur: $dur',
               fixformula: ''));
         }
       }
-      if (_countolddouble ==
-          _doubleshortTaskController.doubleshorttask.length) {
+      if (countolddouble == _doubleshortTaskController.doubleshorttask.length) {
         _shortTaskMoveController.addShortTaskMove(ShortTaskMove(
             success: 'indef',
             program: program,
@@ -155,33 +127,19 @@ class ShortTaskController extends GetxController {
             hidedur: hiddenamplfreqdur || hiddenfreqdur,
             hidefreq: hiddenamplfreqdur || hiddenfreqdur,
             hideamplt: hiddenamplfreqdur,
-            formula: 'el:' +
-                electrodes +
-                ' selectamp:' +
-                selectedcondchoiceampl.toString() +
-                ' freq: ' +
-                freq.toString() +
-                ' dur: ' +
-                dur.toString(),
+            formula:
+                'el:$electrodes selectamp:$selectedcondchoiceampl freq: $freq dur: $dur',
             fixformula: ''));
         _candidateshortTaskMoveController.addCandidateShortTaskMove(
             CandidateShortTaskMove(
                 id: _shortTaskMoveController.shorttaskmoves.last.id));
       }
-      ;
     }
     if ((selectedactivity == LocaleKeys.cseat.tr()) &&
         (selectedcondchoiceampl == LocaleKeys.fixamp.tr())) {
       for (int i = 0; i < _shortTaskSeatController.shorttaskseats.length; i++) {
         if (_shortTaskSeatController.shorttaskseats[i].fixformula ==
-            ('el:' +
-                electrodes +
-                ' ampl:' +
-                amplitude.toString() +
-                ' freq: ' +
-                freq.toString() +
-                ' dur: ' +
-                dur.toString())) {
+            ('el:$electrodes ampl:$amplitude freq: $freq dur: $dur')) {
           _doubleshortTaskController.addDoubleShortTask(DoubleShortTask(
               program: program,
               electrodes: electrodes,
@@ -193,18 +151,11 @@ class ShortTaskController extends GetxController {
               hidefreq: hiddenamplfreqdur || hiddenfreqdur,
               hideamplt: hiddenamplfreqdur,
               formula: '',
-              fixformula: 'el:' +
-                  electrodes +
-                  ' ampl:' +
-                  amplitude.toString() +
-                  ' freq: ' +
-                  freq.toString() +
-                  ' dur: ' +
-                  dur.toString()));
+              fixformula:
+                  'el:$electrodes ampl:$amplitude freq: $freq dur: $dur'));
         }
       }
-      if (_countolddouble ==
-          _doubleshortTaskController.doubleshorttask.length) {
+      if (countolddouble == _doubleshortTaskController.doubleshorttask.length) {
         _shortTaskSeatController.addShortTaskSeat(
           ShortTaskSeat(
               success: 'undef',
@@ -218,14 +169,8 @@ class ShortTaskController extends GetxController {
               hidefreq: hiddenamplfreqdur || hiddenfreqdur,
               hideamplt: hiddenamplfreqdur,
               formula: '',
-              fixformula: 'el:' +
-                  electrodes +
-                  ' ampl:' +
-                  amplitude.toString() +
-                  ' freq: ' +
-                  freq.toString() +
-                  ' dur: ' +
-                  dur.toString()),
+              fixformula:
+                  'el:$electrodes ampl:$amplitude freq: $freq dur: $dur'),
         );
         _candidateshortTaskSeatController.addCandidateShortTaskSeat(
             CandidateShortTaskSeat(
@@ -237,14 +182,7 @@ class ShortTaskController extends GetxController {
         (selectedcondchoiceampl != LocaleKeys.fixamp.tr())) {
       for (int i = 0; i < _shortTaskSeatController.shorttaskseats.length; i++) {
         if (_shortTaskSeatController.shorttaskseats[i].formula ==
-            ('el:' +
-                electrodes +
-                ' selectamp:' +
-                selectedcondchoiceampl.toString() +
-                ' freq: ' +
-                freq.toString() +
-                ' dur: ' +
-                dur.toString())) {
+            ('el:$electrodes selectamp:$selectedcondchoiceampl freq: $freq dur: $dur')) {
           _doubleshortTaskController.addDoubleShortTask(DoubleShortTask(
               program: program,
               electrodes: electrodes,
@@ -255,19 +193,12 @@ class ShortTaskController extends GetxController {
               hidedur: hiddenamplfreqdur || hiddenfreqdur,
               hidefreq: hiddenamplfreqdur || hiddenfreqdur,
               hideamplt: hiddenamplfreqdur,
-              formula: 'el:' +
-                  electrodes +
-                  ' selectamp:' +
-                  selectedcondchoiceampl.toString() +
-                  ' freq: ' +
-                  freq.toString() +
-                  ' dur: ' +
-                  dur.toString(),
+              formula:
+                  'el:$electrodes selectamp:$selectedcondchoiceampl freq: $freq dur: $dur',
               fixformula: ''));
         }
       }
-      if (_countolddouble ==
-          _doubleshortTaskController.doubleshorttask.length) {
+      if (countolddouble == _doubleshortTaskController.doubleshorttask.length) {
         _shortTaskSeatController.addShortTaskSeat(ShortTaskSeat(
             success: 'indef',
             program: program,
@@ -279,33 +210,19 @@ class ShortTaskController extends GetxController {
             hidedur: hiddenamplfreqdur || hiddenfreqdur,
             hidefreq: hiddenamplfreqdur || hiddenfreqdur,
             hideamplt: hiddenamplfreqdur,
-            formula: 'el:' +
-                electrodes +
-                ' selectamp:' +
-                selectedcondchoiceampl.toString() +
-                ' freq: ' +
-                freq.toString() +
-                ' dur: ' +
-                dur.toString(),
+            formula:
+                'el:$electrodes selectamp:$selectedcondchoiceampl freq: $freq dur: $dur',
             fixformula: ''));
         _candidateshortTaskSeatController.addCandidateShortTaskSeat(
             CandidateShortTaskSeat(
                 id: _shortTaskSeatController.shorttaskseats.last.id));
       }
-      ;
     }
     if ((selectedactivity == LocaleKeys.clie.tr()) &&
         (selectedcondchoiceampl == LocaleKeys.fixamp.tr())) {
       for (int i = 0; i < _shortTaskLieController.shorttasklies.length; i++) {
         if (_shortTaskLieController.shorttasklies[i].fixformula ==
-            ('el:' +
-                electrodes +
-                ' ampl:' +
-                amplitude.toString() +
-                ' freq: ' +
-                freq.toString() +
-                ' dur: ' +
-                dur.toString())) {
+            ('el:$electrodes ampl:$amplitude freq: $freq dur: $dur')) {
           _doubleshortTaskController.addDoubleShortTask(DoubleShortTask(
               program: program,
               electrodes: electrodes,
@@ -317,18 +234,11 @@ class ShortTaskController extends GetxController {
               hidefreq: hiddenamplfreqdur || hiddenfreqdur,
               hideamplt: hiddenamplfreqdur,
               formula: '',
-              fixformula: 'el:' +
-                  electrodes +
-                  ' ampl:' +
-                  amplitude.toString() +
-                  ' freq: ' +
-                  freq.toString() +
-                  ' dur: ' +
-                  dur.toString()));
+              fixformula:
+                  'el:$electrodes ampl:$amplitude freq: $freq dur: $dur'));
         }
       }
-      if (_countolddouble ==
-          _doubleshortTaskController.doubleshorttask.length) {
+      if (countolddouble == _doubleshortTaskController.doubleshorttask.length) {
         _shortTaskLieController.addShortTaskLie(
           ShortTaskLie(
               success: 'undef',
@@ -342,14 +252,8 @@ class ShortTaskController extends GetxController {
               hidefreq: hiddenamplfreqdur || hiddenfreqdur,
               hideamplt: hiddenamplfreqdur,
               formula: '',
-              fixformula: 'el:' +
-                  electrodes +
-                  ' ampl:' +
-                  amplitude.toString() +
-                  ' freq: ' +
-                  freq.toString() +
-                  ' dur: ' +
-                  dur.toString()),
+              fixformula:
+                  'el:$electrodes ampl:$amplitude freq: $freq dur: $dur'),
         );
         _candidateshortTaskLieController.addCandidateShortTaskLie(
             CandidateShortTaskLie(
@@ -361,14 +265,7 @@ class ShortTaskController extends GetxController {
         (selectedcondchoiceampl != LocaleKeys.fixamp.tr())) {
       for (int i = 0; i < _shortTaskLieController.shorttasklies.length; i++) {
         if (_shortTaskLieController.shorttasklies[i].formula ==
-            ('el:' +
-                electrodes +
-                ' selectamp:' +
-                selectedcondchoiceampl.toString() +
-                ' freq: ' +
-                freq.toString() +
-                ' dur: ' +
-                dur.toString())) {
+            ('el:$electrodes selectamp:$selectedcondchoiceampl freq: $freq dur: $dur')) {
           _doubleshortTaskController.addDoubleShortTask(DoubleShortTask(
               program: program,
               electrodes: electrodes,
@@ -379,19 +276,12 @@ class ShortTaskController extends GetxController {
               hidedur: hiddenamplfreqdur || hiddenfreqdur,
               hidefreq: hiddenamplfreqdur || hiddenfreqdur,
               hideamplt: hiddenamplfreqdur,
-              formula: 'el:' +
-                  electrodes +
-                  ' selectamp:' +
-                  selectedcondchoiceampl.toString() +
-                  ' freq: ' +
-                  freq.toString() +
-                  ' dur: ' +
-                  dur.toString(),
+              formula:
+                  'el:$electrodes selectamp:$selectedcondchoiceampl freq: $freq dur: $dur',
               fixformula: ''));
         }
       }
-      if (_countolddouble ==
-          _doubleshortTaskController.doubleshorttask.length) {
+      if (countolddouble == _doubleshortTaskController.doubleshorttask.length) {
         _shortTaskLieController.addShortTaskLie(ShortTaskLie(
             success: 'indef',
             program: program,
@@ -403,20 +293,13 @@ class ShortTaskController extends GetxController {
             hidedur: hiddenamplfreqdur || hiddenfreqdur,
             hidefreq: hiddenamplfreqdur || hiddenfreqdur,
             hideamplt: hiddenamplfreqdur,
-            formula: 'el:' +
-                electrodes +
-                ' selectamp:' +
-                selectedcondchoiceampl.toString() +
-                ' freq: ' +
-                freq.toString() +
-                ' dur: ' +
-                dur.toString(),
+            formula:
+                'el:$electrodes selectamp:$selectedcondchoiceampl freq: $freq dur: $dur',
             fixformula: ''));
         _candidateshortTaskLieController.addCandidateShortTaskLie(
             CandidateShortTaskLie(
                 id: _shortTaskLieController.shorttasklies.last.id));
       }
-      ;
     }
   }
 }

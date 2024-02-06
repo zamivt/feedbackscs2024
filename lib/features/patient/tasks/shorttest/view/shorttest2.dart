@@ -28,7 +28,7 @@ class ShortTest2 extends StatefulWidget {
 class _ShortTest2State extends State<ShortTest2> {
   @override
   Widget build(BuildContext context) {
-    final _currentShortTaskControler = Get.find<CurrentShortTaskControler>();
+    final currentShortTaskControler = Get.find<CurrentShortTaskControler>();
     return Scaffold(
       appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.primary,
@@ -36,17 +36,10 @@ class _ShortTest2State extends State<ShortTest2> {
           centerTitle: true,
           automaticallyImplyLeading: false,
           titleSpacing: 0,
-          title: Text(Get.find<CurrentShortTaskControler>()
-                  .currentshorttasks[0]
-                  .position +
-              ': ' +
-              LocaleKeys.program.tr() +
-              ' ' +
-              Get.find<CurrentShortTaskControler>()
-                  .currentshorttasks[0]
-                  .program)),
+          title: Text(
+              '${Get.find<CurrentShortTaskControler>().currentshorttasks[0].position}: ${LocaleKeys.program.tr()} ${Get.find<CurrentShortTaskControler>().currentshorttasks[0].program}')),
       backgroundColor: Theme.of(context).colorScheme.secondary,
-      body: Container(
+      body: SizedBox(
         width: double.maxFinite,
         child: Column(
           children: [
@@ -56,7 +49,7 @@ class _ShortTest2State extends State<ShortTest2> {
               padding: const EdgeInsets.all(10),
               alignment: Alignment.center,
               child: Text(
-                '2.' + LocaleKeys.timerrun.tr(),
+                '2.${LocaleKeys.timerrun.tr()}',
                 style: Theme.of(context).textTheme.labelLarge,
               ),
             ),
@@ -75,9 +68,7 @@ class _ShortTest2State extends State<ShortTest2> {
                   ),
                   const Spacer(),
                   Text(
-                    TimeTestConst.timeshorttest.toString() +
-                        ' ' +
-                        LocaleKeys.min.tr(),
+                    '${TimeTestConst.timeshorttest} ${LocaleKeys.min.tr()}',
                     style: Theme.of(context).textTheme.displayLarge,
                   ),
                   const SizedBox(
@@ -91,19 +82,18 @@ class _ShortTest2State extends State<ShortTest2> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                 child: AppCommentText(text: LocaleKeys.interrupttesting.tr())),
-            Expanded(child: LongTest2Timer()),
+            const Expanded(child: LongTest2Timer()),
             ElevatedButton(
               child: Text(
                 LocaleKeys.aborttesting.tr(),
                 style: Theme.of(context).textTheme.labelLarge,
               ),
               onPressed: () {
-                _currentShortTaskControler
+                currentShortTaskControler
                     .addStopTestTimeShortTask(DateTime.now());
-                _currentShortTaskControler.addDurationTestTimeShortTask(
-                    _currentShortTaskControler
-                        .currentshorttasks[0].stoptesttime!
-                        .difference(_currentShortTaskControler
+                currentShortTaskControler.addDurationTestTimeShortTask(
+                    currentShortTaskControler.currentshorttasks[0].stoptesttime!
+                        .difference(currentShortTaskControler
                             .currentshorttasks[0].begintesttime!)
                         .inMinutes);
 
@@ -134,7 +124,7 @@ class LongTest2Timer extends StatelessWidget {
       child: GetBuilder(
           builder: (CurrentShortTaskControler currentShortTaskControler) {
         return Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           color: Theme.of(context).colorScheme.surfaceTint,
           child: AppCountUpTimer(
               dopstartTime:
@@ -167,7 +157,7 @@ class ShortTest2Timer extends StatelessWidget {
       child: GetBuilder(
           builder: (CurrentShortTaskControler currentShortTaskControler) {
         return Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           color: Theme.of(context).colorScheme.surfaceTint,
           child: AppCountDownTimer(
             hoursDescription: LocaleKeys.hours.tr(),

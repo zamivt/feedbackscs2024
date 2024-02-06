@@ -35,7 +35,7 @@ class _ShortTest1State extends State<ShortTest1> {
 
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
+    final formKey = GlobalKey<FormState>();
     final amplcondCtrl = TextEditingController();
     Provider.of<FeedbackSCSDatabase>(context, listen: false).readCurrentTest();
     final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
@@ -47,7 +47,7 @@ class _ShortTest1State extends State<ShortTest1> {
         .readundefShortTestMove();
 
     List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
-    final String _sex = currentpatient[0].sex;
+    final String sex = currentpatient[0].sex;
     final String position = currenttask[0].position;
     final String condition = currenttask[0].condition;
     final String program = currenttask[0].program;
@@ -74,26 +74,26 @@ class _ShortTest1State extends State<ShortTest1> {
         // ),
         body: SafeArea(
           child: Form(
-            key: _formKey,
+            key: formKey,
             child: Column(
               children: [
                 AppPictureContainer(
                     widget1: Container(),
                     widget2: Container(),
                     picture: ((position == LocaleKeys.cmove.tr()) &
-                            (_sex == LocaleKeys.fem.tr()))
+                            (sex == LocaleKeys.fem.tr()))
                         ? AppImages.painmovewomen
                         : ((position == LocaleKeys.cmove.tr()) &
-                                (_sex == LocaleKeys.mal.tr()))
+                                (sex == LocaleKeys.mal.tr()))
                             ? AppImages.painmovemen
                             : ((position == LocaleKeys.cseat.tr()) &
-                                    (_sex == LocaleKeys.fem.tr()))
+                                    (sex == LocaleKeys.fem.tr()))
                                 ? AppImages.painseatwomen
                                 : ((position == LocaleKeys.cseat.tr()) &
-                                        (_sex == LocaleKeys.mal.tr()))
+                                        (sex == LocaleKeys.mal.tr()))
                                     ? AppImages.painseatmen
                                     : ((position == LocaleKeys.clie.tr()) &
-                                            (_sex == LocaleKeys.fem.tr()))
+                                            (sex == LocaleKeys.fem.tr()))
                                         ? AppImages.painsleepwomen
                                         : AppImages.painsleepmen,
                     title: LocaleKeys.shorttest.tr()),
@@ -105,21 +105,10 @@ class _ShortTest1State extends State<ShortTest1> {
                       children: [
                         AppCommentText(
                             text: position == LocaleKeys.cmove.tr()
-                                ? LocaleKeys.conditionmove1.tr() +
-                                    ' ' +
-                                    TimeTestConst.timeshorttest.toString() +
-                                    ' ' +
-                                    LocaleKeys.conditionmove2.tr()
+                                ? '${LocaleKeys.conditionmove1.tr()} ${TimeTestConst.timeshorttest} ${LocaleKeys.conditionmove2.tr()}'
                                 : position == LocaleKeys.cseat.tr()
-                                    ? LocaleKeys.conditionseat1.tr() +
-                                        TimeTestConst.timeshorttest.toString() +
-                                        " " +
-                                        LocaleKeys.conditionseat2.tr()
-                                    : LocaleKeys.conditionlie1.tr() +
-                                        ' ' +
-                                        TimeTestConst.timeshorttest.toString() +
-                                        ' ' +
-                                        LocaleKeys.conditionlie2.tr()),
+                                    ? "${LocaleKeys.conditionseat1.tr()}${TimeTestConst.timeshorttest} ${LocaleKeys.conditionseat2.tr()}"
+                                    : '${LocaleKeys.conditionlie1.tr()} ${TimeTestConst.timeshorttest} ${LocaleKeys.conditionlie2.tr()}'),
                         if (condition == LocaleKeys.fixamp.tr())
                           AppTableFullParamStim(
                             program: program,
@@ -151,19 +140,18 @@ class _ShortTest1State extends State<ShortTest1> {
                                   ],
                                 ),
                               ),
-                              AppDivider(),
+                              const AppDivider(),
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 8),
                                 child: AppTextField(
                                   isText: false,
-                                  title: LocaleKeys.setamplitudecond.tr() +
-                                      ' ' +
-                                      condition.toString(),
+                                  title:
+                                      '${LocaleKeys.setamplitudecond.tr()} $condition',
                                   controller: amplcondCtrl,
                                 ),
                               ),
-                              AppDivider(),
+                              const AppDivider(),
                               !hidefreq
                                   ? Padding(
                                       padding: const EdgeInsets.symmetric(
@@ -184,7 +172,7 @@ class _ShortTest1State extends State<ShortTest1> {
                                       ),
                                     )
                                   : Container(),
-                              !hidefreq ? AppDivider() : Container(),
+                              !hidefreq ? const AppDivider() : Container(),
                               !hidedur
                                   ? Padding(
                                       padding: const EdgeInsets.symmetric(
@@ -205,10 +193,10 @@ class _ShortTest1State extends State<ShortTest1> {
                                       ),
                                     )
                                   : Container(),
-                              !hidedur ? AppDivider() : Container(),
+                              !hidedur ? const AppDivider() : Container(),
                             ],
                           ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                       ],
@@ -218,7 +206,8 @@ class _ShortTest1State extends State<ShortTest1> {
                 Container(
                   color: Theme.of(context).colorScheme.secondary,
                   width: double.infinity,
-                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
                   child: ElevatedButton(
                       onPressed: () {
                         // currentShortTaskControler
@@ -233,7 +222,7 @@ class _ShortTest1State extends State<ShortTest1> {
                         style: Theme.of(context).textTheme.labelLarge,
                       )),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 )
               ],
@@ -245,12 +234,12 @@ class _ShortTest1State extends State<ShortTest1> {
   void addconditionamp(
       CurrentShortTaskControler currentShortTaskControler,
       TextEditingController amplcondCtrl,
-      String _position,
-      ShortTaskMoveControler _shorttaskmovecontroller,
+      String position,
+      ShortTaskMoveControler shorttaskmovecontroller,
       BuildContext context,
-      ShortTaskSeatControler _shorttaskseatcontroller,
-      ShortTaskLieControler _shorttaskliecontroller) {
-    int _countdouble = 0;
+      ShortTaskSeatControler shorttaskseatcontroller,
+      ShortTaskLieControler shorttaskliecontroller) {
+    int countdouble = 0;
     if (currentShortTaskControler.currentshorttasks[0].condition ==
         LocaleKeys.fixamp.tr()) {
       context.read<FeedbackSCSDatabase>().updateActiveTask('st2');
@@ -259,33 +248,20 @@ class _ShortTest1State extends State<ShortTest1> {
       currentShortTaskControler
           .addConditionAmpTestTimeShortTask(double.parse(amplcondCtrl.text));
 
-      _position == LocaleKeys.cmove.tr()
+      position == LocaleKeys.cmove.tr()
           ? {
               for (int i = 0;
-                  i < _shorttaskmovecontroller.shorttaskmoves.length;
+                  i < shorttaskmovecontroller.shorttaskmoves.length;
                   i++)
                 {
-                  if ((_shorttaskmovecontroller.shorttaskmoves[i].fixformula ==
-                          'el:' +
-                              currentShortTaskControler
-                                  .currentshorttasks[0].electrodes +
-                              ' ampl:' +
-                              currentShortTaskControler
-                                  .currentshorttasks[0].amplit
-                                  .toString() +
-                              ' freq: ' +
-                              currentShortTaskControler
-                                  .currentshorttasks[0].freq
-                                  .toString() +
-                              ' dur: ' +
-                              currentShortTaskControler.currentshorttasks[0].dur
-                                  .toString()) &
-                      (_shorttaskmovecontroller.shorttaskmoves[i].success !=
+                  if ((shorttaskmovecontroller.shorttaskmoves[i].fixformula ==
+                          'el:${currentShortTaskControler.currentshorttasks[0].electrodes} ampl:${currentShortTaskControler.currentshorttasks[0].amplit} freq: ${currentShortTaskControler.currentshorttasks[0].freq} dur: ${currentShortTaskControler.currentshorttasks[0].dur}') &
+                      (shorttaskmovecontroller.shorttaskmoves[i].success !=
                           'undef'))
-                    {_countdouble++},
-                  if (_countdouble == 0)
+                    {countdouble++},
+                  if (countdouble == 0)
                     {
-                      _shorttaskmovecontroller.addAmpCondition(
+                      shorttaskmovecontroller.addAmpCondition(
                           currentShortTaskControler.currentshorttasks[0].id,
                           currentShortTaskControler
                               .currentshorttasks[0].amplit!),
@@ -303,11 +279,11 @@ class _ShortTest1State extends State<ShortTest1> {
                         title: Text(currentShortTaskControler
                             .currentshorttasks[0].position),
                         onProgressFinished: () => {
-                          _shorttaskmovecontroller.addAmpCondition(
+                          shorttaskmovecontroller.addAmpCondition(
                               currentShortTaskControler.currentshorttasks[0].id,
                               currentShortTaskControler
                                   .currentshorttasks[0].amplit!),
-                          _shorttaskmovecontroller.addSuccess(
+                          shorttaskmovecontroller.addSuccess(
                               'double',
                               currentShortTaskControler
                                   .currentshorttasks[0].id),
@@ -319,11 +295,11 @@ class _ShortTest1State extends State<ShortTest1> {
                         },
                         description: Text(LocaleKeys.noaddtask.tr()),
                         onDismiss: () => {
-                          _shorttaskmovecontroller.addAmpCondition(
+                          shorttaskmovecontroller.addAmpCondition(
                               currentShortTaskControler.currentshorttasks[0].id,
                               currentShortTaskControler
                                   .currentshorttasks[0].amplit!),
-                          _shorttaskmovecontroller.addSuccess(
+                          shorttaskmovecontroller.addSuccess(
                               'double',
                               currentShortTaskControler
                                   .currentshorttasks[0].id),
@@ -337,35 +313,21 @@ class _ShortTest1State extends State<ShortTest1> {
                     }
                 }
             }
-          : _position == LocaleKeys.cseat.tr()
+          : position == LocaleKeys.cseat.tr()
               ? {
                   for (int i = 0;
-                      i < _shorttaskseatcontroller.shorttaskseats.length;
+                      i < shorttaskseatcontroller.shorttaskseats.length;
                       i++)
                     {
-                      if ((_shorttaskseatcontroller
+                      if ((shorttaskseatcontroller
                                   .shorttaskseats[i].fixformula ==
-                              'el:' +
-                                  currentShortTaskControler
-                                      .currentshorttasks[0].electrodes +
-                                  ' ampl:' +
-                                  currentShortTaskControler
-                                      .currentshorttasks[0].amplit
-                                      .toString() +
-                                  ' freq: ' +
-                                  currentShortTaskControler
-                                      .currentshorttasks[0].freq
-                                      .toString() +
-                                  ' dur: ' +
-                                  currentShortTaskControler
-                                      .currentshorttasks[0].dur
-                                      .toString()) &
-                          (_shorttaskseatcontroller.shorttaskseats[i].success !=
+                              'el:${currentShortTaskControler.currentshorttasks[0].electrodes} ampl:${currentShortTaskControler.currentshorttasks[0].amplit} freq: ${currentShortTaskControler.currentshorttasks[0].freq} dur: ${currentShortTaskControler.currentshorttasks[0].dur}') &
+                          (shorttaskseatcontroller.shorttaskseats[i].success !=
                               'undef'))
-                        {_countdouble++},
-                      if (_countdouble == 0)
+                        {countdouble++},
+                      if (countdouble == 0)
                         {
-                          _shorttaskseatcontroller.addAmpCondition(
+                          shorttaskseatcontroller.addAmpCondition(
                               currentShortTaskControler.currentshorttasks[0].id,
                               currentShortTaskControler
                                   .currentshorttasks[0].amplit!),
@@ -383,12 +345,12 @@ class _ShortTest1State extends State<ShortTest1> {
                             title: Text(currentShortTaskControler
                                 .currentshorttasks[0].position),
                             onProgressFinished: () => {
-                              _shorttaskseatcontroller.addAmpCondition(
+                              shorttaskseatcontroller.addAmpCondition(
                                   currentShortTaskControler
                                       .currentshorttasks[0].id,
                                   currentShortTaskControler
                                       .currentshorttasks[0].amplit!),
-                              _shorttaskseatcontroller.addSuccess(
+                              shorttaskseatcontroller.addSuccess(
                                   'double',
                                   currentShortTaskControler
                                       .currentshorttasks[0].id),
@@ -400,12 +362,12 @@ class _ShortTest1State extends State<ShortTest1> {
                             },
                             description: Text(LocaleKeys.noaddtask.tr()),
                             onDismiss: () => {
-                              _shorttaskseatcontroller.addAmpCondition(
+                              shorttaskseatcontroller.addAmpCondition(
                                   currentShortTaskControler
                                       .currentshorttasks[0].id,
                                   currentShortTaskControler
                                       .currentshorttasks[0].amplit!),
-                              _shorttaskseatcontroller.addSuccess(
+                              shorttaskseatcontroller.addSuccess(
                                   'double',
                                   currentShortTaskControler
                                       .currentshorttasks[0].id),
@@ -421,32 +383,17 @@ class _ShortTest1State extends State<ShortTest1> {
                 }
               : {
                   for (int i = 0;
-                      i < _shorttaskliecontroller.shorttasklies.length;
+                      i < shorttaskliecontroller.shorttasklies.length;
                       i++)
                     {
-                      if ((_shorttaskliecontroller
-                                  .shorttasklies[i].fixformula ==
-                              'el:' +
-                                  currentShortTaskControler
-                                      .currentshorttasks[0].electrodes +
-                                  ' ampl:' +
-                                  currentShortTaskControler
-                                      .currentshorttasks[0].amplit
-                                      .toString() +
-                                  ' freq: ' +
-                                  currentShortTaskControler
-                                      .currentshorttasks[0].freq
-                                      .toString() +
-                                  ' dur: ' +
-                                  currentShortTaskControler
-                                      .currentshorttasks[0].dur
-                                      .toString()) &
-                          (_shorttaskliecontroller.shorttasklies[i].success !=
+                      if ((shorttaskliecontroller.shorttasklies[i].fixformula ==
+                              'el:${currentShortTaskControler.currentshorttasks[0].electrodes} ampl:${currentShortTaskControler.currentshorttasks[0].amplit} freq: ${currentShortTaskControler.currentshorttasks[0].freq} dur: ${currentShortTaskControler.currentshorttasks[0].dur}') &
+                          (shorttaskliecontroller.shorttasklies[i].success !=
                               'undef'))
-                        {_countdouble++},
-                      if (_countdouble == 0)
+                        {countdouble++},
+                      if (countdouble == 0)
                         {
-                          _shorttaskliecontroller.addAmpCondition(
+                          shorttaskliecontroller.addAmpCondition(
                               currentShortTaskControler.currentshorttasks[0].id,
                               currentShortTaskControler
                                   .currentshorttasks[0].amplit!),
@@ -464,12 +411,12 @@ class _ShortTest1State extends State<ShortTest1> {
                             title: Text(currentShortTaskControler
                                 .currentshorttasks[0].position),
                             onProgressFinished: () => {
-                              _shorttaskliecontroller.addAmpCondition(
+                              shorttaskliecontroller.addAmpCondition(
                                   currentShortTaskControler
                                       .currentshorttasks[0].id,
                                   currentShortTaskControler
                                       .currentshorttasks[0].amplit!),
-                              _shorttaskliecontroller.addSuccess(
+                              shorttaskliecontroller.addSuccess(
                                   'double',
                                   currentShortTaskControler
                                       .currentshorttasks[0].id),
@@ -481,12 +428,12 @@ class _ShortTest1State extends State<ShortTest1> {
                             },
                             description: Text(LocaleKeys.noaddtask.tr()),
                             onDismiss: () => {
-                              _shorttaskliecontroller.addAmpCondition(
+                              shorttaskliecontroller.addAmpCondition(
                                   currentShortTaskControler
                                       .currentshorttasks[0].id,
                                   currentShortTaskControler
                                       .currentshorttasks[0].amplit!),
-                              _shorttaskliecontroller.addSuccess(
+                              shorttaskliecontroller.addSuccess(
                                   'double',
                                   currentShortTaskControler
                                       .currentshorttasks[0].id),
@@ -501,6 +448,5 @@ class _ShortTest1State extends State<ShortTest1> {
                     }
                 };
     }
-    ;
   }
 }

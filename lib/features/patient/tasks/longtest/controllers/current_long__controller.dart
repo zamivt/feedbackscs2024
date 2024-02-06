@@ -18,7 +18,6 @@ class CurrentLongTaskControler extends GetxController {
   addCurrentLongTask(CurrentLongTask currentlongtask) {
     curentlongtaskbox.values.isNotEmpty
         ? {
-            print(currentlongtasks.length),
             _currentlongtasks.setAll(0, [currentlongtask]),
             curentlongtaskbox.putAt(0, currentlongtask),
             update()

@@ -43,14 +43,8 @@ class ShortTaskSeatControler extends GetxController {
         index = i;
 
         shorttaskseats[index].amplit = condamplit;
-        shorttaskseats[index].fixformula = 'el:' +
-            shorttaskseats[index].electrodes +
-            ' ampl:' +
-            shorttaskseats[index].amplit.toString() +
-            ' freq: ' +
-            shorttaskseats[index].freq.toString() +
-            ' dur: ' +
-            shorttaskseats[index].dur.toString();
+        shorttaskseats[index].fixformula =
+            'el:${shorttaskseats[index].electrodes} ampl:${shorttaskseats[index].amplit} freq: ${shorttaskseats[index].freq} dur: ${shorttaskseats[index].dur}';
         shorttaskseatbox.putAt(index, shorttaskseats[index]);
       }
     }

@@ -28,7 +28,7 @@ class DocListShortTaskMove extends StatelessWidget {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             onPressed: () {
               context.pushNamed(RouteNames.doctasks);
             },
@@ -37,8 +37,8 @@ class DocListShortTaskMove extends StatelessWidget {
           foregroundColor: Colors.white,
           centerTitle: true,
           title: Text(
-            LocaleKeys.tasks.tr() + " : " + LocaleKeys.cmove.tr(),
-            style: TextStyle(fontSize: 16),
+            "${LocaleKeys.tasks.tr()} : ${LocaleKeys.cmove.tr()}",
+            style: const TextStyle(fontSize: 16),
           ),
         ),
         body: SafeArea(
@@ -55,7 +55,7 @@ class DocListShortTaskMove extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     color: Theme.of(context).colorScheme.tertiary,
                     child: Text(
-                      LocaleKeys.electrodes.tr() + ": " + value,
+                      "${LocaleKeys.electrodes.tr()}: $value",
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.displayLarge,
                     ),
@@ -126,7 +126,7 @@ class DocListShortTaskMove extends StatelessWidget {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.center,
                                               children: [
-                                                SizedBox(
+                                                const SizedBox(
                                                   width: 5,
                                                 ),
                                                 Padding(
@@ -138,7 +138,7 @@ class DocListShortTaskMove extends StatelessWidget {
                                                           .textTheme
                                                           .displaySmall,
                                                     )),
-                                                SizedBox(
+                                                const SizedBox(
                                                   width: 5,
                                                 ),
                                                 Text(
@@ -148,8 +148,10 @@ class DocListShortTaskMove extends StatelessWidget {
                                                       .displaySmall,
                                                 ),
                                                 element.hideamplt
-                                                    ? Icon(Icons.visibility_off)
-                                                    : Icon(Icons.visibility)
+                                                    ? const Icon(
+                                                        Icons.visibility_off)
+                                                    : const Icon(
+                                                        Icons.visibility)
                                               ],
                                             )
                                           : Column(
@@ -202,22 +204,20 @@ class DocListShortTaskMove extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: [
-                                          SizedBox(width: 5),
+                                          const SizedBox(width: 5),
                                           Padding(
                                             padding: const EdgeInsets.symmetric(
                                                 vertical: 5),
                                             child: Text(
-                                              LocaleKeys.freqs.tr() +
-                                                  ': ' +
-                                                  element.freq.toString(),
+                                              '${LocaleKeys.freqs.tr()}: ${element.freq}',
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .displaySmall,
                                             ),
                                           ),
                                           element.hidefreq
-                                              ? Icon(Icons.visibility_off)
-                                              : Icon(Icons.visibility),
+                                              ? const Icon(Icons.visibility_off)
+                                              : const Icon(Icons.visibility),
                                         ],
                                       ),
                                       Row(
@@ -226,7 +226,7 @@ class DocListShortTaskMove extends StatelessWidget {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
                                           children: [
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 5,
                                             ),
                                             Padding(
@@ -234,17 +234,16 @@ class DocListShortTaskMove extends StatelessWidget {
                                                   const EdgeInsets.symmetric(
                                                       vertical: 5),
                                               child: Text(
-                                                LocaleKeys.durs.tr() +
-                                                    ': ' +
-                                                    element.dur.toString(),
+                                                '${LocaleKeys.durs.tr()}: ${element.dur}',
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .displaySmall,
                                               ),
                                             ),
                                             element.hidedur
-                                                ? Icon(Icons.visibility_off)
-                                                : Icon(Icons.visibility)
+                                                ? const Icon(
+                                                    Icons.visibility_off)
+                                                : const Icon(Icons.visibility)
                                           ])
                                     ],
                                   )

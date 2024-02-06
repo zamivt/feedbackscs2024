@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'dart:async';
 import 'package:flutter/widgets.dart';
 
@@ -109,7 +111,7 @@ class _AppCountDownTimerState extends State<AppCountUpTimer> {
     countdownMinutes = _durationToStringMinutes(difference);
     countdownSeconds = _durationToStringSeconds(difference);
 
-    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       difference = -widget.startTime.difference(DateTime.now()) -
           widget.dopstartTime.difference(DateTime.now());
       widget.onTick?.call(difference);
@@ -142,7 +144,7 @@ class _AppCountDownTimerState extends State<AppCountUpTimer> {
               style: widget.colonsTextStyle,
             ),
             if (widget.enableDescriptions)
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
             if (widget.enableDescriptions)
@@ -166,7 +168,7 @@ class _AppCountDownTimerState extends State<AppCountUpTimer> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         if (widget.enableDescriptions)
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
         if (widget.enableDescriptions)
@@ -189,7 +191,7 @@ class _AppCountDownTimerState extends State<AppCountUpTimer> {
           style: widget.timeTextStyle,
         ),
         if (widget.enableDescriptions)
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
         if (widget.enableDescriptions)
@@ -212,7 +214,7 @@ class _AppCountDownTimerState extends State<AppCountUpTimer> {
           style: widget.timeTextStyle,
         ),
         if (widget.enableDescriptions)
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
         if (widget.enableDescriptions)
@@ -235,7 +237,7 @@ class _AppCountDownTimerState extends State<AppCountUpTimer> {
           style: widget.timeTextStyle,
         ),
         if (widget.enableDescriptions)
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
         if (widget.enableDescriptions)
@@ -282,8 +284,9 @@ class _AppCountDownTimerState extends State<AppCountUpTimer> {
         widget.format == CountAppTimerFormat.hoursMinutes ||
         widget.format == CountAppTimerFormat.hoursOnly) {
       return _twoDigits(duration.inHours, "hours");
-    } else
+    } else {
       return _twoDigits(duration.inHours.remainder(24), "hours").toString();
+    }
   }
 
   /// Convert [Duration] in minutes to String for UI.
@@ -291,16 +294,18 @@ class _AppCountDownTimerState extends State<AppCountUpTimer> {
     if (widget.format == CountAppTimerFormat.minutesSeconds ||
         widget.format == CountAppTimerFormat.minutesOnly) {
       return _twoDigits(duration.inMinutes, "minutes");
-    } else
+    } else {
       return _twoDigits(duration.inMinutes.remainder(60), "minutes");
+    }
   }
 
   /// Convert [Duration] in seconds to String for UI.
   String _durationToStringSeconds(Duration duration) {
     if (widget.format == CountAppTimerFormat.secondsOnly) {
       return _twoDigits(duration.inSeconds, "seconds");
-    } else
+    } else {
       return _twoDigits(duration.inSeconds.remainder(60), "seconds");
+    }
   }
 
   /// Switches the UI to be displayed based on [CountDownTimerFormat].

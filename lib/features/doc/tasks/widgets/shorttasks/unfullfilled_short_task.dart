@@ -42,7 +42,7 @@ class _UnfulfilledshorttasksState extends State<Unfulfilledshorttasks> {
           decoration: BoxDecoration(
               border: Border.all(color: Theme.of(context).colorScheme.primary),
               color: Theme.of(context).colorScheme.primary,
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(8), topRight: Radius.circular(8))),
           child: Text(LocaleKeys.unfulfilledtasks.tr(),
               textAlign: TextAlign.center,
@@ -50,11 +50,11 @@ class _UnfulfilledshorttasksState extends State<Unfulfilledshorttasks> {
         ),
         Container(
           padding: const EdgeInsets.all(8.0),
-          margin: EdgeInsets.only(bottom: 10),
+          margin: const EdgeInsets.only(bottom: 10),
           decoration: BoxDecoration(
               border: Border.all(color: Theme.of(context).colorScheme.primary),
               color: Theme.of(context).colorScheme.tertiary,
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(8),
                   bottomRight: Radius.circular(8))),
           alignment: Alignment.center,
@@ -63,23 +63,20 @@ class _UnfulfilledshorttasksState extends State<Unfulfilledshorttasks> {
             children: [
               Expanded(
                 child: AppTextButton(
-                    text: LocaleKeys.cmove.tr() +
-                        '\n' +
-                        undefmoveshortTest.length.toString(),
+                    text:
+                        '${LocaleKeys.cmove.tr()}\n${undefmoveshortTest.length}',
                     linkbutton: RouteNames.doccandidateshorttaskmove),
               ),
               Expanded(
                 child: AppTextButton(
-                    text: LocaleKeys.cseat.tr() +
-                        '\n' +
-                        undefseatshortTest.length.toString(),
+                    text:
+                        '${LocaleKeys.cseat.tr()}\n${undefseatshortTest.length}',
                     linkbutton: RouteNames.doccandidateshorttaskseat),
               ),
               Expanded(
                 child: AppTextButton(
-                    text: LocaleKeys.clie.tr() +
-                        '\n' +
-                        undeflieshortTest.length.toString(),
+                    text:
+                        '${LocaleKeys.clie.tr()}\n${undeflieshortTest.length}',
                     linkbutton: RouteNames.doccandidateshorttasklie),
               )
             ],

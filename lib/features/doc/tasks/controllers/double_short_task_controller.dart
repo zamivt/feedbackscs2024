@@ -24,7 +24,7 @@ class DoubleShortTaskControler extends GetxController {
   }
 
   clearDoubleShortTask() {
-    if (_doubleshorttasks.length != 0) {
+    if (_doubleshorttasks.isNotEmpty) {
       _doubleshorttasks = [];
       doubleshorttaskbox.clear;
       update();

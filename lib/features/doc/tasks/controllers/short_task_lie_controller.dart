@@ -42,14 +42,8 @@ class ShortTaskLieControler extends GetxController {
         index = i;
 
         shorttasklies[index].amplit = condamplit;
-        shorttasklies[index].fixformula = 'el:' +
-            shorttasklies[index].electrodes +
-            ' ampl:' +
-            shorttasklies[index].amplit.toString() +
-            ' freq: ' +
-            shorttasklies[index].freq.toString() +
-            ' dur: ' +
-            shorttasklies[index].dur.toString();
+        shorttasklies[index].fixformula =
+            'el:${shorttasklies[index].electrodes} ampl:${shorttasklies[index].amplit} freq: ${shorttasklies[index].freq} dur: ${shorttasklies[index].dur}';
         shorttaskliebox.putAt(index, shorttasklies[index]);
       }
     }

@@ -24,14 +24,14 @@ class AppEmptyWidget extends StatelessWidget {
             padding: EdgeInsets.zero,
             width: double.infinity,
             color: Theme.of(context).colorScheme.onSurface,
-            child: Icon(
+            child: const Icon(
               Icons.data_thresholding,
               size: 60,
               color: Colors.blue,
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 5),
+            padding: const EdgeInsets.symmetric(vertical: 5),
             child: Text(
               (title == 'nodata') ? LocaleKeys.nodate.tr() : title,
               style: Theme.of(context).textTheme.displayLarge,

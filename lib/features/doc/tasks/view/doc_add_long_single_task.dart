@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:elegant_notification/elegant_notification.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +42,7 @@ class _DocAddLongSingleTaskState extends State<DocAddLongSingleTask> {
 
   String? _selectedactivity;
   final requiredvalidator =
-      RequiredValidator(errorText: LocaleKeys.requiredfield.tr() + '*');
+      RequiredValidator(errorText: '${LocaleKeys.requiredfield.tr()}*');
   @override
   void dispose() {
     _programCtrl.dispose();
@@ -100,7 +102,7 @@ class _DocAddLongSingleTaskState extends State<DocAddLongSingleTask> {
                                   fillColor: Colors.white,
                                   filled: true),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             TextFormField(
@@ -120,7 +122,7 @@ class _DocAddLongSingleTaskState extends State<DocAddLongSingleTask> {
                                   fillColor: Colors.white,
                                   filled: true),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Text(LocaleKeys.choiceactivity.tr(),
@@ -219,7 +221,7 @@ class _DocAddLongSingleTaskState extends State<DocAddLongSingleTask> {
                                 textAlign: TextAlign.end,
                                 style:
                                     Theme.of(context).textTheme.displayLarge),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             TextFormField(
@@ -254,7 +256,7 @@ class _DocAddLongSingleTaskState extends State<DocAddLongSingleTask> {
                                 '${liststimul.map((neumodel) => neumodel.mindur).toList().first} - ${liststimul.map((neumodel) => neumodel.maxdur).toList().first}',
                                 style:
                                     Theme.of(context).textTheme.displayLarge),
-                            AppDivider(),
+                            const AppDivider(),
                             Text(LocaleKeys.choicehide.tr(),
                                 style:
                                     Theme.of(context).textTheme.displaySmall),
@@ -271,11 +273,11 @@ class _DocAddLongSingleTaskState extends State<DocAddLongSingleTask> {
                                                 .textTheme
                                                 .displayLarge),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 20,
                                       ),
                                       Container(
-                                        padding: EdgeInsets.symmetric(
+                                        padding: const EdgeInsets.symmetric(
                                             vertical: 5, horizontal: 8),
                                         color: Theme.of(context)
                                             .colorScheme
@@ -286,7 +288,7 @@ class _DocAddLongSingleTaskState extends State<DocAddLongSingleTask> {
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .displaySmall),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 10,
                                             ),
                                             Transform.scale(
@@ -308,7 +310,7 @@ class _DocAddLongSingleTaskState extends State<DocAddLongSingleTask> {
                                                     .primary,
                                               ),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 10,
                                             ),
                                             Text(LocaleKeys.yes.tr(),
@@ -320,7 +322,7 @@ class _DocAddLongSingleTaskState extends State<DocAddLongSingleTask> {
                                       ),
                                     ],
                                   ),
-                            AppDivider(),
+                            const AppDivider(),
                             !_hidefreqdur
                                 ? Row(
                                     children: [
@@ -330,11 +332,11 @@ class _DocAddLongSingleTaskState extends State<DocAddLongSingleTask> {
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .displayLarge)),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 20,
                                       ),
                                       Container(
-                                        padding: EdgeInsets.symmetric(
+                                        padding: const EdgeInsets.symmetric(
                                             vertical: 5, horizontal: 8),
                                         color: Theme.of(context)
                                             .colorScheme
@@ -345,7 +347,7 @@ class _DocAddLongSingleTaskState extends State<DocAddLongSingleTask> {
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .displaySmall),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 10,
                                             ),
                                             Transform.scale(
@@ -367,7 +369,7 @@ class _DocAddLongSingleTaskState extends State<DocAddLongSingleTask> {
                                                     .primary,
                                               ),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               width: 10,
                                             ),
                                             Text(LocaleKeys.yes.tr(),
@@ -377,13 +379,13 @@ class _DocAddLongSingleTaskState extends State<DocAddLongSingleTask> {
                                           ],
                                         ),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 5,
                                       )
                                     ],
                                   )
                                 : Container(),
-                            AppDivider(),
+                            const AppDivider(),
                             ElevatedButton(
                                 child: Text(
                                   LocaleKeys.save.tr(),
@@ -414,7 +416,7 @@ class _DocAddLongSingleTaskState extends State<DocAddLongSingleTask> {
           _hidefreqdur,
           _hideampfreqdur);
     }
-    ElegantNotification.success(description: Text('Задание добавлено'));
+    ElegantNotification.success(description: const Text('Задание добавлено'));
     context.pushNamed(RouteNames.doctasks);
   }
 

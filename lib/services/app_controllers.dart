@@ -1,4 +1,4 @@
-// ignore_for_file: unused_local_variable, duplicate_ignore
+// ignore_for_file: unused_local_variable, duplicate_ignore, non_constant_identifier_names
 
 import 'package:feedbackscs2024/features/doc/tasks/controllers/before_task_controller.dart';
 import 'package:feedbackscs2024/features/patient/battery/controllers/battery_controllers.dart';

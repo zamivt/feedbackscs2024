@@ -53,8 +53,9 @@ class _DocAuthMainScreenState extends State<DocAuthMainScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  padding: EdgeInsets.all(20),
-                  margin: EdgeInsets.symmetric(vertical: 100, horizontal: 10),
+                  padding: const EdgeInsets.all(20),
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 100, horizontal: 10),
                   decoration: BoxDecoration(
                       border: Border.all(
                           color: Theme.of(context).colorScheme.primary),
@@ -62,7 +63,7 @@ class _DocAuthMainScreenState extends State<DocAuthMainScreen> {
                       borderRadius: BorderRadius.circular(8)),
                   child: Column(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       TextFormField(
@@ -136,14 +137,13 @@ class _DocAuthMainScreenState extends State<DocAuthMainScreen> {
                                               .colorScheme
                                               .surfaceTint,
                                           child: Center(
-                                              child: Container(
-                                                  child: Text(
+                                              child: Text(
                                             LocaleKeys.wrongploginpassword.tr(),
                                             textAlign: TextAlign.center,
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .displayLarge,
-                                          ))));
+                                          )));
                                     });
                               }
                             } else {
@@ -151,15 +151,14 @@ class _DocAuthMainScreenState extends State<DocAuthMainScreen> {
                                   isDismissible: true,
                                   context: context,
                                   builder: (context) {
-                                    return Container(
+                                    return SizedBox(
                                         height: 150,
                                         width: double.infinity,
                                         child: Center(
-                                            child: Container(
-                                                child: Text(
+                                            child: Text(
                                           LocaleKeys.invaliduserdata.tr(),
                                           textAlign: TextAlign.center,
-                                        ))));
+                                        )));
                                   });
                             }
                           },

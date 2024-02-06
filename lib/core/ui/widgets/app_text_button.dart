@@ -5,7 +5,8 @@ class AppTextButton extends StatelessWidget {
   final String text;
   final String linkbutton;
 
-  AppTextButton({super.key, required this.text, required this.linkbutton});
+  const AppTextButton(
+      {super.key, required this.text, required this.linkbutton});
 
   @override
   Widget build(BuildContext context) {

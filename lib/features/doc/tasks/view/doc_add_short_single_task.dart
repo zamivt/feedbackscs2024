@@ -1,3 +1,5 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers, non_constant_identifier_names
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:elegant_notification/elegant_notification.dart';
 import 'package:elegant_notification/resources/arrays.dart';
@@ -41,7 +43,7 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
 
   String? _selectedactivity;
   final requiredvalidator =
-      RequiredValidator(errorText: LocaleKeys.requiredfield.tr() + '*');
+      RequiredValidator(errorText: '${LocaleKeys.requiredfield.tr()}*');
 
   @override
   void dispose() {
@@ -74,9 +76,9 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
           );
       Provider.of<FeedbackSCSDatabase>(context, listen: false).currentTest;
 
-      Future.delayed(Duration(milliseconds: 500), () {
+      Future.delayed(const Duration(milliseconds: 500), () {
         Provider.of<FeedbackSCSDatabase>(context, listen: false).doubleTest;
-        feedbackSCSDatabase.doubleTest.length > 0
+        feedbackSCSDatabase.doubleTest.isNotEmpty
             ? ElegantNotification.error(
                 width: 360,
                 notificationPosition: NotificationPosition.center,
@@ -115,7 +117,6 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
               ).show(context);
       });
     }
-    ;
   }
 
   @override
@@ -177,23 +178,23 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
                     autovalidateMode: AutovalidateMode.always,
                     child: Column(children: [
                       busyprogram.isEmpty
-                          ? Text('')
+                          ? const Text('')
                           : Wrap(children: [
-                              Text(LocaleKeys.busyprogram.tr() + ": ",
+                              Text("${LocaleKeys.busyprogram.tr()}: ",
                                   style:
                                       Theme.of(context).textTheme.displayLarge),
                               for (var index = 0;
                                   index < busyprogram.length;
                                   index++)
                                 Text(
-                                  busyprogram[index] + ", ",
+                                  "${busyprogram[index]}, ",
                                   style:
                                       Theme.of(context).textTheme.displayLarge,
                                 ),
                               beforetest.isEmpty
-                                  ? Text('')
+                                  ? const Text('')
                                   : Text(
-                                      beforetest[0].program + ", ",
+                                      "${beforetest[0].program}, ",
                                       style: Theme.of(context)
                                           .textTheme
                                           .displayLarge,
@@ -310,7 +311,7 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       _selectedcondchoiceampl == LocaleKeys.fixamp.tr()
@@ -356,7 +357,8 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
                                       ),
                                     ),
                                     Container(
-                                      padding: EdgeInsets.only(bottom: 30),
+                                      padding:
+                                          const EdgeInsets.only(bottom: 30),
                                       child: IconButton(
                                           color: Theme.of(context)
                                               .colorScheme
@@ -365,8 +367,8 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
                                             _toggle1();
                                           },
                                           icon: _hideampfreqdur
-                                              ? Icon(Icons.visibility_off)
-                                              : Icon(Icons.visibility)),
+                                              ? const Icon(Icons.visibility_off)
+                                              : const Icon(Icons.visibility)),
                                     )
                                   ],
                                 ),
@@ -466,19 +468,19 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
                             ],
                           ),
                           Container(
-                            padding: EdgeInsets.only(bottom: 30),
+                            padding: const EdgeInsets.only(bottom: 30),
                             child: IconButton(
                                 color: Theme.of(context).colorScheme.primary,
                                 onPressed: () {
                                   _toggle2();
                                 },
                                 icon: _hidefreqdur
-                                    ? Icon(Icons.visibility_off)
-                                    : Icon(Icons.visibility)),
+                                    ? const Icon(Icons.visibility_off)
+                                    : const Icon(Icons.visibility)),
                           )
                         ],
                       ),
-                      AppDivider(),
+                      const AppDivider(),
                       ElevatedButton(
                           child: Text(
                             LocaleKeys.save.tr(),

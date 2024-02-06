@@ -6,6 +6,7 @@ import '../../../../core/router/route_names.dart';
 import '../../../../l10n/locale_keys.g.dart';
 import '../../../../repository/feedbackscs_database.dart';
 
+// ignore: non_constant_identifier_names
 Neurostimulator(context) {
   final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
   List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
@@ -32,7 +33,7 @@ Neurostimulator(context) {
                           style: Theme.of(context).textTheme.titleSmall),
                     ],
                   ),
-                  AppDivider(),
+                  const AppDivider(),
                   AppTextButton(
                     text: LocaleKeys.instructionneuro.tr(),
                     linkbutton: RouteNames.neuroinst,

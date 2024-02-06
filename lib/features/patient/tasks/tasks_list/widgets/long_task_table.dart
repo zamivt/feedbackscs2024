@@ -48,7 +48,7 @@ class LongTaskTable extends StatelessWidget {
                               shape: badges.BadgeShape.square,
                               badgeColor:
                                   Theme.of(context).colorScheme.surfaceTint,
-                              padding: EdgeInsets.all(5),
+                              padding: const EdgeInsets.all(5),
                               borderRadius: BorderRadius.circular(4),
                               borderSide: BorderSide(
                                   color: Theme.of(context).colorScheme.primary,
@@ -59,8 +59,8 @@ class LongTaskTable extends StatelessWidget {
                                 height: 70,
                                 clipBehavior: Clip.antiAlias,
                                 decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(0)),
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(0)),
                                     shape: BoxShape.rectangle,
                                     border: Border.all(
                                         color: Theme.of(context)
@@ -73,20 +73,20 @@ class LongTaskTable extends StatelessWidget {
                         Container(
                           width: 100,
                           color: Theme.of(context).colorScheme.secondary,
-                          padding: EdgeInsets.symmetric(vertical: 5),
+                          padding: const EdgeInsets.symmetric(vertical: 5),
                           child: Text(
                             LocaleKeys.cmove.tr(),
                             style: Theme.of(context).textTheme.displayLarge,
                             textAlign: TextAlign.center,
                           ),
                         ),
-                        (undefmovelongTest.length == 0)
+                        (undefmovelongTest.isEmpty)
                             ? Container(
                                 width: 100,
                                 height: 40,
                                 decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(0)),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(0)),
                                   color:
                                       Theme.of(context).colorScheme.secondary,
                                   shape: BoxShape.rectangle,
@@ -103,7 +103,7 @@ class LongTaskTable extends StatelessWidget {
                                     onPressed: () {
                                       createNewLongCurrentTask(context);
                                     },
-                                    icon: Icon(Icons.add_task))),
+                                    icon: const Icon(Icons.add_task))),
                       ],
                     ),
                   ),
@@ -122,7 +122,7 @@ class LongTaskTable extends StatelessWidget {
                               shape: badges.BadgeShape.square,
                               badgeColor:
                                   Theme.of(context).colorScheme.surfaceTint,
-                              padding: EdgeInsets.all(5),
+                              padding: const EdgeInsets.all(5),
                               borderRadius: BorderRadius.circular(4),
                               borderSide: BorderSide(
                                   color: Theme.of(context).colorScheme.primary,
@@ -133,8 +133,8 @@ class LongTaskTable extends StatelessWidget {
                                 height: 70,
                                 clipBehavior: Clip.antiAlias,
                                 decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(0)),
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(0)),
                                     shape: BoxShape.rectangle,
                                     border: Border.all(
                                         color: Theme.of(context)
@@ -147,20 +147,20 @@ class LongTaskTable extends StatelessWidget {
                         Container(
                           width: 100,
                           color: Theme.of(context).colorScheme.secondary,
-                          padding: EdgeInsets.symmetric(vertical: 5),
+                          padding: const EdgeInsets.symmetric(vertical: 5),
                           child: Text(
                             LocaleKeys.cseat.tr(),
                             style: Theme.of(context).textTheme.displayLarge,
                             textAlign: TextAlign.center,
                           ),
                         ),
-                        (undefseatlongTest.length == 0)
+                        (undefseatlongTest.isEmpty)
                             ? Container(
                                 width: 100,
                                 height: 40,
                                 decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(0)),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(0)),
                                   color:
                                       Theme.of(context).colorScheme.secondary,
                                   shape: BoxShape.rectangle,
@@ -177,7 +177,7 @@ class LongTaskTable extends StatelessWidget {
                                     onPressed: () {
                                       createNewLongCurrentTask(context);
                                     },
-                                    icon: Icon(Icons.add_task))),
+                                    icon: const Icon(Icons.add_task))),
                       ],
                     ),
                   ),
@@ -196,7 +196,7 @@ class LongTaskTable extends StatelessWidget {
                             shape: badges.BadgeShape.square,
                             badgeColor:
                                 Theme.of(context).colorScheme.surfaceTint,
-                            padding: EdgeInsets.all(5),
+                            padding: const EdgeInsets.all(5),
                             borderRadius: BorderRadius.circular(4),
                             borderSide: BorderSide(
                                 color: Theme.of(context).colorScheme.primary,
@@ -207,8 +207,8 @@ class LongTaskTable extends StatelessWidget {
                               height: 70,
                               clipBehavior: Clip.antiAlias,
                               decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(0)),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(0)),
                                   shape: BoxShape.rectangle,
                                   border: Border.all(
                                       color: Theme.of(context)
@@ -222,20 +222,20 @@ class LongTaskTable extends StatelessWidget {
                         Container(
                           width: 100,
                           color: Theme.of(context).colorScheme.secondary,
-                          padding: EdgeInsets.symmetric(vertical: 5),
+                          padding: const EdgeInsets.symmetric(vertical: 5),
                           child: Text(
                             LocaleKeys.clie.tr(),
                             style: Theme.of(context).textTheme.displayLarge,
                             textAlign: TextAlign.center,
                           ),
                         ),
-                        (undeflielongTest.length == 0)
+                        (undeflielongTest.isEmpty)
                             ? Container(
                                 width: 100,
                                 height: 40,
                                 decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(0)),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(0)),
                                   shape: BoxShape.rectangle,
                                   color:
                                       Theme.of(context).colorScheme.secondary,
@@ -252,7 +252,7 @@ class LongTaskTable extends StatelessWidget {
                                     onPressed: () {
                                       createNewLongCurrentTask(context);
                                     },
-                                    icon: Icon(Icons.add_task))),
+                                    icon: const Icon(Icons.add_task))),
                       ],
                     ),
                   ),

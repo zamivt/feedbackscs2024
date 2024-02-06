@@ -34,7 +34,7 @@ class DocListCandidateShortTaskMove extends StatelessWidget {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             onPressed: () {
               context.pushNamed(RouteNames.doctasks);
             },
@@ -42,8 +42,8 @@ class DocListCandidateShortTaskMove extends StatelessWidget {
           backgroundColor: Theme.of(context).colorScheme.primary,
           foregroundColor: Colors.white,
           title: Text(
-            LocaleKeys.unfulfilledtasks.tr() + " : " + LocaleKeys.cmove.tr(),
-            style: TextStyle(fontSize: 16),
+            "${LocaleKeys.unfulfilledtasks.tr()} : ${LocaleKeys.cmove.tr()}",
+            style: const TextStyle(fontSize: 16),
           ),
         ),
         body: SafeArea(
@@ -84,7 +84,7 @@ class DocListCandidateShortTaskMove extends StatelessWidget {
                                         Theme.of(context).textTheme.labelLarge,
                                     textAlign: TextAlign.center,
                                   )),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
                               Container(
@@ -99,11 +99,11 @@ class DocListCandidateShortTaskMove extends StatelessWidget {
                                           .displayLarge,
                                     ),
                                   )),
-                              SizedBox(
+                              const SizedBox(
                                 width: 5,
                               ),
                               Text(
-                                LocaleKeys.electrodess.tr() + ': ',
+                                '${LocaleKeys.electrodess.tr()}: ',
                                 style: Theme.of(context).textTheme.displaySmall,
                               ),
                               Expanded(
@@ -115,7 +115,7 @@ class DocListCandidateShortTaskMove extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                LocaleKeys.amps.tr() + ': ',
+                                '${LocaleKeys.amps.tr()}: ',
                                 style: Theme.of(context).textTheme.displaySmall,
                               ),
                               undefmoveshortTest[index].condition ==
@@ -137,7 +137,7 @@ class DocListCandidateShortTaskMove extends StatelessWidget {
                                       ),
                                     ),
                               undefmoveshortTest[index].hideamplt
-                                  ? Icon(Icons.visibility_off)
+                                  ? const Icon(Icons.visibility_off)
                                   : Container()
                             ]),
                           ],
@@ -145,21 +145,15 @@ class DocListCandidateShortTaskMove extends StatelessWidget {
                         subtitle: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Text(
-                              LocaleKeys.durs.tr() +
-                                  ': ' +
-                                  undefmoveshortTest[index].dur.toString() +
-                                  ', ' +
-                                  LocaleKeys.freqs.tr() +
-                                  ': ' +
-                                  undefmoveshortTest[index].freq.toString(),
+                              '${LocaleKeys.durs.tr()}: ${undefmoveshortTest[index].dur}, ${LocaleKeys.freqs.tr()}: ${undefmoveshortTest[index].freq}',
                               style: Theme.of(context).textTheme.displaySmall,
                             ),
                             undefmoveshortTest[index].hidefreq
-                                ? Icon(Icons.visibility_off)
+                                ? const Icon(Icons.visibility_off)
                                 : Container()
                           ],
                         ),

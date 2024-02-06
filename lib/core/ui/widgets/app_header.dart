@@ -8,7 +8,7 @@ class AppHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       width: double.infinity,
       decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.tertiary,

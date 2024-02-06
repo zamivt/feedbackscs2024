@@ -40,7 +40,7 @@ class AppTextField extends StatelessWidget {
             istitle
                 ? Text(title, style: Theme.of(context).textTheme.displayLarge)
                 : Container(),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Container(
               margin: const EdgeInsets.only(top: 5.0),
               padding: const EdgeInsets.only(left: 14),
@@ -60,7 +60,7 @@ class AppTextField extends StatelessWidget {
                     child: TextFormField(
                       readOnly: widget == null ? false : true,
                       autofocus: false,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.black, fontWeight: FontWeight.bold),
                       cursorColor: Colors.black,
                       textCapitalization: !isCaps

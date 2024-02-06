@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors_in_immutables, use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 
 class AppRow extends StatelessWidget {
@@ -23,11 +25,11 @@ class AppRow extends StatelessWidget {
           ),
           Text(bodyrow, style: Theme.of(context).textTheme.titleSmall),
           ishidden
-              ? Icon(
+              ? const Icon(
                   Icons.visibility_off,
                   color: Colors.blueGrey,
                 )
-              : SizedBox(width: 1)
+              : const SizedBox(width: 1)
         ],
       ),
     );

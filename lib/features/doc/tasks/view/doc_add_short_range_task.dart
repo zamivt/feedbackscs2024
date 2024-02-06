@@ -44,7 +44,7 @@ class _DocAddRangeTaskState extends State<DocAddRangeTask> {
 
   String? _selectedactivity;
   final requiredvalidator =
-      RequiredValidator(errorText: LocaleKeys.requiredfield.tr() + '*');
+      RequiredValidator(errorText: '${LocaleKeys.requiredfield.tr()}*');
   final _programCtrl = TextEditingController();
   final _electrodesCtrl = TextEditingController();
   final _ampCtrl = TextEditingController();
@@ -113,9 +113,9 @@ class _DocAddRangeTaskState extends State<DocAddRangeTask> {
                           autovalidateMode: AutovalidateMode.always,
                           child: Column(children: [
                             undefshorttest.isEmpty
-                                ? Text('')
+                                ? const Text('')
                                 : Wrap(children: [
-                                    Text(LocaleKeys.busyprogram.tr() + ": ",
+                                    Text("${LocaleKeys.busyprogram.tr()}: ",
                                         style: Theme.of(context)
                                             .textTheme
                                             .displayLarge),
@@ -123,17 +123,15 @@ class _DocAddRangeTaskState extends State<DocAddRangeTask> {
                                         index < undefshorttest.length;
                                         index++)
                                       Text(
-                                        undefshorttest.toList()[index].program +
-                                            ", ",
+                                        "${undefshorttest.toList()[index].program}, ",
                                         style: Theme.of(context)
                                             .textTheme
                                             .displayLarge,
                                       ),
                                     beforetest.isEmpty
-                                        ? Text('')
+                                        ? const Text('')
                                         : Text(
-                                            beforetest.toList()[1].program +
-                                                ", ",
+                                            "${beforetest.toList()[1].program}, ",
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .displayLarge,
@@ -271,7 +269,7 @@ class _DocAddRangeTaskState extends State<DocAddRangeTask> {
                                 ),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             _selectedcondchoiceampl == LocaleKeys.fixamp.tr()
@@ -324,10 +322,7 @@ class _DocAddRangeTaskState extends State<DocAddRangeTask> {
                                   )
                                 : Container(),
                             Text(
-                                LocaleKeys.freq.tr() +
-                                    ' ( '
-                                        '${liststimul.map((neumodel) => neumodel.minfreq).toList().first} - ${liststimul.map((neumodel) => neumodel.maxfreq).toList().first}' +
-                                    ' )',
+                                '${LocaleKeys.freq.tr()} ( ${liststimul.map((neumodel) => neumodel.minfreq).toList().first} - ${liststimul.map((neumodel) => neumodel.maxfreq).toList().first} )',
                                 textAlign: TextAlign.right,
                                 style:
                                     Theme.of(context).textTheme.displayLarge),
@@ -450,10 +445,7 @@ class _DocAddRangeTaskState extends State<DocAddRangeTask> {
                               ],
                             ),
                             Text(
-                                LocaleKeys.dur.tr() +
-                                    ' ( '
-                                        '${liststimul.map((neumodel) => neumodel.mindur).toList().first} - ${liststimul.map((neumodel) => neumodel.maxdur).toList().first}' +
-                                    ' )',
+                                '${LocaleKeys.dur.tr()} ( ${liststimul.map((neumodel) => neumodel.mindur).toList().first} - ${liststimul.map((neumodel) => neumodel.maxdur).toList().first} )',
                                 textAlign: TextAlign.right,
                                 style:
                                     Theme.of(context).textTheme.displayLarge),
@@ -543,7 +535,7 @@ class _DocAddRangeTaskState extends State<DocAddRangeTask> {
                                   width:
                                       (MediaQuery.sizeOf(context).width - 40) /
                                           3,
-                                  child: Container(
+                                  child: SizedBox(
                                     width: double.infinity - 100,
                                     child: TextFormField(
                                       controller: _stepdurCtrl,
@@ -574,7 +566,7 @@ class _DocAddRangeTaskState extends State<DocAddRangeTask> {
                                 ),
                               ],
                             ),
-                            AppDivider(),
+                            const AppDivider(),
                             ((_startdur > 0) &&
                                         (_stopdur > 0) &&
                                         (_stepdur > 0) &&
@@ -600,7 +592,7 @@ class _DocAddRangeTaskState extends State<DocAddRangeTask> {
                                         Container(
                                           color: Colors.grey.shade300,
                                           width: double.infinity,
-                                          padding: EdgeInsets.all(10),
+                                          padding: const EdgeInsets.all(10),
                                           child: Column(
                                             children: [
                                               Text(
@@ -640,7 +632,7 @@ class _DocAddRangeTaskState extends State<DocAddRangeTask> {
                                                     .textTheme
                                                     .displaySmall,
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 10,
                                               ),
                                               Text(
@@ -701,7 +693,8 @@ class _DocAddRangeTaskState extends State<DocAddRangeTask> {
                                                       .isNotEmpty
                                                   ? ElegantNotification.error(
                                                       toastDuration:
-                                                          Duration(seconds: 20),
+                                                          const Duration(
+                                                              seconds: 20),
                                                       width: 360,
                                                       height: 400,
                                                       notificationPosition:
@@ -723,8 +716,8 @@ class _DocAddRangeTaskState extends State<DocAddRangeTask> {
                                                           SingleChildScrollView(
                                                         child: Container(
                                                           padding:
-                                                              EdgeInsets.all(
-                                                                  20),
+                                                              const EdgeInsets
+                                                                  .all(20),
                                                           child: Column(
                                                             children: [
                                                               Text(
@@ -829,7 +822,7 @@ class _DocAddRangeTaskState extends State<DocAddRangeTask> {
                                                       onDismiss: () {},
                                                     ).show(context);
                                             }),
-                                        AppDivider(),
+                                        const AppDivider(),
                                         TableCandidate(
                                             startdur: _startdur,
                                             stopdur: _stopdur,
@@ -843,10 +836,8 @@ class _DocAddRangeTaskState extends State<DocAddRangeTask> {
                                       ],
                                     ),
                                   )
-                                : Container(
-                                    child: Text(LocaleKeys.checkcor.tr()),
-                                  ),
-                            AppDivider(),
+                                : Text(LocaleKeys.checkcor.tr()),
+                            const AppDivider(),
                           ]))
                     ])),
           ),
@@ -919,7 +910,7 @@ class TableCandidate extends StatelessWidget {
           style: Theme.of(context).textTheme.displayLarge,
         ),
         Container(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: Table(border: TableBorder.all(), children: [
             TableRow(
                 decoration: BoxDecoration(

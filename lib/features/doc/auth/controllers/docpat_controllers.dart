@@ -61,14 +61,8 @@ class DocPatController extends GetxController {
               .map((docs) => docs.password)
               .toList()
               .first,
-          history: DateFormat.yMMMEd().format(date).toString() +
-              ' - ' +
-              docs
-                  .where((docs) => docs.docid.contains(docid))
-                  .map((docs) => docs.family)
-                  .toList()
-                  .first +
-              ', ');
+          history:
+              '${DateFormat.yMMMEd().format(date)} - ${docs.where((docs) => docs.docid.contains(docid)).map((docs) => docs.family).toList().first}, ');
       _docpats.add(docpat);
       docpatbox.add(docpat);
     } else {
@@ -114,15 +108,8 @@ class DocPatController extends GetxController {
             .map((docs) => docs.attempt)
             .toList()
             .first;
-        _docpats[0].history = docpats[0].history +
-            DateFormat.yMMMEd().format(date).toString() +
-            ' - ' +
-            docs
-                .where((docs) => docs.docid.contains(docid))
-                .map((docs) => docs.family)
-                .toList()
-                .first +
-            ', ';
+        _docpats[0].history =
+            '${docpats[0].history}${DateFormat.yMMMEd().format(date)} - ${docs.where((docs) => docs.docid.contains(docid)).map((docs) => docs.family).toList().first}, ';
         // _patients[0].email = newemail;
         docpatbox.putAt(0, _docpats[0]);
         update();

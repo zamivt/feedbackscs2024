@@ -16,7 +16,7 @@ class _DocMainScreenState extends State<DocMainScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       body: widget.child,
-      bottomNavigationBar: DocBottomNavigationWidget(),
+      bottomNavigationBar: const DocBottomNavigationWidget(),
     );
   }
 }

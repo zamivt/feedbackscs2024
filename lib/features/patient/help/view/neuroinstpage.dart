@@ -24,17 +24,17 @@ class _NeuroinstPageState extends State<NeuroinstPage> {
     Provider.of<FeedbackSCSDatabase>(context, listen: false).readPatient();
     final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
     List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
-    final String _namemodel = currentpatient[0].modelneuro;
-    Iterable<Neuro> liststimul = neuromodels
-        .where((neuromodel) => neuromodel.model.contains(_namemodel));
+    final String namemodel = currentpatient[0].modelneuro;
+    Iterable<Neuro> liststimul =
+        neuromodels.where((neuromodel) => neuromodel.model.contains(namemodel));
 
-    final String _namepdf = liststimul
+    final String namepdf = liststimul
         .map((neumodel) => neumodel.pathinstneuro)
         .toList()
         .first
         .toString();
     _pdfController = PdfController(
-      document: PdfDocument.openAsset(_namepdf),
+      document: PdfDocument.openAsset(namepdf),
       initialPage: _initialPage,
     );
   }
@@ -54,7 +54,7 @@ class _NeuroinstPageState extends State<NeuroinstPage> {
         centerTitle: true,
         foregroundColor: Colors.white,
         title: Text(currentpatient[0].modelneuro.toString()),
-        actions: <Widget>[],
+        actions: const <Widget>[],
       ),
       body: SafeArea(
         child: Column(
@@ -64,7 +64,7 @@ class _NeuroinstPageState extends State<NeuroinstPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     width: 40,
                   ),
                   IconButton(

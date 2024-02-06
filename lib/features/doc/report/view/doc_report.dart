@@ -31,24 +31,24 @@ class DocReport extends StatelessWidget {
         ),
         body: currentpatient.isNotEmpty
             ? Column(children: [
-                Padding(
+                const Padding(
                     padding: EdgeInsets.only(right: 5, left: 5),
                     child: ExcelReport()),
-                AppDivider(),
+                const AppDivider(),
                 AppColorContainer(
                     color: Theme.of(context).colorScheme.secondary,
                     headerbloc: LocaleKeys.shorttest.tr(),
-                    widget: Column(
+                    widget: const Column(
                       children: [],
                     )),
                 AppColorContainer(
                     color: Theme.of(context).colorScheme.tertiary,
                     headerbloc: LocaleKeys.longtest.tr(),
-                    widget: Column(
+                    widget: const Column(
                       children: [],
                     )),
               ])
-            : Container(
+            : SizedBox(
                 width: double.infinity,
                 height: 400,
                 child: Center(

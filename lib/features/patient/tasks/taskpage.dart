@@ -32,19 +32,19 @@ class _TaskPageState extends State<TaskPage> {
     List<CurrentTest> currenttest = feedbackSCSDatabase.currentTest;
 
     return (currenttest.isEmpty || currenttest[0].activetask == 'no tasks')
-        ? TasksListPage()
+        ? const TasksListPage()
         : currenttest[0].activetask == 'st1'
-            ? ShortTest1()
+            ? const ShortTest1()
             : currenttest[0].activetask == 'st2'
-                ? ShortTest2()
+                ? const ShortTest2()
                 : currenttest[0].activetask == 'st3'
-                    ? ShortTest3()
+                    ? const ShortTest3()
                     : currenttest[0].activetask == 'st4'
-                        ? ShortTest4()
+                        ? const ShortTest4()
                         : currenttest[0].activetask == 'lt1'
-                            ? LongTest1()
+                            ? const LongTest1()
                             : currenttest[0].activetask == 'lt2'
-                                ? LongTest2()
+                                ? const LongTest2()
                                 : currenttest[0].activetask == 'lt3'
                                     ? LongTest3()
                                     : Container();

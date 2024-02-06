@@ -41,7 +41,7 @@ void main() async {
         //databasenitier
         ChangeNotifierProvider(create: (context) => FeedbackSCSDatabase()),
       ],
-      child: FeedbackSCSApp(),
+      child: const FeedbackSCSApp(),
     ),
   ));
 }

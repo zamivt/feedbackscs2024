@@ -35,13 +35,12 @@ class _LongTest3State extends State<LongTest3> {
   @override
   Widget build(BuildContext context) {
     final currentLongTaskControler = Get.find<CurrentLongTaskControler>();
-    final String _position =
+    final String position =
         currentLongTaskControler.currentlongtasks[0].position;
 
-    final String _program =
-        currentLongTaskControler.currentlongtasks[0].program;
+    final String program = currentLongTaskControler.currentlongtasks[0].program;
 
-    final _formKey = GlobalKey<FormState>();
+    final formKey = GlobalKey<FormState>();
     String reasonstoptest;
     double markself;
     final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
@@ -51,14 +50,13 @@ class _LongTest3State extends State<LongTest3> {
       appBar: AppBar(
         centerTitle: true,
         automaticallyImplyLeading: false,
-        title:
-            Text(_position + ': ' + LocaleKeys.program.tr() + ' - ' + _program),
+        title: Text('$position: ${LocaleKeys.program.tr()} - $program'),
       ),
       backgroundColor: Theme.of(context).colorScheme.secondary,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Form(
-            key: _formKey,
+            key: formKey,
             child: Column(
               children: [
                 Get.find<BeforeTaskController>().beforetasks.isNotEmpty &&
@@ -83,13 +81,7 @@ class _LongTest3State extends State<LongTest3> {
                                     horizontal: 10, vertical: 30),
                                 width: double.infinity,
                                 child: Text(
-                                  LocaleKeys.changeprog.tr() +
-                                      Get.find<BeforeTaskController>()
-                                          .beforetasks[0]
-                                          .beforeprogram
-                                          .toString() +
-                                      '- 10 ' +
-                                      LocaleKeys.min.tr(),
+                                  '${LocaleKeys.changeprog.tr()}${Get.find<BeforeTaskController>().beforetasks[0].beforeprogram}- 10 ${LocaleKeys.min.tr()}',
                                   style:
                                       Theme.of(context).textTheme.displayLarge,
                                 ),
@@ -99,14 +91,14 @@ class _LongTest3State extends State<LongTest3> {
                         ),
                       )
                     : Container(),
-                AppHeader(header: '3. ' + LocaleKeys.evaluateresult.tr()),
+                AppHeader(header: '3. ${LocaleKeys.evaluateresult.tr()}'),
                 const SizedBox(
                   height: 20,
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: AppTextField(
-                    title: '1. ' + LocaleKeys.reasonfinishtest.tr(),
+                    title: '1. ${LocaleKeys.reasonfinishtest.tr()}',
                     controller: _reasonstoptestCtrl,
                     countrow: 4,
                   ),
@@ -114,12 +106,12 @@ class _LongTest3State extends State<LongTest3> {
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                  child: Text('2. ' + LocaleKeys.markself.tr(),
+                  child: Text('2. ${LocaleKeys.markself.tr()}',
                       style: Theme.of(context).textTheme.displaySmall),
                 ),
                 Container(
                   width: double.infinity,
-                  margin: EdgeInsets.symmetric(horizontal: 10),
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
                   color: Theme.of(context).colorScheme.primary,
                   child: Center(
                     child: RatingStars(
@@ -155,13 +147,13 @@ class _LongTest3State extends State<LongTest3> {
                     ),
                   ),
                 ),
-                AppDivider(),
+                const AppDivider(),
                 const SizedBox(
                   height: 20,
                 ),
                 ElevatedButton(
                     onPressed: () {
-                      _formKey.currentState?.save();
+                      formKey.currentState?.save();
 
                       currentLongTaskControler.addDateSt3(
                           reasonstoptest = _reasonstoptestCtrl.text,

@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:get/get_state_manager/get_state_manager.dart';
 
 class LongTaskController extends GetxController {

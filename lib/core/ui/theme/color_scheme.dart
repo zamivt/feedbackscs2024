@@ -1,33 +1,35 @@
+// ignore_for_file: use_full_hex_values_for_flutter_colors
+
 import 'package:flutter/material.dart';
 
 final lightColorScheme = ColorScheme(
   brightness: Brightness.light,
   //нижнее и верхнее меню
-  primary: Color(0xff356392),
+  primary: const Color(0xff356392),
   onPrimary: Colors.grey.shade300,
   //активное меню
-  onSurface: Color(0xffFFFA07A),
+  onSurface: const Color(0xfffffa07a),
   // header
-  primaryContainer: Color.fromARGB(255, 55, 56, 57),
-  onPrimaryContainer: Color(0xffd8dccd),
+  primaryContainer: const Color.fromARGB(255, 55, 56, 57),
+  onPrimaryContainer: const Color(0xffd8dccd),
   //main backColor
-  background: Color(0xffB0C4DE),
+  background: const Color(0xffB0C4DE),
   onBackground: Colors.white,
-  surfaceTint: Color(0xffFFFA07A),
+  surfaceTint: const Color(0xfffffa07a),
   //first block
-  secondary: Color(0xffd1e4b6),
-  onSecondary: Color(0xff37517e),
+  secondary: const Color(0xffd1e4b6),
+  onSecondary: const Color(0xff37517e),
   //second block
-  tertiary: Color(0xffFED6A2),
-  onTertiary: Color(0xff37517e),
+  tertiary: const Color(0xffFED6A2),
+  onTertiary: const Color(0xff37517e),
 
   //error
   error: Colors.blue, onError: Colors.white,
   //Card
-  surface: Color(0xffC0C2C4),
+  surface: const Color(0xffC0C2C4),
 );
 
-final darkColorScheme = ColorScheme(
+const darkColorScheme = ColorScheme(
   brightness: Brightness.dark,
   //нижнее и верхнее меню
   primary: Color(0xff356392),
@@ -40,7 +42,7 @@ final darkColorScheme = ColorScheme(
   background: Color(0xff043f5d),
   onBackground: Colors.white,
 
-  surfaceTint: Color(0xff2),
+  surfaceTint: Color(0x00000ff2),
   //first block
   secondary: Color(0xff003153),
   onSecondary: Color(0xffA2ADD0),

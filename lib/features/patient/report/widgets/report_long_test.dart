@@ -13,7 +13,7 @@ class Report_Long_test extends StatelessWidget {
     return AppColorContainer(
         color: Theme.of(context).colorScheme.tertiary,
         headerbloc: LocaleKeys.longtest.tr(),
-        widget: Column(
+        widget: const Column(
           children: [
             ReportLongPosition(position: 'move'),
             ReportLongPosition(position: 'seat'),

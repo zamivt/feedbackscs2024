@@ -7,6 +7,7 @@ import '../../../../core/ui/widgets/common_widgets.dart';
 import '../../../../l10n/locale_keys.g.dart';
 
 class Header extends StatelessWidget {
+  // ignore: use_key_in_widget_constructors
   const Header();
 
   @override

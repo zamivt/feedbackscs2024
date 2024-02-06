@@ -15,26 +15,26 @@ class ShortList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _listsuccessshorttaskmove =
+    final listsuccessshorttaskmove =
         Get.find<SuccessShortTaskMoveControler>().successshorttaskmoves;
 
-    _listsuccessshorttaskmove
+    listsuccessshorttaskmove
         .sort((a, b) => a.currentlevelpain.compareTo(b.currentlevelpain));
-    final _listsuccessshorttaskseat =
+    final listsuccessshorttaskseat =
         Get.find<SuccessShortTaskSeatControler>().successshorttaskseats;
 
-    _listsuccessshorttaskseat
+    listsuccessshorttaskseat
         .sort((a, b) => a.currentlevelpain.compareTo(b.currentlevelpain));
-    final _listsuccessshorttasklie =
+    final listsuccessshorttasklie =
         Get.find<SuccessShortTaskLieControler>().successshorttasklies;
 
-    _listsuccessshorttasklie
+    listsuccessshorttasklie
         .sort((a, b) => a.currentlevelpain.compareTo(b.currentlevelpain));
 
     return BuildCardShortTask(
         position: position,
-        listsuccessshorttaskmove: _listsuccessshorttaskmove,
-        listsuccessshorttaskseat: _listsuccessshorttaskseat,
-        listsuccessshorttasklie: _listsuccessshorttasklie);
+        listsuccessshorttaskmove: listsuccessshorttaskmove,
+        listsuccessshorttaskseat: listsuccessshorttaskseat,
+        listsuccessshorttasklie: listsuccessshorttasklie);
   }
 }

@@ -92,34 +92,18 @@ class _BatteryListState extends State<BatteryList> {
                             ),
                       title: Container(
                         // padding: const EdgeInsets.only(bottom: 10),
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             border: Border(
                                 bottom: BorderSide(
                                     width: 1, style: BorderStyle.solid))),
                         child: Text(
                             // ignore: prefer_interpolation_to_compose_strings
                             batteryController.batteries[index].note.isEmpty
-                                ? DateFormat.d().format(batteryController
-                                        .batteries[index].date) +
-                                    ' / ' +
-                                    DateFormat.M().format(batteryController
-                                        .batteries[index].date) +
-                                    ' / ' +
-                                    DateFormat.y().format(
-                                        batteryController.batteries[index].date)
-                                : DateFormat.d().format(batteryController
-                                        .batteries[index].date) +
-                                    ' / ' +
-                                    DateFormat.M().format(batteryController
-                                        .batteries[index].date) +
-                                    '/' +
-                                    DateFormat.y().format(batteryController
-                                        .batteries[index].date) +
-                                    '\n' +
-                                    batteryController.batteries[index].note,
+                                ? '${DateFormat.d().format(batteryController.batteries[index].date)} / ${DateFormat.M().format(batteryController.batteries[index].date)} / ${DateFormat.y().format(batteryController.batteries[index].date)}'
+                                : '${DateFormat.d().format(batteryController.batteries[index].date)} / ${DateFormat.M().format(batteryController.batteries[index].date)}/${DateFormat.y().format(batteryController.batteries[index].date)}\n${batteryController.batteries[index].note}',
                             style: Theme.of(context).textTheme.displayLarge),
                       ),
-                      subtitle: Container(
+                      subtitle: SizedBox(
                         width: double.infinity,
                         //color: Colors.amber,
                         child: Text(

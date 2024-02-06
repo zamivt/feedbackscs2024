@@ -18,8 +18,9 @@ class MainMenu extends StatelessWidget {
       child: Align(
         alignment: Alignment.center,
         child: TabBar(
-            unselectedLabelStyle: TextStyle(fontSize: 16, color: Colors.white),
-            labelStyle: TextStyle(fontWeight: FontWeight.bold),
+            unselectedLabelStyle:
+                const TextStyle(fontSize: 16, color: Colors.white),
+            labelStyle: const TextStyle(fontWeight: FontWeight.bold),
             controller: _tabController,
             labelColor: Theme.of(context).colorScheme.onSurface,
             unselectedLabelColor: Colors.white,

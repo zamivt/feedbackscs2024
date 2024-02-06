@@ -41,7 +41,7 @@ class _LicenseAppPageState extends State<LicenseAppPage> {
         automaticallyImplyLeading: false,
         centerTitle: true,
         title: const Text('FeedbackSCS'),
-        actions: <Widget>[],
+        actions: const <Widget>[],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -51,7 +51,7 @@ class _LicenseAppPageState extends State<LicenseAppPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     width: 40,
                   ),
                   IconButton(
@@ -89,7 +89,7 @@ class _LicenseAppPageState extends State<LicenseAppPage> {
                       );
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 20,
                   )
                 ],
@@ -109,7 +109,7 @@ class _LicenseAppPageState extends State<LicenseAppPage> {
                 controller: _pdfController,
               ),
             ),
-            AppDivider(),
+            const AppDivider(),
             AppCommentText(text: LocaleKeys.decriptionconfident.tr()),
             ElevatedButton(
               onPressed: () {

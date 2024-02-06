@@ -30,7 +30,7 @@ class DocTasks extends StatelessWidget {
         ),
         body: SingleChildScrollView(
             child: currentpatient.isNotEmpty
-                ? Column(
+                ? const Column(
                     children: [ShortTasks(), LongTasks(), CombinationTasks()],
                   )
                 : Container(

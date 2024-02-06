@@ -46,9 +46,9 @@ class _PatientFormState extends State<PatientForm> {
   bool _ismale = true;
   String _modelneuro = 'Medtronic 37702';
   bool _issumcrit = true;
-  String _priorityshorttest = LocaleKeys.totalcrit.tr();
+  final String _priorityshorttest = LocaleKeys.totalcrit.tr();
   final requiredvalidator =
-      RequiredValidator(errorText: LocaleKeys.requiredfield.tr() + '*');
+      RequiredValidator(errorText: '${LocaleKeys.requiredfield.tr()}*');
   @override
   void dispose() {
     _numberelectrodes.dispose();
@@ -103,7 +103,7 @@ class _PatientFormState extends State<PatientForm> {
                       Text(LocaleKeys.sex.tr(),
                           style: Theme.of(context).textTheme.displayLarge),
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
                         decoration: BoxDecoration(
                             color: Colors.white,
                             border: Border.all(color: Colors.black, width: 1)),
@@ -238,7 +238,7 @@ class _PatientFormState extends State<PatientForm> {
                     decoration: InputDecoration(
                         focusColor: Colors.white,
                         labelStyle: const TextStyle(fontSize: 16),
-                        labelText: LocaleKeys.currentpainlevel.tr() + ' : 1-10',
+                        labelText: '${LocaleKeys.currentpainlevel.tr()} : 1-10',
                         border: UnderlineInputBorder(
                             borderRadius: BorderRadius.circular(8.0)),
                         fillColor: Colors.white,
@@ -363,7 +363,7 @@ class _PatientFormState extends State<PatientForm> {
                           style: Theme.of(context).textTheme.displayLarge),
                     ),
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
                       decoration: BoxDecoration(
                           color: Colors.white,
                           border: Border.all(color: Colors.black, width: 1)),

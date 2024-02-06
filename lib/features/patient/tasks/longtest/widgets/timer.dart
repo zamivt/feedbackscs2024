@@ -15,7 +15,7 @@ class TimerLongTest extends StatelessWidget {
     return SlideCountdownSeparated(
       showZeroValue: true,
       slideDirection: SlideDirection.up,
-      textStyle: TextStyle(
+      style: TextStyle(
           fontSize: 40,
           fontWeight: FontWeight.bold,
           color: Theme.of(context).colorScheme.primary),

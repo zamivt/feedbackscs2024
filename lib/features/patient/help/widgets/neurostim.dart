@@ -22,14 +22,14 @@ class Neurostim extends StatelessWidget {
         neuromodel.model.contains(currentpatient[0].modelneuro));
     return SingleChildScrollView(
         child: Container(
-      padding: EdgeInsets.all(5),
+      padding: const EdgeInsets.all(5),
       decoration: BoxDecoration(
         border: Border.all(color: Theme.of(context).colorScheme.primary),
         borderRadius: BorderRadius.circular(8),
         color: Theme.of(context).colorScheme.surfaceTint,
       ),
       child: currentpatient.isEmpty
-          ? Container(
+          ? SizedBox(
               width: double.infinity,
               height: 300,
               child: Center(
@@ -38,10 +38,10 @@ class Neurostim extends StatelessWidget {
                 style: Theme.of(context).textTheme.displayLarge,
               )),
             )
-          : Container(
+          : SizedBox(
               width: double.infinity - 100,
               child: Column(children: [
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Row(
@@ -53,7 +53,7 @@ class Neurostim extends StatelessWidget {
                         style: Theme.of(context).textTheme.displayLarge),
                   ],
                 ),
-                AppDivider(),
+                const AppDivider(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -64,53 +64,29 @@ class Neurostim extends StatelessWidget {
                         style: Theme.of(context).textTheme.displayLarge),
                   ],
                 ),
-                AppDivider(),
+                const AppDivider(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(LocaleKeys.freq.tr(),
                         style: Theme.of(context).textTheme.displayLarge),
                     Text(
-                        liststimul
-                                .map((neumodel) => neumodel.minfreq)
-                                .toList()
-                                .first
-                                .toString() +
-                            ' -' +
-                            liststimul
-                                .map((neumodel) => neumodel.maxfreq)
-                                .toList()
-                                .first
-                                .toString() +
-                            '' +
-                            LocaleKeys.hz.tr(),
+                        '${liststimul.map((neumodel) => neumodel.minfreq).toList().first} -${liststimul.map((neumodel) => neumodel.maxfreq).toList().first}${LocaleKeys.hz.tr()}',
                         style: Theme.of(context).textTheme.displayLarge),
                   ],
                 ),
-                AppDivider(),
+                const AppDivider(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(LocaleKeys.dur.tr(),
                         style: Theme.of(context).textTheme.displayLarge),
                     Text(
-                        liststimul
-                                .map((neumodel) => neumodel.mindur)
-                                .toList()
-                                .first
-                                .toString() +
-                            ' - ' +
-                            liststimul
-                                .map((neumodel) => neumodel.maxdur)
-                                .toList()
-                                .first
-                                .toString() +
-                            ' ' +
-                            'mcsec',
+                        '${liststimul.map((neumodel) => neumodel.mindur).toList().first} - ${liststimul.map((neumodel) => neumodel.maxdur).toList().first} mcsec',
                         style: Theme.of(context).textTheme.displayLarge),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Container(
@@ -120,14 +96,14 @@ class Neurostim extends StatelessWidget {
                   child: Text(LocaleKeys.instructions.tr(),
                       style: Theme.of(context).textTheme.labelLarge),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 AppTextButton(
                   text: LocaleKeys.instructionneuro.tr(),
                   linkbutton: RouteNames.neuroinst,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
               ]),

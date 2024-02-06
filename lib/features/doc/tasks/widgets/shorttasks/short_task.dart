@@ -20,7 +20,7 @@ class ShortTasks extends StatelessWidget {
       child: AppColorContainer(
         color: Theme.of(context).colorScheme.background,
         headerbloc: LocaleKeys.tasksshort.tr(),
-        widget: Column(
+        widget: const Column(
           children: [
             BeforeProgramTask(),
             CountShortTasks(),

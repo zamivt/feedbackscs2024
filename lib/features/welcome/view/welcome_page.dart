@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pdfx/pdfx.dart';
@@ -85,7 +87,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             MediaQuery.of(context).orientation ==
@@ -95,7 +97,7 @@ class _WelcomePageState extends State<WelcomePage> {
                                     child: Image.asset(images[index]))
                                 : Container(),
                             Container(
-                              padding: EdgeInsets.symmetric(vertical: 20),
+                              padding: const EdgeInsets.symmetric(vertical: 20),
                               color: Theme.of(context).colorScheme.primary,
                               width: MediaQuery.of(context).size.width,
                               child: Text(
@@ -111,7 +113,7 @@ class _WelcomePageState extends State<WelcomePage> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 20,
                                   ),
                                   SizedBox(
@@ -125,7 +127,7 @@ class _WelcomePageState extends State<WelcomePage> {
                                                 .colorScheme
                                                 .primary)),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 10,
                                   ),
                                   Column(
@@ -155,7 +157,8 @@ class _WelcomePageState extends State<WelcomePage> {
                             ),
                             (images.length - 1 == index) || (index == 0)
                                 ? Container(
-                                    padding: EdgeInsets.only(top: 40, left: 40),
+                                    padding: const EdgeInsets.only(
+                                        top: 40, left: 40),
                                     child: ElevatedButton(
                                       onPressed: () {
                                         currentpatient.isEmpty
@@ -167,7 +170,6 @@ class _WelcomePageState extends State<WelcomePage> {
                                                     RouteNames.licenseapp)
                                                 : context.pushNamed(
                                                     RouteNames.patientmainpage);
-                                        ;
                                       },
                                       child: Text(LocaleKeys.begin.tr(),
                                           style: Theme.of(context)
@@ -211,7 +213,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              contentPadding: EdgeInsets.all(10.0),
+              contentPadding: const EdgeInsets.all(10.0),
               content: Column(
                 children: [
                   ColoredBox(

@@ -20,7 +20,7 @@ class AddshortTask extends StatelessWidget {
           decoration: BoxDecoration(
               border: Border.all(color: Theme.of(context).colorScheme.primary),
               color: Theme.of(context).colorScheme.primary,
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(8), topRight: Radius.circular(8))),
           child: Text(LocaleKeys.addtask.tr(),
               textAlign: TextAlign.center,
@@ -31,7 +31,7 @@ class AddshortTask extends StatelessWidget {
           decoration: BoxDecoration(
               border: Border.all(color: Theme.of(context).colorScheme.primary),
               color: Theme.of(context).colorScheme.tertiary,
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(8),
                   bottomRight: Radius.circular(8))),
           alignment: Alignment.center,
@@ -42,7 +42,7 @@ class AddshortTask extends StatelessWidget {
                 style: Theme.of(context).textTheme.displayLarge,
                 textAlign: TextAlign.center,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Row(

@@ -167,7 +167,7 @@ class GraphBattery extends StatelessWidget {
                       isCurved: true,
                     )
                   ]),
-              swapAnimationDuration: Duration(seconds: 2),
+              swapAnimationDuration: const Duration(seconds: 2),
               swapAnimationCurve: Curves.decelerate,
             ),
           ),

@@ -62,49 +62,48 @@ class BuildCardShortTask extends StatelessWidget {
               );
             },
             itemBuilder: (context, index) {
-              final DateTime _begintest;
+              final DateTime begintest;
               (position == 'move')
-                  ? (_begintest =
-                      _listsuccessshorttaskmove[index].begintesttime)
+                  ? (begintest = _listsuccessshorttaskmove[index].begintesttime)
                   : (position == 'seat')
-                      ? (_begintest =
+                      ? (begintest =
                           _listsuccessshorttaskseat[index].begintesttime)
-                      : (_begintest =
+                      : (begintest =
                           _listsuccessshorttasklie[index].begintesttime);
-              final String _electrodes;
+              final String electrodes;
               (position == 'move')
-                  ? (_electrodes = _listsuccessshorttaskmove[index].electrodes)
+                  ? (electrodes = _listsuccessshorttaskmove[index].electrodes)
                   : (position == 'seat')
-                      ? (_electrodes =
+                      ? (electrodes =
                           _listsuccessshorttaskseat[index].electrodes)
-                      : (_electrodes =
+                      : (electrodes =
                           _listsuccessshorttasklie[index].electrodes);
-              final double _amp;
+              final double amp;
               (position == 'move')
-                  ? (_amp = _listsuccessshorttaskmove[index].amplit)
+                  ? (amp = _listsuccessshorttaskmove[index].amplit)
                   : (position == 'seat')
-                      ? (_amp = _listsuccessshorttaskseat[index].amplit)
-                      : (_amp = _listsuccessshorttasklie[index].amplit);
-              final int _freq;
+                      ? (amp = _listsuccessshorttaskseat[index].amplit)
+                      : (amp = _listsuccessshorttasklie[index].amplit);
+              final int freq;
               (position == 'move')
-                  ? (_freq = _listsuccessshorttaskmove[index].freq)
+                  ? (freq = _listsuccessshorttaskmove[index].freq)
                   : (position == 'seat')
-                      ? (_freq = _listsuccessshorttaskseat[index].freq)
-                      : (_freq = _listsuccessshorttasklie[index].freq);
-              final int _dur;
+                      ? (freq = _listsuccessshorttaskseat[index].freq)
+                      : (freq = _listsuccessshorttasklie[index].freq);
+              final int dur;
               (position == 'move')
-                  ? (_dur = _listsuccessshorttaskmove[index].dur)
+                  ? (dur = _listsuccessshorttaskmove[index].dur)
                   : (position == 'seat')
-                      ? (_dur = _listsuccessshorttaskseat[index].dur)
-                      : (_dur = _listsuccessshorttasklie[index].dur);
-              final int _painlevel;
+                      ? (dur = _listsuccessshorttaskseat[index].dur)
+                      : (dur = _listsuccessshorttasklie[index].dur);
+              final int painlevel;
               (position == 'move')
-                  ? (_painlevel =
+                  ? (painlevel =
                       _listsuccessshorttaskmove[index].currentlevelpain)
                   : (position == 'seat')
-                      ? (_painlevel =
+                      ? (painlevel =
                           _listsuccessshorttaskseat[index].currentlevelpain)
-                      : (_painlevel =
+                      : (painlevel =
                           _listsuccessshorttasklie[index].currentlevelpain);
               return Container(
                 width: 300,
@@ -114,7 +113,7 @@ class BuildCardShortTask extends StatelessWidget {
                     color: Theme.of(context).colorScheme.primary,
                     spreadRadius: 4,
                     blurRadius: 8,
-                    offset: Offset(0, 1),
+                    offset: const Offset(0, 1),
                   ),
                 ]),
                 child: Column(
@@ -126,7 +125,7 @@ class BuildCardShortTask extends StatelessWidget {
                         color: Theme.of(context).colorScheme.primary,
                       ),
                       child: Text(
-                        '${DateFormat.d().format(_begintest)}/${DateFormat.M().format(_begintest)}',
+                        '${DateFormat.d().format(begintest)}/${DateFormat.M().format(begintest)}',
                         style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -144,7 +143,7 @@ class BuildCardShortTask extends StatelessWidget {
                                   style:
                                       Theme.of(context).textTheme.displayLarge),
                               const Spacer(),
-                              Text(_electrodes,
+                              Text(electrodes,
                                   style:
                                       Theme.of(context).textTheme.displayLarge)
                             ],
@@ -156,7 +155,7 @@ class BuildCardShortTask extends StatelessWidget {
                                 style: Theme.of(context).textTheme.displayLarge,
                               ),
                               const Spacer(),
-                              Text(_amp.toString(),
+                              Text(amp.toString(),
                                   style:
                                       Theme.of(context).textTheme.displayLarge)
                             ],
@@ -167,7 +166,7 @@ class BuildCardShortTask extends StatelessWidget {
                                   style:
                                       Theme.of(context).textTheme.displayLarge),
                               const Spacer(),
-                              Text(_freq.toString(),
+                              Text(freq.toString(),
                                   style:
                                       Theme.of(context).textTheme.displayLarge)
                             ],
@@ -178,7 +177,7 @@ class BuildCardShortTask extends StatelessWidget {
                                   style:
                                       Theme.of(context).textTheme.displayLarge),
                               const Spacer(),
-                              Text(_dur.toString(),
+                              Text(dur.toString(),
                                   style:
                                       Theme.of(context).textTheme.displayLarge)
                             ],
@@ -206,7 +205,7 @@ class BuildCardShortTask extends StatelessWidget {
                           ),
                           const Spacer(),
                           Text(
-                            _painlevel.toString(),
+                            painlevel.toString(),
                             style: const TextStyle(fontSize: 18),
                           ),
                         ],

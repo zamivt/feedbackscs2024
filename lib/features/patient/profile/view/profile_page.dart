@@ -60,7 +60,7 @@ class ProfilePage extends StatelessWidget {
                       : Column(
                           children: [
                             Padding(
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -87,13 +87,7 @@ class ProfilePage extends StatelessWidget {
                                       padding: const EdgeInsets.only(
                                           left: 20, top: 5, bottom: 5),
                                       child: Text(
-                                        currentpatient[0].sympotoms1 +
-                                            ', ' +
-                                            currentpatient[0].sympotoms2 +
-                                            ', ' +
-                                            currentpatient[0]
-                                                .sympotoms3
-                                                .toString(),
+                                        '${currentpatient[0].sympotoms1}, ${currentpatient[0].sympotoms2}, ${currentpatient[0].sympotoms3}',
                                         style: Theme.of(context)
                                             .textTheme
                                             .labelLarge,
@@ -138,7 +132,7 @@ class ProfilePage extends StatelessWidget {
                                         LocaleKeys.reducingsymptoms.tr()),
                                   ],
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 10,
                                 ),
                                 Row(
@@ -151,7 +145,7 @@ class ProfilePage extends StatelessWidget {
                                                 .textTheme
                                                 .displayMedium,
                                             LocaleKeys.minpain.tr())),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 10,
                                     ),
                                     Text(
@@ -193,7 +187,7 @@ class ProfilePage extends StatelessWidget {
                                           .titleSmall),
                                 ],
                               ),
-                              AppDivider(),
+                              const AppDivider(),
                               AppTextButton(
                                 text: LocaleKeys.instructionneuro.tr(),
                                 linkbutton: RouteNames.neuroinst,
@@ -201,7 +195,7 @@ class ProfilePage extends StatelessWidget {
                             ],
                           )),
               ),
-              MyDoctor()
+              const MyDoctor()
             ],
           ),
         ),

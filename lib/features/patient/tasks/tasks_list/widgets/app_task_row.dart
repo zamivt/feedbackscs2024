@@ -20,7 +20,7 @@ class AppTaskRow extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       child: Column(
         children: [
@@ -32,7 +32,8 @@ class AppTaskRow extends StatelessWidget {
                     height: 70,
                     clipBehavior: Clip.antiAlias,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(0)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(0)),
                         shape: BoxShape.rectangle,
                         border: Border.all(
                             color: Theme.of(context).colorScheme.onBackground)),
@@ -86,8 +87,7 @@ class AppTaskRow extends StatelessWidget {
                                                         ? AppImages.happymovemen
                                                         : ((stadytest == 'long') &
                                                                 (position ==
-                                                                    LocaleKeys
-                                                                        .cseat
+                                                                    LocaleKeys.cseat
                                                                         .tr()) &
                                                                 (sex ==
                                                                     LocaleKeys.fem
@@ -123,9 +123,10 @@ class AppTaskRow extends StatelessWidget {
                   flex: 2,
                   child: Container(
                     height: 70,
-                    padding: EdgeInsets.only(top: 5),
+                    padding: const EdgeInsets.only(top: 5),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(0)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(0)),
                         shape: BoxShape.rectangle,
                         border: Border.all(
                             color: Theme.of(context).colorScheme.onBackground)),
@@ -133,14 +134,11 @@ class AppTaskRow extends StatelessWidget {
                       children: [
                         Text(position,
                             style: Theme.of(context).textTheme.displayLarge),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         (tasks == 0)
                             ? Text(LocaleKeys.notask.tr(),
                                 style: Theme.of(context).textTheme.displaySmall)
-                            : Text(
-                                LocaleKeys.aviabletasks.tr() +
-                                    ' ' +
-                                    tasks.toString(),
+                            : Text('${LocaleKeys.aviabletasks.tr()} $tasks',
                                 style:
                                     Theme.of(context).textTheme.displaySmall),
                       ],

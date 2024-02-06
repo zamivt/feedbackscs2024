@@ -3,7 +3,7 @@ import 'widgets/patient_bottom_navigation_widget.dart';
 
 class PatientMainFullScreen extends StatefulWidget {
   final Widget child;
-  PatientMainFullScreen({super.key, required this.child});
+  const PatientMainFullScreen({super.key, required this.child});
 
   @override
   State<PatientMainFullScreen> createState() => _MainFulPageState();
@@ -15,7 +15,7 @@ class _MainFulPageState extends State<PatientMainFullScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       body: widget.child,
-      bottomNavigationBar: PatientBottomNavigationWidget(),
+      bottomNavigationBar: const PatientBottomNavigationWidget(),
     );
   }
 }

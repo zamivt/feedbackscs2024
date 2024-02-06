@@ -1,3 +1,5 @@
+// ignore_for_file: unrelated_type_equality_checks, empty_statements
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:feedbackscs2024/collections/before_test_short_test.dart';
 import 'package:feedbackscs2024/collections/current_test.dart';
@@ -512,7 +514,7 @@ class FeedbackSCSDatabase extends ChangeNotifier {
     }
     ;
 
-    if (newdoubleShortTest.length == 0) {
+    if (newdoubleShortTest.isEmpty) {
       final newShortTest = IShortTest()
         ..position = position
         ..program = program

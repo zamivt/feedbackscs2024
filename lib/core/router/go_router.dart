@@ -98,8 +98,8 @@ final GoRouter router = GoRouter(
     GoRoute(
         name: RouteNames.patientmainpage,
         path: '/patient',
-        builder: (context, state) => PatientMainFullScreen(
-              child: const ProfilePage(),
+        builder: (context, state) => const PatientMainFullScreen(
+              child: ProfilePage(),
             )),
     ShellRoute(
         navigatorKey: _shellemptypatientnavigator,
@@ -192,7 +192,7 @@ final GoRouter router = GoRouter(
     GoRoute(
         name: RouteNames.docmainpage,
         path: '/doc',
-        builder: (context, state) => DocMainScreen(child: DocPatient())),
+        builder: (context, state) => const DocMainScreen(child: DocPatient())),
     ShellRoute(
         navigatorKey: _shelldocnavigator,
         builder: (context, state, child) => DocMainScreen(

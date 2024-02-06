@@ -53,7 +53,7 @@ class ShortTaskTable extends StatelessWidget {
                     badgeStyle: badges.BadgeStyle(
                       shape: badges.BadgeShape.square,
                       badgeColor: Theme.of(context).colorScheme.surfaceTint,
-                      padding: EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(5),
                       borderRadius: BorderRadius.circular(4),
                       borderSide: BorderSide(
                           color: Theme.of(context).colorScheme.primary,
@@ -64,7 +64,8 @@ class ShortTaskTable extends StatelessWidget {
                         height: 70,
                         clipBehavior: Clip.antiAlias,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(0)),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(0)),
                             shape: BoxShape.rectangle,
                             border: Border.all(
                                 color: Theme.of(context)
@@ -77,20 +78,21 @@ class ShortTaskTable extends StatelessWidget {
                 Container(
                   width: 100,
                   color: Theme.of(context).colorScheme.tertiary,
-                  padding: EdgeInsets.symmetric(vertical: 5),
+                  padding: const EdgeInsets.symmetric(vertical: 5),
                   child: Text(
                     LocaleKeys.cmove.tr(),
                     style: Theme.of(context).textTheme.displayLarge,
                     textAlign: TextAlign.center,
                   ),
                 ),
-                (undefmoveshortTest.length == 0)
+                (undefmoveshortTest.isEmpty)
                     ? Container(
                         width: 100,
                         height: 40,
                         decoration: BoxDecoration(
                           color: Theme.of(context).colorScheme.tertiary,
-                          borderRadius: BorderRadius.all(Radius.circular(0)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(0)),
                           shape: BoxShape.rectangle,
                         ),
                       )
@@ -103,7 +105,7 @@ class ShortTaskTable extends StatelessWidget {
                             onPressed: () {
                               newCurrentShortTestMove(context);
                             },
-                            icon: Icon(Icons.add_task))),
+                            icon: const Icon(Icons.add_task))),
               ],
             ),
           ),
@@ -121,7 +123,7 @@ class ShortTaskTable extends StatelessWidget {
                     badgeStyle: badges.BadgeStyle(
                       shape: badges.BadgeShape.square,
                       badgeColor: Theme.of(context).colorScheme.surfaceTint,
-                      padding: EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(5),
                       borderRadius: BorderRadius.circular(4),
                       borderSide: BorderSide(
                           color: Theme.of(context).colorScheme.primary,
@@ -132,7 +134,8 @@ class ShortTaskTable extends StatelessWidget {
                         height: 70,
                         clipBehavior: Clip.antiAlias,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(0)),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(0)),
                             shape: BoxShape.rectangle,
                             border: Border.all(
                                 color: Theme.of(context)
@@ -145,20 +148,21 @@ class ShortTaskTable extends StatelessWidget {
                 Container(
                   width: 100,
                   color: Theme.of(context).colorScheme.tertiary,
-                  padding: EdgeInsets.symmetric(vertical: 5),
+                  padding: const EdgeInsets.symmetric(vertical: 5),
                   child: Text(
                     LocaleKeys.cseat.tr(),
                     style: Theme.of(context).textTheme.displayLarge,
                     textAlign: TextAlign.center,
                   ),
                 ),
-                (undefseatshortTest.length == 0)
+                (undefseatshortTest.isEmpty)
                     ? Container(
                         width: 100,
                         height: 40,
                         decoration: BoxDecoration(
                           color: Theme.of(context).colorScheme.tertiary,
-                          borderRadius: BorderRadius.all(Radius.circular(0)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(0)),
                           shape: BoxShape.rectangle,
                         ),
                       )
@@ -171,7 +175,7 @@ class ShortTaskTable extends StatelessWidget {
                             onPressed: () {
                               createNewShortSeatCurrentTask(context);
                             },
-                            icon: Icon(Icons.add_task))),
+                            icon: const Icon(Icons.add_task))),
               ],
             ),
           ),
@@ -189,7 +193,7 @@ class ShortTaskTable extends StatelessWidget {
                   badgeStyle: badges.BadgeStyle(
                     shape: badges.BadgeShape.square,
                     badgeColor: Theme.of(context).colorScheme.surfaceTint,
-                    padding: EdgeInsets.all(5),
+                    padding: const EdgeInsets.all(5),
                     borderRadius: BorderRadius.circular(4),
                     borderSide: BorderSide(
                         color: Theme.of(context).colorScheme.primary, width: 2),
@@ -199,7 +203,8 @@ class ShortTaskTable extends StatelessWidget {
                       height: 70,
                       clipBehavior: Clip.antiAlias,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(0)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(0)),
                           shape: BoxShape.rectangle,
                           border: Border.all(
                               color:
@@ -212,20 +217,21 @@ class ShortTaskTable extends StatelessWidget {
                 Container(
                   width: 100,
                   color: Theme.of(context).colorScheme.tertiary,
-                  padding: EdgeInsets.symmetric(vertical: 5),
+                  padding: const EdgeInsets.symmetric(vertical: 5),
                   child: Text(
                     LocaleKeys.clie.tr(),
                     style: Theme.of(context).textTheme.displayLarge,
                     textAlign: TextAlign.center,
                   ),
                 ),
-                (undeflieshortTest.length == 0)
+                (undeflieshortTest.isEmpty)
                     ? Container(
                         width: 100,
                         height: 40,
                         decoration: BoxDecoration(
                           color: Theme.of(context).colorScheme.tertiary,
-                          borderRadius: BorderRadius.all(Radius.circular(0)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(0)),
                           shape: BoxShape.rectangle,
                         ),
                       )
@@ -238,7 +244,7 @@ class ShortTaskTable extends StatelessWidget {
                             onPressed: () {
                               createNewShortLieCurrentTask(context);
                             },
-                            icon: Icon(Icons.add_task))),
+                            icon: const Icon(Icons.add_task))),
               ],
             ),
           ),

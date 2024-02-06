@@ -1,3 +1,5 @@
+// ignore_for_file: unrelated_type_equality_checks, prefer_interpolation_to_compose_strings
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:feedbackscs2024/core/ui/widgets/common_widgets.dart';
 import 'package:feedbackscs2024/features/doc/tasks/controllers/short_task_move_controller.dart';
@@ -43,33 +45,33 @@ class ShortTest4 extends StatelessWidget {
 
     List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
 
-    final _shorttaskmoveController = Get.find<ShortTaskMoveControler>();
-    final _successShortMoveController =
+    final shorttaskmoveController = Get.find<ShortTaskMoveControler>();
+    final successShortMoveController =
         Get.find<SuccessShortTaskMoveControler>();
-    final _unsuccessShortMoveController =
+    final unsuccessShortMoveController =
         Get.find<UnsuccessShortTaskMoveControler>();
 
-    final _shorttaskseatController = Get.find<ShortTaskSeatControler>();
-    final _successShortSeatController =
+    final shorttaskseatController = Get.find<ShortTaskSeatControler>();
+    final successShortSeatController =
         Get.find<SuccessShortTaskSeatControler>();
-    final _unsuccessShortSeatController =
+    final unsuccessShortSeatController =
         Get.find<UnsuccessShortTaskSeatControler>();
 
-    final _shorttasklieController = Get.find<ShortTaskLieControler>();
-    final _successShortLieController = Get.find<SuccessShortTaskLieControler>();
-    final _unsuccessShortLieController =
+    final shorttasklieController = Get.find<ShortTaskLieControler>();
+    final successShortLieController = Get.find<SuccessShortTaskLieControler>();
+    final unsuccessShortLieController =
         Get.find<UnsuccessShortTaskLieControler>();
 
-    final _candidatelongtaskMoveController =
+    final candidatelongtaskMoveController =
         Get.find<CandidateLongTaskMoveControler>();
-    final _candidatelongtaskSeatController =
+    final candidatelongtaskSeatController =
         Get.find<CandidateLongTaskSeatControler>();
-    final _candidatelongtaskLieController =
+    final candidatelongtaskLieController =
         Get.find<CandidateLongTaskLieControler>();
 
     return GetBuilder(
         builder: (CurrentShortTaskControler currentShortTaskControler) {
-      final bool _issuccess =
+      final bool issuccess =
           ((currentShortTaskControler.currentshorttasks[0].durationtest ?? 0) >=
                   TimeTestConst.timeshorttest) &&
               (currentShortTaskControler.currentshorttasks[0].longestsuitable ==
@@ -109,11 +111,8 @@ class ShortTest4 extends StatelessWidget {
                 children: [
                   AppRow(
                       headerrow: LocaleKeys.timetest.tr(),
-                      bodyrow: currentShortTaskControler
-                              .currentshorttasks[0].durationtest
-                              .toString() +
-                          ' ' +
-                          LocaleKeys.min.tr()),
+                      bodyrow:
+                          '${currentShortTaskControler.currentshorttasks[0].durationtest} ${LocaleKeys.min.tr()}'),
                   AppResult(
                       text: ((currentShortTaskControler
                                       .currentshorttasks[0].durationtest ??
@@ -125,7 +124,7 @@ class ShortTest4 extends StatelessWidget {
                                   .currentshorttasks[0].durationtest ??
                               0) <
                           TimeTestConst.timeshorttest)),
-                  AppDivider(),
+                  const AppDivider(),
                   AppRow(
                       headerrow: LocaleKeys.program.tr(),
                       bodyrow: currentShortTaskControler
@@ -167,33 +166,33 @@ class ShortTest4 extends StatelessWidget {
                       ),
                     ],
                   ),
-                  AppDivider(),
+                  const AppDivider(),
                   AppResult(
-                      text: _issuccess
+                      text: issuccess
                           // ignore: dead_code
                           ? LocaleKeys.progcandidatlongtest.tr()
                           : LocaleKeys.prognoncandidatlongtest.tr(),
-                      isSucces: _issuccess),
-                  SizedBox(
+                      isSucces: issuccess),
+                  const SizedBox(
                     height: 10,
                   ),
                   ElevatedButton(
                       onPressed: () {
                         add_suc_and_candid(
-                            _issuccess,
+                            issuccess,
                             currentShortTaskControler,
-                            _candidatelongtaskMoveController,
-                            _shorttaskmoveController,
-                            _successShortMoveController,
-                            _unsuccessShortMoveController,
-                            _candidatelongtaskSeatController,
-                            _shorttaskseatController,
-                            _successShortSeatController,
-                            _unsuccessShortSeatController,
-                            _candidatelongtaskLieController,
-                            _shorttasklieController,
-                            _successShortLieController,
-                            _unsuccessShortLieController);
+                            candidatelongtaskMoveController,
+                            shorttaskmoveController,
+                            successShortMoveController,
+                            unsuccessShortMoveController,
+                            candidatelongtaskSeatController,
+                            shorttaskseatController,
+                            successShortSeatController,
+                            unsuccessShortSeatController,
+                            candidatelongtaskLieController,
+                            shorttasklieController,
+                            successShortLieController,
+                            unsuccessShortLieController);
                         context
                             .read<FeedbackSCSDatabase>()
                             .updateActiveTask('no tasks');
@@ -212,46 +211,46 @@ class ShortTest4 extends StatelessWidget {
   }
 
   void add_suc_and_candid(
-      bool _issuccess,
+      bool issuccess,
       CurrentShortTaskControler currentShortTaskControler,
-      CandidateLongTaskMoveControler _candidatelongtaskMoveController,
-      ShortTaskMoveControler _shorttaskmoveController,
-      SuccessShortTaskMoveControler _successShortMoveController,
-      UnsuccessShortTaskMoveControler _unsuccessShortMoveController,
-      CandidateLongTaskSeatControler _candidatelongtaskSeatController,
-      ShortTaskSeatControler _shorttaskseatController,
-      SuccessShortTaskSeatControler _successShortSeatController,
-      UnsuccessShortTaskSeatControler _unsuccessShortSeatController,
-      CandidateLongTaskLieControler _candidatelongtaskLieController,
-      ShortTaskLieControler _shorttasklieController,
-      SuccessShortTaskLieControler _successShortLieController,
-      UnsuccessShortTaskLieControler _unsuccessShortLieController) {
-    _issuccess &&
+      CandidateLongTaskMoveControler candidatelongtaskMoveController,
+      ShortTaskMoveControler shorttaskmoveController,
+      SuccessShortTaskMoveControler successShortMoveController,
+      UnsuccessShortTaskMoveControler unsuccessShortMoveController,
+      CandidateLongTaskSeatControler candidatelongtaskSeatController,
+      ShortTaskSeatControler shorttaskseatController,
+      SuccessShortTaskSeatControler successShortSeatController,
+      UnsuccessShortTaskSeatControler unsuccessShortSeatController,
+      CandidateLongTaskLieControler candidatelongtaskLieController,
+      ShortTaskLieControler shorttasklieController,
+      SuccessShortTaskLieControler successShortLieController,
+      UnsuccessShortTaskLieControler unsuccessShortLieController) {
+    issuccess &&
             currentShortTaskControler.currentshorttasks[0].position ==
                 LocaleKeys.cmove.tr()
         ? {
-            _candidatelongtaskMoveController.addCandidateLongTaskMove(
+            candidatelongtaskMoveController.addCandidateLongTaskMove(
                 CandidateLongTaskMove(
                     id: currentShortTaskControler.currentshorttasks[0].id)),
-            _shorttaskmoveController.addSuccess(
+            shorttaskmoveController.addSuccess(
                 "success", currentShortTaskControler.currentshorttasks[0].id),
-            _successShortMoveController.addSuccessShortTaskMove(
+            successShortMoveController.addSuccessShortTaskMove(
                 SuccesShortTaskMove(
                     id: currentShortTaskControler.currentshorttasks[0].id,
-                    program: currentShortTaskControler
-                        .currentshorttasks[0].program,
+                    program:
+                        currentShortTaskControler.currentshorttasks[0].program,
                     electrodes: currentShortTaskControler
                         .currentshorttasks[0].electrodes,
-                    amplit: currentShortTaskControler
-                        .currentshorttasks[0].amplit!,
+                    amplit:
+                        currentShortTaskControler.currentshorttasks[0].amplit!,
                     hideampl: currentShortTaskControler
                         .currentshorttasks[0].hideamplt,
                     freq: currentShortTaskControler.currentshorttasks[0].freq,
-                    hidefreq: currentShortTaskControler
-                        .currentshorttasks[0].hidefreq,
+                    hidefreq:
+                        currentShortTaskControler.currentshorttasks[0].hidefreq,
                     dur: currentShortTaskControler.currentshorttasks[0].dur,
-                    hidedur: currentShortTaskControler
-                        .currentshorttasks[0].hidedur,
+                    hidedur:
+                        currentShortTaskControler.currentshorttasks[0].hidedur,
                     begintesttime: currentShortTaskControler
                         .currentshorttasks[0].begintesttime!,
                     stoptesttime: currentShortTaskControler
@@ -276,13 +275,13 @@ class ShortTest4 extends StatelessWidget {
                     longestsuitable: currentShortTaskControler
                         .currentshorttasks[0].longestsuitable!))
           }
-        : !_issuccess &&
+        : !issuccess &&
                 currentShortTaskControler.currentshorttasks[0].position ==
                     LocaleKeys.cmove.tr()
             ? {
-                _shorttaskmoveController.addSuccess("unsuccess",
+                shorttaskmoveController.addSuccess("unsuccess",
                     currentShortTaskControler.currentshorttasks[0].id),
-                _unsuccessShortMoveController.addUnsuccessShortTaskMove(
+                unsuccessShortMoveController.addUnsuccessShortTaskMove(
                     UnSuccesShortTaskMove(
                         id: currentShortTaskControler.currentshorttasks[0].id,
                         program: currentShortTaskControler
@@ -324,69 +323,68 @@ class ShortTest4 extends StatelessWidget {
                         longestsuitable: currentShortTaskControler
                             .currentshorttasks[0].longestsuitable!))
               }
-            : _issuccess &&
+            : issuccess &&
                     currentShortTaskControler.currentshorttasks[0].position ==
                         LocaleKeys.cseat.tr()
                 ? {
-                    _candidatelongtaskSeatController.addCandidateLongTaskSeat(
+                    candidatelongtaskSeatController.addCandidateLongTaskSeat(
                         CandidateLongTaskSeat(
                             id: currentShortTaskControler
                                 .currentshorttasks[0].id)),
-                    _shorttaskseatController.addSuccess("success",
+                    shorttaskseatController.addSuccess("success",
                         currentShortTaskControler.currentshorttasks[0].id),
-                    _successShortSeatController
-                        .addSuccessShortTaskSeat(
-                            SuccesShortTaskSeat(
-                                id: currentShortTaskControler
-                                    .currentshorttasks[0].id,
-                                program: currentShortTaskControler
-                                    .currentshorttasks[0].program,
-                                electrodes: currentShortTaskControler
-                                    .currentshorttasks[0].electrodes,
-                                amplit: currentShortTaskControler
-                                    .currentshorttasks[0].amplit!,
-                                hideampl: currentShortTaskControler
-                                    .currentshorttasks[0].hideamplt,
-                                freq: currentShortTaskControler
-                                    .currentshorttasks[0].freq,
-                                hidefreq: currentShortTaskControler
-                                    .currentshorttasks[0].hidefreq,
-                                dur: currentShortTaskControler
-                                    .currentshorttasks[0].dur,
-                                hidedur: currentShortTaskControler
-                                    .currentshorttasks[0].hidedur,
-                                begintesttime: currentShortTaskControler
-                                    .currentshorttasks[0].begintesttime!,
-                                stoptesttime: currentShortTaskControler
-                                    .currentshorttasks[0].stoptesttime!,
-                                durationtest: currentShortTaskControler
-                                    .currentshorttasks[0].durationtest!,
-                                currentlevelpain: currentShortTaskControler
-                                    .currentshorttasks[0].currentlevelpain!,
-                                dessymptoms1: currentShortTaskControler
-                                    .currentshorttasks[0].dessymptoms1!,
-                                dessymptoms2: currentShortTaskControler
-                                    .currentshorttasks[0].dessymptoms2!,
-                                dessymptoms3: currentShortTaskControler
-                                        .currentshorttasks[0].dessymptoms3 ??
-                                    true,
-                                bigsideeffects: currentShortTaskControler
-                                    .currentshorttasks[0].bigsideeffects!,
-                                sideeffects: currentShortTaskControler
-                                    .currentshorttasks[0].sideeffects!,
-                                placeparestesia: currentShortTaskControler
-                                    .currentshorttasks[0].placeparestesia!,
-                                longestsuitable: currentShortTaskControler
-                                    .currentshorttasks[0].longestsuitable!))
+                    successShortSeatController.addSuccessShortTaskSeat(
+                        SuccesShortTaskSeat(
+                            id: currentShortTaskControler
+                                .currentshorttasks[0].id,
+                            program: currentShortTaskControler
+                                .currentshorttasks[0].program,
+                            electrodes: currentShortTaskControler
+                                .currentshorttasks[0].electrodes,
+                            amplit: currentShortTaskControler
+                                .currentshorttasks[0].amplit!,
+                            hideampl: currentShortTaskControler
+                                .currentshorttasks[0].hideamplt,
+                            freq: currentShortTaskControler
+                                .currentshorttasks[0].freq,
+                            hidefreq: currentShortTaskControler
+                                .currentshorttasks[0].hidefreq,
+                            dur: currentShortTaskControler
+                                .currentshorttasks[0].dur,
+                            hidedur: currentShortTaskControler
+                                .currentshorttasks[0].hidedur,
+                            begintesttime: currentShortTaskControler
+                                .currentshorttasks[0].begintesttime!,
+                            stoptesttime: currentShortTaskControler
+                                .currentshorttasks[0].stoptesttime!,
+                            durationtest: currentShortTaskControler
+                                .currentshorttasks[0].durationtest!,
+                            currentlevelpain: currentShortTaskControler
+                                .currentshorttasks[0].currentlevelpain!,
+                            dessymptoms1: currentShortTaskControler
+                                .currentshorttasks[0].dessymptoms1!,
+                            dessymptoms2: currentShortTaskControler
+                                .currentshorttasks[0].dessymptoms2!,
+                            dessymptoms3: currentShortTaskControler
+                                    .currentshorttasks[0].dessymptoms3 ??
+                                true,
+                            bigsideeffects: currentShortTaskControler
+                                .currentshorttasks[0].bigsideeffects!,
+                            sideeffects: currentShortTaskControler
+                                .currentshorttasks[0].sideeffects!,
+                            placeparestesia: currentShortTaskControler
+                                .currentshorttasks[0].placeparestesia!,
+                            longestsuitable: currentShortTaskControler
+                                .currentshorttasks[0].longestsuitable!))
                   }
-                : !_issuccess &&
+                : !issuccess &&
                         currentShortTaskControler
                                 .currentshorttasks[0].position ==
                             LocaleKeys.cseat.tr()
                     ? {
-                        _shorttaskseatController.addSuccess("unsuccess",
+                        shorttaskseatController.addSuccess("unsuccess",
                             currentShortTaskControler.currentshorttasks[0].id),
-                        _unsuccessShortSeatController.addUnsuccessShortTaskSeat(
+                        unsuccessShortSeatController.addUnsuccessShortTaskSeat(
                             UnSuccesShortTaskSeat(
                                 id: currentShortTaskControler
                                     .currentshorttasks[0].id,
@@ -430,70 +428,78 @@ class ShortTest4 extends StatelessWidget {
                                 longestsuitable: currentShortTaskControler
                                     .currentshorttasks[0].longestsuitable!))
                       }
-                    : _issuccess &&
+                    : issuccess &&
                             currentShortTaskControler
                                     .currentshorttasks[0].position ==
                                 LocaleKeys.clie.tr()
                         ? {
-                            _candidatelongtaskLieController
+                            candidatelongtaskLieController
                                 .addCandidateLongTaskLie(CandidateLongTaskLie(
                                     id: currentShortTaskControler
                                         .currentshorttasks[0].id)),
-                            _shorttasklieController.addSuccess(
+                            shorttasklieController.addSuccess(
                                 "success",
                                 currentShortTaskControler
                                     .currentshorttasks[0].id),
-                            _successShortLieController.addSuccessShortTaskLie(
-                                SuccesShortTaskLie(
-                                    id: currentShortTaskControler
-                                        .currentshorttasks[0].id,
-                                    program: currentShortTaskControler
-                                        .currentshorttasks[0].program,
-                                    electrodes: currentShortTaskControler
-                                        .currentshorttasks[0].electrodes,
-                                    amplit: currentShortTaskControler
-                                        .currentshorttasks[0].amplit!,
-                                    hideampl: currentShortTaskControler
-                                        .currentshorttasks[0].hideamplt,
-                                    freq: currentShortTaskControler
-                                        .currentshorttasks[0].freq,
-                                    hidefreq: currentShortTaskControler
-                                        .currentshorttasks[0].hidefreq,
-                                    dur: currentShortTaskControler
-                                        .currentshorttasks[0].dur,
-                                    hidedur: currentShortTaskControler
-                                        .currentshorttasks[0].hidedur,
-                                    begintesttime: currentShortTaskControler
-                                        .currentshorttasks[0].begintesttime!,
-                                    stoptesttime: currentShortTaskControler
-                                        .currentshorttasks[0].stoptesttime!,
-                                    durationtest: currentShortTaskControler
-                                        .currentshorttasks[0].durationtest!,
-                                    currentlevelpain: currentShortTaskControler
-                                        .currentshorttasks[0].currentlevelpain!,
-                                    dessymptoms1: currentShortTaskControler
-                                        .currentshorttasks[0].dessymptoms1!,
-                                    dessymptoms2: currentShortTaskControler
-                                        .currentshorttasks[0].dessymptoms2!,
-                                    dessymptoms3: currentShortTaskControler
+                            successShortLieController
+                                .addSuccessShortTaskLie(
+                                    SuccesShortTaskLie(
+                                        id: currentShortTaskControler
+                                            .currentshorttasks[0].id,
+                                        program: currentShortTaskControler
+                                            .currentshorttasks[0].program,
+                                        electrodes: currentShortTaskControler
+                                            .currentshorttasks[0].electrodes,
+                                        amplit: currentShortTaskControler
+                                            .currentshorttasks[0].amplit!,
+                                        hideampl: currentShortTaskControler
+                                            .currentshorttasks[0].hideamplt,
+                                        freq: currentShortTaskControler
+                                            .currentshorttasks[0].freq,
+                                        hidefreq: currentShortTaskControler
+                                            .currentshorttasks[0].hidefreq,
+                                        dur: currentShortTaskControler
+                                            .currentshorttasks[0].dur,
+                                        hidedur: currentShortTaskControler
+                                            .currentshorttasks[0].hidedur,
+                                        begintesttime: currentShortTaskControler
                                             .currentshorttasks[0]
-                                            .dessymptoms3 ??
-                                        true,
-                                    bigsideeffects: currentShortTaskControler
-                                        .currentshorttasks[0].bigsideeffects!,
-                                    sideeffects: currentShortTaskControler
-                                        .currentshorttasks[0].sideeffects!,
-                                    placeparestesia: currentShortTaskControler
-                                        .currentshorttasks[0].placeparestesia!,
-                                    longestsuitable: currentShortTaskControler
-                                        .currentshorttasks[0].longestsuitable!))
+                                            .begintesttime!,
+                                        stoptesttime: currentShortTaskControler
+                                            .currentshorttasks[0].stoptesttime!,
+                                        durationtest: currentShortTaskControler
+                                            .currentshorttasks[0].durationtest!,
+                                        currentlevelpain:
+                                            currentShortTaskControler
+                                                .currentshorttasks[0]
+                                                .currentlevelpain!,
+                                        dessymptoms1: currentShortTaskControler
+                                            .currentshorttasks[0].dessymptoms1!,
+                                        dessymptoms2: currentShortTaskControler
+                                            .currentshorttasks[0].dessymptoms2!,
+                                        dessymptoms3: currentShortTaskControler
+                                                .currentshorttasks[0]
+                                                .dessymptoms3 ??
+                                            true,
+                                        bigsideeffects: currentShortTaskControler
+                                            .currentshorttasks[0]
+                                            .bigsideeffects!,
+                                        sideeffects: currentShortTaskControler
+                                            .currentshorttasks[0].sideeffects!,
+                                        placeparestesia: currentShortTaskControler
+                                            .currentshorttasks[0]
+                                            .placeparestesia!,
+                                        longestsuitable:
+                                            currentShortTaskControler
+                                                .currentshorttasks[0]
+                                                .longestsuitable!))
                           }
                         : {
-                            _shorttasklieController.addSuccess(
+                            shorttasklieController.addSuccess(
                                 "unsuccess",
                                 currentShortTaskControler
                                     .currentshorttasks[0].id),
-                            _unsuccessShortLieController.addUnsuccessShortTaskLie(
+                            unsuccessShortLieController.addUnsuccessShortTaskLie(
                                 UnSuccesShortTaskLie(
                                     id: currentShortTaskControler
                                         .currentshorttasks[0].id,

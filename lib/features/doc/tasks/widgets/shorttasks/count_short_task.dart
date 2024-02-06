@@ -35,7 +35,7 @@ class CountShortTasks extends StatelessWidget {
           decoration: BoxDecoration(
               border: Border.all(color: Theme.of(context).colorScheme.primary),
               color: Theme.of(context).colorScheme.primary,
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(8), topRight: Radius.circular(8))),
           child: Text(LocaleKeys.tasks.tr(),
               textAlign: TextAlign.center,
@@ -43,11 +43,11 @@ class CountShortTasks extends StatelessWidget {
         ),
         Container(
           padding: const EdgeInsets.all(8.0),
-          margin: EdgeInsets.only(bottom: 10),
+          margin: const EdgeInsets.only(bottom: 10),
           decoration: BoxDecoration(
               border: Border.all(color: Theme.of(context).colorScheme.primary),
               color: Theme.of(context).colorScheme.tertiary,
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(8),
                   bottomRight: Radius.circular(8))),
           alignment: Alignment.center,
@@ -56,23 +56,17 @@ class CountShortTasks extends StatelessWidget {
             children: [
               Expanded(
                 child: AppTextButton(
-                    text: LocaleKeys.cmove.tr() +
-                        '\n' +
-                        moveshortTest.length.toString(),
+                    text: '${LocaleKeys.cmove.tr()}\n${moveshortTest.length}',
                     linkbutton: RouteNames.docshorttaskmove),
               ),
               Expanded(
                 child: AppTextButton(
-                    text: LocaleKeys.cseat.tr() +
-                        '\n' +
-                        seatshortTest.length.toString(),
+                    text: '${LocaleKeys.cseat.tr()}\n${seatshortTest.length}',
                     linkbutton: RouteNames.docshorttaskseat),
               ),
               Expanded(
                 child: AppTextButton(
-                    text: LocaleKeys.clie.tr() +
-                        '\n' +
-                        lieshortTest.length.toString(),
+                    text: '${LocaleKeys.clie.tr()}\n${lieshortTest.length}',
                     linkbutton: RouteNames.docshorttasklie),
               )
             ],

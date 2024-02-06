@@ -19,6 +19,7 @@ import 'short_list.dart';
 // ignore: must_be_immutable
 class ShortReportWidget extends StatelessWidget {
   String position;
+  // ignore: use_key_in_widget_constructors
   ShortReportWidget({
     required this.position,
     Key? key,
@@ -27,39 +28,39 @@ class ShortReportWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //move
-    final _successShortMoveController =
+    final successShortMoveController =
         Get.find<SuccessShortTaskMoveControler>();
-    final _unsuccessShortMoveController =
+    final unsuccessShortMoveController =
         Get.find<UnsuccessShortTaskMoveControler>();
-    final _shorttaskMoveController = Get.find<ShortTaskMoveControler>();
+    final shorttaskMoveController = Get.find<ShortTaskMoveControler>();
     //seat
-    final _successShortSeatController =
+    final successShortSeatController =
         Get.find<SuccessShortTaskSeatControler>();
-    final _unsuccessShortSeatController =
+    final unsuccessShortSeatController =
         Get.find<UnsuccessShortTaskSeatControler>();
-    final _shorttaskSeatController = Get.find<ShortTaskSeatControler>();
+    final shorttaskSeatController = Get.find<ShortTaskSeatControler>();
     //lie
-    final _successShortLieController = Get.find<SuccessShortTaskLieControler>();
-    final _unsuccessShortLieController =
+    final successShortLieController = Get.find<SuccessShortTaskLieControler>();
+    final unsuccessShortLieController =
         Get.find<UnsuccessShortTaskLieControler>();
-    final _shorttaskLieController = Get.find<ShortTaskLieControler>();
+    final shorttaskLieController = Get.find<ShortTaskLieControler>();
 
-    final _listshortsuccestask = (position == 'move')
-        ? _successShortMoveController.successshorttaskmoves
+    final listshortsuccestask = (position == 'move')
+        ? successShortMoveController.successshorttaskmoves
         : (position == 'seat')
-            ? _successShortSeatController.successshorttaskseats
-            : _successShortLieController.successshorttasklies;
+            ? successShortSeatController.successshorttaskseats
+            : successShortLieController.successshorttasklies;
 
-    final _listshortunsuccestask = (position == 'move')
-        ? _unsuccessShortMoveController.unsuccessshorttaskmoves
+    final listshortunsuccestask = (position == 'move')
+        ? unsuccessShortMoveController.unsuccessshorttaskmoves
         : (position == 'seat')
-            ? _unsuccessShortSeatController.unsuccessshorttaskseats
-            : _unsuccessShortLieController.unsuccessshorttasklies;
-    final _listshorttask = (position == 'move')
-        ? _shorttaskMoveController.shorttaskmoves
+            ? unsuccessShortSeatController.unsuccessshorttaskseats
+            : unsuccessShortLieController.unsuccessshorttasklies;
+    final listshorttask = (position == 'move')
+        ? shorttaskMoveController.shorttaskmoves
         : (position == 'seat')
-            ? _shorttaskSeatController.shorttaskseats
-            : _shorttaskLieController.shorttasklies;
+            ? shorttaskSeatController.shorttaskseats
+            : shorttaskLieController.shorttasklies;
 
     return Column(
       children: [
@@ -82,8 +83,8 @@ class ShortReportWidget extends StatelessWidget {
         Container(
             width: double.infinity,
             color: Theme.of(context).colorScheme.background,
-            child: (_listshortsuccestask.length +
-                        _listshortunsuccestask.length) !=
+            child: (listshortsuccestask.length +
+                        listshortunsuccestask.length) !=
                     0
                 ? Column(children: [
                     ColoredBox(
@@ -95,17 +96,17 @@ class ShortReportWidget extends StatelessWidget {
                             width: MediaQuery.of(context).size.width / 2 - 10,
                             child: AppDuoDiagram(
                                 content: LocaleKeys.done.tr(),
-                                countcontent: _listshorttask.length,
-                                nocountcontent: _listshortsuccestask.length +
-                                    _listshortunsuccestask.length),
+                                countcontent: listshorttask.length,
+                                nocountcontent: listshortsuccestask.length +
+                                    listshortunsuccestask.length),
                           ),
                           SizedBox(
                             width: MediaQuery.of(context).size.width / 2 - 10,
                             child: AppDuoDiagram(
                                 content: LocaleKeys.fits.tr(),
-                                countcontent: _listshortsuccestask.length +
-                                    _listshortunsuccestask.length,
-                                nocountcontent: _listshortsuccestask.length),
+                                countcontent: listshortsuccestask.length +
+                                    listshortunsuccestask.length,
+                                nocountcontent: listshortsuccestask.length),
                           ),
                         ],
                       ),
@@ -113,7 +114,7 @@ class ShortReportWidget extends StatelessWidget {
                     ColoredBox(
                       color: Theme.of(context).colorScheme.background,
                       child: Column(children: [
-                        _listshorttask.isNotEmpty
+                        listshorttask.isNotEmpty
                             ? ShortList(
                                 position: position,
                               )

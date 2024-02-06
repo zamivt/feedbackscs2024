@@ -45,7 +45,7 @@ class _PatientProfileState extends State<PatientProfile> {
     final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
     List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
 
-    int _countask = 0;
+    int countask = 0;
     return Container(
       color: Theme.of(context).colorScheme.background,
       padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -86,7 +86,7 @@ class _PatientProfileState extends State<PatientProfile> {
                           ))
                     ],
                   ),
-                  AppDivider(
+                  const AppDivider(
                     ismin: true,
                   ),
                   Row(
@@ -118,7 +118,7 @@ class _PatientProfileState extends State<PatientProfile> {
                           ))
                     ],
                   ),
-                  AppDivider(
+                  const AppDivider(
                     ismin: true,
                   ),
                   Row(
@@ -150,7 +150,7 @@ class _PatientProfileState extends State<PatientProfile> {
                           ))
                     ],
                   ),
-                  AppDivider(
+                  const AppDivider(
                     ismin: true,
                   ),
                   Row(
@@ -182,7 +182,7 @@ class _PatientProfileState extends State<PatientProfile> {
                           ))
                     ],
                   ),
-                  AppDivider(
+                  const AppDivider(
                     ismin: true,
                   ),
                   AppNameField(namefield: LocaleKeys.diagnoz.tr()),
@@ -217,7 +217,7 @@ class _PatientProfileState extends State<PatientProfile> {
                       ],
                     ),
                   ),
-                  AppDivider(
+                  const AppDivider(
                     ismin: true,
                   ),
                   AppNameField(namefield: LocaleKeys.anamnesis.tr()),
@@ -252,7 +252,7 @@ class _PatientProfileState extends State<PatientProfile> {
                       ],
                     ),
                   ),
-                  AppDivider(
+                  const AppDivider(
                     ismin: true,
                   ),
                   ColoredBox(
@@ -273,7 +273,7 @@ class _PatientProfileState extends State<PatientProfile> {
                             style: Theme.of(context).textTheme.displaySmall,
                           ),
                         ),
-                        (_countask > 0)
+                        (countask > 0)
                             ? Container()
                             : IconButton(
                                 onPressed: () {
@@ -290,7 +290,7 @@ class _PatientProfileState extends State<PatientProfile> {
                       ],
                     ),
                   ),
-                  AppDivider(
+                  const AppDivider(
                     ismin: true,
                   ),
                   AppNameField(namefield: LocaleKeys.currentsymptoms.tr()),
@@ -304,11 +304,11 @@ class _PatientProfileState extends State<PatientProfile> {
                         ),
                         Expanded(
                           child: Text(
-                            '1. ' + currentpatient[0].sympotoms1,
+                            '1. ${currentpatient[0].sympotoms1}',
                             style: Theme.of(context).textTheme.displaySmall,
                           ),
                         ),
-                        (_countask > 0)
+                        (countask > 0)
                             ? Container()
                             : IconButton(
                                 onPressed: () {
@@ -325,7 +325,7 @@ class _PatientProfileState extends State<PatientProfile> {
                       ],
                     ),
                   ),
-                  AppDivider(
+                  const AppDivider(
                     ismin: true,
                   ),
                   ColoredBox(
@@ -338,11 +338,11 @@ class _PatientProfileState extends State<PatientProfile> {
                         ),
                         Expanded(
                           child: Text(
-                            '2. ' + currentpatient[0].sympotoms2,
+                            '2. ${currentpatient[0].sympotoms2}',
                             style: Theme.of(context).textTheme.displaySmall,
                           ),
                         ),
-                        (_countask > 0)
+                        (countask > 0)
                             ? Container()
                             : IconButton(
                                 onPressed: () {
@@ -359,7 +359,7 @@ class _PatientProfileState extends State<PatientProfile> {
                       ],
                     ),
                   ),
-                  AppDivider(
+                  const AppDivider(
                     ismin: true,
                   ),
                   ColoredBox(
@@ -372,11 +372,11 @@ class _PatientProfileState extends State<PatientProfile> {
                         ),
                         Expanded(
                           child: Text(
-                            '3. ' + currentpatient[0].sympotoms3.toString(),
+                            '3. ${currentpatient[0].sympotoms3}',
                             style: Theme.of(context).textTheme.displaySmall,
                           ),
                         ),
-                        (_countask > 0)
+                        (countask > 0)
                             ? Container()
                             : IconButton(
                                 onPressed: () {
@@ -415,7 +415,7 @@ class _PatientProfileState extends State<PatientProfile> {
                           style: Theme.of(context).textTheme.displaySmall,
                         ),
                       ),
-                      (_countask > 0)
+                      (countask > 0)
                           ? Container()
                           : IconButton(
                               onPressed: () {
@@ -509,13 +509,11 @@ class _PatientProfileState extends State<PatientProfile> {
                         Expanded(
                           flex: 1,
                           child: Text(
-                            currentpatient[0].timemove.toString() +
-                                " " +
-                                LocaleKeys.hours.tr(),
+                            "${currentpatient[0].timemove} ${LocaleKeys.hours.tr()}",
                             style: Theme.of(context).textTheme.displaySmall,
                           ),
                         ),
-                        (_countask > 0)
+                        (countask > 0)
                             ? Container()
                             : IconButton(
                                 onPressed: () {
@@ -558,7 +556,7 @@ class _PatientProfileState extends State<PatientProfile> {
                             style: Theme.of(context).textTheme.displaySmall,
                           ),
                         ),
-                        (_countask > 0)
+                        (countask > 0)
                             ? Container()
                             : IconButton(
                                 onPressed: () {
@@ -594,13 +592,11 @@ class _PatientProfileState extends State<PatientProfile> {
                       Expanded(
                         flex: 1,
                         child: Text(
-                          currentpatient[0].timelie.toString() +
-                              ' ' +
-                              LocaleKeys.hours.tr(),
+                          '${currentpatient[0].timelie} ${LocaleKeys.hours.tr()}',
                           style: Theme.of(context).textTheme.displaySmall,
                         ),
                       ),
-                      (_countask > 0)
+                      (countask > 0)
                           ? Container()
                           : IconButton(
                               onPressed: () {

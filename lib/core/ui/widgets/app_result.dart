@@ -17,14 +17,14 @@ class AppResult extends StatelessWidget {
             color: Theme.of(context).colorScheme.primaryContainer,
           )),
       width: double.infinity,
-      padding: EdgeInsets.all(10),
-      margin: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
 
       child: Text(
         text,
         textAlign: TextAlign.center,
         style: TextStyle(
-          color: isSucces ? Colors.green : Color(0xffe5863a),
+          color: isSucces ? Colors.green : const Color(0xffe5863a),
           fontWeight: FontWeight.w700,
           fontSize: 20,
           fontStyle: FontStyle.italic,

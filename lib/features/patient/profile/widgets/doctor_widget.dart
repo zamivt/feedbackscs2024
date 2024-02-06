@@ -38,7 +38,7 @@ class MyDoctor extends StatelessWidget {
                       ? doc.map((doc) => doc.photo).toList().first.toString()
                       : (docpatController.docpats[0].photo)),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Text(

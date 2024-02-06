@@ -28,7 +28,7 @@ class BatteryPage extends StatelessWidget {
                 title: LocaleKeys.bebattery.tr(),
                 height: 300,
               ),
-              TabBattery(),
+              const TabBattery(),
               GetBuilder(builder: (BatteryControler batteryControler) {
                 return batteryControler.batteries.length <= 5
                     ? Container()

@@ -52,7 +52,7 @@ class AppCountDownTimer extends StatefulWidget {
   /// Defines the width between the colons and the units.
   final double spacerWidth;
 
-  AppCountDownTimer({
+  const AppCountDownTimer({
     required this.endTime,
     this.format = CountDownTimerFormat.hoursMinutesSeconds,
     this.enableDescriptions = true,
@@ -114,7 +114,7 @@ class _AppCountDownTimerState extends State<AppCountDownTimer> {
         widget.onEnd!();
       }
     } else {
-      timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      timer = Timer.periodic(const Duration(seconds: 1), (timer) {
         difference = widget.endTime.difference(DateTime.now());
         widget.onTick?.call(difference);
         setState(() {
@@ -153,7 +153,7 @@ class _AppCountDownTimerState extends State<AppCountDownTimer> {
               style: widget.colonsTextStyle,
             ),
             if (widget.enableDescriptions)
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
             if (widget.enableDescriptions)
@@ -177,7 +177,7 @@ class _AppCountDownTimerState extends State<AppCountDownTimer> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         if (widget.enableDescriptions)
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
         if (widget.enableDescriptions)
@@ -200,7 +200,7 @@ class _AppCountDownTimerState extends State<AppCountDownTimer> {
           style: widget.timeTextStyle,
         ),
         if (widget.enableDescriptions)
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
         if (widget.enableDescriptions)
@@ -223,7 +223,7 @@ class _AppCountDownTimerState extends State<AppCountDownTimer> {
           style: widget.timeTextStyle,
         ),
         if (widget.enableDescriptions)
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
         if (widget.enableDescriptions)
@@ -246,7 +246,7 @@ class _AppCountDownTimerState extends State<AppCountDownTimer> {
           style: widget.timeTextStyle,
         ),
         if (widget.enableDescriptions)
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
         if (widget.enableDescriptions)
@@ -293,8 +293,9 @@ class _AppCountDownTimerState extends State<AppCountDownTimer> {
         widget.format == CountDownTimerFormat.hoursMinutes ||
         widget.format == CountDownTimerFormat.hoursOnly) {
       return _twoDigits(duration.inHours, "hours");
-    } else
+    } else {
       return _twoDigits(duration.inHours.remainder(24), "hours").toString();
+    }
   }
 
   /// Convert [Duration] in minutes to String for UI.
@@ -302,16 +303,18 @@ class _AppCountDownTimerState extends State<AppCountDownTimer> {
     if (widget.format == CountDownTimerFormat.minutesSeconds ||
         widget.format == CountDownTimerFormat.minutesOnly) {
       return _twoDigits(duration.inMinutes, "minutes");
-    } else
+    } else {
       return _twoDigits(duration.inMinutes.remainder(60), "minutes");
+    }
   }
 
   /// Convert [Duration] in seconds to String for UI.
   String _durationToStringSeconds(Duration duration) {
     if (widget.format == CountDownTimerFormat.secondsOnly) {
       return _twoDigits(duration.inSeconds, "seconds");
-    } else
+    } else {
       return _twoDigits(duration.inSeconds.remainder(60), "seconds");
+    }
   }
 
   /// Switches the UI to be displayed based on [CountDownTimerFormat].

@@ -32,7 +32,7 @@ class _DocTaskShortBeforeState extends State<DocTaskShortBefore> {
   final _beforedurCtrl = TextEditingController();
 
   final requiredvalidator =
-      RequiredValidator(errorText: LocaleKeys.requiredfield.tr() + '*');
+      RequiredValidator(errorText: '${LocaleKeys.requiredfield.tr()}*');
   // electrodes
 
   @override
@@ -79,7 +79,7 @@ class _DocTaskShortBeforeState extends State<DocTaskShortBefore> {
                       fillColor: Colors.white,
                       filled: true),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextFormField(
@@ -98,7 +98,7 @@ class _DocTaskShortBeforeState extends State<DocTaskShortBefore> {
                       fillColor: Colors.white,
                       filled: true),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextFormField(
@@ -131,7 +131,7 @@ class _DocTaskShortBeforeState extends State<DocTaskShortBefore> {
                 Text(
                     '${liststimul.map((neumodel) => neumodel.minampl).toList().first} - ${liststimul.map((neumodel) => neumodel.maxampl).toList().first}',
                     style: Theme.of(context).textTheme.displayLarge),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextFormField(
@@ -164,7 +164,7 @@ class _DocTaskShortBeforeState extends State<DocTaskShortBefore> {
                 Text(
                     '${liststimul.map((neumodel) => neumodel.minfreq).toList().first} - ${liststimul.map((neumodel) => neumodel.maxfreq).toList().first}',
                     style: Theme.of(context).textTheme.displayLarge),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextFormField(
@@ -197,7 +197,7 @@ class _DocTaskShortBeforeState extends State<DocTaskShortBefore> {
                 Text(
                     '${liststimul.map((neumodel) => neumodel.mindur).toList().first} - ${liststimul.map((neumodel) => neumodel.maxdur).toList().first}',
                     style: Theme.of(context).textTheme.displayLarge),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 ElevatedButton(

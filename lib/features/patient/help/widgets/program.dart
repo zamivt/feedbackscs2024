@@ -15,7 +15,7 @@ class Program extends StatelessWidget {
       width: double.infinity - 20,
       child: SingleChildScrollView(
         child: Container(
-            padding: EdgeInsets.all(5),
+            padding: const EdgeInsets.all(5),
             decoration: BoxDecoration(
               border: Border.all(color: Theme.of(context).colorScheme.primary),
               borderRadius: BorderRadius.circular(16),
@@ -28,7 +28,7 @@ class Program extends StatelessWidget {
                       Theme.of(context).colorScheme.tertiary,
                   collapsedTitleBackgroundColor:
                       Theme.of(context).colorScheme.surface,
-                  titleChild: Text('1. ' + LocaleKeys.aboutapp.tr(),
+                  titleChild: Text('1. ${LocaleKeys.aboutapp.tr()}',
                       style: Theme.of(context).textTheme.displaySmall),
                   contentChild: Column(children: [
                     Container(
@@ -98,7 +98,7 @@ class Program extends StatelessWidget {
                         Theme.of(context).colorScheme.tertiary,
                     collapsedTitleBackgroundColor:
                         Theme.of(context).colorScheme.surface,
-                    titleChild: Text('2. ' + LocaleKeys.privacy.tr(),
+                    titleChild: Text('2. ${LocaleKeys.privacy.tr()}',
                         style: Theme.of(context).textTheme.displaySmall),
                     contentChild: Column(children: [
                       Container(

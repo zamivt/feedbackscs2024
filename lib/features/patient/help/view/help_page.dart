@@ -18,12 +18,12 @@ class _HelpPageState extends State<HelpPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     TabController _tabController = TabController(length: 3, vsync: this);
     return Scaffold(
-      backgroundColor: Color(0xff4a1c1e),
+      backgroundColor: const Color(0xff4a1c1e),
       body: SafeArea(
         child: SingleChildScrollView(
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            HeaderBloc(),
+            const HeaderBloc(),
             MainMenu(tabController: _tabController),
             BodyBlock(tabController: _tabController)
           ]),

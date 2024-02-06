@@ -23,7 +23,7 @@ class AppDrawer extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                  padding: EdgeInsets.only(top: 20, bottom: 20),
+                  padding: const EdgeInsets.only(top: 20, bottom: 20),
                   width: double.infinity,
                   color: Theme.of(context).colorScheme.primary,
                   child: Text(
@@ -32,7 +32,7 @@ class AppDrawer extends StatelessWidget {
                     textAlign: TextAlign.center,
                   )),
               Container(
-                padding: EdgeInsets.only(top: 20, bottom: 20),
+                padding: const EdgeInsets.only(top: 20, bottom: 20),
                 width: double.infinity,
                 color: Colors.white,
                 child: Text(
@@ -41,7 +41,7 @@ class AppDrawer extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               ),
-              AppDivider(
+              const AppDivider(
                 ismin: true,
               ),
               Container(

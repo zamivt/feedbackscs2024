@@ -31,7 +31,7 @@ class DocListCandidateShortTaskLie extends StatelessWidget {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             onPressed: () {
               context.pushNamed(RouteNames.doctasks);
             },
@@ -39,8 +39,8 @@ class DocListCandidateShortTaskLie extends StatelessWidget {
           backgroundColor: Theme.of(context).colorScheme.primary,
           foregroundColor: Colors.white,
           title: Text(
-            LocaleKeys.unfulfilledtasks.tr() + " : " + LocaleKeys.clie.tr(),
-            style: TextStyle(fontSize: 16),
+            "${LocaleKeys.unfulfilledtasks.tr()} : ${LocaleKeys.clie.tr()}",
+            style: const TextStyle(fontSize: 16),
           ),
         ),
         body: SafeArea(
@@ -81,7 +81,7 @@ class DocListCandidateShortTaskLie extends StatelessWidget {
                                         Theme.of(context).textTheme.labelLarge,
                                     textAlign: TextAlign.center,
                                   )),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
                               Container(
@@ -96,11 +96,11 @@ class DocListCandidateShortTaskLie extends StatelessWidget {
                                           .displayLarge,
                                     ),
                                   )),
-                              SizedBox(
+                              const SizedBox(
                                 width: 5,
                               ),
                               Text(
-                                LocaleKeys.electrodess.tr() + ': ',
+                                '${LocaleKeys.electrodess.tr()}: ',
                                 style: Theme.of(context).textTheme.displaySmall,
                               ),
                               Expanded(
@@ -115,11 +115,11 @@ class DocListCandidateShortTaskLie extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                SizedBox(
+                                const SizedBox(
                                   width: 10,
                                 ),
                                 Text(
-                                  LocaleKeys.amps.tr() + ': ',
+                                  '${LocaleKeys.amps.tr()}: ',
                                   style:
                                       Theme.of(context).textTheme.displaySmall,
                                 ),
@@ -142,7 +142,7 @@ class DocListCandidateShortTaskLie extends StatelessWidget {
                                         ),
                                       ),
                                 undeflieshortTest[index].hideamplt
-                                    ? Icon(Icons.visibility_off)
+                                    ? const Icon(Icons.visibility_off)
                                     : Container()
                               ],
                             )
@@ -151,21 +151,15 @@ class DocListCandidateShortTaskLie extends StatelessWidget {
                         subtitle: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Text(
-                              LocaleKeys.durs.tr() +
-                                  ': ' +
-                                  undeflieshortTest[index].dur.toString() +
-                                  ', ' +
-                                  LocaleKeys.freqs.tr() +
-                                  ': ' +
-                                  undeflieshortTest[index].freq.toString(),
+                              '${LocaleKeys.durs.tr()}: ${undeflieshortTest[index].dur}, ${LocaleKeys.freqs.tr()}: ${undeflieshortTest[index].freq}',
                               style: Theme.of(context).textTheme.displaySmall,
                             ),
                             undeflieshortTest[index].hidefreq
-                                ? Icon(Icons.visibility_off)
+                                ? const Icon(Icons.visibility_off)
                                 : Container()
                           ],
                         ),

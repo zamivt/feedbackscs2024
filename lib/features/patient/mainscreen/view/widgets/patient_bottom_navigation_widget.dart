@@ -65,7 +65,6 @@ class _PatientBottomNavifationWidgetState
         context.go('/patient/profile');
         break;
       case 1:
-        print(1);
         context.go('/patient/tasks');
         break;
       case 2:

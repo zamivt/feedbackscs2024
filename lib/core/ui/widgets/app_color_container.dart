@@ -61,7 +61,7 @@ class AppColorContainer extends StatelessWidget {
                         onPressed: () {
                           context.goNamed('doc/auth');
                         },
-                        icon: Icon(FontAwesomeIcons.rightFromBracket))
+                        icon: const Icon(FontAwesomeIcons.rightFromBracket))
                     : Container(
                         height: 15,
                       )

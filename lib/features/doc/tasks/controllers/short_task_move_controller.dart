@@ -43,14 +43,8 @@ class ShortTaskMoveControler extends GetxController {
         index = i;
 
         shorttaskmoves[index].amplit = condamplit;
-        shorttaskmoves[index].fixformula = 'el:' +
-            shorttaskmoves[index].electrodes +
-            ' ampl:' +
-            shorttaskmoves[index].amplit.toString() +
-            ' freq: ' +
-            shorttaskmoves[index].freq.toString() +
-            ' dur: ' +
-            shorttaskmoves[index].dur.toString();
+        shorttaskmoves[index].fixformula =
+            'el:${shorttaskmoves[index].electrodes} ampl:${shorttaskmoves[index].amplit} freq: ${shorttaskmoves[index].freq} dur: ${shorttaskmoves[index].dur}';
         shorttaskmovebox.putAt(index, shorttaskmoves[index]);
       }
     }

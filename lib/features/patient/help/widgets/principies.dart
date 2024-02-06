@@ -14,7 +14,7 @@ class Principies extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         decoration: BoxDecoration(
           border: Border.all(color: Theme.of(context).colorScheme.primary),
           borderRadius: BorderRadius.circular(16),
@@ -27,7 +27,7 @@ class Principies extends StatelessWidget {
                   Theme.of(context).colorScheme.background,
               collapsedTitleBackgroundColor:
                   Theme.of(context).colorScheme.surface,
-              titleChild: Text('1. ' + LocaleKeys.principlscs.tr(),
+              titleChild: Text('1. ${LocaleKeys.principlscs.tr()}',
                   style: Theme.of(context).textTheme.displaySmall),
               contentChild: Column(children: [
                 Container(
@@ -120,7 +120,7 @@ class Principies extends StatelessWidget {
                 ),
               ]),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             GFAccordion(
@@ -128,7 +128,7 @@ class Principies extends StatelessWidget {
                   Theme.of(context).colorScheme.onSurface,
               collapsedTitleBackgroundColor:
                   Theme.of(context).colorScheme.surface,
-              titleChild: Text('2. ' + LocaleKeys.effectiveprogram.tr(),
+              titleChild: Text('2. ${LocaleKeys.effectiveprogram.tr()}',
                   style: Theme.of(context).textTheme.displaySmall),
               contentChild: Column(
                 children: [
@@ -207,7 +207,7 @@ class Principies extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             GFAccordion(
@@ -215,7 +215,7 @@ class Principies extends StatelessWidget {
                   Theme.of(context).colorScheme.onSurface,
               collapsedTitleBackgroundColor:
                   Theme.of(context).colorScheme.surface,
-              titleChild: Text('3. ' + LocaleKeys.typesofactivities.tr(),
+              titleChild: Text('3. ${LocaleKeys.typesofactivities.tr()}',
                   style: Theme.of(context).textTheme.displaySmall),
               contentChild: Column(children: [
                 Container(
@@ -254,12 +254,12 @@ class Principies extends StatelessWidget {
                   child: Text(LocaleKeys.descriptionmove.tr(),
                       style: Theme.of(context).textTheme.displaySmall),
                 ),
-                AppDivider(),
+                const AppDivider(),
                 Text(LocaleKeys.concldescription.tr(),
                     style: Theme.of(context).textTheme.displaySmall),
               ]),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             GFAccordion(
@@ -267,7 +267,7 @@ class Principies extends StatelessWidget {
                   Theme.of(context).colorScheme.onSurface,
               collapsedTitleBackgroundColor:
                   Theme.of(context).colorScheme.surface,
-              titleChild: Text('4. ' + LocaleKeys.strategychoiceandtasks.tr(),
+              titleChild: Text('4. ${LocaleKeys.strategychoiceandtasks.tr()}',
                   style: Theme.of(context).textTheme.displaySmall),
               contentChild: Column(children: [
                 Padding(
@@ -484,7 +484,7 @@ class Principies extends StatelessWidget {
                 ),
               ]),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             )
           ],

@@ -68,7 +68,7 @@ class TabBattery extends StatelessWidget {
                       style: Theme.of(context).textTheme.titleSmall,
                       textAlign: TextAlign.end,
                     ),
-                    AppDivider(),
+                    const AppDivider(),
                     AppTextButton(
                       linkbutton: RouteNames.patientbatterylist,
                       text: LocaleKeys.showdiarycharge.tr(),

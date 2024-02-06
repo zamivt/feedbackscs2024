@@ -25,7 +25,7 @@ class _MainEmptyPageState extends State<PatientMainEmptyScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       body: widget.child,
-      bottomNavigationBar: EmptyPatientBottomNavigationWidget(),
+      bottomNavigationBar: const EmptyPatientBottomNavigationWidget(),
     );
   }
 }

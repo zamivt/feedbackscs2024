@@ -10,7 +10,7 @@ class ReportPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      body: SafeArea(
+      body: const SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [Header(), Report_short_test(), Report_Long_test()],

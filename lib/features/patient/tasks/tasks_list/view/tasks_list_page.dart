@@ -28,7 +28,7 @@ class TasksListPage extends StatelessWidget {
                 picture: AppImages.changelife,
                 title: LocaleKeys.taskheader.tr(),
               ),
-              Stage1_2()
+              const Stage1_2()
             ],
           ),
         ),

@@ -42,7 +42,7 @@ class _ExcelReportState extends State<ExcelReport> {
     final String fileName = '$path/feedbackscs_report.xlsx';
 
     // Create a new Excel document.
-    final Workbook workbook = new Workbook();
+    final Workbook workbook = Workbook();
 //Accessing worksheet via index.
     final Worksheet sheet1 = workbook.worksheets[0];
     sheet1.getRangeByName('A1').setText('Hello World');

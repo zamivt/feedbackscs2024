@@ -11,7 +11,7 @@ class AppSubHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         alignment: Alignment.center,
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         width: double.infinity,
         color: Theme.of(context).colorScheme.tertiary,
         child: widget);

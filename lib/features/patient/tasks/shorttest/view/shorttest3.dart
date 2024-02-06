@@ -60,7 +60,7 @@ class _ShortTest3State extends State<ShortTest3> {
     bool isbigsideeffects;
     final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
     List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
-    int _painlevel = currentpatient[0].levelmaxpain;
+    int painlevel0 = currentpatient[0].levelmaxpain;
 
     List<CurrentTest> currenttest = feedbackSCSDatabase.currentTest;
     return Scaffold(
@@ -71,11 +71,8 @@ class _ShortTest3State extends State<ShortTest3> {
           automaticallyImplyLeading: false,
           foregroundColor: Colors.white,
           titleSpacing: 0,
-          title: Text(currentShortTaskControler.currentshorttasks[0].position +
-              ': ' +
-              LocaleKeys.program.tr() +
-              ' - ' +
-              currentShortTaskControler.currentshorttasks[0].program)),
+          title: Text(
+              '${currentShortTaskControler.currentshorttasks[0].position}: ${LocaleKeys.program.tr()} - ${currentShortTaskControler.currentshorttasks[0].program}')),
       backgroundColor: Theme.of(context).colorScheme.secondary,
       body: SingleChildScrollView(
         child: ColoredBox(
@@ -103,14 +100,7 @@ class _ShortTest3State extends State<ShortTest3> {
                                 horizontal: 10, vertical: 30),
                             width: double.infinity,
                             child: Text(
-                              LocaleKeys.changeprog.tr() +
-                                  ' ' +
-                                  Get.find<BeforeTaskController>()
-                                      .beforetasks[0]
-                                      .beforeprogram
-                                      .toString() +
-                                  '- 10 ' +
-                                  LocaleKeys.min.tr(),
+                              '${LocaleKeys.changeprog.tr()} ${Get.find<BeforeTaskController>().beforetasks[0].beforeprogram}- 10 ${LocaleKeys.min.tr()}',
                               style: Theme.of(context).textTheme.displayLarge,
                               textAlign: TextAlign.center,
                             ),
@@ -129,7 +119,7 @@ class _ShortTest3State extends State<ShortTest3> {
                       color: Theme.of(context).colorScheme.primaryContainer,
                       width: double.infinity,
                       padding: const EdgeInsets.all(10),
-                      child: Text('3. ' + LocaleKeys.evaluateresult.tr(),
+                      child: Text('3. ${LocaleKeys.evaluateresult.tr()}',
                           textAlign: TextAlign.center,
                           style: Theme.of(context).textTheme.labelLarge),
                     ),
@@ -137,7 +127,7 @@ class _ShortTest3State extends State<ShortTest3> {
                       height: 20,
                     ),
                     Text(
-                      '1. ' + LocaleKeys.painlevel.tr(),
+                      '1. ${LocaleKeys.painlevel.tr()}',
                       style: Theme.of(context).textTheme.displaySmall,
                       textAlign: TextAlign.start,
                     ),
@@ -149,8 +139,8 @@ class _ShortTest3State extends State<ShortTest3> {
                         trackHeight: 14,
                         thumbShape:
                             const RoundSliderThumbShape(enabledThumbRadius: 20),
-                        valueIndicatorTextStyle:
-                            TextStyle(color: Colors.white, fontSize: 30.0),
+                        valueIndicatorTextStyle: const TextStyle(
+                            color: Colors.white, fontSize: 30.0),
                         activeTrackColor: Theme.of(context).colorScheme.primary,
                         inactiveTrackColor:
                             Theme.of(context).colorScheme.tertiary,
@@ -173,14 +163,14 @@ class _ShortTest3State extends State<ShortTest3> {
                           ),
                           Expanded(
                             child: Slider(
-                              value: _painlevel.toDouble(),
+                              value: painlevel0.toDouble(),
                               min: 0,
                               max: 10,
                               divisions: 10,
-                              label: _painlevel.round().toString(),
+                              label: painlevel0.round().toString(),
                               onChanged: (double value) {
                                 setState(() {
-                                  _painlevel = value.round().toInt();
+                                  painlevel0 = value.round().toInt();
                                 });
                               },
                             ),
@@ -195,14 +185,12 @@ class _ShortTest3State extends State<ShortTest3> {
                         ],
                       ),
                     ),
-                    SizedBox(),
+                    const SizedBox(),
                     Text(
-                      LocaleKeys.currentpainlevel.tr() +
-                          ': ' +
-                          _painlevel.toString(),
+                      '${LocaleKeys.currentpainlevel.tr()}: $painlevel0',
                       style: Theme.of(context).textTheme.displaySmall,
                     ),
-                    AppDivider(),
+                    const AppDivider(),
                     Container(
                         padding: const EdgeInsets.all(5),
                         child: Column(
@@ -356,7 +344,7 @@ class _ShortTest3State extends State<ShortTest3> {
                                       ),
                                     ),
                                   ]),
-                            AppDivider(),
+                            const AppDivider(),
                             const SizedBox(
                               height: 10,
                             ),
@@ -370,7 +358,7 @@ class _ShortTest3State extends State<ShortTest3> {
                         countrow: 4,
                       ),
                     ),
-                    AppDivider(),
+                    const AppDivider(),
                     const SizedBox(
                       height: 10,
                     ),
@@ -415,7 +403,7 @@ class _ShortTest3State extends State<ShortTest3> {
                         ],
                       ),
                     ),
-                    AppDivider(),
+                    const AppDivider(),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: AppTextField(
@@ -427,7 +415,7 @@ class _ShortTest3State extends State<ShortTest3> {
                     const SizedBox(
                       height: 10,
                     ),
-                    AppDivider(),
+                    const AppDivider(),
                     Container(
                         padding: const EdgeInsets.symmetric(horizontal: 5),
                         child: Text(LocaleKeys.longtestsuitable.tr(),
@@ -466,7 +454,7 @@ class _ShortTest3State extends State<ShortTest3> {
                         ],
                       ),
                     ),
-                    AppDivider(),
+                    const AppDivider(),
                     const SizedBox(
                       height: 20,
                     ),
@@ -475,7 +463,7 @@ class _ShortTest3State extends State<ShortTest3> {
                           _formKey.currentState?.save();
 
                           currentShortTaskControler.addDateSt3(
-                            painlevel = _painlevel,
+                            painlevel = painlevel0,
                             isSymptom1 = _isSymptom1,
                             isSymptom2 = _isSymptom2,
                             isSymptom3 = _isSymptom3,
@@ -495,7 +483,7 @@ class _ShortTest3State extends State<ShortTest3> {
                           LocaleKeys.savetest.tr(),
                           style: Theme.of(context).textTheme.labelLarge,
                         )),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     )
                   ],

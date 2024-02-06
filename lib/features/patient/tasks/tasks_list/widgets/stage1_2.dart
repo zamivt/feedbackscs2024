@@ -31,14 +31,14 @@ class Stage1_2 extends StatelessWidget {
           isminpadding: true,
           color: Theme.of(context).colorScheme.secondary,
           headerbloc: LocaleKeys.shorttest.tr(),
-          widget: Column(
+          widget: const Column(
             children: [
               ShortTaskTable(),
             ],
           ),
         ),
       ),
-      LongTaskTable()
+      const LongTaskTable()
     ]);
   }
 }

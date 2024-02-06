@@ -41,14 +41,14 @@ class _BatteryFormState extends State<BatteryForm> {
   @override
   @override
   Widget build(BuildContext context) {
-    final _batteryController = Get.find<BatteryControler>();
+    final batteryController = Get.find<BatteryControler>();
     final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
     List<CurrentTest> currenttest = feedbackSCSDatabase.currentTest;
 
-    final DateTime _lastchargedate = _batteryController.batteries.isEmpty
+    final DateTime lastchargedate = batteryController.batteries.isEmpty
         ? _date
-        : _batteryController
-            .batteries[_batteryController.batteries.length - 1].date;
+        : batteryController
+            .batteries[batteryController.batteries.length - 1].date;
     return SingleChildScrollView(
       child: Container(
         color: Theme.of(context).colorScheme.secondary,
@@ -60,7 +60,7 @@ class _BatteryFormState extends State<BatteryForm> {
               Container(
                 width: double.infinity,
                 color: Theme.of(context).colorScheme.primaryContainer,
-                padding: EdgeInsets.symmetric(vertical: 10),
+                padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Text(
                   LocaleKeys.addcharge.tr(),
                   textAlign: TextAlign.center,
@@ -79,9 +79,9 @@ class _BatteryFormState extends State<BatteryForm> {
                 padding: const EdgeInsets.all(8.0),
                 child: AppHintField(
                   title: LocaleKeys.datecharge.tr(),
-                  hint: ((_date.difference(_lastchargedate).inDays) >= 0)
+                  hint: ((_date.difference(lastchargedate).inDays) >= 0)
                       ? '${DateFormat.d().format(_date)}/${DateFormat.M().format(_date)}/${DateFormat.y().format(_date)}'
-                      : '${DateFormat.d().format(_lastchargedate)}/${DateFormat.M().format(_lastchargedate)}/${DateFormat.y().format(_lastchargedate)}',
+                      : '${DateFormat.d().format(lastchargedate)}/${DateFormat.M().format(lastchargedate)}/${DateFormat.y().format(lastchargedate)}',
                   widget: IconButton(
                     onPressed: () {
                       _getDateFromUser();
@@ -93,47 +93,47 @@ class _BatteryFormState extends State<BatteryForm> {
                   ),
                 ),
               ),
-              ((_date.difference(_lastchargedate).inDays) >= 0)
+              ((_date.difference(lastchargedate).inDays) >= 0)
                   ? ElevatedButton(
                       onPressed: () {
                         _formKey.currentState?.save();
-                        _batteryController.addBattery(
+                        batteryController.addBattery(
                           Battery(
                             date: _date,
                             note: _reasonCtrl.text,
-                            lengbattery: _batteryController.batteries.isEmpty
+                            lengbattery: batteryController.batteries.isEmpty
                                 ? 0
                                 : (_date
-                                    .difference(_batteryController
-                                        .batteries[_batteryController
-                                                .batteries.length -
-                                            1]
+                                    .difference(batteryController
+                                        .batteries[
+                                            batteryController.batteries.length -
+                                                1]
                                         .date)
                                     .inDays),
-                            summarybattery: _batteryController.batteries.isEmpty
+                            summarybattery: batteryController.batteries.isEmpty
                                 ? 0
-                                : _batteryController
-                                        .batteries[_batteryController
-                                                .batteries.length -
-                                            1]
+                                : batteryController
+                                        .batteries[
+                                            batteryController.batteries.length -
+                                                1]
                                         .summarybattery! +
                                     (_reasonCtrl.text.isNotEmpty
                                         ? 0
-                                        : (_date.difference(_batteryController
-                                                .batteries[_batteryController
+                                        : (_date.difference(batteryController
+                                                .batteries[batteryController
                                                         .batteries.length -
                                                     1]
                                                 .date))
                                             .inDays),
-                            countwithoutcoment:
-                                _batteryController.batteries.isEmpty
-                                    ? 0
-                                    : _batteryController
-                                            .batteries[_batteryController
-                                                    .batteries.length -
+                            countwithoutcoment: batteryController
+                                    .batteries.isEmpty
+                                ? 0
+                                : batteryController
+                                        .batteries[
+                                            batteryController.batteries.length -
                                                 1]
-                                            .countwithoutcoment! +
-                                        (_reasonCtrl.text.isNotEmpty ? 0 : 1),
+                                        .countwithoutcoment! +
+                                    (_reasonCtrl.text.isNotEmpty ? 0 : 1),
                             teststage: currenttest[0].stage.toString(),
                           ),
                         );

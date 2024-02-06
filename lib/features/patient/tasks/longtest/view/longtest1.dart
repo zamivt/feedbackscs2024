@@ -17,18 +17,18 @@ class LongTest1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final currentLongTaskControler = Get.find<CurrentLongTaskControler>();
-    final String _position =
+    final String position =
         currentLongTaskControler.currentlongtasks[0].position;
     final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
     List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
-    final String _sex = currentpatient[0].sex;
+    final String sex = currentpatient[0].sex;
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.secondary,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text(
-          _position + ': ' + LocaleKeys.long.tr(),
+          '$position: ${LocaleKeys.long.tr()}',
         ),
       ),
       body: SingleChildScrollView(
@@ -37,27 +37,27 @@ class LongTest1 extends StatelessWidget {
               widget1: Container(),
               widget2: Container(),
               title: LocaleKeys.longtest.tr(),
-              picture: ((_position == LocaleKeys.cmove.tr()) &
-                      (_sex == LocaleKeys.fem.tr()))
+              picture: ((position == LocaleKeys.cmove.tr()) &
+                      (sex == LocaleKeys.fem.tr()))
                   ? AppImages.happymovewomen
-                  : ((_position == LocaleKeys.cmove.tr()) &
-                          (_sex == LocaleKeys.mal.tr()))
+                  : ((position == LocaleKeys.cmove.tr()) &
+                          (sex == LocaleKeys.mal.tr()))
                       ? AppImages.happymovemen
-                      : ((_position == LocaleKeys.cseat.tr()) &
-                              (_sex == LocaleKeys.fem.tr()))
+                      : ((position == LocaleKeys.cseat.tr()) &
+                              (sex == LocaleKeys.fem.tr()))
                           ? AppImages.happyseatwomen
-                          : ((_position == LocaleKeys.cseat.tr()) &
-                                  (_sex == LocaleKeys.mal.tr()))
+                          : ((position == LocaleKeys.cseat.tr()) &
+                                  (sex == LocaleKeys.mal.tr()))
                               ? AppImages.happyseatmen
-                              : ((_position == LocaleKeys.clie.tr()) &
-                                      (_sex == LocaleKeys.fem.tr()))
+                              : ((position == LocaleKeys.clie.tr()) &
+                                      (sex == LocaleKeys.fem.tr()))
                                   ? AppImages.happysleepwomen
                                   : AppImages.happysleepmen),
           AppHeader(header: LocaleKeys.enterparametres.tr()),
           AppCommentText(
-              text: _position == LocaleKeys.cmove.tr()
+              text: position == LocaleKeys.cmove.tr()
                   ? LocaleKeys.condlongmove.tr()
-                  : _position == LocaleKeys.cseat.tr()
+                  : position == LocaleKeys.cseat.tr()
                       ? LocaleKeys.condlongseat.tr()
                       : LocaleKeys.condlongmove.tr()),
           AppTableFullParamStim(
@@ -69,7 +69,7 @@ class LongTest1 extends StatelessWidget {
             hidedur: currentLongTaskControler.currentlongtasks[0].hidedur,
             dur: currentLongTaskControler.currentlongtasks[0].dur,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           ElevatedButton(

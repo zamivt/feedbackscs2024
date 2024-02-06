@@ -49,7 +49,7 @@ class LongTasks extends StatelessWidget {
                   LocaleKeys.addtask.tr(),
                   style: Theme.of(context).textTheme.labelLarge,
                 )),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Container(
@@ -59,7 +59,7 @@ class LongTasks extends StatelessWidget {
                   border:
                       Border.all(color: Theme.of(context).colorScheme.primary),
                   color: Theme.of(context).colorScheme.primary,
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(8),
                       topRight: Radius.circular(8))),
               child: Text(LocaleKeys.unfulfilledtasks.tr(),
@@ -73,7 +73,7 @@ class LongTasks extends StatelessWidget {
                   border:
                       Border.all(color: Theme.of(context).colorScheme.primary),
                   color: Theme.of(context).colorScheme.tertiary,
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(8),
                       bottomRight: Radius.circular(8))),
               child: Row(
@@ -82,13 +82,13 @@ class LongTasks extends StatelessWidget {
                   AppTextButton(
                       text: LocaleKeys.cmove.tr(),
                       linkbutton: RouteNames.docshorttaskmove),
-                  SizedBox(
+                  const SizedBox(
                     width: 20,
                   ),
                   AppTextButton(
                       text: LocaleKeys.cseat.tr(),
                       linkbutton: RouteNames.docshorttaskmove),
-                  SizedBox(
+                  const SizedBox(
                     width: 20,
                   ),
                   AppTextButton(

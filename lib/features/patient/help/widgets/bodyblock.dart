@@ -15,12 +15,12 @@ class BodyBlock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       height: MediaQuery.of(context).size.height * 0.75,
       width: double.maxFinite,
       color: Theme.of(context).colorScheme.background,
       //Theme.of(context).colorScheme.onPrimaryContainer,
-      child: TabBarView(controller: _tabController, children: [
+      child: TabBarView(controller: _tabController, children: const [
         Principies(),
         Program(),
         Neurostim(),

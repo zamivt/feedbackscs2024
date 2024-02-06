@@ -32,7 +32,7 @@ class DocListCandidateShortTaskSeat extends StatelessWidget {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             onPressed: () {
               context.pushNamed(RouteNames.doctasks);
             },
@@ -40,8 +40,8 @@ class DocListCandidateShortTaskSeat extends StatelessWidget {
           backgroundColor: Theme.of(context).colorScheme.primary,
           foregroundColor: Colors.white,
           title: Text(
-            LocaleKeys.unfulfilledtasks.tr() + " : " + LocaleKeys.cseat.tr(),
-            style: TextStyle(fontSize: 16),
+            "${LocaleKeys.unfulfilledtasks.tr()} : ${LocaleKeys.cseat.tr()}",
+            style: const TextStyle(fontSize: 16),
           ),
         ),
         body: SafeArea(
@@ -82,7 +82,7 @@ class DocListCandidateShortTaskSeat extends StatelessWidget {
                                         Theme.of(context).textTheme.labelLarge,
                                     textAlign: TextAlign.center,
                                   )),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
                               Container(
@@ -97,11 +97,11 @@ class DocListCandidateShortTaskSeat extends StatelessWidget {
                                           .displayLarge,
                                     ),
                                   )),
-                              SizedBox(
+                              const SizedBox(
                                 width: 5,
                               ),
                               Text(
-                                LocaleKeys.electrodess.tr() + ': ',
+                                '${LocaleKeys.electrodess.tr()}: ',
                                 style: Theme.of(context).textTheme.displaySmall,
                               ),
                               Expanded(
@@ -116,11 +116,11 @@ class DocListCandidateShortTaskSeat extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                SizedBox(
+                                const SizedBox(
                                   width: 10,
                                 ),
                                 Text(
-                                  LocaleKeys.amps.tr() + ': ',
+                                  '${LocaleKeys.amps.tr()}: ',
                                   style:
                                       Theme.of(context).textTheme.displaySmall,
                                 ),
@@ -143,7 +143,7 @@ class DocListCandidateShortTaskSeat extends StatelessWidget {
                                         ),
                                       ),
                                 undefseatshortTest[index].hideamplt
-                                    ? Icon(Icons.visibility_off)
+                                    ? const Icon(Icons.visibility_off)
                                     : Container()
                               ],
                             )
@@ -152,21 +152,15 @@ class DocListCandidateShortTaskSeat extends StatelessWidget {
                         subtitle: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Text(
-                              LocaleKeys.durs.tr() +
-                                  ': ' +
-                                  undefseatshortTest[index].dur.toString() +
-                                  ', ' +
-                                  LocaleKeys.freqs.tr() +
-                                  ': ' +
-                                  undefseatshortTest[index].freq.toString(),
+                              '${LocaleKeys.durs.tr()}: ${undefseatshortTest[index].dur}, ${LocaleKeys.freqs.tr()}: ${undefseatshortTest[index].freq}',
                               style: Theme.of(context).textTheme.displaySmall,
                             ),
                             undefseatshortTest[index].hidefreq
-                                ? Icon(Icons.visibility_off)
+                                ? const Icon(Icons.visibility_off)
                                 : Container()
                           ],
                         ),
