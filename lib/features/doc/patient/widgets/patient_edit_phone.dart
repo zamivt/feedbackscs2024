@@ -1,11 +1,11 @@
 // ignore_for_file: unused_field
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:feedbackscs2024/repository/current_patient_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../collections/patient.dart';
 import '../../../../l10n/locale_keys.g.dart';
-import '../../../../repository/feedbackscs_database.dart';
 
 class PatientEditPhone extends StatefulWidget {
   const PatientEditPhone({super.key});
@@ -20,7 +20,7 @@ class _PatientEditPhoneState extends State<PatientEditPhone> {
   late String _newphone;
   @override
   Widget build(BuildContext context) {
-    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    final feedbackSCSDatabase = context.watch<CurrentPatientProvider>();
     List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
     return AlertDialog(
       backgroundColor: Colors.grey.shade300,
@@ -42,7 +42,7 @@ class _PatientEditPhoneState extends State<PatientEditPhone> {
             onPressed: () {
               _formKey.currentState?.save();
 
-              context.read<FeedbackSCSDatabase>().updatePhone(_newphone);
+              context.read<CurrentPatientProvider>().updatePhone(_newphone);
 
               Navigator.of(context).pop();
             },

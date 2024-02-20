@@ -8,7 +8,7 @@ import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_xlsio/xlsio.dart' hide Column;
-import '../../../repository/feedbackscs_database.dart';
+import '../../../repository/current_patient_provider.dart';
 
 class ExcelReport extends StatefulWidget {
   const ExcelReport({super.key});
@@ -20,7 +20,7 @@ class ExcelReport extends StatefulWidget {
 class _ExcelReportState extends State<ExcelReport> {
   @override
   Widget build(BuildContext context) {
-    Provider.of<FeedbackSCSDatabase>(context, listen: false);
+    Provider.of<CurrentPatientProvider>(context, listen: false);
     return TextButton(
       onPressed: createProfileExcel,
       child: Text(

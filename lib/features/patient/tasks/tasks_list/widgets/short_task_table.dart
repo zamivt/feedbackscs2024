@@ -1,38 +1,36 @@
 import 'dart:math';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:feedbackscs2024/repository/current_patient_provider.dart';
+import 'package:feedbackscs2024/repository/current_test_provider.dart';
+import 'package:feedbackscs2024/repository/short_test_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-
 import 'package:provider/provider.dart';
 import 'package:badges/badges.dart' as badges;
 import '../../../../../collections/patient.dart';
 import '../../../../../collections/shorttest.dart';
-import '../../../../../core/router/route_names.dart';
 import '../../../../../core/ui/theme/appimages.dart';
 import '../../../../../l10n/locale_keys.g.dart';
-import '../../../../../repository/feedbackscs_database.dart';
 
 class ShortTaskTable extends StatelessWidget {
   const ShortTaskTable({super.key});
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<FeedbackSCSDatabase>(context, listen: false)
+    Provider.of<ShortTestProvider>(context, listen: false)
         .readundefShortTestSeat();
-    Provider.of<FeedbackSCSDatabase>(context, listen: false)
+    Provider.of<ShortTestProvider>(context, listen: false)
         .readundefShortTestMove();
 
-    Provider.of<FeedbackSCSDatabase>(context, listen: false)
+    Provider.of<ShortTestProvider>(context, listen: false)
         .readundefShortTestLie();
-    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
-    List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
-    List<IShortTest> undefmoveshortTest =
-        feedbackSCSDatabase.undefmoveshortTest;
+    final currentpatientbase = context.watch<CurrentPatientProvider>();
+    List<IPatient> currentpatient = currentpatientbase.currentPatient;
+    final shorttestbase = context.watch<ShortTestProvider>();
+    List<IShortTest> undefmoveshortTest = shorttestbase.undefmoveshortTest;
 
-    List<IShortTest> undefseatshortTest =
-        feedbackSCSDatabase.undefseatshortTest;
-    List<IShortTest> undeflieshortTest = feedbackSCSDatabase.undeflieshortTest;
+    List<IShortTest> undefseatshortTest = shorttestbase.undefseatshortTest;
+    List<IShortTest> undeflieshortTest = shorttestbase.undeflieshortTest;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
@@ -254,11 +252,14 @@ class ShortTaskTable extends StatelessWidget {
   }
 
   void newCurrentShortTestMove(BuildContext context) {
-    final feedbackSCSDatabase = context.read<FeedbackSCSDatabase>();
+    Provider.of<ShortTestProvider>(context, listen: false)
+        .readundefShortTestMove();
+    final feedbackSCSDatabase = context.read<ShortTestProvider>();
     List<IShortTest> undefmoveshortTest =
         feedbackSCSDatabase.undefmoveshortTest;
 
     late int index;
+
     undefmoveshortTest.length > 1
         ? {index = Random().nextInt(undefmoveshortTest.length)}
         : undefmoveshortTest.length == 1
@@ -266,7 +267,9 @@ class ShortTaskTable extends StatelessWidget {
             : {
                 index = 0,
               };
+
     int currentid = undefmoveshortTest[index].id;
+
     String position = LocaleKeys.cmove.tr();
 
     String program = undefmoveshortTest[index].program;
@@ -278,7 +281,7 @@ class ShortTaskTable extends StatelessWidget {
     bool hidefreq = undefmoveshortTest[index].hidefreq;
     int dur = undefmoveshortTest[index].dur;
     bool hidedur = undefmoveshortTest[index].hidedur;
-    context.read<FeedbackSCSDatabase>().updatest0ShortTest(
+    context.read<CurrentTestProvider>().updatest0ShortTest(
         currentid,
         position,
         program,
@@ -290,10 +293,9 @@ class ShortTaskTable extends StatelessWidget {
         hidefreq,
         dur,
         hidedur);
-    context.read<FeedbackSCSDatabase>().updateSt0ShortTest(currentid);
 
-    context.read<FeedbackSCSDatabase>().updateActiveTask('st1');
-    context.pushNamed(RouteNames.shorttest1);
+    context.read<CurrentTestProvider>().updateActiveTask('st1');
+    //context.pushNamed(RouteNames.shorttest1);
   }
 }
 

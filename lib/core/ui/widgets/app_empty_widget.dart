@@ -23,7 +23,7 @@ class AppEmptyWidget extends StatelessWidget {
           Container(
             padding: EdgeInsets.zero,
             width: double.infinity,
-            color: Theme.of(context).colorScheme.onSurface,
+            color: Theme.of(context).colorScheme.secondary,
             child: const Icon(
               Icons.data_thresholding,
               size: 60,

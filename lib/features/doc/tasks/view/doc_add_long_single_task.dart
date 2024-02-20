@@ -15,7 +15,7 @@ import '../../../../core/router/route_names.dart';
 import '../../../../core/ui/widgets/common_widgets.dart';
 import '../../../../l10n/locale_keys.g.dart';
 
-import '../../../../repository/feedbackscs_database.dart';
+import '../../../../repository/current_patient_provider.dart';
 import '../../../../services/entities/data/model/neuromodel.dart';
 
 import '../controllers/Long_task_controller.dart';
@@ -55,7 +55,7 @@ class _DocAddLongSingleTaskState extends State<DocAddLongSingleTask> {
 
   @override
   Widget build(BuildContext context) {
-    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    final feedbackSCSDatabase = context.watch<CurrentPatientProvider>();
     List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
     Iterable<Neuro> liststimul = neuromodels.where((neuromodel) =>
         neuromodel.model.contains(currentpatient[0].modelneuro));

@@ -1,6 +1,7 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:feedbackscs2024/repository/current_test_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -9,7 +10,6 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../../../../../collections/current_test.dart';
 import '../../../../../l10n/locale_keys.g.dart';
-import '../../../../../repository/feedbackscs_database.dart';
 import '../../../../doc/tasks/controllers/before_task_controller.dart';
 import '../../../../../core/router/route_names.dart';
 import '../../../../../core/ui/widgets/common_widgets.dart';
@@ -43,7 +43,7 @@ class _LongTest3State extends State<LongTest3> {
     final formKey = GlobalKey<FormState>();
     String reasonstoptest;
     double markself;
-    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    final feedbackSCSDatabase = context.watch<CurrentTestProvider>();
     List<CurrentTest> currenttest = feedbackSCSDatabase.currentTest;
 
     return Scaffold(
@@ -161,7 +161,7 @@ class _LongTest3State extends State<LongTest3> {
 
                       String newactivetask;
                       context
-                          .read<FeedbackSCSDatabase>()
+                          .read<CurrentTestProvider>()
                           .updateActiveTask('no tasks');
                       context.pushNamed(RouteNames.patienttasks);
                     },

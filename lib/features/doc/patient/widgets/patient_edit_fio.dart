@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../collections/patient.dart';
 import '../../../../l10n/locale_keys.g.dart';
-import '../../../../repository/feedbackscs_database.dart';
+import '../../../../repository/current_patient_provider.dart';
 
 class PatientEditFio extends StatefulWidget {
   const PatientEditFio({super.key});
@@ -22,7 +22,7 @@ class _PatientEditFioState extends State<PatientEditFio> {
 
   @override
   Widget build(BuildContext context) {
-    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    final feedbackSCSDatabase = context.watch<CurrentPatientProvider>();
     List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
 
     return AlertDialog(
@@ -45,7 +45,7 @@ class _PatientEditFioState extends State<PatientEditFio> {
             onPressed: () {
               _formKey.currentState?.save();
 
-              context.read<FeedbackSCSDatabase>().updateFIO(_newfio);
+              context.read<CurrentPatientProvider>().updateFIO(_newfio);
 
               Navigator.of(context).pop();
             },

@@ -1,6 +1,8 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:feedbackscs2024/repository/current_patient_provider.dart';
+import 'package:feedbackscs2024/repository/current_test_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/instance_manager.dart';
@@ -11,7 +13,6 @@ import '../../../../../collections/patient.dart';
 import '../../../../../core/ui/widgets/app_divider.dart';
 import '../../../../../core/ui/widgets/app_text_field.dart';
 import '../../../../../l10n/locale_keys.g.dart';
-import '../../../../../repository/feedbackscs_database.dart';
 import '../../../../doc/tasks/controllers/before_task_controller.dart';
 import '../../../../../core/router/route_names.dart';
 import '../controllers/current_short_controller.dart';
@@ -58,11 +59,12 @@ class _ShortTest3State extends State<ShortTest3> {
     String placeparestesia;
     bool islongestsuitable;
     bool isbigsideeffects;
-    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
-    List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
+    final curpatbase = context.watch<CurrentPatientProvider>();
+    List<IPatient> currentpatient = curpatbase.currentPatient;
     int painlevel0 = currentpatient[0].levelmaxpain;
 
-    List<CurrentTest> currenttest = feedbackSCSDatabase.currentTest;
+    final curtestbase = context.watch<CurrentTestProvider>();
+    List<CurrentTest> currenttest = curtestbase.currentTest;
     return Scaffold(
       appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.primary,
@@ -475,7 +477,7 @@ class _ShortTest3State extends State<ShortTest3> {
                           //
                           String newactivetask;
                           context
-                              .read<FeedbackSCSDatabase>()
+                              .read<CurrentTestProvider>()
                               .updateActiveTask('st4');
                           context.pushNamed(RouteNames.shorttest4);
                         },

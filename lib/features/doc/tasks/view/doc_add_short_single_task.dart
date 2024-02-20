@@ -5,6 +5,11 @@ import 'package:elegant_notification/elegant_notification.dart';
 import 'package:elegant_notification/resources/arrays.dart';
 import 'package:feedbackscs2024/collections/before_test_short_test.dart';
 import 'package:feedbackscs2024/collections/shorttest.dart';
+import 'package:feedbackscs2024/repository/beforetest_provider.dart';
+import 'package:feedbackscs2024/repository/current_patient_provider.dart';
+import 'package:feedbackscs2024/repository/current_test_provider.dart';
+import 'package:feedbackscs2024/repository/doubletest_provider.dart';
+import 'package:feedbackscs2024/repository/short_test_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 
@@ -16,7 +21,6 @@ import '../../../../collections/patient.dart';
 import '../../../../core/router/route_names.dart';
 import '../../../../core/ui/widgets/common_widgets.dart';
 import '../../../../l10n/locale_keys.g.dart';
-import '../../../../repository/feedbackscs_database.dart';
 import '../../../../services/entities/data/model/neuromodel.dart';
 
 class DocAddSingleTask extends StatefulWidget {
@@ -57,11 +61,11 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
   }
 
   void addSingleTask(
-      BuildContext context, FeedbackSCSDatabase feedbackSCSDatabase) {
+      BuildContext context, ShortTestProvider shorttestbasebase) {
     _formkey.currentState?.save();
     if (add_Short_task_candidate.currentState != null &&
         _formkey.currentState!.validate()) {
-      context.read<FeedbackSCSDatabase>().addSingleShortTest(
+      context.read<ShortTestProvider>().addSingleShortTest(
             _selectedactivity!,
             _programCtrl.text,
             _electrodesCtrl.text,
@@ -74,28 +78,29 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
             _hidefreqdur,
             _hideampfreqdur,
           );
-      Provider.of<FeedbackSCSDatabase>(context, listen: false).currentTest;
+      Provider.of<CurrentTestProvider>(context, listen: false).currentTest;
 
       Future.delayed(const Duration(milliseconds: 500), () {
-        Provider.of<FeedbackSCSDatabase>(context, listen: false).doubleTest;
-        feedbackSCSDatabase.doubleTest.isNotEmpty
+        Provider.of<DoubleTestProvider>(context, listen: false).doubleTest;
+        final doubletestbase = context.watch<DoubleTestProvider>();
+        doubletestbase.doubleTest.isNotEmpty
             ? ElegantNotification.error(
                 width: 360,
                 notificationPosition: NotificationPosition.center,
                 animation: AnimationType.fromBottom,
                 title: Text(_selectedactivity.toString()),
                 onProgressFinished: () => {
-                  context.read<FeedbackSCSDatabase>().updateCountDoubleTest(0),
-                  context.read<FeedbackSCSDatabase>().clearDoubleTest(),
-                  Provider.of<FeedbackSCSDatabase>(context, listen: false)
+                  context.read<CurrentTestProvider>().updateCountDoubleTest(0),
+                  context.read<DoubleTestProvider>().clearDoubleTest(),
+                  Provider.of<DoubleTestProvider>(context, listen: false)
                       .doubleTest,
                   context.pushNamed(RouteNames.docaddsingletask)
                 },
                 description: Text(LocaleKeys.noaddtask.tr()),
                 onDismiss: () {
-                  context.read<FeedbackSCSDatabase>().updateCountDoubleTest(0);
-                  context.read<FeedbackSCSDatabase>().clearDoubleTest();
-                  Provider.of<FeedbackSCSDatabase>(context, listen: false)
+                  context.read<CurrentTestProvider>().updateCountDoubleTest(0);
+                  context.read<DoubleTestProvider>().clearDoubleTest();
+                  Provider.of<DoubleTestProvider>(context, listen: false)
                       .doubleTest;
                   context.pushNamed(RouteNames.docaddsingletask);
                 },
@@ -106,12 +111,12 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
                 animation: AnimationType.fromBottom,
                 title: Text(_selectedactivity.toString()),
                 onProgressFinished: () => {
-                  context.read<FeedbackSCSDatabase>().updateCountDoubleTest(0),
+                  context.read<CurrentTestProvider>().updateCountDoubleTest(0),
                   context.pushNamed(RouteNames.doctasks)
                 },
                 description: Text(LocaleKeys.addsuccestask.tr()),
                 onDismiss: () {
-                  context.read<FeedbackSCSDatabase>().updateCountDoubleTest(0);
+                  context.read<CurrentTestProvider>().updateCountDoubleTest(0);
                   context.pushNamed(RouteNames.doctasks);
                 },
               ).show(context);
@@ -121,13 +126,15 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<FeedbackSCSDatabase>(context, listen: false)
+    Provider.of<ShortTestProvider>(context, listen: false)
         .readCommonShortTestUndef();
-    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
-    Provider.of<FeedbackSCSDatabase>(context, listen: false).readCurrentTest();
-    Provider.of<FeedbackSCSDatabase>(context, listen: false).readBeforeTest();
-    List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
-    List<IBeforeTest> beforetest = feedbackSCSDatabase.beforeTest;
+    final curpatbase = context.watch<CurrentPatientProvider>();
+    Provider.of<CurrentTestProvider>(context, listen: false).readCurrentTest();
+    Provider.of<BeforeTestProvider>(context, listen: false).readBeforeTest();
+    List<IPatient> currentpatient = curpatbase.currentPatient;
+
+    final beforetestbase = context.watch<BeforeTestProvider>();
+    List<IBeforeTest> beforetest = beforetestbase.beforeTest;
     Iterable<Neuro> liststimul = neuromodels.where((neuromodel) =>
         neuromodel.model.contains(currentpatient[0].modelneuro));
     final condchoiceampl = [
@@ -135,8 +142,8 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
       LocaleKeys.noparestesia.tr(),
       LocaleKeys.painmin.tr() + currentpatient[0].prioritylevelpain.toString()
     ];
-
-    List<IShortTest> undefshorttest = feedbackSCSDatabase.undefshortTest;
+    final shorttestbase = context.watch<ShortTestProvider>();
+    List<IShortTest> undefshorttest = shorttestbase.undefshortTest;
     List<String> busyprogram;
     busyprogram =
         undefshorttest.map((e) => e.program).toList().toSet().toList();
@@ -487,7 +494,7 @@ class _DocAddSingleTaskState extends State<DocAddSingleTask> {
                             style: Theme.of(context).textTheme.labelLarge,
                           ),
                           onPressed: () {
-                            addSingleTask(context, feedbackSCSDatabase);
+                            addSingleTask(context, shorttestbase);
                           })
                     ]))
               ]),

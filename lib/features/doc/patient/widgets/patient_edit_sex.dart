@@ -4,7 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../l10n/locale_keys.g.dart';
-import '../../../../repository/feedbackscs_database.dart';
+import '../../../../repository/current_patient_provider.dart';
 
 class PatientEditSex extends StatefulWidget {
   const PatientEditSex({super.key});
@@ -76,7 +76,7 @@ class _PatientEditSexState extends State<PatientEditSex> {
                     Theme.of(context).colorScheme.primary)),
             onPressed: () {
               _formKey.currentState?.save();
-              context.read<FeedbackSCSDatabase>().updateSEX(
+              context.read<CurrentPatientProvider>().updateSEX(
                     newsex =
                         _ismale ? LocaleKeys.mal.tr() : LocaleKeys.fem.tr(),
                   );

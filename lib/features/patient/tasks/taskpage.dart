@@ -1,8 +1,8 @@
 import 'package:feedbackscs2024/collections/current_test.dart';
 import 'package:feedbackscs2024/features/patient/tasks/tasks_list/view/tasks_list_page.dart';
+import 'package:feedbackscs2024/repository/current_test_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../repository/feedbackscs_database.dart';
 import 'longtest/view/longtest1.dart';
 import 'longtest/view/longtest2.dart';
 import 'longtest/view/longtest3.dart';
@@ -21,15 +21,15 @@ class TaskPage extends StatefulWidget {
 class _TaskPageState extends State<TaskPage> {
   @override
   void initState() {
-    Provider.of<FeedbackSCSDatabase>(context, listen: false).readCurrentTest();
+    Provider.of<CurrentTestProvider>(context, listen: false).readCurrentTest();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<FeedbackSCSDatabase>(context, listen: false).readCurrentTest();
-    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
-    List<CurrentTest> currenttest = feedbackSCSDatabase.currentTest;
+    Provider.of<CurrentTestProvider>(context, listen: false).readCurrentTest();
+    final currenttestbase = context.watch<CurrentTestProvider>();
+    List<CurrentTest> currenttest = currenttestbase.currentTest;
 
     return (currenttest.isEmpty || currenttest[0].activetask == 'no tasks')
         ? const TasksListPage()

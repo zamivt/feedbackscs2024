@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 import '../../../../../collections/shorttest.dart';
 import '../../../../../core/router/route_names.dart';
 import '../../../../../l10n/locale_keys.g.dart';
-import '../../../../../repository/feedbackscs_database.dart';
+import '../../../../../repository/short_test_provider.dart';
 
 class CountShortTasks extends StatelessWidget {
   const CountShortTasks({
@@ -16,14 +16,14 @@ class CountShortTasks extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<FeedbackSCSDatabase>(context, listen: false)
+    Provider.of<ShortTestProvider>(context, listen: false)
         .readCommonShortTestMove();
-    Provider.of<FeedbackSCSDatabase>(context, listen: false)
+    Provider.of<ShortTestProvider>(context, listen: false)
         .readCommonShortTestLie();
 
-    Provider.of<FeedbackSCSDatabase>(context, listen: false)
+    Provider.of<ShortTestProvider>(context, listen: false)
         .readCommonShortTestSeat();
-    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    final feedbackSCSDatabase = context.watch<ShortTestProvider>();
     List<IShortTest> moveshortTest = feedbackSCSDatabase.moveShortTest;
     List<IShortTest> seatshortTest = feedbackSCSDatabase.seatshortTest;
     List<IShortTest> lieshortTest = feedbackSCSDatabase.lieshortTest;

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../../../../services/entities/data/test_const.dart';
 import '../../../../l10n/locale_keys.g.dart';
-import '../../../../repository/feedbackscs_database.dart';
+import '../../../../repository/current_patient_provider.dart';
 
 class PatientEditPriorityShorttest extends StatefulWidget {
   const PatientEditPriorityShorttest({super.key});
@@ -77,7 +77,7 @@ class _PatientEditPriorityShorttestState
                     Theme.of(context).colorScheme.primary)),
             onPressed: () {
               _formKey.currentState?.save();
-              context.read<FeedbackSCSDatabase>().updatePriorityshorttes(
+              context.read<CurrentPatientProvider>().updatePriorityshorttes(
                     newpriorityshorttest =
                         _issumcrit ? choicesol[0] : choicesol[1],
                   );

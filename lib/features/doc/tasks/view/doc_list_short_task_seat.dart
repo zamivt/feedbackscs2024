@@ -6,8 +6,7 @@ import '../../../../collections/shorttest.dart';
 import '../../../../core/router/route_names.dart';
 import '../../../../l10n/locale_keys.g.dart';
 import 'package:grouped_list/grouped_list.dart';
-
-import '../../../../repository/feedbackscs_database.dart';
+import '../../../../repository/short_test_provider.dart';
 
 class DocListShortTaskSeat extends StatelessWidget {
   const DocListShortTaskSeat({
@@ -16,10 +15,10 @@ class DocListShortTaskSeat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<FeedbackSCSDatabase>(context, listen: false)
+    Provider.of<ShortTestProvider>(context, listen: false)
         .readCommonShortTestLie();
 
-    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    final feedbackSCSDatabase = context.watch<ShortTestProvider>();
 
     List<IShortTest> seatshortTest = feedbackSCSDatabase.seatshortTest;
 

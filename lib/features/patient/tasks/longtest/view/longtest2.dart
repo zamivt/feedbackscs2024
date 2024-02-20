@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:feedbackscs2024/repository/current_test_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
 import 'package:go_router/go_router.dart';
@@ -6,7 +7,6 @@ import 'package:provider/provider.dart';
 import '../../../../../l10n/locale_keys.g.dart';
 import '../../../../../core/router/route_names.dart';
 import '../../../../../core/ui/widgets/common_widgets.dart';
-import '../../../../../repository/feedbackscs_database.dart';
 import '../controllers/current_long__controller.dart';
 //import '../widgets/timer.dart';
 
@@ -75,7 +75,7 @@ class LongTest2 extends StatelessWidget {
                       .difference(currentLongTaskControler
                           .currentlongtasks[0].begintesttime!)
                       .inMinutes);
-              context.read<FeedbackSCSDatabase>().updateActiveTask('lt3');
+              context.read<CurrentTestProvider>().updateActiveTask('lt3');
               context.pushNamed(RouteNames.longtest3);
             },
             child: Text(LocaleKeys.aborttesting.tr(),

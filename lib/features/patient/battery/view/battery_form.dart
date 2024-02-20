@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:feedbackscs2024/collections/current_test.dart';
+import 'package:feedbackscs2024/repository/current_test_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_instance/get_instance.dart';
 import 'package:get/state_manager.dart';
@@ -7,7 +8,6 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 import '../../../../core/ui/widgets/common_widgets.dart';
 import '../../../../l10n/locale_keys.g.dart';
-import '../../../../repository/feedbackscs_database.dart';
 import '../../../../services/entities/0_battery.dart';
 import '../controllers/battery_controllers.dart';
 
@@ -42,7 +42,7 @@ class _BatteryFormState extends State<BatteryForm> {
   @override
   Widget build(BuildContext context) {
     final batteryController = Get.find<BatteryControler>();
-    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    final feedbackSCSDatabase = context.watch<CurrentTestProvider>();
     List<CurrentTest> currenttest = feedbackSCSDatabase.currentTest;
 
     final DateTime lastchargedate = batteryController.batteries.isEmpty

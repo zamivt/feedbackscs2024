@@ -5,7 +5,8 @@ import 'package:provider/provider.dart';
 import '../../../../collections/shorttest.dart';
 import '../../../../core/router/route_names.dart';
 import '../../../../l10n/locale_keys.g.dart';
-import '../../../../repository/feedbackscs_database.dart';
+
+import '../../../../repository/short_test_provider.dart';
 
 class DocListCandidateShortTaskSeat extends StatelessWidget {
   const DocListCandidateShortTaskSeat({
@@ -14,16 +15,16 @@ class DocListCandidateShortTaskSeat extends StatelessWidget {
   void delete_undef_short_test(
       BuildContext context, List<IShortTest> undefmoveshortTest, int index) {
     context
-        .read<FeedbackSCSDatabase>()
+        .read<ShortTestProvider>()
         .deleteundefShortTest(undefmoveshortTest[index].id);
   }
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<FeedbackSCSDatabase>(context, listen: false)
+    Provider.of<ShortTestProvider>(context, listen: false)
         .readundefShortTestSeat();
 
-    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    final feedbackSCSDatabase = context.watch<ShortTestProvider>();
 
     List<IShortTest> undefseatshortTest =
         feedbackSCSDatabase.undefseatshortTest;

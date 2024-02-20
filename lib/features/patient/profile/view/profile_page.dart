@@ -9,7 +9,7 @@ import '../../../../core/router/route_names.dart';
 import '../../../../core/ui/theme/appimages.dart';
 import '../../../../core/ui/widgets/common_widgets.dart';
 import '../../../../l10n/locale_keys.g.dart';
-import '../../../../repository/feedbackscs_database.dart';
+import '../../../../repository/current_patient_provider.dart';
 import '../widgets/doctor_widget.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -18,7 +18,7 @@ class ProfilePage extends StatelessWidget {
   // @override
   @override
   Widget build(BuildContext context) {
-    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    final feedbackSCSDatabase = context.watch<CurrentPatientProvider>();
     List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,

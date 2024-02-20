@@ -8,14 +8,14 @@ import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:provider/provider.dart';
 import '../../../../collections/patient.dart';
 import '../../../../l10n/locale_keys.g.dart';
-import '../../../../repository/feedbackscs_database.dart';
+import '../../../../repository/current_patient_provider.dart';
 
 class DocReport extends StatelessWidget {
   const DocReport({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    final feedbackSCSDatabase = context.watch<CurrentPatientProvider>();
     List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
     return Scaffold(
         backgroundColor: Colors.grey.shade200,

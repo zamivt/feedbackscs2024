@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../collections/patient.dart';
 import '../../../../l10n/locale_keys.g.dart';
-import '../../../../repository/feedbackscs_database.dart';
+import '../../../../repository/current_patient_provider.dart';
 
 class PatientEditAnamnez extends StatefulWidget {
   const PatientEditAnamnez({super.key});
@@ -20,7 +20,7 @@ class _PatientEditAnamnezState extends State<PatientEditAnamnez> {
   late String _newanamnez;
   @override
   Widget build(BuildContext context) {
-    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    final feedbackSCSDatabase = context.watch<CurrentPatientProvider>();
     List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
     return AlertDialog(
       backgroundColor: Colors.grey.shade300,
@@ -42,7 +42,7 @@ class _PatientEditAnamnezState extends State<PatientEditAnamnez> {
             onPressed: () {
               _formKey.currentState?.save();
 
-              context.read<FeedbackSCSDatabase>().updateAnamnez(_newanamnez);
+              context.read<CurrentPatientProvider>().updateAnamnez(_newanamnez);
 
               Navigator.of(context).pop();
             },

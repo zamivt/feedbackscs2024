@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../../collections/patient.dart';
 import '../../../../l10n/locale_keys.g.dart';
 
-import '../../../../repository/feedbackscs_database.dart';
+import '../../../../repository/current_patient_provider.dart';
 import '../widgets/combination_tasks.dart';
 import '../widgets/shorttasks/short_task.dart';
 
@@ -13,7 +13,7 @@ class DocTasks extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    final feedbackSCSDatabase = context.watch<CurrentPatientProvider>();
     List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
 
     return Scaffold(

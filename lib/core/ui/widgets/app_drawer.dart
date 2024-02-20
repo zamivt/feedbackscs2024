@@ -18,7 +18,7 @@ class AppDrawer extends StatelessWidget {
   ) {
     return Drawer(
         backgroundColor: Theme.of(context).colorScheme.primary,
-        child: Padding(
+        child: Container(
           padding: const EdgeInsets.only(top: 80),
           child: Column(
             children: [
@@ -45,7 +45,9 @@ class AppDrawer extends StatelessWidget {
                 ismin: true,
               ),
               Container(
-                color: Colors.white,
+                color: Provider.of<ThemeProvider>(context).isDarkmode
+                    ? Color(0xff131862)
+                    : Color(0xff75bbfd),
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -53,26 +55,29 @@ class AppDrawer extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Icon(
+                        Icons.light_mode,
+                        size: 50,
+                        color: !Provider.of<ThemeProvider>(context).isDarkmode
+                            ? Colors.yellow
+                            : Colors.grey.shade300,
+                      ),
+                    ),
+                    ColoredBox(
+                      color: Colors.white,
+                      child: CupertinoSwitch(
+                          value: Provider.of<ThemeProvider>(context).isDarkmode,
+                          onChanged: (value) =>
+                              Provider.of<ThemeProvider>(context, listen: false)
+                                  .toogleTheme()),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(
                         Icons.dark_mode,
                         size: 50,
                         color: Provider.of<ThemeProvider>(context).isDarkmode
                             ? Colors.yellow
-                            : Colors.grey,
-                      ),
-                    ),
-                    CupertinoSwitch(
-                        value: Provider.of<ThemeProvider>(context).isDarkmode,
-                        onChanged: (value) =>
-                            Provider.of<ThemeProvider>(context, listen: false)
-                                .toogleTheme()),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Icon(
-                        Icons.light_mode,
-                        size: 50,
-                        color: Provider.of<ThemeProvider>(context).isDarkmode
-                            ? Colors.yellow
-                            : Colors.grey,
+                            : Colors.grey.shade300,
                       ),
                     ),
                   ],

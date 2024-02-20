@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:feedbackscs2024/repository/beforetest_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:get/get_instance/get_instance.dart';
@@ -8,7 +9,7 @@ import 'package:provider/provider.dart';
 import '../../../../../../../services/entities/data/neuromodels.dart';
 import '../../../../../collections/patient.dart';
 import '../../../../../l10n/locale_keys.g.dart';
-import '../../../../../repository/feedbackscs_database.dart';
+import '../../../../../repository/current_patient_provider.dart';
 import '../../../../../services/entities/data/model/neuromodel.dart';
 import '../../controllers/before_task_controller.dart';
 import '../../../../../core/router/route_names.dart';
@@ -37,7 +38,7 @@ class _DocTaskShortBeforeState extends State<DocTaskShortBefore> {
 
   @override
   Widget build(BuildContext context) {
-    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    final feedbackSCSDatabase = context.watch<CurrentPatientProvider>();
     List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
     Iterable<Neuro> liststimul = neuromodels.where((neuromodel) =>
         neuromodel.model.contains(currentpatient[0].modelneuro));
@@ -209,7 +210,7 @@ class _DocTaskShortBeforeState extends State<DocTaskShortBefore> {
                       _formkey.currentState?.save();
                       if (_formkey.currentState != null &&
                           _formkey.currentState!.validate()) {
-                        context.read<FeedbackSCSDatabase>().addBeforeTest(
+                        context.read<BeforeTestProvider>().addBeforeTest(
                             _beforeprogramCtrl.text,
                             _electrodesCtrl.text,
                             double.parse(_beforeampCtrl.text),

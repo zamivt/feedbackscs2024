@@ -4,6 +4,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:feedbackscs2024/core/ui/widgets/common_widgets.dart';
 import 'package:feedbackscs2024/features/doc/tasks/controllers/short_task_move_controller.dart';
 import 'package:feedbackscs2024/features/patient/tasks/longtest/controllers/candidate_long_move.dart';
+import 'package:feedbackscs2024/repository/current_patient_provider.dart';
+import 'package:feedbackscs2024/repository/current_test_provider.dart';
 import 'package:feedbackscs2024/services/entities/12_successhorttaskseat.dart';
 import 'package:feedbackscs2024/services/entities/16_candidate_long_taskmove.dart';
 import 'package:feedbackscs2024/services/entities/17_candidate_longtasklie.dart';
@@ -17,9 +19,7 @@ import '../../../../../collections/patient.dart';
 import '../../../../../l10n/locale_keys.g.dart';
 import '../../../../../../services/entities/13_unsuccesshorttaskmove.dart';
 import '../../../../../../services/entities/10_successhorttaskmove.dart';
-
 import '../../../../../core/router/route_names.dart';
-import '../../../../../repository/feedbackscs_database.dart';
 import '../../../../../services/entities/11_successhorttasklie.dart';
 import '../../../../../services/entities/14_unsuccesshorttasklie.dart';
 import '../../../../../services/entities/15_unsuccesshorttaskseat.dart';
@@ -41,9 +41,9 @@ class ShortTest4 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    final curpatbase = context.watch<CurrentPatientProvider>();
 
-    List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
+    List<IPatient> currentpatient = curpatbase.currentPatient;
 
     final shorttaskmoveController = Get.find<ShortTaskMoveControler>();
     final successShortMoveController =
@@ -194,7 +194,7 @@ class ShortTest4 extends StatelessWidget {
                             successShortLieController,
                             unsuccessShortLieController);
                         context
-                            .read<FeedbackSCSDatabase>()
+                            .read<CurrentTestProvider>()
                             .updateActiveTask('no tasks');
 
                         context.pushNamed(RouteNames.patienttasks);

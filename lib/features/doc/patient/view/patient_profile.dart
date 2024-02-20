@@ -6,7 +6,7 @@ import '../../../../core/ui/widgets/app_name_field.dart';
 import '../../../../core/ui/widgets/common_widgets.dart';
 
 import '../../../../l10n/locale_keys.g.dart';
-import '../../../../repository/feedbackscs_database.dart';
+import '../../../../repository/current_patient_provider.dart';
 import '../widgets/patient_edit_anamnez.dart';
 import '../widgets/patient_edit_diagnoz.dart';
 import '../widgets/patient_edit_email.dart';
@@ -36,13 +36,13 @@ class PatientProfile extends StatefulWidget {
 class _PatientProfileState extends State<PatientProfile> {
   @override
   void initState() {
-    Provider.of<FeedbackSCSDatabase>(context, listen: false).readPatient();
+    Provider.of<CurrentPatientProvider>(context, listen: false).readPatient();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    final feedbackSCSDatabase = context.watch<CurrentPatientProvider>();
     List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
 
     int countask = 0;

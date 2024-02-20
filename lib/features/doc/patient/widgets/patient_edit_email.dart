@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../collections/patient.dart';
 import '../../../../l10n/locale_keys.g.dart';
-import '../../../../repository/feedbackscs_database.dart';
+import '../../../../repository/current_patient_provider.dart';
 
 class PatientEditEmail extends StatefulWidget {
   const PatientEditEmail({super.key});
@@ -21,7 +21,7 @@ class _PatientEditEmailState extends State<PatientEditEmail> {
 
   @override
   Widget build(BuildContext context) {
-    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    final feedbackSCSDatabase = context.watch<CurrentPatientProvider>();
     List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
     return AlertDialog(
       backgroundColor: Colors.grey.shade300,
@@ -43,7 +43,7 @@ class _PatientEditEmailState extends State<PatientEditEmail> {
             onPressed: () {
               _formKey.currentState?.save();
 
-              context.read<FeedbackSCSDatabase>().updateEMAIL(_newemail);
+              context.read<CurrentPatientProvider>().updateEMAIL(_newemail);
 
               Navigator.of(context).pop();
             },

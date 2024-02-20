@@ -14,17 +14,17 @@ class CurrentTest {
 
   int? idshorttest;
   int? idlongtest;
-  late String position;
+  String? position;
 
-  late String program;
-  late String electrodes;
-  late String condition;
-  late double amplit;
-  late bool hideamplt;
-  late int freq;
-  late bool hidefreq;
-  late int dur;
-  late bool hidedur;
+  String? program;
+  String? electrodes;
+  String? condition;
+  double? amplit;
+  bool? hideamplt;
+  int? freq;
+  bool? hidefreq;
+  int? dur;
+  bool? hidedur;
 
   int? idcombinationtest;
   String? description;

@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:feedbackscs2024/repository/current_patient_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pdfx/pdfx.dart';
@@ -9,7 +10,6 @@ import '../../../core/router/route_names.dart';
 import '../../../core/ui/theme/appimages.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../../../l10n/locale_keys.g.dart';
-import '../../../repository/feedbackscs_database.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
@@ -52,16 +52,16 @@ class _WelcomePageState extends State<WelcomePage> {
   ];
   @override
   void initState() {
-    Provider.of<FeedbackSCSDatabase>(context, listen: false).readPatient();
+    Provider.of<CurrentPatientProvider>(context, listen: false).readPatient();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    final feedbackSCSDatabase = context.watch<CurrentPatientProvider>();
     List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
     return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.onBackground,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         body: PageView.builder(
             scrollDirection: Axis.vertical,
             itemCount: images.length,
@@ -70,6 +70,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 width: double.maxFinite,
                 height: double.maxFinite,
                 decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.onBackground,
                     image: DecorationImage(
                         image: AssetImage(MediaQuery.of(context).orientation ==
                                 Orientation.landscape
@@ -78,18 +79,12 @@ class _WelcomePageState extends State<WelcomePage> {
                         alignment: Alignment.bottomCenter,
                         fit: BoxFit.scaleDown)),
                 child: Container(
-                  margin: const EdgeInsets.only(
-                    top: 40,
-                  ),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const SizedBox(
-                              height: 10,
-                            ),
                             MediaQuery.of(context).orientation ==
                                     Orientation.landscape
                                 ? SizedBox(
@@ -97,7 +92,8 @@ class _WelcomePageState extends State<WelcomePage> {
                                     child: Image.asset(images[index]))
                                 : Container(),
                             Container(
-                              padding: const EdgeInsets.symmetric(vertical: 20),
+                              padding:
+                                  const EdgeInsets.only(top: 60, bottom: 20),
                               color: Theme.of(context).colorScheme.primary,
                               width: MediaQuery.of(context).size.width,
                               child: Text(
@@ -193,7 +189,9 @@ class _WelcomePageState extends State<WelcomePage> {
               actions: [
                 TextButton(
                     onPressed: () {
-                      context.read<FeedbackSCSDatabase>().updateIsLisense(true);
+                      context
+                          .read<CurrentPatientProvider>()
+                          .updateIsLisense(true);
                       context.pushNamed(RouteNames.patientmainpage);
                     },
                     child: Text(

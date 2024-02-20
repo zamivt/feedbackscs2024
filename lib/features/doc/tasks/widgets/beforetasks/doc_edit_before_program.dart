@@ -1,10 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:feedbackscs2024/collections/before_test_short_test.dart';
+import 'package:feedbackscs2024/repository/beforetest_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../l10n/locale_keys.g.dart';
-import '../../../../../repository/feedbackscs_database.dart';
 
 class DocEditBeforeProgram extends StatefulWidget {
   const DocEditBeforeProgram({super.key});
@@ -16,11 +16,12 @@ class DocEditBeforeProgram extends StatefulWidget {
 class _DocEditBeforeProgramState extends State<DocEditBeforeProgram> {
   final _formKey = GlobalKey<FormState>();
 
+  // ignore: unused_field
   late String _newprogram;
 
   @override
   Widget build(BuildContext context) {
-    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    final feedbackSCSDatabase = context.watch<BeforeTestProvider>();
     List<IBeforeTest> beforeprogram = feedbackSCSDatabase.beforeTest;
 
     return AlertDialog(
@@ -43,7 +44,7 @@ class _DocEditBeforeProgramState extends State<DocEditBeforeProgram> {
             onPressed: () {
               _formKey.currentState?.save();
 
-              context.read<FeedbackSCSDatabase>().updateFIO(_newprogram);
+              // context.read<BeforeTestProvider>().update(_newprogram);
 
               Navigator.of(context).pop();
             },

@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../collections/patient.dart';
 import '../../../../l10n/locale_keys.g.dart';
-import '../../../../repository/feedbackscs_database.dart';
+import '../../../../repository/current_patient_provider.dart';
 
 class PatientEditLevelMaxPain extends StatefulWidget {
   const PatientEditLevelMaxPain({super.key});
@@ -24,7 +24,7 @@ class _PatientEditLevelMaxPainState extends State<PatientEditLevelMaxPain> {
 
   @override
   Widget build(BuildContext context) {
-    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    final feedbackSCSDatabase = context.watch<CurrentPatientProvider>();
     List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
     return AlertDialog(
       backgroundColor: Colors.grey.shade300,
@@ -47,7 +47,7 @@ class _PatientEditLevelMaxPainState extends State<PatientEditLevelMaxPain> {
               _formKey.currentState?.save();
 
               context
-                  .read<FeedbackSCSDatabase>()
+                  .read<CurrentPatientProvider>()
                   .updateMaxlevelpain(_newlevelmaxpain);
 
               Navigator.of(context).pop();

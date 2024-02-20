@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:feedbackscs2024/repository/current_test_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
 import 'package:go_router/go_router.dart';
@@ -8,7 +9,7 @@ import '../../../../../core/router/route_names.dart';
 import '../../../../../core/ui/theme/appimages.dart';
 import '../../../../../core/ui/widgets/common_widgets.dart';
 import '../../../../../l10n/locale_keys.g.dart';
-import '../../../../../repository/feedbackscs_database.dart';
+import '../../../../../repository/current_patient_provider.dart';
 import '../controllers/current_long__controller.dart';
 
 class LongTest1 extends StatelessWidget {
@@ -19,7 +20,7 @@ class LongTest1 extends StatelessWidget {
     final currentLongTaskControler = Get.find<CurrentLongTaskControler>();
     final String position =
         currentLongTaskControler.currentlongtasks[0].position;
-    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    final feedbackSCSDatabase = context.watch<CurrentPatientProvider>();
     List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
     final String sex = currentpatient[0].sex;
 
@@ -76,7 +77,7 @@ class LongTest1 extends StatelessWidget {
               onPressed: () {
                 currentLongTaskControler
                     .addStartTestTimeLongTask(DateTime.now());
-                context.read<FeedbackSCSDatabase>().updateActiveTask('lt2');
+                context.read<CurrentTestProvider>().updateActiveTask('lt2');
                 context.pushNamed(RouteNames.longtest2);
               },
               child: Text(

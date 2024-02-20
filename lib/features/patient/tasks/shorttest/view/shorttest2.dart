@@ -3,6 +3,7 @@
 //import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:feedbackscs2024/repository/current_test_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_timer_countdown/flutter_timer_countdown.dart';
@@ -14,7 +15,6 @@ import '../../../../../core/router/route_names.dart';
 import '../../../../../core/ui/widgets/app_comment_text.dart';
 import '../../../../../core/ui/widgets/appcountuptimer.dart';
 import '../../../../../l10n/locale_keys.g.dart';
-import '../../../../../repository/feedbackscs_database.dart';
 import '../../../../../services/entities/data/test_const.dart';
 import '../controllers/current_short_controller.dart';
 
@@ -97,7 +97,7 @@ class _ShortTest2State extends State<ShortTest2> {
                             .currentshorttasks[0].begintesttime!)
                         .inMinutes);
 
-                context.read<FeedbackSCSDatabase>().updateActiveTask('st3');
+                context.read<CurrentTestProvider>().updateActiveTask('st3');
                 context.pushNamed(RouteNames.shorttest3);
               },
             ),
@@ -189,7 +189,7 @@ class ShortTest2Timer extends StatelessWidget {
                       .difference(currentShortTaskControler
                           .currentshorttasks[0].begintesttime!)
                       .inMinutes);
-              context.read<FeedbackSCSDatabase>().updateActiveTask('st3');
+              context.read<CurrentTestProvider>().updateActiveTask('st3');
               context.pushNamed(RouteNames.shorttest3);
             },
           ),

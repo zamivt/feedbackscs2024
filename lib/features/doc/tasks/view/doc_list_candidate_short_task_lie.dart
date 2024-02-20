@@ -1,11 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:feedbackscs2024/repository/short_test_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../../../../collections/shorttest.dart';
 import '../../../../core/router/route_names.dart';
 import '../../../../l10n/locale_keys.g.dart';
-import '../../../../repository/feedbackscs_database.dart';
 
 class DocListCandidateShortTaskLie extends StatelessWidget {
   const DocListCandidateShortTaskLie({
@@ -14,18 +14,18 @@ class DocListCandidateShortTaskLie extends StatelessWidget {
   void delete_undef_short_test(
       BuildContext context, List<IShortTest> undefmoveshortTest, int index) {
     context
-        .read<FeedbackSCSDatabase>()
+        .read<ShortTestProvider>()
         .deleteundefShortTest(undefmoveshortTest[index].id);
   }
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<FeedbackSCSDatabase>(context, listen: false)
+    Provider.of<ShortTestProvider>(context, listen: false)
         .readundefShortTestLie();
 
-    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    final shorttestbase = context.watch<ShortTestProvider>();
 
-    List<IShortTest> undeflieshortTest = feedbackSCSDatabase.undeflieshortTest;
+    List<IShortTest> undeflieshortTest = shorttestbase.undeflieshortTest;
 
     return Scaffold(
         appBar: AppBar(

@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:pdfx/pdfx.dart';
 import 'package:provider/provider.dart';
 import '../../../core/router/route_names.dart';
-import '../../../repository/feedbackscs_database.dart';
+import '../../../repository/current_patient_provider.dart';
 
 class LicenseAppPage extends StatefulWidget {
   const LicenseAppPage({super.key});
@@ -113,7 +113,7 @@ class _LicenseAppPageState extends State<LicenseAppPage> {
             AppCommentText(text: LocaleKeys.decriptionconfident.tr()),
             ElevatedButton(
               onPressed: () {
-                context.read<FeedbackSCSDatabase>().updateIsLisense(true);
+                context.read<CurrentPatientProvider>().updateIsLisense(true);
 
                 context.pushNamed(RouteNames.patientmainpage);
               },

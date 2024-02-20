@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../collections/patient.dart';
 import '../../../../l10n/locale_keys.g.dart';
-import '../../../../repository/feedbackscs_database.dart';
+import '../../../../repository/current_patient_provider.dart';
 
 class PatientEditSymptoms1 extends StatefulWidget {
   const PatientEditSymptoms1({super.key});
@@ -20,7 +20,7 @@ class _PatientEditSymptoms1State extends State<PatientEditSymptoms1> {
   late String _newsymptoms1;
   @override
   Widget build(BuildContext context) {
-    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    final feedbackSCSDatabase = context.watch<CurrentPatientProvider>();
     List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
     return AlertDialog(
       backgroundColor: Colors.grey.shade300,
@@ -43,7 +43,7 @@ class _PatientEditSymptoms1State extends State<PatientEditSymptoms1> {
               _formKey.currentState?.save();
 
               context
-                  .read<FeedbackSCSDatabase>()
+                  .read<CurrentPatientProvider>()
                   .updateSymptoms1(_newsymptoms1);
 
               Navigator.of(context).pop();

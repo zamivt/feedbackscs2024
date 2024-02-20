@@ -139,16 +139,36 @@ int _currentTestEstimateSize(
       bytesCount += 3 + value.length * 3;
     }
   }
-  bytesCount += 3 + object.condition.length * 3;
+  {
+    final value = object.condition;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   {
     final value = object.description;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
   }
-  bytesCount += 3 + object.electrodes.length * 3;
-  bytesCount += 3 + object.position.length * 3;
-  bytesCount += 3 + object.program.length * 3;
+  {
+    final value = object.electrodes;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.position;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.program;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   {
     final value = object.stage;
     if (value != null) {
@@ -193,24 +213,24 @@ CurrentTest _currentTestDeserialize(
 ) {
   final object = CurrentTest();
   object.activetask = reader.readStringOrNull(offsets[0]);
-  object.amplit = reader.readDouble(offsets[1]);
-  object.condition = reader.readString(offsets[2]);
+  object.amplit = reader.readDoubleOrNull(offsets[1]);
+  object.condition = reader.readStringOrNull(offsets[2]);
   object.countdoubleshorttest = reader.readLongOrNull(offsets[3]);
   object.description = reader.readStringOrNull(offsets[4]);
-  object.dur = reader.readLong(offsets[5]);
-  object.electrodes = reader.readString(offsets[6]);
-  object.freq = reader.readLong(offsets[7]);
-  object.hideamplt = reader.readBool(offsets[8]);
-  object.hidedur = reader.readBool(offsets[9]);
-  object.hidefreq = reader.readBool(offsets[10]);
+  object.dur = reader.readLongOrNull(offsets[5]);
+  object.electrodes = reader.readStringOrNull(offsets[6]);
+  object.freq = reader.readLongOrNull(offsets[7]);
+  object.hideamplt = reader.readBoolOrNull(offsets[8]);
+  object.hidedur = reader.readBoolOrNull(offsets[9]);
+  object.hidefreq = reader.readBoolOrNull(offsets[10]);
   object.id = id;
   object.idcombinationtest = reader.readLongOrNull(offsets[11]);
   object.iddiarytest = reader.readLongOrNull(offsets[12]);
   object.idlongtest = reader.readLongOrNull(offsets[13]);
   object.idprobetest = reader.readLongOrNull(offsets[14]);
   object.idshorttest = reader.readLongOrNull(offsets[15]);
-  object.position = reader.readString(offsets[16]);
-  object.program = reader.readString(offsets[17]);
+  object.position = reader.readStringOrNull(offsets[16]);
+  object.program = reader.readStringOrNull(offsets[17]);
   object.stage = reader.readStringOrNull(offsets[18]);
   return object;
 }
@@ -225,25 +245,25 @@ P _currentTestDeserializeProp<P>(
     case 0:
       return (reader.readStringOrNull(offset)) as P;
     case 1:
-      return (reader.readDouble(offset)) as P;
+      return (reader.readDoubleOrNull(offset)) as P;
     case 2:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 3:
       return (reader.readLongOrNull(offset)) as P;
     case 4:
       return (reader.readStringOrNull(offset)) as P;
     case 5:
-      return (reader.readLong(offset)) as P;
+      return (reader.readLongOrNull(offset)) as P;
     case 6:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 7:
-      return (reader.readLong(offset)) as P;
+      return (reader.readLongOrNull(offset)) as P;
     case 8:
-      return (reader.readBool(offset)) as P;
+      return (reader.readBoolOrNull(offset)) as P;
     case 9:
-      return (reader.readBool(offset)) as P;
+      return (reader.readBoolOrNull(offset)) as P;
     case 10:
-      return (reader.readBool(offset)) as P;
+      return (reader.readBoolOrNull(offset)) as P;
     case 11:
       return (reader.readLongOrNull(offset)) as P;
     case 12:
@@ -255,9 +275,9 @@ P _currentTestDeserializeProp<P>(
     case 15:
       return (reader.readLongOrNull(offset)) as P;
     case 16:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 17:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 18:
       return (reader.readStringOrNull(offset)) as P;
     default:
@@ -512,8 +532,25 @@ extension CurrentTestQueryFilter
     });
   }
 
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> amplitIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'amplit',
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      amplitIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'amplit',
+      ));
+    });
+  }
+
   QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> amplitEqualTo(
-    double value, {
+    double? value, {
     double epsilon = Query.epsilon,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -527,7 +564,7 @@ extension CurrentTestQueryFilter
 
   QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
       amplitGreaterThan(
-    double value, {
+    double? value, {
     bool include = false,
     double epsilon = Query.epsilon,
   }) {
@@ -542,7 +579,7 @@ extension CurrentTestQueryFilter
   }
 
   QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> amplitLessThan(
-    double value, {
+    double? value, {
     bool include = false,
     double epsilon = Query.epsilon,
   }) {
@@ -557,8 +594,8 @@ extension CurrentTestQueryFilter
   }
 
   QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> amplitBetween(
-    double lower,
-    double upper, {
+    double? lower,
+    double? upper, {
     bool includeLower = true,
     bool includeUpper = true,
     double epsilon = Query.epsilon,
@@ -576,8 +613,26 @@ extension CurrentTestQueryFilter
   }
 
   QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      conditionIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'condition',
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      conditionIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'condition',
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
       conditionEqualTo(
-    String value, {
+    String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -591,7 +646,7 @@ extension CurrentTestQueryFilter
 
   QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
       conditionGreaterThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -607,7 +662,7 @@ extension CurrentTestQueryFilter
 
   QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
       conditionLessThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -623,8 +678,8 @@ extension CurrentTestQueryFilter
 
   QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
       conditionBetween(
-    String lower,
-    String upper, {
+    String? lower,
+    String? upper, {
     bool includeLower = true,
     bool includeUpper = true,
     bool caseSensitive = true,
@@ -939,8 +994,24 @@ extension CurrentTestQueryFilter
     });
   }
 
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> durIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'dur',
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> durIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'dur',
+      ));
+    });
+  }
+
   QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> durEqualTo(
-      int value) {
+      int? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'dur',
@@ -950,7 +1021,7 @@ extension CurrentTestQueryFilter
   }
 
   QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> durGreaterThan(
-    int value, {
+    int? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -963,7 +1034,7 @@ extension CurrentTestQueryFilter
   }
 
   QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> durLessThan(
-    int value, {
+    int? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -976,8 +1047,8 @@ extension CurrentTestQueryFilter
   }
 
   QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> durBetween(
-    int lower,
-    int upper, {
+    int? lower,
+    int? upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
@@ -993,8 +1064,26 @@ extension CurrentTestQueryFilter
   }
 
   QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      electrodesIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'electrodes',
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      electrodesIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'electrodes',
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
       electrodesEqualTo(
-    String value, {
+    String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -1008,7 +1097,7 @@ extension CurrentTestQueryFilter
 
   QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
       electrodesGreaterThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -1024,7 +1113,7 @@ extension CurrentTestQueryFilter
 
   QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
       electrodesLessThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -1040,8 +1129,8 @@ extension CurrentTestQueryFilter
 
   QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
       electrodesBetween(
-    String lower,
-    String upper, {
+    String? lower,
+    String? upper, {
     bool includeLower = true,
     bool includeUpper = true,
     bool caseSensitive = true,
@@ -1128,8 +1217,25 @@ extension CurrentTestQueryFilter
     });
   }
 
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> freqIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'freq',
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      freqIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'freq',
+      ));
+    });
+  }
+
   QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> freqEqualTo(
-      int value) {
+      int? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'freq',
@@ -1139,7 +1245,7 @@ extension CurrentTestQueryFilter
   }
 
   QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> freqGreaterThan(
-    int value, {
+    int? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -1152,7 +1258,7 @@ extension CurrentTestQueryFilter
   }
 
   QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> freqLessThan(
-    int value, {
+    int? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -1165,8 +1271,8 @@ extension CurrentTestQueryFilter
   }
 
   QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> freqBetween(
-    int lower,
-    int upper, {
+    int? lower,
+    int? upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
@@ -1182,7 +1288,25 @@ extension CurrentTestQueryFilter
   }
 
   QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
-      hideampltEqualTo(bool value) {
+      hideampltIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'hideamplt',
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      hideampltIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'hideamplt',
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      hideampltEqualTo(bool? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'hideamplt',
@@ -1191,8 +1315,26 @@ extension CurrentTestQueryFilter
     });
   }
 
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      hidedurIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'hidedur',
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      hidedurIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'hidedur',
+      ));
+    });
+  }
+
   QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> hidedurEqualTo(
-      bool value) {
+      bool? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'hidedur',
@@ -1201,8 +1343,26 @@ extension CurrentTestQueryFilter
     });
   }
 
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      hidefreqIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'hidefreq',
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      hidefreqIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'hidefreq',
+      ));
+    });
+  }
+
   QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> hidefreqEqualTo(
-      bool value) {
+      bool? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'hidefreq',
@@ -1634,8 +1794,26 @@ extension CurrentTestQueryFilter
     });
   }
 
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      positionIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'position',
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      positionIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'position',
+      ));
+    });
+  }
+
   QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> positionEqualTo(
-    String value, {
+    String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -1649,7 +1827,7 @@ extension CurrentTestQueryFilter
 
   QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
       positionGreaterThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -1665,7 +1843,7 @@ extension CurrentTestQueryFilter
 
   QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
       positionLessThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -1680,8 +1858,8 @@ extension CurrentTestQueryFilter
   }
 
   QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> positionBetween(
-    String lower,
-    String upper, {
+    String? lower,
+    String? upper, {
     bool includeLower = true,
     bool includeUpper = true,
     bool caseSensitive = true,
@@ -1769,8 +1947,26 @@ extension CurrentTestQueryFilter
     });
   }
 
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      programIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'program',
+      ));
+    });
+  }
+
+  QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
+      programIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'program',
+      ));
+    });
+  }
+
   QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> programEqualTo(
-    String value, {
+    String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -1784,7 +1980,7 @@ extension CurrentTestQueryFilter
 
   QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition>
       programGreaterThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -1799,7 +1995,7 @@ extension CurrentTestQueryFilter
   }
 
   QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> programLessThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -1814,8 +2010,8 @@ extension CurrentTestQueryFilter
   }
 
   QueryBuilder<CurrentTest, CurrentTest, QAfterFilterCondition> programBetween(
-    String lower,
-    String upper, {
+    String? lower,
+    String? upper, {
     bool includeLower = true,
     bool includeUpper = true,
     bool caseSensitive = true,
@@ -2681,13 +2877,13 @@ extension CurrentTestQueryProperty
     });
   }
 
-  QueryBuilder<CurrentTest, double, QQueryOperations> amplitProperty() {
+  QueryBuilder<CurrentTest, double?, QQueryOperations> amplitProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'amplit');
     });
   }
 
-  QueryBuilder<CurrentTest, String, QQueryOperations> conditionProperty() {
+  QueryBuilder<CurrentTest, String?, QQueryOperations> conditionProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'condition');
     });
@@ -2706,37 +2902,37 @@ extension CurrentTestQueryProperty
     });
   }
 
-  QueryBuilder<CurrentTest, int, QQueryOperations> durProperty() {
+  QueryBuilder<CurrentTest, int?, QQueryOperations> durProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'dur');
     });
   }
 
-  QueryBuilder<CurrentTest, String, QQueryOperations> electrodesProperty() {
+  QueryBuilder<CurrentTest, String?, QQueryOperations> electrodesProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'electrodes');
     });
   }
 
-  QueryBuilder<CurrentTest, int, QQueryOperations> freqProperty() {
+  QueryBuilder<CurrentTest, int?, QQueryOperations> freqProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'freq');
     });
   }
 
-  QueryBuilder<CurrentTest, bool, QQueryOperations> hideampltProperty() {
+  QueryBuilder<CurrentTest, bool?, QQueryOperations> hideampltProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'hideamplt');
     });
   }
 
-  QueryBuilder<CurrentTest, bool, QQueryOperations> hidedurProperty() {
+  QueryBuilder<CurrentTest, bool?, QQueryOperations> hidedurProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'hidedur');
     });
   }
 
-  QueryBuilder<CurrentTest, bool, QQueryOperations> hidefreqProperty() {
+  QueryBuilder<CurrentTest, bool?, QQueryOperations> hidefreqProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'hidefreq');
     });
@@ -2773,13 +2969,13 @@ extension CurrentTestQueryProperty
     });
   }
 
-  QueryBuilder<CurrentTest, String, QQueryOperations> positionProperty() {
+  QueryBuilder<CurrentTest, String?, QQueryOperations> positionProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'position');
     });
   }
 
-  QueryBuilder<CurrentTest, String, QQueryOperations> programProperty() {
+  QueryBuilder<CurrentTest, String?, QQueryOperations> programProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'program');
     });

@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:feedbackscs2024/repository/long_test_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:badges/badges.dart' as badges;
@@ -7,18 +8,19 @@ import '../../../../../collections/patient.dart';
 import '../../../../../core/ui/theme/appimages.dart';
 import '../../../../../core/ui/widgets/common_widgets.dart';
 import '../../../../../l10n/locale_keys.g.dart';
-import '../../../../../repository/feedbackscs_database.dart';
+import '../../../../../repository/current_patient_provider.dart';
 
 class LongTaskTable extends StatelessWidget {
   const LongTaskTable({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
-    List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
-    List<ILongTest> undefmovelongTest = feedbackSCSDatabase.undefmovelongTest;
-    List<ILongTest> undefseatlongTest = feedbackSCSDatabase.undefseatlongTest;
-    List<ILongTest> undeflielongTest = feedbackSCSDatabase.undeflielongTest;
+    final longtestbase = context.watch<LongTestProvider>();
+    final patientbase = context.watch<CurrentPatientProvider>();
+    List<IPatient> currentpatient = patientbase.currentPatient;
+    List<ILongTest> undefmovelongTest = longtestbase.undefmovelongTest;
+    List<ILongTest> undefseatlongTest = longtestbase.undefseatlongTest;
+    List<ILongTest> undeflielongTest = longtestbase.undeflielongTest;
 
     return Padding(
       padding: const EdgeInsets.all(5.0),

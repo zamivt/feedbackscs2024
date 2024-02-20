@@ -2,6 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:elegant_notification/elegant_notification.dart';
 import 'package:elegant_notification/resources/arrays.dart';
 import 'package:feedbackscs2024/l10n/locale_keys.g.dart';
+import 'package:feedbackscs2024/repository/beforetest_provider.dart';
+import 'package:feedbackscs2024/repository/current_test_provider.dart';
+import 'package:feedbackscs2024/repository/short_test_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:get/instance_manager.dart';
@@ -12,7 +15,7 @@ import '../../../../collections/patient.dart';
 import '../../../../collections/shorttest.dart';
 import '../../../../core/router/route_names.dart';
 import '../../../../core/ui/widgets/common_widgets.dart';
-import '../../../../repository/feedbackscs_database.dart';
+import '../../../../repository/current_patient_provider.dart';
 import '../../../../services/entities/data/model/neuromodel.dart';
 import '../../../../services/entities/data/neuromodels.dart';
 import '../../../../services/entities/data/test_const.dart';
@@ -72,13 +75,15 @@ class _DocAddRangeTaskState extends State<DocAddRangeTask> {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<FeedbackSCSDatabase>(context, listen: false)
+    Provider.of<ShortTestProvider>(context, listen: false)
         .readCommonShortTestUndef();
-    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
-    Provider.of<FeedbackSCSDatabase>(context, listen: false).readCurrentTest();
-    Provider.of<FeedbackSCSDatabase>(context, listen: false).readBeforeTest();
-    List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
-    List<IBeforeTest> beforetest = feedbackSCSDatabase.beforeTest;
+
+    Provider.of<CurrentTestProvider>(context, listen: false).readCurrentTest();
+    Provider.of<BeforeTestProvider>(context, listen: false).readBeforeTest();
+    final currentPatientprovider = context.watch<CurrentPatientProvider>();
+    List<IPatient> currentpatient = currentPatientprovider.currentPatient;
+    final beforetestprovider = context.watch<BeforeTestProvider>();
+    List<IBeforeTest> beforetest = beforetestprovider.beforeTest;
     Iterable<Neuro> liststimul = neuromodels.where((neuromodel) =>
         neuromodel.model.contains(currentpatient[0].modelneuro));
     final condchoiceampl = [
@@ -86,8 +91,8 @@ class _DocAddRangeTaskState extends State<DocAddRangeTask> {
       LocaleKeys.noparestesia.tr(),
       LocaleKeys.painmin.tr() + currentpatient[0].prioritylevelpain.toString()
     ];
-
-    List<IShortTest> undefshorttest = feedbackSCSDatabase.undefshortTest;
+    final shorttestprovider = context.watch<ShortTestProvider>();
+    List<IShortTest> undefshorttest = shorttestprovider.undefshortTest;
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.secondary,
       appBar: AppBar(

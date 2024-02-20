@@ -1,12 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:feedbackscs2024/collections/before_test_short_test.dart';
 import 'package:feedbackscs2024/core/ui/widgets/common_widgets.dart';
+import 'package:feedbackscs2024/repository/beforetest_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../../../../../core/router/route_names.dart';
 import '../../../../../l10n/locale_keys.g.dart';
-import '../../../../../repository/feedbackscs_database.dart';
 import 'doc_edit_before_program.dart';
 
 class BeforeProgramTask extends StatelessWidget {
@@ -14,8 +14,8 @@ class BeforeProgramTask extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<FeedbackSCSDatabase>(context, listen: false).readBeforeTest();
-    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    Provider.of<BeforeTestProvider>(context, listen: false).readBeforeTest();
+    final feedbackSCSDatabase = context.watch<BeforeTestProvider>();
     List<IBeforeTest> beforetest = feedbackSCSDatabase.beforeTest;
 
     return AppColorContainer(

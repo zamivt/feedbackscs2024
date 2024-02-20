@@ -3,6 +3,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:elegant_notification/elegant_notification.dart';
 import 'package:elegant_notification/resources/arrays.dart';
+import 'package:feedbackscs2024/repository/current_test_provider.dart';
 
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
@@ -12,7 +13,7 @@ import '../../../../core/ui/widgets/app_name_field.dart';
 import '../../../../core/ui/widgets/common_widgets.dart';
 import '../../../../l10n/locale_keys.g.dart';
 
-import '../../../../repository/feedbackscs_database.dart';
+import '../../../../repository/current_patient_provider.dart';
 import '../../../../services/entities/data/neuromodels.dart';
 import '../../../../services/entities/data/test_const.dart';
 
@@ -490,7 +491,7 @@ class _PatientFormState extends State<PatientForm> {
                   _formkey.currentState?.save();
                   if (_formkey.currentState != null &&
                       _formkey.currentState!.validate()) {
-                    context.read<FeedbackSCSDatabase>().addPatient(
+                    context.read<CurrentPatientProvider>().addPatient(
                         false,
                         _fioCtrl.text,
                         _ismale ? LocaleKeys.mal.tr() : LocaleKeys.fem.tr(),
@@ -508,7 +509,7 @@ class _PatientFormState extends State<PatientForm> {
                         int.parse(_maxseatCtrl.text),
                         int.parse(_maxlieCtrl.text),
                         int.parse(_maxmoveCtrl.text));
-                    context.read<FeedbackSCSDatabase>().addCurrentTest('probe');
+                    context.read<CurrentTestProvider>().addCurrentTest('probe');
                     _numberelectrodes.clear();
                     _phoneCtrl.clear();
                     _fioCtrl.clear();

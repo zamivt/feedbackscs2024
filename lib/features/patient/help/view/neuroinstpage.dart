@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pdfx/pdfx.dart';
 import 'package:provider/provider.dart';
 import '../../../../collections/patient.dart';
-import '../../../../repository/feedbackscs_database.dart';
+import '../../../../repository/current_patient_provider.dart';
 import '../../../../services/entities/data/model/neuromodel.dart';
 import '../../../../services/entities/data/neuromodels.dart';
 
@@ -21,8 +21,8 @@ class _NeuroinstPageState extends State<NeuroinstPage> {
   @override
   void initState() {
     super.initState();
-    Provider.of<FeedbackSCSDatabase>(context, listen: false).readPatient();
-    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    Provider.of<CurrentPatientProvider>(context, listen: false).readPatient();
+    final feedbackSCSDatabase = context.watch<CurrentPatientProvider>();
     List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
     final String namemodel = currentpatient[0].modelneuro;
     Iterable<Neuro> liststimul =
@@ -47,7 +47,7 @@ class _NeuroinstPageState extends State<NeuroinstPage> {
 
   @override
   Widget build(BuildContext context) {
-    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    final feedbackSCSDatabase = context.watch<CurrentPatientProvider>();
     List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
     return Scaffold(
       appBar: AppBar(

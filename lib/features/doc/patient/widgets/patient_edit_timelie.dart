@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../collections/patient.dart';
 import '../../../../l10n/locale_keys.g.dart';
-import '../../../../repository/feedbackscs_database.dart';
+import '../../../../repository/current_patient_provider.dart';
 
 class PatientEditTimeLie extends StatefulWidget {
   const PatientEditTimeLie({super.key});
@@ -21,7 +21,7 @@ class _PatientEditTimeLieState extends State<PatientEditTimeLie> {
 
   @override
   Widget build(BuildContext context) {
-    final feedbackSCSDatabase = context.watch<FeedbackSCSDatabase>();
+    final feedbackSCSDatabase = context.watch<CurrentPatientProvider>();
     List<IPatient> currentpatient = feedbackSCSDatabase.currentPatient;
     return AlertDialog(
       backgroundColor: Colors.grey.shade300,
@@ -43,7 +43,7 @@ class _PatientEditTimeLieState extends State<PatientEditTimeLie> {
             onPressed: () {
               _formKey.currentState?.save();
 
-              context.read<FeedbackSCSDatabase>().updateTimelie(_newtimelie);
+              context.read<CurrentPatientProvider>().updateTimelie(_newtimelie);
 
               Navigator.of(context).pop();
             },
